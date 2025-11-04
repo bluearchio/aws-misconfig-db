@@ -90,7 +90,7 @@
       "scenario": "- user wants to increase the reliability of their ecs sevices / tasks and/or\n- user has been experiencing frequent service failures and/or\n- users' ecs services have been failing health checks",
       "alert_criteria": "- fargate launch type and/or\n- tasks have transitioned to a failed state > 3 times in the last 21 day and/or \n- are failing healthchecks",
       "recommendation_action": "enable deployment rollback / circut breaker",
-      "risk_detail": "reliabilty",
+      "risk_detail": "reliability",
       "build_priority": 0,
       "action_value": 2,
       "effort_level": 1,

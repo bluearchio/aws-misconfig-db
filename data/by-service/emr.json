@@ -9,7 +9,7 @@
       "scenario": "EMR (or other) cluster is used and task nodes are not utilizing spot instances",
       "alert_criteria": "",
       "recommendation_action": "use spot instances",
-      "risk_detail": "perforamnce, cost",
+      "risk_detail": "performance, cost",
       "build_priority": 1,
       "action_value": 3,
       "effort_level": 2,

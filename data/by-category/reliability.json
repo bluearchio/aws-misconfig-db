@@ -1,7 +1,90 @@
 {
   "category": "reliability",
-  "count": 1,
+  "count": 5,
   "misconfigurations": [
+    {
+      "id": "75ba739e-a10d-4233-9d93-233587bf1de5",
+      "status": "open",
+      "service_name": "alb/elb",
+      "scenario": "Idle Load Balancers",
+      "alert_criteria": "A load balancer has no healthy back-end instances.",
+      "recommendation_action": "-",
+      "risk_detail": "reliability",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 2,
+      "risk_value": 3,
+      "recommendation_description_detailed": "Checks your Elastic Load Balancing configuration for load balancers that are not actively used. Any load balancer that is configured accrues charges. If a load balancer has no associated back-end instances or if network traffic is severely limited, the load balancer is not being used effectively",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/ts-elb-healthcheck.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "eba421cf-bea5-4fa2-982a-c992016bd34f",
+      "status": "pending",
+      "service_name": "alb/elb",
+      "scenario": "user wants to ensure the availability / performance of their auto scaling group(s)",
+      "alert_criteria": "instance that is attached to the autoscaling group has been stopped or hibernated",
+      "recommendation_action": "restart instance or attach new instance to the auto scaling group",
+      "risk_detail": "reliability",
+      "build_priority": 0,
+      "action_value": 1,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "57fdeba4-4823-4bd7-957f-5cb8b0d9f84e",
+      "status": "pending",
+      "service_name": "ecs",
+      "scenario": "- user wants to increase the reliability of their ecs sevices / tasks and/or\n- user has been experiencing frequent service failures and/or\n- users' ecs services have been failing health checks",
+      "alert_criteria": "- fargate launch type and/or\n- tasks have transitioned to a failed state > 3 times in the last 21 day and/or \n- are failing healthchecks",
+      "recommendation_action": "enable deployment rollback / circut breaker",
+      "risk_detail": "reliability",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 3,
+      "recommendation_description_detailed": "this will cause the service to automatically rollback to the last stable state",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
     {
       "id": "c727a01a-e43a-4157-a80c-21dc130a50c5",
       "status": "pending",
@@ -20,6 +103,35 @@
       "notes": null,
       "references": [
         "https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "57dd389a-4580-44db-a15e-499506415d56",
+      "status": "open",
+      "service_name": "route 53",
+      "scenario": "Amazon Route 53 Latency Resource Record Sets",
+      "alert_criteria": "resources exist in multiple regions and only one latency resource record set is configured for a particular domain name.",
+      "recommendation_action": "define a latency resource record set for each region",
+      "risk_detail": "cost, reliability",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 3,
+      "risk_value": 1,
+      "recommendation_description_detailed": "Checks for Amazon Route 53 latency record sets that are configured inefficiently. To allow Amazon Route 53 to route queries to the region with the lowest network latency, you should create latency resource record sets for a particular domain name (such as example.com) in different regions. If you create only one latency resource record set for a domain name, all queries are routed to one region, and you pay extra for latency-based routing without getting the benefits. Hosted zones created by AWS services won’t appear in your check results.",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-latency"
       ],
       "metadata": {
         "created_at": "2025-11-04T23:07:44.651478Z",

@@ -40,8 +40,8 @@
     },
     "risk_detail": {
       "type": "string",
-      "description": "Type of risk associated with this misconfiguration",
-      "enum": ["cost", "security", "operations", "performance", "reliability", "cost, operations", "cost, performance", "security, operations", "performance, operations", "performance, cost"]
+      "description": "Type of risk associated with this misconfiguration. Can be a single value or comma-separated list of: cost, security, operations, performance, reliability",
+      "pattern": "^(cost|security|operations|performance|reliability)(,\\s*(cost|security|operations|performance|reliability))*$"
     },
     "build_priority": {
       "type": "integer",

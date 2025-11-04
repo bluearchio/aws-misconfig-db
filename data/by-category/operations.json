@@ -3,17 +3,17 @@
   "count": 196,
   "misconfigurations": [
     {
-      "id": "e9b21a0d-2fe8-4f5b-8875-52995b4cf2e7",
-      "status": "open",
-      "service_name": "s3",
-      "scenario": "users wants to automatically manage data storage tiers",
-      "alert_criteria": "s3 lifecycle manager is turned off; intelligent tiering is not enabled",
-      "recommendation_action": "turn on lifecycle manager",
-      "risk_detail": "cost, operations",
+      "id": "8c0a3d78-a5e3-4ac1-a1ca-f25306b46143",
+      "status": "done",
+      "service_name": "iam",
+      "scenario": "user wants to get notified / know of non-compliant IAM keys (keys older than 90 days)",
+      "alert_criteria": "IAM key is older than 90 days",
+      "recommendation_action": "refresh IAM key",
+      "risk_detail": "operations",
       "build_priority": 0,
-      "action_value": 3,
-      "effort_level": 1,
-      "risk_value": 2,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
       "recommendation_description_detailed": "",
       "category": null,
       "output_notes": null,
@@ -30,39 +30,93 @@
       "tags": []
     },
     {
-      "id": "356570fe-de33-4782-bc81-152cb144fb05",
-      "status": "pending",
-      "service_name": "s3",
-      "scenario": "user wants to be made aware of the locations of all public s3 buckets (or their contents)",
-      "alert_criteria": "bucket or its subfolders are open to the public",
-      "recommendation_action": "- Randomise your bucket names! There is no need to use company-backup.s3.amazonaws.com.\n- Set appropriate permissions and audit regularly.  \n- If possible create two buckets - one for your public assets and another for private data.\n- Try Amazon Macie - it can automatically classify and secure sensitive data.",
-      "risk_detail": "security, operations",
-      "build_priority": 0,
-      "action_value": 1,
-      "effort_level": 1,
-      "risk_value": 3,
-      "recommendation_description_detailed": "",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "327f7304-6e47-4eff-93b2-e070afcfc180",
-      "status": "open",
-      "service_name": "cloudfront",
-      "scenario": "streaming service needs to reduce latency for its users",
+      "id": "297883ae-5ece-4511-8c34-1a2008cf1ad4",
+      "status": "ice",
+      "service_name": "iam",
+      "scenario": "user wants to be notified of new security groups",
       "alert_criteria": "",
-      "recommendation_action": "use cdn",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "f2ee54dd-37e7-4118-80f9-f164d89f3a8f",
+      "status": "open",
+      "service_name": "iam",
+      "scenario": "user wants the password policy to require at least one number (+ specific password requirements)",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "a2e6377a-b62c-47a6-b957-452e9b79883b",
+      "status": "open",
+      "service_name": "iam",
+      "scenario": "user wants to remove unused security groups",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "299fc2d0-a2f2-4b79-a3d2-2b479b25d07f",
+      "status": "open",
+      "service_name": "iam",
+      "scenario": "user wants to ensure second access key is rotated every 90 days or less",
+      "alert_criteria": "access key has not been rotated in X days",
+      "recommendation_action": "",
       "risk_detail": "operations",
       "build_priority": null,
       "action_value": null,
@@ -4517,6 +4571,114 @@
       "tags": []
     },
     {
+      "id": "04dbd22f-e862-4f8b-8a00-7ad7ac48836e",
+      "status": "open",
+      "service_name": "networking",
+      "scenario": "user wants fault tolerant internet access",
+      "alert_criteria": "instances exist in more azs than nat gateways exist",
+      "recommendation_action": "create nat gateway in each az where an ec2 instance exists",
+      "risk_detail": "operations",
+      "build_priority": 0,
+      "action_value": 1,
+      "effort_level": 2,
+      "risk_value": 2,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "9962a78d-7100-4d15-bc9c-c62a6c0d3b91",
+      "status": "open",
+      "service_name": "ebs",
+      "scenario": "user wants to prevent volumes (root or attached) from filling up, forcing a restart and leading to a new IP address (if an elastic ip has not been assigned)",
+      "alert_criteria": "volume storage capacity has less than threshold (%) remaining",
+      "recommendation_action": "increase the storage size of your targeted volumes",
+      "risk_detail": "operations",
+      "build_priority": 0,
+      "action_value": 1,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "4649adc3-53cc-4ccc-bd61-5c79f7fa6999",
+      "status": "pending",
+      "service_name": "ecs",
+      "scenario": "user wants to increase the performance of their ecs service(s)",
+      "alert_criteria": "if max memory utilization is > 50% for more than 3 concecutive time periods AND autoscaling is not enabled",
+      "recommendation_action": "enable autoscalling policy with target tracking; set target to 50%",
+      "risk_detail": "operations",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "326eaec8-4b35-417d-b883-33c31948a9cd",
+      "status": "pending",
+      "service_name": "ecs",
+      "scenario": "user wants to make sure their services are all running the latest platform version",
+      "alert_criteria": "platform version != LATEST",
+      "recommendation_action": "update service in console to LATEST",
+      "risk_detail": "operations",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "this will cause the service to automatically rollback to the last stable state",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
       "id": "030f361e-eb21-4382-8d26-fcd86f47c8d5",
       "status": "done",
       "service_name": "ec2",
@@ -4600,23 +4762,77 @@
       "tags": []
     },
     {
-      "id": "c8fd0f3c-90c1-45ec-9467-963920497527",
+      "id": "e9b21a0d-2fe8-4f5b-8875-52995b4cf2e7",
       "status": "open",
-      "service_name": "lambda",
-      "scenario": "use wants to be made aware of any function throttling that ocurrs",
-      "alert_criteria": "function throttle counts are above threshold",
-      "recommendation_action": "- place limits on how many concurrent \"slices\" (percentage of total concurrency available to your account / region) a single function can have\n- request unreserved (5000) concurrency limit increases (no cost)\n- configure a dlq to capture failure(s)",
-      "risk_detail": "performance, operations",
-      "build_priority": 2,
-      "action_value": 2,
-      "effort_level": 2,
+      "service_name": "s3",
+      "scenario": "users wants to automatically manage data storage tiers",
+      "alert_criteria": "s3 lifecycle manager is turned off; intelligent tiering is not enabled",
+      "recommendation_action": "turn on lifecycle manager",
+      "risk_detail": "cost, operations",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "356570fe-de33-4782-bc81-152cb144fb05",
+      "status": "pending",
+      "service_name": "s3",
+      "scenario": "user wants to be made aware of the locations of all public s3 buckets (or their contents)",
+      "alert_criteria": "bucket or its subfolders are open to the public",
+      "recommendation_action": "- Randomise your bucket names! There is no need to use company-backup.s3.amazonaws.com.\n- Set appropriate permissions and audit regularly.  \n- If possible create two buckets - one for your public assets and another for private data.\n- Try Amazon Macie - it can automatically classify and secure sensitive data.",
+      "risk_detail": "security, operations",
+      "build_priority": 0,
+      "action_value": 1,
+      "effort_level": 1,
       "risk_value": 3,
       "recommendation_description_detailed": "",
       "category": null,
       "output_notes": null,
       "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "c727a01a-e43a-4157-a80c-21dc130a50c5",
+      "status": "pending",
+      "service_name": "elastic beanstalk",
+      "scenario": "user wants to make sure all environments are healthy",
+      "alert_criteria": "environment != healthy",
+      "recommendation_action": "see logs to address issue or delete environment",
+      "risk_detail": "operations, reliability",
+      "build_priority": 0,
+      "action_value": 1,
+      "effort_level": 1,
+      "risk_value": 3,
+      "recommendation_description_detailed": "see documentation for alert message details",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
       "references": [
-        "https://aws.amazon.com/premiumsupport/knowledge-center/lambda-troubleshoot-throttling/"
+        "https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html"
       ],
       "metadata": {
         "created_at": "2025-11-04T23:07:44.651478Z",
@@ -4629,71 +4845,17 @@
       "tags": []
     },
     {
-      "id": "1d169e83-e553-4a67-8796-1c4365265efc",
-      "status": "open",
-      "service_name": "lambda",
-      "scenario": "user wants to avoide lambda function throttling",
-      "alert_criteria": "concurrent executions in a period of time are predicted to exceed to concurrent execution limits (account limit -100)",
-      "recommendation_action": "- place limits on how many concurrent \"slices\" (percentage of total concurrency available to your account / region) a single function can have\n- request unreserved (5000) concurrency limit increases (no cost)\n- configure a dlq to capture failure(s)",
-      "risk_detail": "performance, operations",
-      "build_priority": 2,
-      "action_value": 3,
-      "effort_level": 2,
-      "risk_value": 1,
-      "recommendation_description_detailed": "",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "d814745d-a655-4612-9d03-07f7236cab77",
-      "status": "open",
-      "service_name": "lambda",
-      "scenario": "user wants to clean up unused or inactive lambda functions",
-      "alert_criteria": "if lambda function is older than threshold or does not have an invocation in the last n days",
-      "recommendation_action": "delete lambda",
-      "risk_detail": "operations",
-      "build_priority": 0,
-      "action_value": 1,
-      "effort_level": 1,
-      "risk_value": 1,
-      "recommendation_description_detailed": "",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "2cd8897d-8db5-4bde-8476-1edbe7f97894",
+      "id": "ceb5228b-8733-4978-8fed-36588bfb638d",
       "status": "pending",
-      "service_name": "lambda",
-      "scenario": "user needs serverless (lambda) tracing functionality",
-      "alert_criteria": "user does not have x-ray tracing installed",
-      "recommendation_action": "enable x-ray",
+      "service_name": "elastic beanstalk",
+      "scenario": "user wants to make sure all environments are up to date",
+      "alert_criteria": "platform state == deprecated",
+      "recommendation_action": "update your environment",
       "risk_detail": "operations",
       "build_priority": 0,
       "action_value": 1,
       "effort_level": 1,
-      "risk_value": 0,
+      "risk_value": 1,
       "recommendation_description_detailed": "",
       "category": null,
       "output_notes": null,
@@ -4818,15 +4980,128 @@
       "tags": []
     },
     {
-      "id": "4649adc3-53cc-4ccc-bd61-5c79f7fa6999",
-      "status": "pending",
-      "service_name": "ecs",
-      "scenario": "user wants to increase the performance of their ecs service(s)",
-      "alert_criteria": "if max memory utilization is > 50% for more than 3 concecutive time periods AND autoscaling is not enabled",
-      "recommendation_action": "enable autoscalling policy with target tracking; set target to 50%",
+      "id": "1d8ad405-4cb5-4d9a-9326-b436d9bbdfe2",
+      "status": "ice",
+      "service_name": "s3, rds, redshift, etc.",
+      "scenario": "user wants to associate costs to cost centers, projects, teams, and other business units",
+      "alert_criteria": "check if resoruce has ANY tags, if no tags send recommendation",
+      "recommendation_action": "use data-classification association tagging solution",
       "risk_detail": "operations",
       "build_priority": 0,
       "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "332b3d41-5118-4fa2-ab98-1b2181c80f84",
+      "status": "ice",
+      "service_name": "route 53",
+      "scenario": "Amazon Route 53 Alias Resource Record Sets",
+      "alert_criteria": "A resource record set is a CNAME to an Amazon S3 website.",
+      "recommendation_action": "Replace the listed CNAME resource record sets with alias resource record sets; You also need to change the record type from CNAME to A or AAAA, depending on the AWS resource",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "Checks for resource record sets that can be changed to alias resource record sets to improve performance and save money. An alias resource record set routes DNS queries to an AWS resource (for example, an Elastic Load Balancing load balancer or an Amazon S3 bucket) or to another Route 53 resource record set. When you use alias resource record sets, Route 53 routes your DNS queries to AWS resources free of charge. Hosted zones created by AWS services won’t appear in your check results.",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-choosing-alias-non-alias.html",
+        "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-values.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "c8fd0f3c-90c1-45ec-9467-963920497527",
+      "status": "open",
+      "service_name": "lambda",
+      "scenario": "use wants to be made aware of any function throttling that ocurrs",
+      "alert_criteria": "function throttle counts are above threshold",
+      "recommendation_action": "- place limits on how many concurrent \"slices\" (percentage of total concurrency available to your account / region) a single function can have\n- request unreserved (5000) concurrency limit increases (no cost)\n- configure a dlq to capture failure(s)",
+      "risk_detail": "performance, operations",
+      "build_priority": 2,
+      "action_value": 2,
+      "effort_level": 2,
+      "risk_value": 3,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://aws.amazon.com/premiumsupport/knowledge-center/lambda-troubleshoot-throttling/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "1d169e83-e553-4a67-8796-1c4365265efc",
+      "status": "open",
+      "service_name": "lambda",
+      "scenario": "user wants to avoide lambda function throttling",
+      "alert_criteria": "concurrent executions in a period of time are predicted to exceed to concurrent execution limits (account limit -100)",
+      "recommendation_action": "- place limits on how many concurrent \"slices\" (percentage of total concurrency available to your account / region) a single function can have\n- request unreserved (5000) concurrency limit increases (no cost)\n- configure a dlq to capture failure(s)",
+      "risk_detail": "performance, operations",
+      "build_priority": 2,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 1,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "d814745d-a655-4612-9d03-07f7236cab77",
+      "status": "open",
+      "service_name": "lambda",
+      "scenario": "user wants to clean up unused or inactive lambda functions",
+      "alert_criteria": "if lambda function is older than threshold or does not have an invocation in the last n days",
+      "recommendation_action": "delete lambda",
+      "risk_detail": "operations",
+      "build_priority": 0,
+      "action_value": 1,
       "effort_level": 1,
       "risk_value": 1,
       "recommendation_description_detailed": "",
@@ -4845,18 +5120,72 @@
       "tags": []
     },
     {
-      "id": "326eaec8-4b35-417d-b883-33c31948a9cd",
+      "id": "2cd8897d-8db5-4bde-8476-1edbe7f97894",
       "status": "pending",
-      "service_name": "ecs",
-      "scenario": "user wants to make sure their services are all running the latest platform version",
-      "alert_criteria": "platform version != LATEST",
-      "recommendation_action": "update service in console to LATEST",
+      "service_name": "lambda",
+      "scenario": "user needs serverless (lambda) tracing functionality",
+      "alert_criteria": "user does not have x-ray tracing installed",
+      "recommendation_action": "enable x-ray",
       "risk_detail": "operations",
       "build_priority": 0,
-      "action_value": 2,
+      "action_value": 1,
       "effort_level": 1,
-      "risk_value": 1,
-      "recommendation_description_detailed": "this will cause the service to automatically rollback to the last stable state",
+      "risk_value": 0,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "327f7304-6e47-4eff-93b2-e070afcfc180",
+      "status": "open",
+      "service_name": "cloudfront",
+      "scenario": "streaming service needs to reduce latency for its users",
+      "alert_criteria": "",
+      "recommendation_action": "use cdn",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "1a48e014-dc5b-4b3d-9e8a-4fa00ebd4223",
+      "status": "open",
+      "service_name": "cloudtrail",
+      "scenario": "user wants to ensure CloudTrail is enabled in all regions",
+      "alert_criteria": "cloudtrail is not enabled in region X",
+      "recommendation_action": "enable cloudtrail",
+      "risk_detail": "operations",
+      "build_priority": 0,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
       "category": null,
       "output_notes": null,
       "notes": null,
@@ -4964,335 +5293,6 @@
       "action_value": null,
       "effort_level": null,
       "risk_value": null,
-      "recommendation_description_detailed": "",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "04dbd22f-e862-4f8b-8a00-7ad7ac48836e",
-      "status": "open",
-      "service_name": "networking",
-      "scenario": "user wants fault tolerant internet access",
-      "alert_criteria": "instances exist in more azs than nat gateways exist",
-      "recommendation_action": "create nat gateway in each az where an ec2 instance exists",
-      "risk_detail": "operations",
-      "build_priority": 0,
-      "action_value": 1,
-      "effort_level": 2,
-      "risk_value": 2,
-      "recommendation_description_detailed": "",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "1a48e014-dc5b-4b3d-9e8a-4fa00ebd4223",
-      "status": "open",
-      "service_name": "cloudtrail",
-      "scenario": "user wants to ensure CloudTrail is enabled in all regions",
-      "alert_criteria": "cloudtrail is not enabled in region X",
-      "recommendation_action": "enable cloudtrail",
-      "risk_detail": "operations",
-      "build_priority": 0,
-      "action_value": null,
-      "effort_level": null,
-      "risk_value": null,
-      "recommendation_description_detailed": "",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "332b3d41-5118-4fa2-ab98-1b2181c80f84",
-      "status": "ice",
-      "service_name": "route 53",
-      "scenario": "Amazon Route 53 Alias Resource Record Sets",
-      "alert_criteria": "A resource record set is a CNAME to an Amazon S3 website.",
-      "recommendation_action": "Replace the listed CNAME resource record sets with alias resource record sets; You also need to change the record type from CNAME to A or AAAA, depending on the AWS resource",
-      "risk_detail": "operations",
-      "build_priority": null,
-      "action_value": null,
-      "effort_level": null,
-      "risk_value": null,
-      "recommendation_description_detailed": "Checks for resource record sets that can be changed to alias resource record sets to improve performance and save money. An alias resource record set routes DNS queries to an AWS resource (for example, an Elastic Load Balancing load balancer or an Amazon S3 bucket) or to another Route 53 resource record set. When you use alias resource record sets, Route 53 routes your DNS queries to AWS resources free of charge. Hosted zones created by AWS services won’t appear in your check results.",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [
-        "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-choosing-alias-non-alias.html",
-        "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-values.html"
-      ],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "9962a78d-7100-4d15-bc9c-c62a6c0d3b91",
-      "status": "open",
-      "service_name": "ebs",
-      "scenario": "user wants to prevent volumes (root or attached) from filling up, forcing a restart and leading to a new IP address (if an elastic ip has not been assigned)",
-      "alert_criteria": "volume storage capacity has less than threshold (%) remaining",
-      "recommendation_action": "increase the storage size of your targeted volumes",
-      "risk_detail": "operations",
-      "build_priority": 0,
-      "action_value": 1,
-      "effort_level": 1,
-      "risk_value": 1,
-      "recommendation_description_detailed": "",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "8c0a3d78-a5e3-4ac1-a1ca-f25306b46143",
-      "status": "done",
-      "service_name": "iam",
-      "scenario": "user wants to get notified / know of non-compliant IAM keys (keys older than 90 days)",
-      "alert_criteria": "IAM key is older than 90 days",
-      "recommendation_action": "refresh IAM key",
-      "risk_detail": "operations",
-      "build_priority": 0,
-      "action_value": null,
-      "effort_level": null,
-      "risk_value": null,
-      "recommendation_description_detailed": "",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "297883ae-5ece-4511-8c34-1a2008cf1ad4",
-      "status": "ice",
-      "service_name": "iam",
-      "scenario": "user wants to be notified of new security groups",
-      "alert_criteria": "",
-      "recommendation_action": "",
-      "risk_detail": "operations",
-      "build_priority": null,
-      "action_value": null,
-      "effort_level": null,
-      "risk_value": null,
-      "recommendation_description_detailed": "",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "f2ee54dd-37e7-4118-80f9-f164d89f3a8f",
-      "status": "open",
-      "service_name": "iam",
-      "scenario": "user wants the password policy to require at least one number (+ specific password requirements)",
-      "alert_criteria": "",
-      "recommendation_action": "",
-      "risk_detail": "operations",
-      "build_priority": null,
-      "action_value": null,
-      "effort_level": null,
-      "risk_value": null,
-      "recommendation_description_detailed": "",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "a2e6377a-b62c-47a6-b957-452e9b79883b",
-      "status": "open",
-      "service_name": "iam",
-      "scenario": "user wants to remove unused security groups",
-      "alert_criteria": "",
-      "recommendation_action": "",
-      "risk_detail": "operations",
-      "build_priority": null,
-      "action_value": null,
-      "effort_level": null,
-      "risk_value": null,
-      "recommendation_description_detailed": "",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "299fc2d0-a2f2-4b79-a3d2-2b479b25d07f",
-      "status": "open",
-      "service_name": "iam",
-      "scenario": "user wants to ensure second access key is rotated every 90 days or less",
-      "alert_criteria": "access key has not been rotated in X days",
-      "recommendation_action": "",
-      "risk_detail": "operations",
-      "build_priority": null,
-      "action_value": null,
-      "effort_level": null,
-      "risk_value": null,
-      "recommendation_description_detailed": "",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "c727a01a-e43a-4157-a80c-21dc130a50c5",
-      "status": "pending",
-      "service_name": "elastic beanstalk",
-      "scenario": "user wants to make sure all environments are healthy",
-      "alert_criteria": "environment != healthy",
-      "recommendation_action": "see logs to address issue or delete environment",
-      "risk_detail": "operations, reliability",
-      "build_priority": 0,
-      "action_value": 1,
-      "effort_level": 1,
-      "risk_value": 3,
-      "recommendation_description_detailed": "see documentation for alert message details",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [
-        "https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html"
-      ],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "ceb5228b-8733-4978-8fed-36588bfb638d",
-      "status": "pending",
-      "service_name": "elastic beanstalk",
-      "scenario": "user wants to make sure all environments are up to date",
-      "alert_criteria": "platform state == deprecated",
-      "recommendation_action": "update your environment",
-      "risk_detail": "operations",
-      "build_priority": 0,
-      "action_value": 1,
-      "effort_level": 1,
-      "risk_value": 1,
-      "recommendation_description_detailed": "",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "1d8ad405-4cb5-4d9a-9326-b436d9bbdfe2",
-      "status": "ice",
-      "service_name": "s3, rds, redshift, etc.",
-      "scenario": "user wants to associate costs to cost centers, projects, teams, and other business units",
-      "alert_criteria": "check if resoruce has ANY tags, if no tags send recommendation",
-      "recommendation_action": "use data-classification association tagging solution",
-      "risk_detail": "operations",
-      "build_priority": 0,
-      "action_value": 2,
-      "effort_level": 1,
-      "risk_value": 2,
       "recommendation_description_detailed": "",
       "category": null,
       "output_notes": null,

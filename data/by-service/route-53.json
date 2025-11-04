@@ -99,7 +99,7 @@
       "scenario": "Amazon Route 53 Latency Resource Record Sets",
       "alert_criteria": "resources exist in multiple regions and only one latency resource record set is configured for a particular domain name.",
       "recommendation_action": "define a latency resource record set for each region",
-      "risk_detail": "cost, reliabilty",
+      "risk_detail": "cost, reliability",
       "build_priority": 0,
       "action_value": 2,
       "effort_level": 3,

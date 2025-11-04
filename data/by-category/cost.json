@@ -3,6 +3,35 @@
   "count": 29,
   "misconfigurations": [
     {
+      "id": "6aa5f0f0-2e69-4f2e-82f2-e4110654b102",
+      "status": "done",
+      "service_name": "elasticache",
+      "scenario": "Amazon ElastiCache Reserved Node Optimization",
+      "alert_criteria": "Optimizing the purchase of ElastiCache Reserved Nodes can help reduce costs",
+      "recommendation_action": "See the Cost Explorer page for more detailed recommendations, customization options (e.g. look-back period, payment option, etc.) and to purchase ElastiCache Reserved Nodes",
+      "risk_detail": "cost",
+      "build_priority": 2,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "Checks your usage of ElastiCache and provides recommendations on purchase of Reserved Nodes to help reduce costs incurred from using ElastiCache On-Demand. AWS generates these recommendations by analyzing your On-Demand usage for the past 30 days. We then simulate every combination of reservations in the generated category of usage in order to identify the best number of each type of Reserved Node to purchase to maximize your savings. This check covers recommendations based on partial upfront payment option with 1-year or 3-year commitment. This check is not available to accounts linked in Consolidated Billing. Recommendations are only available for the Paying Account.",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://aws.amazon.com/aws-cost-management/aws-cost-explorer/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
       "id": "475b24d9-4b5b-4ce4-8161-af25f89bee49",
       "status": "done",
       "service_name": "alb/elb",
@@ -62,105 +91,24 @@
       "tags": []
     },
     {
-      "id": "6aa5f0f0-2e69-4f2e-82f2-e4110654b102",
+      "id": "e1b071d7-7358-4318-9021-015de19b783b",
       "status": "done",
-      "service_name": "elasticache",
-      "scenario": "Amazon ElastiCache Reserved Node Optimization",
-      "alert_criteria": "Optimizing the purchase of ElastiCache Reserved Nodes can help reduce costs",
-      "recommendation_action": "See the Cost Explorer page for more detailed recommendations, customization options (e.g. look-back period, payment option, etc.) and to purchase ElastiCache Reserved Nodes",
+      "service_name": "elasticsearch",
+      "scenario": "Amazon Elasticsearch Reserved Instance Optimization",
+      "alert_criteria": "Optimizing the purchase of Elasticsearch Reserved Instances can help reduce costs.",
+      "recommendation_action": "See the Cost Explorer page for more detailed recommendations, customization options (e.g. look-back period, payment option, etc.) and to purchase Elasticsearch Reserved Instances.",
       "risk_detail": "cost",
       "build_priority": 2,
       "action_value": null,
       "effort_level": null,
       "risk_value": null,
-      "recommendation_description_detailed": "Checks your usage of ElastiCache and provides recommendations on purchase of Reserved Nodes to help reduce costs incurred from using ElastiCache On-Demand. AWS generates these recommendations by analyzing your On-Demand usage for the past 30 days. We then simulate every combination of reservations in the generated category of usage in order to identify the best number of each type of Reserved Node to purchase to maximize your savings. This check covers recommendations based on partial upfront payment option with 1-year or 3-year commitment. This check is not available to accounts linked in Consolidated Billing. Recommendations are only available for the Paying Account.",
+      "recommendation_description_detailed": "Checks your usage of Elasticsearch and provides recommendations on purchase of Reserved Instances to help reduce costs incurred from using Elasticsearch On-Demand. AWS generates these recommendations by analyzing your On-Demand usage for the past 30 days. We then simulate every combination of reservations in the generated category of usage in order to identify the best number of each type of Reserved Instance to purchase to maximize your savings. This check covers recommendations based on partial upfront payment option with 1-year or 3-year commitment. This check is not available to accounts linked in Consolidated Billing. Recommendations are only available for the Paying Account.",
       "category": null,
       "output_notes": null,
       "notes": null,
       "references": [
         "https://aws.amazon.com/aws-cost-management/aws-cost-explorer/"
       ],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "5fc3d4a9-96ef-4bba-82e9-bccabe531b34",
-      "status": "open",
-      "service_name": "eks",
-      "scenario": "pods OR nodes within cluster are not appropriately sized (artur to clarify)",
-      "alert_criteria": "workloads (cpu, memory, network IOPs, etc.) for the previous 14, 30, 90 days, multiplied by 1.4 are too large...",
-      "recommendation_action": "recommend the proper size for each pod",
-      "risk_detail": "cost, performance",
-      "build_priority": null,
-      "action_value": null,
-      "effort_level": null,
-      "risk_value": null,
-      "recommendation_description_detailed": "",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "e9b21a0d-2fe8-4f5b-8875-52995b4cf2e7",
-      "status": "open",
-      "service_name": "s3",
-      "scenario": "users wants to automatically manage data storage tiers",
-      "alert_criteria": "s3 lifecycle manager is turned off; intelligent tiering is not enabled",
-      "recommendation_action": "turn on lifecycle manager",
-      "risk_detail": "cost, operations",
-      "build_priority": 0,
-      "action_value": 3,
-      "effort_level": 1,
-      "risk_value": 2,
-      "recommendation_description_detailed": "",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "2b6ae2c7-d432-401b-8164-23782cb1b1dc",
-      "status": "open",
-      "service_name": "emr",
-      "scenario": "EMR (or other) cluster is used and task nodes are not utilizing spot instances",
-      "alert_criteria": "",
-      "recommendation_action": "use spot instances",
-      "risk_detail": "perforamnce, cost",
-      "build_priority": 1,
-      "action_value": 3,
-      "effort_level": 2,
-      "risk_value": 2,
-      "recommendation_description_detailed": "useful for high CPU but low Memory requirements; i.e. high processing requirement but low (or no) caching required",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [],
       "metadata": {
         "created_at": "2025-11-04T23:07:44.651478Z",
         "updated_at": "2025-11-04T23:07:44.651478Z",
@@ -202,24 +150,22 @@
       "tags": []
     },
     {
-      "id": "daa4711f-c1d3-4104-a9e4-f709af67ecf7",
-      "status": "open",
-      "service_name": "redshift",
-      "scenario": "Amazon Redshift Reserved Node Optimization",
-      "alert_criteria": "Optimizing the purchase of Redshift Reserved Nodes can help reduce costs.",
-      "recommendation_action": "See the Cost Explorer page for more detailed recommendations, customization options (e.g. look-back period, payment option, etc.) and to purchase Redshift Reserved Nodes",
+      "id": "8dfe3ba4-c72f-4ed8-9a07-f88c1ccc8b3b",
+      "status": "done",
+      "service_name": "ebs",
+      "scenario": "user wants to ensure that only necessary / needed snapshots are available for use",
+      "alert_criteria": "if snapshot is older than seven days and/or is older than another snapshot made from an identical volume, then recommend deletion",
+      "recommendation_action": "delete snapshot",
       "risk_detail": "cost",
-      "build_priority": 2,
-      "action_value": null,
-      "effort_level": null,
-      "risk_value": null,
-      "recommendation_description_detailed": "Checks your usage of Redshift and provides recommendations on purchase of Reserved Nodes to help reduce costs incurred from using Redshift On-Demand. AWS generates these recommendations by analyzing your On-Demand usage for the past 30 days. We then simulate every combination of reservations in the generated category of usage in order to identify the best number of each type of Reserved Nodes to purchase to maximize your savings. This check covers recommendations based on partial upfront payment option with 1-year or 3-year commitment. This check is not available to accounts linked in Consolidated Billing. Recommendations are only available for the Paying Account.",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 1,
+      "recommendation_description_detailed": "",
       "category": null,
       "output_notes": null,
       "notes": null,
-      "references": [
-        "https://aws.amazon.com/aws-cost-management/aws-cost-explorer/"
-      ],
+      "references": [],
       "metadata": {
         "created_at": "2025-11-04T23:07:44.651478Z",
         "updated_at": "2025-11-04T23:07:44.651478Z",
@@ -231,24 +177,22 @@
       "tags": []
     },
     {
-      "id": "7d5eed76-e0e9-41d3-98ca-5d1becff0c18",
+      "id": "9b4bd9b6-9139-4e8d-a157-055bbb6bacc3",
       "status": "open",
-      "service_name": "redshift",
-      "scenario": "Underutilized Amazon Redshift Clusters",
-      "alert_criteria": "A running cluster has not had a connection in the last 7 days.",
-      "recommendation_action": "Consider shutting down the cluster and taking a final snapshot, or downsizing the cluster.",
+      "service_name": "ebs",
+      "scenario": "user wants to ensure ebs volumes are deleted when an instance is terminated",
+      "alert_criteria": "\"delete on termination\" flag on instances is set to false",
+      "recommendation_action": "set \"delete on termination\" flag to true (enable automatic deletion upon instance termination)",
       "risk_detail": "cost",
       "build_priority": 0,
-      "action_value": null,
-      "effort_level": null,
-      "risk_value": null,
-      "recommendation_description_detailed": "Checks your Amazon Redshift configuration for clusters that appear to be underutilized. If an Amazon Redshift cluster has not had a connection for a prolonged period of time or is using a low amount of CPU, you can use lower-cost options such as downsizing the cluster or shutting down the cluster and taking a final snapshot. Final snapshots are retained even after you delete your cluster.",
+      "action_value": 1,
+      "effort_level": 0,
+      "risk_value": 0,
+      "recommendation_description_detailed": "",
       "category": null,
       "output_notes": null,
-      "notes": "can beat our aws recommendations by determining which path is the correct path, and, if resizing is optimal, to which size",
-      "references": [
-        "https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-mgmt-shutdown-delete-cluster"
-      ],
+      "notes": null,
+      "references": [],
       "metadata": {
         "created_at": "2025-11-04T23:07:44.651478Z",
         "updated_at": "2025-11-04T23:07:44.651478Z",
@@ -260,24 +204,22 @@
       "tags": []
     },
     {
-      "id": "0c1b66db-e282-4fbe-91cb-5c49cc88427a",
+      "id": "4305d944-eb3c-473c-b9ce-99fe6911713b",
       "status": "open",
-      "service_name": "redshift",
-      "scenario": "Underutilized Amazon Redshift Clusters",
-      "alert_criteria": "A running cluster had less than 5% cluster-wide average CPU utilization for 99% of the last 7 days.",
-      "recommendation_action": "Consider shutting down the cluster and taking a final snapshot, or downsizing the cluster.",
+      "service_name": "ecs",
+      "scenario": "user wants to remove or update inactive tasks",
+      "alert_criteria": "ecs task definition set to inactive status",
+      "recommendation_action": "delete or update task",
       "risk_detail": "cost",
       "build_priority": 0,
-      "action_value": null,
-      "effort_level": null,
-      "risk_value": null,
-      "recommendation_description_detailed": "Checks your Amazon Redshift configuration for clusters that appear to be underutilized. If an Amazon Redshift cluster has not had a connection for a prolonged period of time or is using a low amount of CPU, you can use lower-cost options such as downsizing the cluster or shutting down the cluster and taking a final snapshot. Final snapshots are retained even after you delete your cluster.",
+      "action_value": 1,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "",
       "category": null,
       "output_notes": null,
-      "notes": "can beat our aws recommendations by determining which path is the correct path, and, if resizing is optimal, to which size",
-      "references": [
-        "https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-mgmt-shutdown-delete-cluster"
-      ],
+      "notes": null,
+      "references": [],
       "metadata": {
         "created_at": "2025-11-04T23:07:44.651478Z",
         "updated_at": "2025-11-04T23:07:44.651478Z",
@@ -542,24 +484,22 @@
       "tags": []
     },
     {
-      "id": "51e22636-4dae-4f77-ab58-c4f4961013a2",
+      "id": "e9b21a0d-2fe8-4f5b-8875-52995b4cf2e7",
       "status": "open",
-      "service_name": "lambda",
-      "scenario": "AWS Lambda Functions with Excessive Timeouts",
-      "alert_criteria": "Functions where > 10% of invocations end in an error due to a timeout on any given day within the last 7 days.",
-      "recommendation_action": "increase the timeout setting for the function.",
-      "risk_detail": "cost",
-      "build_priority": 1,
-      "action_value": null,
-      "effort_level": null,
-      "risk_value": null,
-      "recommendation_description_detailed": "Checks for Lambda functions with high timeout rates that may result in high cost. Lambda charges based on execution time for your function and number of requests for your function. Function timeouts result in function errors that may cause retries that incur additional request and execution time charges. For more information, see Monitoring and troubleshooting Lambda applications.",
+      "service_name": "s3",
+      "scenario": "users wants to automatically manage data storage tiers",
+      "alert_criteria": "s3 lifecycle manager is turned off; intelligent tiering is not enabled",
+      "recommendation_action": "turn on lifecycle manager",
+      "risk_detail": "cost, operations",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "",
       "category": null,
       "output_notes": null,
       "notes": null,
-      "references": [
-        "https://docs.aws.amazon.com/lambda/latest/dg/lambda-monitoring.html"
-      ],
+      "references": [],
       "metadata": {
         "created_at": "2025-11-04T23:07:44.651478Z",
         "updated_at": "2025-11-04T23:07:44.651478Z",
@@ -571,26 +511,49 @@
       "tags": []
     },
     {
-      "id": "59b90e10-df31-4a2e-9cd7-1a598eecb2a1",
+      "id": "5fc3d4a9-96ef-4bba-82e9-bccabe531b34",
       "status": "open",
-      "service_name": "lambda",
-      "scenario": "AWS Lambda Functions with High Error Rates",
-      "alert_criteria": "Functions where > 10% of invocations end in error on any given day within the last 7 days",
-      "recommendation_action": "Consider the following guidelines to reduce errors. Function errors include errors returned by the function's code and errors returned by the function's runtime. To help you troubleshoot Lambda errors, Lambda integrates with services like Amazon CloudWatch and AWS X-Ray. You can use a combination of logs, metrics, alarms, and X-ray tracing to quickly detect and identify issues in your function code, API, or other resources that support your application.",
-      "risk_detail": "cost",
-      "build_priority": 1,
+      "service_name": "eks",
+      "scenario": "pods OR nodes within cluster are not appropriately sized (artur to clarify)",
+      "alert_criteria": "workloads (cpu, memory, network IOPs, etc.) for the previous 14, 30, 90 days, multiplied by 1.4 are too large...",
+      "recommendation_action": "recommend the proper size for each pod",
+      "risk_detail": "cost, performance",
+      "build_priority": null,
       "action_value": null,
       "effort_level": null,
       "risk_value": null,
-      "recommendation_description_detailed": "Checks for Lambda functions with high error rates that may result in high cost. Lambda charges based on the number of requests and aggregate execution time for your function. Function errors may cause retries that incur additional charges. Consider the following guidelines to reduce errors. Function errors include errors returned by the function's code and errors returned by the function's runtime. To help you troubleshoot Lambda errors, Lambda integrates with services like Amazon CloudWatch and AWS X-Ray. You can use a combination of logs, metrics, alarms, and X-ray tracing to quickly detect and identify issues in your function code, API, or other resources that support your application.",
+      "recommendation_description_detailed": "",
       "category": null,
       "output_notes": null,
       "notes": null,
-      "references": [
-        "https://docs.aws.amazon.com/lambda/latest/dg/lambda-monitoring.html",
-        "https://docs.aws.amazon.com/lambda/latest/dg/lambda-troubleshooting.html",
-        "https://docs.aws.amazon.com/lambda/latest/dg/invocation-retries.html"
-      ],
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "2b6ae2c7-d432-401b-8164-23782cb1b1dc",
+      "status": "open",
+      "service_name": "emr",
+      "scenario": "EMR (or other) cluster is used and task nodes are not utilizing spot instances",
+      "alert_criteria": "",
+      "recommendation_action": "use spot instances",
+      "risk_detail": "performance, cost",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 2,
+      "recommendation_description_detailed": "useful for high CPU but low Memory requirements; i.e. high processing requirement but low (or no) caching required",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
       "metadata": {
         "created_at": "2025-11-04T23:07:44.651478Z",
         "updated_at": "2025-11-04T23:07:44.651478Z",
@@ -660,96 +623,13 @@
       "tags": []
     },
     {
-      "id": "4305d944-eb3c-473c-b9ce-99fe6911713b",
-      "status": "open",
-      "service_name": "ecs",
-      "scenario": "user wants to remove or update inactive tasks",
-      "alert_criteria": "ecs task definition set to inactive status",
-      "recommendation_action": "delete or update task",
-      "risk_detail": "cost",
-      "build_priority": 0,
-      "action_value": 1,
-      "effort_level": 1,
-      "risk_value": 1,
-      "recommendation_description_detailed": "",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "277608d6-b89d-459a-ab2d-e2c05ac47af3",
-      "status": "open",
-      "service_name": "ALL",
-      "scenario": "user needs to have an index of resources across regions they can search for",
-      "alert_criteria": "resource explorer is not enabled",
-      "recommendation_action": "enable resource explorer",
-      "risk_detail": "cost, operations",
-      "build_priority": 0,
-      "action_value": 3,
-      "effort_level": 0,
-      "risk_value": 0,
-      "recommendation_description_detailed": "",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "e1b071d7-7358-4318-9021-015de19b783b",
-      "status": "done",
-      "service_name": "elasticsearch",
-      "scenario": "Amazon Elasticsearch Reserved Instance Optimization",
-      "alert_criteria": "Optimizing the purchase of Elasticsearch Reserved Instances can help reduce costs.",
-      "recommendation_action": "See the Cost Explorer page for more detailed recommendations, customization options (e.g. look-back period, payment option, etc.) and to purchase Elasticsearch Reserved Instances.",
-      "risk_detail": "cost",
-      "build_priority": 2,
-      "action_value": null,
-      "effort_level": null,
-      "risk_value": null,
-      "recommendation_description_detailed": "Checks your usage of Elasticsearch and provides recommendations on purchase of Reserved Instances to help reduce costs incurred from using Elasticsearch On-Demand. AWS generates these recommendations by analyzing your On-Demand usage for the past 30 days. We then simulate every combination of reservations in the generated category of usage in order to identify the best number of each type of Reserved Instance to purchase to maximize your savings. This check covers recommendations based on partial upfront payment option with 1-year or 3-year commitment. This check is not available to accounts linked in Consolidated Billing. Recommendations are only available for the Paying Account.",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [
-        "https://aws.amazon.com/aws-cost-management/aws-cost-explorer/"
-      ],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
       "id": "57dd389a-4580-44db-a15e-499506415d56",
       "status": "open",
       "service_name": "route 53",
       "scenario": "Amazon Route 53 Latency Resource Record Sets",
       "alert_criteria": "resources exist in multiple regions and only one latency resource record set is configured for a particular domain name.",
       "recommendation_action": "define a latency resource record set for each region",
-      "risk_detail": "cost, reliabilty",
+      "risk_detail": "cost, reliability",
       "build_priority": 0,
       "action_value": 2,
       "effort_level": 3,
@@ -772,22 +652,24 @@
       "tags": []
     },
     {
-      "id": "8dfe3ba4-c72f-4ed8-9a07-f88c1ccc8b3b",
-      "status": "done",
-      "service_name": "ebs",
-      "scenario": "user wants to ensure that only necessary / needed snapshots are available for use",
-      "alert_criteria": "if snapshot is older than seven days and/or is older than another snapshot made from an identical volume, then recommend deletion",
-      "recommendation_action": "delete snapshot",
+      "id": "daa4711f-c1d3-4104-a9e4-f709af67ecf7",
+      "status": "open",
+      "service_name": "redshift",
+      "scenario": "Amazon Redshift Reserved Node Optimization",
+      "alert_criteria": "Optimizing the purchase of Redshift Reserved Nodes can help reduce costs.",
+      "recommendation_action": "See the Cost Explorer page for more detailed recommendations, customization options (e.g. look-back period, payment option, etc.) and to purchase Redshift Reserved Nodes",
       "risk_detail": "cost",
-      "build_priority": 0,
-      "action_value": 3,
-      "effort_level": 2,
-      "risk_value": 1,
-      "recommendation_description_detailed": "",
+      "build_priority": 2,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "Checks your usage of Redshift and provides recommendations on purchase of Reserved Nodes to help reduce costs incurred from using Redshift On-Demand. AWS generates these recommendations by analyzing your On-Demand usage for the past 30 days. We then simulate every combination of reservations in the generated category of usage in order to identify the best number of each type of Reserved Nodes to purchase to maximize your savings. This check covers recommendations based on partial upfront payment option with 1-year or 3-year commitment. This check is not available to accounts linked in Consolidated Billing. Recommendations are only available for the Paying Account.",
       "category": null,
       "output_notes": null,
       "notes": null,
-      "references": [],
+      "references": [
+        "https://aws.amazon.com/aws-cost-management/aws-cost-explorer/"
+      ],
       "metadata": {
         "created_at": "2025-11-04T23:07:44.651478Z",
         "updated_at": "2025-11-04T23:07:44.651478Z",
@@ -799,15 +681,133 @@
       "tags": []
     },
     {
-      "id": "9b4bd9b6-9139-4e8d-a157-055bbb6bacc3",
+      "id": "7d5eed76-e0e9-41d3-98ca-5d1becff0c18",
       "status": "open",
-      "service_name": "ebs",
-      "scenario": "user wants to ensure ebs volumes are deleted when an instance is terminated",
-      "alert_criteria": "\"delete on termination\" flag on instances is set to false",
-      "recommendation_action": "set \"delete on termination\" flag to true (enable automatic deletion upon instance termination)",
+      "service_name": "redshift",
+      "scenario": "Underutilized Amazon Redshift Clusters",
+      "alert_criteria": "A running cluster has not had a connection in the last 7 days.",
+      "recommendation_action": "Consider shutting down the cluster and taking a final snapshot, or downsizing the cluster.",
       "risk_detail": "cost",
       "build_priority": 0,
-      "action_value": 1,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "Checks your Amazon Redshift configuration for clusters that appear to be underutilized. If an Amazon Redshift cluster has not had a connection for a prolonged period of time or is using a low amount of CPU, you can use lower-cost options such as downsizing the cluster or shutting down the cluster and taking a final snapshot. Final snapshots are retained even after you delete your cluster.",
+      "category": null,
+      "output_notes": null,
+      "notes": "can beat our aws recommendations by determining which path is the correct path, and, if resizing is optimal, to which size",
+      "references": [
+        "https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-mgmt-shutdown-delete-cluster"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "0c1b66db-e282-4fbe-91cb-5c49cc88427a",
+      "status": "open",
+      "service_name": "redshift",
+      "scenario": "Underutilized Amazon Redshift Clusters",
+      "alert_criteria": "A running cluster had less than 5% cluster-wide average CPU utilization for 99% of the last 7 days.",
+      "recommendation_action": "Consider shutting down the cluster and taking a final snapshot, or downsizing the cluster.",
+      "risk_detail": "cost",
+      "build_priority": 0,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "Checks your Amazon Redshift configuration for clusters that appear to be underutilized. If an Amazon Redshift cluster has not had a connection for a prolonged period of time or is using a low amount of CPU, you can use lower-cost options such as downsizing the cluster or shutting down the cluster and taking a final snapshot. Final snapshots are retained even after you delete your cluster.",
+      "category": null,
+      "output_notes": null,
+      "notes": "can beat our aws recommendations by determining which path is the correct path, and, if resizing is optimal, to which size",
+      "references": [
+        "https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-mgmt-shutdown-delete-cluster"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "51e22636-4dae-4f77-ab58-c4f4961013a2",
+      "status": "open",
+      "service_name": "lambda",
+      "scenario": "AWS Lambda Functions with Excessive Timeouts",
+      "alert_criteria": "Functions where > 10% of invocations end in an error due to a timeout on any given day within the last 7 days.",
+      "recommendation_action": "increase the timeout setting for the function.",
+      "risk_detail": "cost",
+      "build_priority": 1,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "Checks for Lambda functions with high timeout rates that may result in high cost. Lambda charges based on execution time for your function and number of requests for your function. Function timeouts result in function errors that may cause retries that incur additional request and execution time charges. For more information, see Monitoring and troubleshooting Lambda applications.",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/lambda-monitoring.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "59b90e10-df31-4a2e-9cd7-1a598eecb2a1",
+      "status": "open",
+      "service_name": "lambda",
+      "scenario": "AWS Lambda Functions with High Error Rates",
+      "alert_criteria": "Functions where > 10% of invocations end in error on any given day within the last 7 days",
+      "recommendation_action": "Consider the following guidelines to reduce errors. Function errors include errors returned by the function's code and errors returned by the function's runtime. To help you troubleshoot Lambda errors, Lambda integrates with services like Amazon CloudWatch and AWS X-Ray. You can use a combination of logs, metrics, alarms, and X-ray tracing to quickly detect and identify issues in your function code, API, or other resources that support your application.",
+      "risk_detail": "cost",
+      "build_priority": 1,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "Checks for Lambda functions with high error rates that may result in high cost. Lambda charges based on the number of requests and aggregate execution time for your function. Function errors may cause retries that incur additional charges. Consider the following guidelines to reduce errors. Function errors include errors returned by the function's code and errors returned by the function's runtime. To help you troubleshoot Lambda errors, Lambda integrates with services like Amazon CloudWatch and AWS X-Ray. You can use a combination of logs, metrics, alarms, and X-ray tracing to quickly detect and identify issues in your function code, API, or other resources that support your application.",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/lambda-monitoring.html",
+        "https://docs.aws.amazon.com/lambda/latest/dg/lambda-troubleshooting.html",
+        "https://docs.aws.amazon.com/lambda/latest/dg/invocation-retries.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "277608d6-b89d-459a-ab2d-e2c05ac47af3",
+      "status": "open",
+      "service_name": "ALL",
+      "scenario": "user needs to have an index of resources across regions they can search for",
+      "alert_criteria": "resource explorer is not enabled",
+      "recommendation_action": "enable resource explorer",
+      "risk_detail": "cost, operations",
+      "build_priority": 0,
+      "action_value": 3,
       "effort_level": 0,
       "risk_value": 0,
       "recommendation_description_detailed": "",
