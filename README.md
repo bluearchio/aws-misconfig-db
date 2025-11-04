@@ -1,6 +1,42 @@
-# AWS Misconfiguration Database
+<div align="center">
 
-A comprehensive, community-driven database of AWS misconfigurations, designed to be LLM-friendly and easily integrated into security tools, cost optimization platforms, and infrastructure analysis systems.
+```
+   ╔═══════════════════════════════════════════════════════════════╗
+   ║                                                               ║
+   ║      █████╗ ██╗    ██╗███████╗    ███╗   ███╗██████╗        ║
+   ║     ██╔══██╗██║    ██║██╔════╝    ████╗ ████║██╔══██╗       ║
+   ║     ███████║██║ █╗ ██║███████╗    ██╔████╔██║██║  ██║       ║
+   ║     ██╔══██║██║███╗██║╚════██║    ██║╚██╔╝██║██║  ██║       ║
+   ║     ██║  ██║╚███╔███╔╝███████║    ██║ ╚═╝ ██║██████╔╝       ║
+   ║     ╚═╝  ╚═╝ ╚══╝╚══╝ ╚══════╝    ╚═╝     ╚═╝╚═════╝        ║
+   ║                                                               ║
+   ║           Misconfiguration Database & Knowledge Hub          ║
+   ║                                                               ║
+   ╚═══════════════════════════════════════════════════════════════╝
+```
+
+<h1>AWS Misconfiguration Database</h1>
+
+<p>
+  <a href="https://github.com/bluearchio/aws-misconfig-db/actions"><img src="https://github.com/bluearchio/aws-misconfig-db/workflows/Validate%20Database/badge.svg" alt="Validation Status"></a>
+  <a href="https://github.com/bluearchio/aws-misconfig-db/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License"></a>
+  <a href="https://github.com/bluearchio/aws-misconfig-db/graphs/contributors"><img src="https://img.shields.io/github/contributors/bluearchio/aws-misconfig-db.svg" alt="Contributors"></a>
+  <a href="https://github.com/bluearchio/aws-misconfig-db/issues"><img src="https://img.shields.io/github/issues/bluearchio/aws-misconfig-db.svg" alt="Issues"></a>
+</p>
+
+<p><strong>A comprehensive, community-driven database of AWS misconfigurations</strong></p>
+
+<p>
+🔐 Security • 💰 Cost • ⚡ Performance • 🛠️ Operations • 🔄 Reliability
+</p>
+
+<p>
+Designed to be LLM-friendly and easily integrated into security tools, cost optimization platforms, and infrastructure analysis systems.
+</p>
+
+</div>
+
+---
 
 ## Overview
 
