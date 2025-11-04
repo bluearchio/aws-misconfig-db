@@ -1,0 +1,546 @@
+{
+  "service": "ec2",
+  "count": 19,
+  "misconfigurations": [
+    {
+      "id": "6d6e48e1-29bb-49ac-a848-a33fba2a712a",
+      "status": "done",
+      "service_name": "ec2",
+      "scenario": "Amazon EC2 Reserved Instance Lease Expiration",
+      "alert_criteria": "The Reserved Instance lease expires in less than 30 days.",
+      "recommendation_action": "Consider purchasing a new Reserved Instance to replace the one that is nearing the end of its term. For more information",
+      "risk_detail": "cost",
+      "build_priority": 3,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "Checks for Amazon EC2 Reserved Instances that are scheduled to expire within the next 30 days or have expired in the preceding 30 days. Reserved Instances do not renew automatically; you can continue using an EC2 instance covered by the reservation without interruption, but you will be charged On-Demand rates. New Reserved Instances can have the same parameters as the expired ones, or you can purchase Reserved Instances with different parameters. The estimated monthly savings we show is the difference between the On-Demand and Reserved Instance rates for the same instance type.",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://aws.amazon.com/ec2/pricing/reserved-instances/buyer/",
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-concepts-buying.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "249dd667-4b1e-4200-bec5-19c6c718f958",
+      "status": "done",
+      "service_name": "ec2",
+      "scenario": "user has unencrypted volumes currently in use",
+      "alert_criteria": "volumes (attached or not) are currently unencrypted",
+      "recommendation_action": "encrypt (or delete) volumes",
+      "risk_detail": "security",
+      "build_priority": 0,
+      "action_value": 1,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "033ae438-4620-4f65-80cd-776fd0102bb0",
+      "status": "done",
+      "service_name": "ec2",
+      "scenario": "user has unattached or unused volumes",
+      "alert_criteria": "volumes are not attached to instances and have little to no activity",
+      "recommendation_action": "delete volumes",
+      "risk_detail": "cost",
+      "build_priority": 0,
+      "action_value": 1,
+      "effort_level": 1,
+      "risk_value": 0,
+      "recommendation_description_detailed": "Checks Amazon Elastic Block Store (Amazon EBS) volume configurations and warns when volumes appear to be underused. Charges begin when a volume is created. If a volume remains unattached or has very low write activity (excluding boot volumes) for a period of time, the volume is probably not being used.",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "e8fc5179-9193-4d19-808f-dee3aa5a08a1",
+      "status": "done",
+      "service_name": "ec2",
+      "scenario": "user has instances that are not being used regularly",
+      "alert_criteria": "cpu utilization of instances is below threshold",
+      "recommendation_action": "stop or terminate instance",
+      "risk_detail": "cost",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "tagging strategies could also be recommended to improve the general \"intelligence\" of the recommendations; Checks the Amazon Elastic Compute Cloud (Amazon EC2) instances that were running at any time during the last 14 days and alerts you if the daily CPU utilization was 10% or less and network I/O was 5 MB or less on 4 or more days. Running instances generate hourly usage charges. Although some scenarios can result in low utilization by design, you can often lower your costs by managing the number and size of your instances.",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "b971de6f-9227-4782-a708-9d2999765755",
+      "status": "done",
+      "service_name": "ec2",
+      "scenario": "user has already reduced waste, has a deep understanding of their future compute usage requirements, and wants to save money on their instance usage rates going forward",
+      "alert_criteria": "boto recommends \"reserved instances\" and the user has already gone through a \"waste reduction\" process\"",
+      "recommendation_action": "purchase reserved instances",
+      "risk_detail": "cost",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 3,
+      "risk_value": 1,
+      "recommendation_description_detailed": "make sure to prompt the user, ensuring they have already maximized their savings by reducing waste, before recommending a RI plan.",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "b21a13ee-39f2-4a77-bebc-c9a49613e826",
+      "status": "done",
+      "service_name": "ec2",
+      "scenario": "user has already reduced waste, has a good understanding of their future compute usage requirements, and wants to save money on their instance usage rates going forward",
+      "alert_criteria": "boto recommends \"ec2 level savings plans\" and the user has already gone through a \"waste reduction\" process\"",
+      "recommendation_action": "purchase savings plan at ec2 level",
+      "risk_detail": "cost",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 1,
+      "recommendation_description_detailed": "make sure to prompt the user, ensuring they have already maximized their savings by reducing waste, before recommending a savings plan",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "3e17f505-9507-4244-b494-02c1c9e7f559",
+      "status": "done",
+      "service_name": "ec2",
+      "scenario": "user has already reduced waste, has an okay understanding of their future compute usage requirements, and wants to save money on their instance usage rates going forward",
+      "alert_criteria": "boto recommends \"ec2 level savings plans\" and the user has already gone through a \"waste reduction\" process\"",
+      "recommendation_action": "purchase general savings plan",
+      "risk_detail": "cost",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "make sure to prompt the user, ensuring they have already maximized their savings by reducing waste, before recommending a savings plan: Checks your usage of EC2, Fargate, and Lambda over the last 30 days and provides Savings Plan purchase recommendations, which allows you to commit to a consistent usage amount measured in $/hour for a one or three year term in exchange for discounted rates. These are sourced from AWS Cost Explorer which can be used to get more detailed recommendation information, or to purchase a savings plan. These recommendations should be considered an alternative to your RI recommendations and choosing to act fully on both sets of recommendations would likely lead to over commitment.",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "030f361e-eb21-4382-8d26-fcd86f47c8d5",
+      "status": "done",
+      "service_name": "ec2",
+      "scenario": "EC2 instances are running on previous generations",
+      "alert_criteria": "EC2 instances are running on previous generations",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "0f5cfb3e-623b-4140-a5ed-db4b5be406f8",
+      "status": "done",
+      "service_name": "ec2",
+      "scenario": "EBS volumes are running on previous generations",
+      "alert_criteria": "EBS volumes are running on previous generations",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "6a2c2d54-b4ce-4d2c-a3c1-4ce04986052c",
+      "status": "done",
+      "service_name": "ec2",
+      "scenario": "user wants to be notified when/if their reserved instance lease is going to expire",
+      "alert_criteria": "The Reserved Instance lease is set to expire in the preceding 30 days",
+      "recommendation_action": "Consider purchasing a new Reserved Instance to replace the one that is nearing the end of its term. For more information",
+      "risk_detail": "cost",
+      "build_priority": 3,
+      "action_value": 1,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "Checks for Amazon EC2 Reserved Instances that are scheduled to expire within the next 30 days or have expired in the preceding 30 days. Reserved Instances do not renew automatically; you can continue using an EC2 instance covered by the reservation without interruption, but you will be charged On-Demand rates. New Reserved Instances can have the same parameters as the expired ones, or you can purchase Reserved Instances with different parameters. The estimated monthly savings we show is the difference between the On-Demand and Reserved Instance rates for the same instance type.",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://aws.amazon.com/ec2/pricing/reserved-instances/buyer/",
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-concepts-buying.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "3bcb0076-e857-4761-988a-4982185813a5",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "ec2 network performance is not what is expected / paid for",
+      "alert_criteria": "using aws inventory stats, compare actual performance to that of expected...",
+      "recommendation_action": "upgrade to a modern ec2 instance type with guaranteed network performance; co-locate all ec2s",
+      "risk_detail": "performance",
+      "build_priority": 3,
+      "action_value": 2,
+      "effort_level": 3,
+      "risk_value": 1,
+      "recommendation_description_detailed": "\"noisy neighbors\" are stealing network I/O performance",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/enhanced-networking.html",
+        "https://www.quora.com/How-did-you-fix-the-noisy-neighbor-problem-while-using-Amazon-EC2"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "b3fcf6d3-9c7f-4728-bdaa-6c2b06fc2709",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "user wants to ensure instances are only on when needed (used during business hours, during a jobs runtime schedule, etc.)",
+      "alert_criteria": "- tag(s) denote the instance as a \"workday\" instance and/or \n- the instance is only active for predictable times throughout the day",
+      "recommendation_action": "use tags to specify active hours and create a lambda function to hibernate ec2 instance when outside of tagged hours",
+      "risk_detail": "cost, operations",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 2,
+      "risk_value": 2,
+      "recommendation_description_detailed": "ec2s are only used during specified hours; usually during regular business hours or when attached to a job",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://medium.com/capital-one-tech/automate-aws-infrastructure-with-boto-3-aws-instance-tags-48f638e4de0b"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "8dcdbfff-850b-40c9-96c7-3186a9fe04ea",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "Amazon EC2 to EBS Throughput Optimization",
+      "alert_criteria": "Compare the maximum throughput of your EBS volumes (see Amazon EBS Volume Types) with the maximum throughput of the EC2 instance they are attached to (see Instance Types That Support EBS Optimization). Consider attaching your volumes to an instance that supports higher throughput to EBS for optimal performance.; In the preceding day (UTC), the aggregate throughput (megabytes/sec) of the EBS volumes attached to the EC2 instance exceeded 95% of the published throughput between the instance and the EBS volumes more than 50% of time.",
+      "recommendation_action": "Compare the maximum throughput of your EBS volumes (see Amazon EBS Volume Types) with the maximum throughput of the EC2 instance they are attached to (see Instance Types That Support EBS Optimization). Consider attaching your volumes to an instance that supports higher throughput to EBS for optimal performance.",
+      "risk_detail": "performance",
+      "build_priority": 0,
+      "action_value": 1,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "Checks for Amazon EBS volumes whose performance might be affected by the maximum throughput capability of the Amazon EC2 instance they are attached to. To optimize performance, you should ensure that the maximum throughput of an EC2 instance is greater than the aggregate maximum throughput of the attached EBS volumes. This check computes the total EBS volume throughput for each five-minute period in the preceding day (UTC) for each EBS-optimized instance and alerts you if usage in more than half of those periods was greater than 95% of the maximum throughput of the EC2 instance",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html#ebs-optimization-support",
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using_cloudwatch_ebs.html",
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-volume-status.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "74492e33-2626-4630-bf53-2bd5ef074061",
+      "status": "done",
+      "service_name": "ec2",
+      "scenario": "Idle Amazon EC2 Instance",
+      "alert_criteria": "An instance had less than 5% daily average CPU utilization and 5 MB or less network I/O on at least 4 of the previous 14 days.",
+      "recommendation_action": "stop or terminate instance",
+      "risk_detail": "cost",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "Checks the Amazon Elastic Compute Cloud (Amazon EC2) instances that were running at any time during the last 14 days and alerts you if the daily CPU utilization was 5% or less and network I/O was 5 MB or less on 4 or more days. Running instances generate hourly usage charges. Although some scenarios can result in low utilization by design, you can often lower your costs by managing the number and size of your instances.",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://aws.amazon.com/premiumsupport/technology/trusted-advisor/best-practice-checklist/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "63b4f412-c3ab-4ec8-af7f-ddfecbc25269",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "user wants to increase the security of their ec2 instances",
+      "alert_criteria": "An Amazon EC2-VPC security group has more than 50 rules",
+      "recommendation_action": "Reduce the number of rules in a security group by deleting unnecessary or overlapping rules",
+      "risk_detail": "security",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 2,
+      "risk_value": 2,
+      "recommendation_description_detailed": "Checks each Amazon Elastic Compute Cloud (EC2) security group for an excessive number of rules. If a security group has a large number of rules, performance can be degraded",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html#deleting-security-group-rule"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "e5bd9c73-a9fb-4dab-b90c-55d37577bc19",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "user wants to increase the security of their ec2 instances",
+      "alert_criteria": "An Amazon EC2-Classic security group has more than 100 rules.",
+      "recommendation_action": "Reduce the number of rules in a security group by deleting unnecessary or overlapping rules",
+      "risk_detail": "security",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 2,
+      "risk_value": 3,
+      "recommendation_description_detailed": "Checks each Amazon Elastic Compute Cloud (EC2) security group for an excessive number of rules. If a security group has a large number of rules, performance can be degraded",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html#deleting-security-group-rule"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "ebe7cf51-ecf8-4eee-a8f4-61d7e7d8fa1c",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "user wants to increase the security of their ec2 instances",
+      "alert_criteria": "An Amazon EC2-VPC instance has more than 50 security group rules.",
+      "recommendation_action": "Reduce the number of rules associated with an instance by deleting unnecessary or overlapping rules",
+      "risk_detail": "security",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 2,
+      "risk_value": 2,
+      "recommendation_description_detailed": "Checks for Amazon Elastic Compute Cloud (EC2) instances that have a large number of security group rules. Performance can be degraded if an instance has a large number of rules.",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html#deleting-security-group-rule"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "89e0797c-0de8-4d2a-826e-810dd6843d23",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "user wants to increase the security of their ec2 instances",
+      "alert_criteria": "An Amazon EC2-Classic instance has more than 100 security group rules.",
+      "recommendation_action": "Reduce the number of rules associated with an instance by deleting unnecessary or overlapping rules",
+      "risk_detail": "security",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 2,
+      "risk_value": 3,
+      "recommendation_description_detailed": "Checks for Amazon Elastic Compute Cloud (EC2) instances that have a large number of security group rules. Performance can be degraded if an instance has a large number of rules.",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html#deleting-security-group-rule"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "f15adfc7-d970-4925-b0fb-99dbe1796d3b",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "High Utilization Amazon EC2 Instances",
+      "alert_criteria": "An instance had more than 90% daily average CPU utilization on at least 4 of the previous 14 days.",
+      "recommendation_action": "- add more instanes OR increase instance size\n- add ALB to application",
+      "risk_detail": "performance",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 2,
+      "risk_value": 1,
+      "recommendation_description_detailed": "Checks the Amazon Elastic Compute Cloud (Amazon EC2) instances that were running at any time during the last 14 days and alerts you if the daily CPU utilization was more than 90% on 4 or more days. Consistent high utilization can indicate optimized, steady performance, but it can also indicate that an application does not have enough resources. To get daily CPU utilization data, download the report for this check",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    }
+  ]
+}

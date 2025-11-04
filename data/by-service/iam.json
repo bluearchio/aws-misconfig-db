@@ -1,0 +1,168 @@
+{
+  "service": "iam",
+  "count": 6,
+  "misconfigurations": [
+    {
+      "id": "85d589af-ca9b-4cb6-8311-6c9e50da0687",
+      "status": "done",
+      "service_name": "iam",
+      "scenario": "user wants to know which keys need rotating (are old or expired)",
+      "alert_criteria": "iam keys have not been rotated in X days",
+      "recommendation_action": "rotate or delete key(s)",
+      "risk_detail": "security",
+      "build_priority": 0,
+      "action_value": 1,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "8c0a3d78-a5e3-4ac1-a1ca-f25306b46143",
+      "status": "done",
+      "service_name": "iam",
+      "scenario": "user wants to get notified / know of non-compliant IAM keys (keys older than 90 days)",
+      "alert_criteria": "IAM key is older than 90 days",
+      "recommendation_action": "refresh IAM key",
+      "risk_detail": "operations",
+      "build_priority": 0,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "297883ae-5ece-4511-8c34-1a2008cf1ad4",
+      "status": "ice",
+      "service_name": "iam",
+      "scenario": "user wants to be notified of new security groups",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "f2ee54dd-37e7-4118-80f9-f164d89f3a8f",
+      "status": "open",
+      "service_name": "iam",
+      "scenario": "user wants the password policy to require at least one number (+ specific password requirements)",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "a2e6377a-b62c-47a6-b957-452e9b79883b",
+      "status": "open",
+      "service_name": "iam",
+      "scenario": "user wants to remove unused security groups",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "299fc2d0-a2f2-4b79-a3d2-2b479b25d07f",
+      "status": "open",
+      "service_name": "iam",
+      "scenario": "user wants to ensure second access key is rotated every 90 days or less",
+      "alert_criteria": "access key has not been rotated in X days",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "service": "networking",
+  "count": 1,
+  "misconfigurations": [
+    {
+      "id": "04dbd22f-e862-4f8b-8a00-7ad7ac48836e",
+      "status": "open",
+      "service_name": "networking",
+      "scenario": "user wants fault tolerant internet access",
+      "alert_criteria": "instances exist in more azs than nat gateways exist",
+      "recommendation_action": "create nat gateway in each az where an ec2 instance exists",
+      "risk_detail": "operations",
+      "build_priority": 0,
+      "action_value": 1,
+      "effort_level": 2,
+      "risk_value": 2,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    }
+  ]
+}

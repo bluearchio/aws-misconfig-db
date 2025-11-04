@@ -1,0 +1,33 @@
+{
+  "service": "eks",
+  "count": 1,
+  "misconfigurations": [
+    {
+      "id": "5fc3d4a9-96ef-4bba-82e9-bccabe531b34",
+      "status": "open",
+      "service_name": "eks",
+      "scenario": "pods OR nodes within cluster are not appropriately sized (artur to clarify)",
+      "alert_criteria": "workloads (cpu, memory, network IOPs, etc.) for the previous 14, 30, 90 days, multiplied by 1.4 are too large...",
+      "recommendation_action": "recommend the proper size for each pod",
+      "risk_detail": "cost, performance",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    }
+  ]
+}

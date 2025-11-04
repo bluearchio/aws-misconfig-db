@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Misconfiguration Database - Browser Example</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            color: #232f3e;
+            border-bottom: 3px solid #ff9900;
+            padding-bottom: 10px;
+        }
+
+        .controls {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .control-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: inline-block;
+            width: 150px;
+            font-weight: bold;
+            color: #232f3e;
+        }
+
+        select, input, button {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #ff9900;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            padding: 10px 20px;
+        }
+
+        button:hover {
+            background-color: #ec7211;
+        }
+
+        #stats {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .stat-box {
+            display: inline-block;
+            margin: 10px 20px 10px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            min-width: 150px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #232f3e;
+        }
+
+        #results {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .misconfig-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: #fafafa;
+        }
+
+        .misconfig-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .service-badge {
+            background: #232f3e;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .risk-badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .risk-cost { background: #28a745; color: white; }
+        .risk-security { background: #dc3545; color: white; }
+        .risk-performance { background: #007bff; color: white; }
+        .risk-operations { background: #6c757d; color: white; }
+        .risk-reliability { background: #ffc107; color: black; }
+
+        .priority-badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+        .priority-0 { background: #dc3545; color: white; }
+        .priority-1 { background: #ff9900; color: white; }
+        .priority-2 { background: #ffc107; color: black; }
+        .priority-3 { background: #28a745; color: white; }
+
+        .scenario {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #232f3e;
+        }
+
+        .recommendation {
+            color: #555;
+            font-style: italic;
+            margin: 10px 0;
+        }
+
+        .references {
+            margin-top: 10px;
+            font-size: 12px;
+        }
+
+        .references a {
+            color: #007bff;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .references a:hover {
+            text-decoration: underline;
+        }
+
+        #loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>AWS Misconfiguration Database</h1>
+
+    <div class="controls">
+        <div class="control-group">
+            <label>Filter by Service:</label>
+            <select id="serviceFilter">
+                <option value="">All Services</option>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <label>Filter by Risk Type:</label>
+            <select id="riskFilter">
+                <option value="">All Risks</option>
+                <option value="cost">Cost</option>
+                <option value="security">Security</option>
+                <option value="performance">Performance</option>
+                <option value="operations">Operations</option>
+                <option value="reliability">Reliability</option>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <label>Filter by Priority:</label>
+            <select id="priorityFilter">
+                <option value="">All Priorities</option>
+                <option value="0">Critical (0)</option>
+                <option value="1">High (1)</option>
+                <option value="2">Medium (2)</option>
+                <option value="3">Low (3)</option>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <label>Search:</label>
+            <input type="text" id="searchInput" placeholder="Search scenarios...">
+        </div>
+
+        <div class="control-group">
+            <button onclick="applyFilters()">Apply Filters</button>
+            <button onclick="resetFilters()">Reset</button>
+        </div>
+    </div>
+
+    <div id="stats">
+        <div class="stat-box">
+            <div class="stat-label">Total Misconfigs</div>
+            <div class="stat-value" id="totalCount">-</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-label">Displayed</div>
+            <div class="stat-value" id="displayedCount">-</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-label">Services</div>
+            <div class="stat-value" id="servicesCount">-</div>
+        </div>
+    </div>
+
+    <div id="loading">Loading database...</div>
+    <div id="results" style="display: none;"></div>
+
+    <script>
+        let database = null;
+        let filteredResults = [];
+
+        // Load database from GitHub (or local file)
+        async function loadDatabase() {
+            try {
+                // For local testing, use relative path
+                const response = await fetch('../../data/all-misconfigs.json');
+                database = await response.json();
+
+                // Populate service filter
+                const serviceFilter = document.getElementById('serviceFilter');
+                database.services.sort().forEach(service => {
+                    const option = document.createElement('option');
+                    option.value = service;
+                    option.textContent = service;
+                    serviceFilter.appendChild(option);
+                });
+
+                // Initial display
+                updateStats();
+                displayResults(database.misconfigurations);
+
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('results').style.display = 'block';
+            } catch (error) {
+                document.getElementById('loading').textContent = 'Error loading database: ' + error.message;
+            }
+        }
+
+        function updateStats() {
+            document.getElementById('totalCount').textContent = database.total_count;
+            document.getElementById('servicesCount').textContent = database.services.length;
+        }
+
+        function applyFilters() {
+            let results = database.misconfigurations;
+
+            // Service filter
+            const service = document.getElementById('serviceFilter').value;
+            if (service) {
+                results = results.filter(m => m.service_name === service);
+            }
+
+            // Risk filter
+            const risk = document.getElementById('riskFilter').value;
+            if (risk) {
+                results = results.filter(m => (m.risk_detail || '').includes(risk));
+            }
+
+            // Priority filter
+            const priority = document.getElementById('priorityFilter').value;
+            if (priority !== '') {
+                results = results.filter(m => m.build_priority === parseInt(priority));
+            }
+
+            // Search filter
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            if (search) {
+                results = results.filter(m =>
+                    (m.scenario || '').toLowerCase().includes(search) ||
+                    (m.recommendation_action || '').toLowerCase().includes(search) ||
+                    (m.recommendation_description_detailed || '').toLowerCase().includes(search)
+                );
+            }
+
+            filteredResults = results;
+            displayResults(results);
+        }
+
+        function resetFilters() {
+            document.getElementById('serviceFilter').value = '';
+            document.getElementById('riskFilter').value = '';
+            document.getElementById('priorityFilter').value = '';
+            document.getElementById('searchInput').value = '';
+            displayResults(database.misconfigurations);
+        }
+
+        function displayResults(misconfigs) {
+            const resultsDiv = document.getElementById('results');
+            document.getElementById('displayedCount').textContent = misconfigs.length;
+
+            if (misconfigs.length === 0) {
+                resultsDiv.innerHTML = '<p>No misconfigurations found matching your filters.</p>';
+                return;
+            }
+
+            let html = '';
+            misconfigs.forEach(m => {
+                const riskClass = `risk-${(m.risk_detail || 'operations').split(',')[0].trim()}`;
+                const priorityClass = `priority-${m.build_priority || 3}`;
+
+                html += `
+                    <div class="misconfig-card">
+                        <div class="misconfig-header">
+                            <div>
+                                <span class="service-badge">${m.service_name || 'general'}</span>
+                                <span class="${riskClass} risk-badge">${m.risk_detail || 'operations'}</span>
+                                <span class="${priorityClass} priority-badge">P${m.build_priority !== null ? m.build_priority : '?'}</span>
+                            </div>
+                        </div>
+                        <div class="scenario">${m.scenario || 'No scenario provided'}</div>
+                        <div class="recommendation">
+                            <strong>Recommendation:</strong> ${m.recommendation_action || 'No recommendation provided'}
+                        </div>
+                        ${m.recommendation_description_detailed ? `<div><small>${m.recommendation_description_detailed}</small></div>` : ''}
+                        ${m.references && m.references.length > 0 ? `
+                            <div class="references">
+                                <strong>References:</strong>
+                                ${m.references.map(ref => `<a href="${ref}" target="_blank">🔗 AWS Docs</a>`).join('')}
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            });
+
+            resultsDiv.innerHTML = html;
+        }
+
+        // Load on page load
+        window.addEventListener('DOMContentLoaded', loadDatabase);
+    </script>
+</body>
+</html>

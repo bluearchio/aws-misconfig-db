@@ -1,0 +1,62 @@
+{
+  "service": "elastic beanstalk",
+  "count": 2,
+  "misconfigurations": [
+    {
+      "id": "c727a01a-e43a-4157-a80c-21dc130a50c5",
+      "status": "pending",
+      "service_name": "elastic beanstalk",
+      "scenario": "user wants to make sure all environments are healthy",
+      "alert_criteria": "environment != healthy",
+      "recommendation_action": "see logs to address issue or delete environment",
+      "risk_detail": "operations, reliability",
+      "build_priority": 0,
+      "action_value": 1,
+      "effort_level": 1,
+      "risk_value": 3,
+      "recommendation_description_detailed": "see documentation for alert message details",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "ceb5228b-8733-4978-8fed-36588bfb638d",
+      "status": "pending",
+      "service_name": "elastic beanstalk",
+      "scenario": "user wants to make sure all environments are up to date",
+      "alert_criteria": "platform state == deprecated",
+      "recommendation_action": "update your environment",
+      "risk_detail": "operations",
+      "build_priority": 0,
+      "action_value": 1,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    }
+  ]
+}

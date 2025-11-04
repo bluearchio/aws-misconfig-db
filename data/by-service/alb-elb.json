@@ -1,0 +1,121 @@
+{
+  "service": "alb/elb",
+  "count": 4,
+  "misconfigurations": [
+    {
+      "id": "475b24d9-4b5b-4ce4-8161-af25f89bee49",
+      "status": "done",
+      "service_name": "alb/elb",
+      "scenario": "Idle Load Balancers",
+      "alert_criteria": "A load balancer has had less than 100 requests per day for the last 7 days.",
+      "recommendation_action": "consider deleting your load balancer.",
+      "risk_detail": "cost",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "Checks your Elastic Load Balancing configuration for load balancers that are not actively used. Any load balancer that is configured accrues charges. If a load balancer has no associated back-end instances or if network traffic is severely limited, the load balancer is not being used effectively",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-delete.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "75ba739e-a10d-4233-9d93-233587bf1de5",
+      "status": "open",
+      "service_name": "alb/elb",
+      "scenario": "Idle Load Balancers",
+      "alert_criteria": "A load balancer has no healthy back-end instances.",
+      "recommendation_action": "-",
+      "risk_detail": "reliabilty",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 2,
+      "risk_value": 3,
+      "recommendation_description_detailed": "Checks your Elastic Load Balancing configuration for load balancers that are not actively used. Any load balancer that is configured accrues charges. If a load balancer has no associated back-end instances or if network traffic is severely limited, the load balancer is not being used effectively",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/ts-elb-healthcheck.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "f8873ffb-d1ce-44d2-adf9-50148350fc92",
+      "status": "done",
+      "service_name": "alb/elb",
+      "scenario": "Idle Load Balancers",
+      "alert_criteria": "A load balancer has no active back-end instances.",
+      "recommendation_action": "consider registering instances or deleting your load balancer.",
+      "risk_detail": "cost",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "Checks your Elastic Load Balancing configuration for load balancers that are not actively used. Any load balancer that is configured accrues charges. If a load balancer has no associated back-end instances or if network traffic is severely limited, the load balancer is not being used effectively",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-deregister-register-instances.html#RegisteringInstances",
+        "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-delete.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "eba421cf-bea5-4fa2-982a-c992016bd34f",
+      "status": "pending",
+      "service_name": "alb/elb",
+      "scenario": "user wants to ensure the availability / performance of their auto scaling group(s)",
+      "alert_criteria": "instance that is attached to the autoscaling group has been stopped or hibernated",
+      "recommendation_action": "restart instance or attach new instance to the auto scaling group",
+      "risk_detail": "reliabilty",
+      "build_priority": 0,
+      "action_value": 1,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    }
+  ]
+}

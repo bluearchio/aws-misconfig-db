@@ -1,0 +1,114 @@
+{
+  "service": "ALL",
+  "count": 4,
+  "misconfigurations": [
+    {
+      "id": "6ba41fc1-7084-4ae2-a0ee-aa50d85f1cea",
+      "status": "ice",
+      "service_name": "ALL",
+      "scenario": "user wants to associate user groups & roles to projects, teams, and other business units",
+      "alert_criteria": "check if resoruce has ANY tags, if no tags send recommendation",
+      "recommendation_action": "use user-group association tagging solution",
+      "risk_detail": "operations",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "6abe56fe-881d-404c-81e3-a87ed491685b",
+      "status": "ice",
+      "service_name": "ALL",
+      "scenario": "user wants to associate costs to cost centers, projects, teams, and other business units",
+      "alert_criteria": "check if resoruce has ANY tags, if no tags send recommendation",
+      "recommendation_action": "use cost-center association tagging solution",
+      "risk_detail": "operations",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "277608d6-b89d-459a-ab2d-e2c05ac47af3",
+      "status": "open",
+      "service_name": "ALL",
+      "scenario": "user needs to have an index of resources across regions they can search for",
+      "alert_criteria": "resource explorer is not enabled",
+      "recommendation_action": "enable resource explorer",
+      "risk_detail": "cost, operations",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 0,
+      "risk_value": 0,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "3360f1f0-c035-4fc1-93d0-1b6afe58d609",
+      "status": "open",
+      "service_name": "ALL",
+      "scenario": "user requires immutable resource tags",
+      "alert_criteria": "immutable aws tags have not been enabled",
+      "recommendation_action": "enable aws resource tags",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    }
+  ]
+}

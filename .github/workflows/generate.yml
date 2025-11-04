@@ -1,0 +1,59 @@
+name: Generate Aggregated Files
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'data/by-service/**'
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Generate aggregated files
+      run: |
+        echo "Generating aggregated files..."
+        python3 scripts/generate.py
+
+    - name: Check for changes
+      id: check_changes
+      run: |
+        if git diff --quiet; then
+          echo "changes=false" >> $GITHUB_OUTPUT
+          echo "No changes generated"
+        else
+          echo "changes=true" >> $GITHUB_OUTPUT
+          echo "Changes detected"
+        fi
+
+    - name: Commit and push if changed
+      if: steps.check_changes.outputs.changes == 'true'
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add data/all-misconfigs.json
+        git add data/by-category/
+        git add data/summary-stats.json
+        git add docs/SUMMARY.md
+        git commit -m "chore: regenerate aggregated files [skip ci]"
+        git push
+
+    - name: Summary
+      run: |
+        echo "✅ Aggregated files generated successfully"
+        if [ "${{ steps.check_changes.outputs.changes }}" = "true" ]; then
+          echo "📝 Changes committed and pushed"
+        else
+          echo "ℹ️ No changes to commit"
+        fi

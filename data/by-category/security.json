@@ -1,0 +1,259 @@
+{
+  "category": "security",
+  "count": 9,
+  "misconfigurations": [
+    {
+      "id": "85d589af-ca9b-4cb6-8311-6c9e50da0687",
+      "status": "done",
+      "service_name": "iam",
+      "scenario": "user wants to know which keys need rotating (are old or expired)",
+      "alert_criteria": "iam keys have not been rotated in X days",
+      "recommendation_action": "rotate or delete key(s)",
+      "risk_detail": "security",
+      "build_priority": 0,
+      "action_value": 1,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "12f2d76b-5c61-403a-bcbe-71c1a4d3ec61",
+      "status": "open",
+      "service_name": "general",
+      "scenario": "user wants to ensure his CDN is secure",
+      "alert_criteria": "When TLS is <= x",
+      "recommendation_action": "Update the CDN to use valid cyphers from TLS 1.2/1.3",
+      "risk_detail": "security",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/secure-connections-supported-viewer-protocols-ciphers.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "249dd667-4b1e-4200-bec5-19c6c718f958",
+      "status": "done",
+      "service_name": "ec2",
+      "scenario": "user has unencrypted volumes currently in use",
+      "alert_criteria": "volumes (attached or not) are currently unencrypted",
+      "recommendation_action": "encrypt (or delete) volumes",
+      "risk_detail": "security",
+      "build_priority": 0,
+      "action_value": 1,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "63b4f412-c3ab-4ec8-af7f-ddfecbc25269",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "user wants to increase the security of their ec2 instances",
+      "alert_criteria": "An Amazon EC2-VPC security group has more than 50 rules",
+      "recommendation_action": "Reduce the number of rules in a security group by deleting unnecessary or overlapping rules",
+      "risk_detail": "security",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 2,
+      "risk_value": 2,
+      "recommendation_description_detailed": "Checks each Amazon Elastic Compute Cloud (EC2) security group for an excessive number of rules. If a security group has a large number of rules, performance can be degraded",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html#deleting-security-group-rule"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "e5bd9c73-a9fb-4dab-b90c-55d37577bc19",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "user wants to increase the security of their ec2 instances",
+      "alert_criteria": "An Amazon EC2-Classic security group has more than 100 rules.",
+      "recommendation_action": "Reduce the number of rules in a security group by deleting unnecessary or overlapping rules",
+      "risk_detail": "security",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 2,
+      "risk_value": 3,
+      "recommendation_description_detailed": "Checks each Amazon Elastic Compute Cloud (EC2) security group for an excessive number of rules. If a security group has a large number of rules, performance can be degraded",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html#deleting-security-group-rule"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "ebe7cf51-ecf8-4eee-a8f4-61d7e7d8fa1c",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "user wants to increase the security of their ec2 instances",
+      "alert_criteria": "An Amazon EC2-VPC instance has more than 50 security group rules.",
+      "recommendation_action": "Reduce the number of rules associated with an instance by deleting unnecessary or overlapping rules",
+      "risk_detail": "security",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 2,
+      "risk_value": 2,
+      "recommendation_description_detailed": "Checks for Amazon Elastic Compute Cloud (EC2) instances that have a large number of security group rules. Performance can be degraded if an instance has a large number of rules.",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html#deleting-security-group-rule"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "89e0797c-0de8-4d2a-826e-810dd6843d23",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "user wants to increase the security of their ec2 instances",
+      "alert_criteria": "An Amazon EC2-Classic instance has more than 100 security group rules.",
+      "recommendation_action": "Reduce the number of rules associated with an instance by deleting unnecessary or overlapping rules",
+      "risk_detail": "security",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 2,
+      "risk_value": 3,
+      "recommendation_description_detailed": "Checks for Amazon Elastic Compute Cloud (EC2) instances that have a large number of security group rules. Performance can be degraded if an instance has a large number of rules.",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html#deleting-security-group-rule"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "03736e4a-6ce5-4375-84ce-278711247314",
+      "status": "pending",
+      "service_name": "s3",
+      "scenario": "users wants their data encrypted in their data lake",
+      "alert_criteria": "s3 object is not encrypted",
+      "recommendation_action": "encrypt object",
+      "risk_detail": "security",
+      "build_priority": 0,
+      "action_value": 1,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "we recommend encrypting objects if you are concerned about [risk reason 1, risk reason 2, risk reason... n]",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "356570fe-de33-4782-bc81-152cb144fb05",
+      "status": "pending",
+      "service_name": "s3",
+      "scenario": "user wants to be made aware of the locations of all public s3 buckets (or their contents)",
+      "alert_criteria": "bucket or its subfolders are open to the public",
+      "recommendation_action": "- Randomise your bucket names! There is no need to use company-backup.s3.amazonaws.com.\n- Set appropriate permissions and audit regularly.  \n- If possible create two buckets - one for your public assets and another for private data.\n- Try Amazon Macie - it can automatically classify and secure sensitive data.",
+      "risk_detail": "security, operations",
+      "build_priority": 0,
+      "action_value": 1,
+      "effort_level": 1,
+      "risk_value": 3,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    }
+  ]
+}

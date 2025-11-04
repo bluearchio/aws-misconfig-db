@@ -1,0 +1,93 @@
+name: Validate Database
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'data/**'
+      - 'schema/**'
+      - 'scripts/**'
+  push:
+    branches: [ main ]
+    paths:
+      - 'data/**'
+      - 'schema/**'
+      - 'scripts/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+
+    - name: Validate JSON syntax
+      run: |
+        echo "Validating JSON files..."
+        for file in data/**/*.json; do
+          if ! python -m json.tool "$file" > /dev/null 2>&1; then
+            echo "❌ Invalid JSON: $file"
+            exit 1
+          fi
+        done
+        echo "✓ All JSON files are valid"
+
+    - name: Validate against schema
+      run: |
+        echo "Validating entries against schema..."
+        python3 scripts/validate.py data/by-service/ --strict
+
+    - name: Check for duplicate IDs
+      run: |
+        echo "Checking for duplicate entry IDs..."
+        python3 << 'EOF'
+        import json
+        from pathlib import Path
+
+        ids = []
+        for file in Path('data/by-service').glob('*.json'):
+            with open(file) as f:
+                data = json.load(f)
+                for entry in data.get('misconfigurations', []):
+                    ids.append(entry.get('id'))
+
+        duplicates = [id for id in ids if ids.count(id) > 1]
+        if duplicates:
+            print(f"❌ Duplicate IDs found: {set(duplicates)}")
+            exit(1)
+        print("✓ No duplicate IDs found")
+        EOF
+
+    - name: Verify aggregated files are up to date
+      run: |
+        echo "Checking if aggregated files need regeneration..."
+        python3 scripts/generate.py
+        if git diff --exit-code data/; then
+          echo "✓ Aggregated files are up to date"
+        else
+          echo "❌ Aggregated files need to be regenerated"
+          echo "Run: python3 scripts/generate.py"
+          git diff data/
+          exit 1
+        fi
+
+    - name: Validation Summary
+      if: success()
+      run: |
+        echo "✅ All validation checks passed!"
+        echo ""
+        echo "Summary:"
+        echo "- JSON syntax: Valid"
+        echo "- Schema validation: Passed"
+        echo "- Duplicate IDs: None found"
+        echo "- Aggregated files: Up to date"

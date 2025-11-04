@@ -1,0 +1,146 @@
+{
+  "service": "ebs",
+  "count": 5,
+  "misconfigurations": [
+    {
+      "id": "8dfe3ba4-c72f-4ed8-9a07-f88c1ccc8b3b",
+      "status": "done",
+      "service_name": "ebs",
+      "scenario": "user wants to ensure that only necessary / needed snapshots are available for use",
+      "alert_criteria": "if snapshot is older than seven days and/or is older than another snapshot made from an identical volume, then recommend deletion",
+      "recommendation_action": "delete snapshot",
+      "risk_detail": "cost",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 1,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "9b4bd9b6-9139-4e8d-a157-055bbb6bacc3",
+      "status": "open",
+      "service_name": "ebs",
+      "scenario": "user wants to ensure ebs volumes are deleted when an instance is terminated",
+      "alert_criteria": "\"delete on termination\" flag on instances is set to false",
+      "recommendation_action": "set \"delete on termination\" flag to true (enable automatic deletion upon instance termination)",
+      "risk_detail": "cost",
+      "build_priority": 0,
+      "action_value": 1,
+      "effort_level": 0,
+      "risk_value": 0,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "444fd30a-f2f2-4a7f-afbc-063349fc900f",
+      "status": "open",
+      "service_name": "ebs",
+      "scenario": "Amazon EBS Provisioned IOPS (SSD) Volume Attachment Configuration",
+      "alert_criteria": "An Amazon EC2 instance that can be EBS-optimized has an attached Provisioned IOPS (SSD) volume but the instance is not EBS-optimized.",
+      "recommendation_action": "create new \"ebs-optimized\" ssd by provisioning a new instance",
+      "risk_detail": "performance",
+      "build_priority": 0,
+      "action_value": 1,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "Checks for Provisioned IOPS (SSD) volumes that are attached to an Amazon EBS-optimizable Amazon Elastic Compute Cloud (Amazon EC2) instance that is not EBS-optimized. Provisioned IOPS (SSD) volumes in the Amazon Elastic Block Store (Amazon EBS) are designed to deliver the expected performance only when they are attached to an EBS-optimized instance.",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html",
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "9962a78d-7100-4d15-bc9c-c62a6c0d3b91",
+      "status": "open",
+      "service_name": "ebs",
+      "scenario": "user wants to prevent volumes (root or attached) from filling up, forcing a restart and leading to a new IP address (if an elastic ip has not been assigned)",
+      "alert_criteria": "volume storage capacity has less than threshold (%) remaining",
+      "recommendation_action": "increase the storage size of your targeted volumes",
+      "risk_detail": "operations",
+      "build_priority": 0,
+      "action_value": 1,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "03060d2d-96d3-43aa-ba18-2968fc8a7189",
+      "status": "open",
+      "service_name": "ebs",
+      "scenario": "Overutilized Amazon EBS Magnetic Volumes",
+      "alert_criteria": "An Amazon EBS Magnetic volume is attached to an instance that can be EBS-optimized or is part of a cluster compute network with a daily median of more than 95 IOPS, and varies by less than 10% of the median value for at least 7 of the past 14 days.",
+      "recommendation_action": "- For consistently higher IOPS, you can use a Provisioned IOPS (SSD) volume. \n- For bursty IOPS, you can use a General Purpose (SSD) volume",
+      "risk_detail": "performance",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "Checks for Amazon Elastic Block Store (EBS) Magnetic volumes that are potentially overutilized and might benefit from a more efficient configuration. A Magnetic volume is designed for applications with moderate or bursty I/O requirements, and the IOPS rate is not guaranteed. It delivers approximately 100 IOPS on average, with a best-effort ability to burst to hundreds of IOPS. For consistently higher IOPS, you can use a Provisioned IOPS (SSD) volume. For bursty IOPS, you can use a General Purpose (SSD) volume. To get daily utilization metrics, download the report for this check. The detailed report shows a column for each of the last 14 days. If there is no active EBS volume, the cell is empty. If there is  insufficient data to make a reliable measurement, the cell contains \"N/A\". If there is sufficient data, the cell contains the daily median and the percentage of the variance in relation to the median (for example, \"256 / 20%\").",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    }
+  ]
+}

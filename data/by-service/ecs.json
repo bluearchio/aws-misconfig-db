@@ -1,0 +1,114 @@
+{
+  "service": "ecs",
+  "count": 4,
+  "misconfigurations": [
+    {
+      "id": "4305d944-eb3c-473c-b9ce-99fe6911713b",
+      "status": "open",
+      "service_name": "ecs",
+      "scenario": "user wants to remove or update inactive tasks",
+      "alert_criteria": "ecs task definition set to inactive status",
+      "recommendation_action": "delete or update task",
+      "risk_detail": "cost",
+      "build_priority": 0,
+      "action_value": 1,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "4649adc3-53cc-4ccc-bd61-5c79f7fa6999",
+      "status": "pending",
+      "service_name": "ecs",
+      "scenario": "user wants to increase the performance of their ecs service(s)",
+      "alert_criteria": "if max memory utilization is > 50% for more than 3 concecutive time periods AND autoscaling is not enabled",
+      "recommendation_action": "enable autoscalling policy with target tracking; set target to 50%",
+      "risk_detail": "operations",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "326eaec8-4b35-417d-b883-33c31948a9cd",
+      "status": "pending",
+      "service_name": "ecs",
+      "scenario": "user wants to make sure their services are all running the latest platform version",
+      "alert_criteria": "platform version != LATEST",
+      "recommendation_action": "update service in console to LATEST",
+      "risk_detail": "operations",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "this will cause the service to automatically rollback to the last stable state",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "57fdeba4-4823-4bd7-957f-5cb8b0d9f84e",
+      "status": "pending",
+      "service_name": "ecs",
+      "scenario": "- user wants to increase the reliability of their ecs sevices / tasks and/or\n- user has been experiencing frequent service failures and/or\n- users' ecs services have been failing health checks",
+      "alert_criteria": "- fargate launch type and/or\n- tasks have transitioned to a failed state > 3 times in the last 21 day and/or \n- are failing healthchecks",
+      "recommendation_action": "enable deployment rollback / circut breaker",
+      "risk_detail": "reliabilty",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 3,
+      "recommendation_description_detailed": "this will cause the service to automatically rollback to the last stable state",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    }
+  ]
+}
