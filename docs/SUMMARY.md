@@ -1,7 +1,7 @@
 # AWS Misconfiguration Database - Summary
 
 **Total Misconfigurations:** 251
-**Last Updated:** 2025-11-04 23:54:30 UTC
+**Last Updated:** 2025-11-04 23:56:31 UTC
 
 ## Overview
 
@@ -37,12 +37,12 @@ performance, reliability, and operational best practices.
 | ec2 | 19 |
 | lambda | 10 |
 | cloudfront | 8 |
-| iam | 6 |
 | rds | 6 |
+| iam | 6 |
 | ebs | 5 |
 | alb/elb | 4 |
 | ecs | 4 |
-| route 53 | 4 |
+| ALL | 4 |
 
 ### By Category
 
