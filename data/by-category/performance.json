@@ -3,155 +3,6 @@
   "count": 21,
   "misconfigurations": [
     {
-      "id": "444fd30a-f2f2-4a7f-afbc-063349fc900f",
-      "status": "open",
-      "service_name": "ebs",
-      "scenario": "Amazon EBS Provisioned IOPS (SSD) Volume Attachment Configuration",
-      "alert_criteria": "An Amazon EC2 instance that can be EBS-optimized has an attached Provisioned IOPS (SSD) volume but the instance is not EBS-optimized.",
-      "recommendation_action": "create new \"ebs-optimized\" ssd by provisioning a new instance",
-      "risk_detail": "performance",
-      "build_priority": 0,
-      "action_value": 1,
-      "effort_level": 1,
-      "risk_value": 1,
-      "recommendation_description_detailed": "Checks for Provisioned IOPS (SSD) volumes that are attached to an Amazon EBS-optimizable Amazon Elastic Compute Cloud (Amazon EC2) instance that is not EBS-optimized. Provisioned IOPS (SSD) volumes in the Amazon Elastic Block Store (Amazon EBS) are designed to deliver the expected performance only when they are attached to an EBS-optimized instance.",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [
-        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html",
-        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html"
-      ],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "03060d2d-96d3-43aa-ba18-2968fc8a7189",
-      "status": "open",
-      "service_name": "ebs",
-      "scenario": "Overutilized Amazon EBS Magnetic Volumes",
-      "alert_criteria": "An Amazon EBS Magnetic volume is attached to an instance that can be EBS-optimized or is part of a cluster compute network with a daily median of more than 95 IOPS, and varies by less than 10% of the median value for at least 7 of the past 14 days.",
-      "recommendation_action": "- For consistently higher IOPS, you can use a Provisioned IOPS (SSD) volume. \n- For bursty IOPS, you can use a General Purpose (SSD) volume",
-      "risk_detail": "performance",
-      "build_priority": 0,
-      "action_value": 2,
-      "effort_level": 1,
-      "risk_value": 1,
-      "recommendation_description_detailed": "Checks for Amazon Elastic Block Store (EBS) Magnetic volumes that are potentially overutilized and might benefit from a more efficient configuration. A Magnetic volume is designed for applications with moderate or bursty I/O requirements, and the IOPS rate is not guaranteed. It delivers approximately 100 IOPS on average, with a best-effort ability to burst to hundreds of IOPS. For consistently higher IOPS, you can use a Provisioned IOPS (SSD) volume. For bursty IOPS, you can use a General Purpose (SSD) volume. To get daily utilization metrics, download the report for this check. The detailed report shows a column for each of the last 14 days. If there is no active EBS volume, the cell is empty. If there is  insufficient data to make a reliable measurement, the cell contains \"N/A\". If there is sufficient data, the cell contains the daily median and the percentage of the variance in relation to the median (for example, \"256 / 20%\").",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [
-        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html"
-      ],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "3bcb0076-e857-4761-988a-4982185813a5",
-      "status": "open",
-      "service_name": "ec2",
-      "scenario": "ec2 network performance is not what is expected / paid for",
-      "alert_criteria": "using aws inventory stats, compare actual performance to that of expected...",
-      "recommendation_action": "upgrade to a modern ec2 instance type with guaranteed network performance; co-locate all ec2s",
-      "risk_detail": "performance",
-      "build_priority": 3,
-      "action_value": 2,
-      "effort_level": 3,
-      "risk_value": 1,
-      "recommendation_description_detailed": "\"noisy neighbors\" are stealing network I/O performance",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [
-        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/enhanced-networking.html",
-        "https://www.quora.com/How-did-you-fix-the-noisy-neighbor-problem-while-using-Amazon-EC2"
-      ],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "8dcdbfff-850b-40c9-96c7-3186a9fe04ea",
-      "status": "open",
-      "service_name": "ec2",
-      "scenario": "Amazon EC2 to EBS Throughput Optimization",
-      "alert_criteria": "Compare the maximum throughput of your EBS volumes (see Amazon EBS Volume Types) with the maximum throughput of the EC2 instance they are attached to (see Instance Types That Support EBS Optimization). Consider attaching your volumes to an instance that supports higher throughput to EBS for optimal performance.; In the preceding day (UTC), the aggregate throughput (megabytes/sec) of the EBS volumes attached to the EC2 instance exceeded 95% of the published throughput between the instance and the EBS volumes more than 50% of time.",
-      "recommendation_action": "Compare the maximum throughput of your EBS volumes (see Amazon EBS Volume Types) with the maximum throughput of the EC2 instance they are attached to (see Instance Types That Support EBS Optimization). Consider attaching your volumes to an instance that supports higher throughput to EBS for optimal performance.",
-      "risk_detail": "performance",
-      "build_priority": 0,
-      "action_value": 1,
-      "effort_level": 1,
-      "risk_value": 1,
-      "recommendation_description_detailed": "Checks for Amazon EBS volumes whose performance might be affected by the maximum throughput capability of the Amazon EC2 instance they are attached to. To optimize performance, you should ensure that the maximum throughput of an EC2 instance is greater than the aggregate maximum throughput of the attached EBS volumes. This check computes the total EBS volume throughput for each five-minute period in the preceding day (UTC) for each EBS-optimized instance and alerts you if usage in more than half of those periods was greater than 95% of the maximum throughput of the EC2 instance",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [
-        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html#ebs-optimization-support",
-        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using_cloudwatch_ebs.html",
-        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-volume-status.html"
-      ],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "f15adfc7-d970-4925-b0fb-99dbe1796d3b",
-      "status": "open",
-      "service_name": "ec2",
-      "scenario": "High Utilization Amazon EC2 Instances",
-      "alert_criteria": "An instance had more than 90% daily average CPU utilization on at least 4 of the previous 14 days.",
-      "recommendation_action": "- add more instanes OR increase instance size\n- add ALB to application",
-      "risk_detail": "performance",
-      "build_priority": 0,
-      "action_value": 2,
-      "effort_level": 2,
-      "risk_value": 1,
-      "recommendation_description_detailed": "Checks the Amazon Elastic Compute Cloud (Amazon EC2) instances that were running at any time during the last 14 days and alerts you if the daily CPU utilization was more than 90% on 4 or more days. Consistent high utilization can indicate optimized, steady performance, but it can also indicate that an application does not have enough resources. To get daily CPU utilization data, download the report for this check",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [
-        "https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html"
-      ],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
       "id": "5fc3d4a9-96ef-4bba-82e9-bccabe531b34",
       "status": "open",
       "service_name": "eks",
@@ -168,234 +19,6 @@
       "output_notes": null,
       "notes": null,
       "references": [],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "e39158bd-8550-4a6e-ba9f-6060f584ec73",
-      "status": "ice",
-      "service_name": "route 53",
-      "scenario": "Amazon Route 53 Alias Resource Record Sets",
-      "alert_criteria": "A resource record set is a CNAME to an Amazon CloudFront distribution.",
-      "recommendation_action": "Replace the listed CNAME resource record sets with alias resource record sets; You also need to change the record type from CNAME to A or AAAA, depending on the AWS resource",
-      "risk_detail": "performance",
-      "build_priority": null,
-      "action_value": null,
-      "effort_level": null,
-      "risk_value": null,
-      "recommendation_description_detailed": "Checks for resource record sets that can be changed to alias resource record sets to improve performance and save money. An alias resource record set routes DNS queries to an AWS resource (for example, an Elastic Load Balancing load balancer or an Amazon S3 bucket) or to another Route 53 resource record set. When you use alias resource record sets, Route 53 routes your DNS queries to AWS resources free of charge. Hosted zones created by AWS services won’t appear in your check results.",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [
-        "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-choosing-alias-non-alias.html",
-        "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-values.html"
-      ],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "c5a5b3c1-b229-4839-8c91-63c630ad1fb9",
-      "status": "ice",
-      "service_name": "route 53",
-      "scenario": "Amazon Route 53 Alias Resource Record Sets",
-      "alert_criteria": "A resource record set is a CNAME to an Elastic Load Balancing load balancer.",
-      "recommendation_action": "Replace the listed CNAME resource record sets with alias resource record sets; You also need to change the record type from CNAME to A or AAAA, depending on the AWS resource",
-      "risk_detail": "performance",
-      "build_priority": null,
-      "action_value": null,
-      "effort_level": null,
-      "risk_value": null,
-      "recommendation_description_detailed": "Checks for resource record sets that can be changed to alias resource record sets to improve performance and save money. An alias resource record set routes DNS queries to an AWS resource (for example, an Elastic Load Balancing load balancer or an Amazon S3 bucket) or to another Route 53 resource record set. When you use alias resource record sets, Route 53 routes your DNS queries to AWS resources free of charge. Hosted zones created by AWS services won’t appear in your check results.",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [
-        "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-choosing-alias-non-alias.html",
-        "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-values.html"
-      ],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "81a5a270-6eef-45f9-921b-593eb7ef6bd6",
-      "status": "open",
-      "service_name": "lambda",
-      "scenario": "time between when the last record in a batch was written to a stream (e.g., Kinesis, DynamoDB) and when Lambda received the batch increases dramatically",
-      "alert_criteria": "",
-      "recommendation_action": "",
-      "risk_detail": "performance",
-      "build_priority": 3,
-      "action_value": null,
-      "effort_level": null,
-      "risk_value": null,
-      "recommendation_description_detailed": "There are a few scenarios that could increase the iterator age:\n    a high execution duration for a function\n    not enough shards in a stream\n    invocation errors\n    insufficient batch size",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "14e59ac7-8087-4489-8073-4bee498c0897",
-      "status": "open",
-      "service_name": "lambda",
-      "scenario": "user wants to limit the time it takes to load and initialize function calls (as the current initialization code runtime takes too long)",
-      "alert_criteria": "**requires x-ray to be enabled**\naverage and percentile of initialization latency is above threshold",
-      "recommendation_action": "provision resserved capacity to reduce cold-start time",
-      "risk_detail": "performance",
-      "build_priority": 2,
-      "action_value": 2,
-      "effort_level": 2,
-      "risk_value": 0,
-      "recommendation_description_detailed": "",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "c8fd0f3c-90c1-45ec-9467-963920497527",
-      "status": "open",
-      "service_name": "lambda",
-      "scenario": "use wants to be made aware of any function throttling that ocurrs",
-      "alert_criteria": "function throttle counts are above threshold",
-      "recommendation_action": "- place limits on how many concurrent \"slices\" (percentage of total concurrency available to your account / region) a single function can have\n- request unreserved (5000) concurrency limit increases (no cost)\n- configure a dlq to capture failure(s)",
-      "risk_detail": "performance, operations",
-      "build_priority": 2,
-      "action_value": 2,
-      "effort_level": 2,
-      "risk_value": 3,
-      "recommendation_description_detailed": "",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [
-        "https://aws.amazon.com/premiumsupport/knowledge-center/lambda-troubleshoot-throttling/"
-      ],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "1d169e83-e553-4a67-8796-1c4365265efc",
-      "status": "open",
-      "service_name": "lambda",
-      "scenario": "user wants to avoide lambda function throttling",
-      "alert_criteria": "concurrent executions in a period of time are predicted to exceed to concurrent execution limits (account limit -100)",
-      "recommendation_action": "- place limits on how many concurrent \"slices\" (percentage of total concurrency available to your account / region) a single function can have\n- request unreserved (5000) concurrency limit increases (no cost)\n- configure a dlq to capture failure(s)",
-      "risk_detail": "performance, operations",
-      "build_priority": 2,
-      "action_value": 3,
-      "effort_level": 2,
-      "risk_value": 1,
-      "recommendation_description_detailed": "",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "44183041-c87c-4bf2-ab10-3a593057135a",
-      "status": "open",
-      "service_name": "lambda",
-      "scenario": "lambda function consistently and significantly under memory limits",
-      "alert_criteria": "lambda functions' average memory used is less than threshold in time period",
-      "recommendation_action": "decrease lambda function memory",
-      "risk_detail": "performance",
-      "build_priority": 1,
-      "action_value": 2,
-      "effort_level": 1,
-      "risk_value": 2,
-      "recommendation_description_detailed": "",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [
-        "https://aws.amazon.com/about-aws/whats-new/2020/12/aws-lambda-supports-10gb-memory-6-vcpu-cores-lambda-functions/"
-      ],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "f11f43fb-072f-4a2a-9a4a-2851f8bae0aa",
-      "status": "open",
-      "service_name": "lambda",
-      "scenario": "lambda function consistently reaches memory limits",
-      "alert_criteria": "average percent use of concurrency pool is greater than threshold and lambda functions' average memory used is greater than threshold in time period",
-      "recommendation_action": "increase lambda function memory",
-      "risk_detail": "performance",
-      "build_priority": 1,
-      "action_value": 2,
-      "effort_level": 1,
-      "risk_value": 2,
-      "recommendation_description_detailed": "",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [
-        "https://aws.amazon.com/about-aws/whats-new/2020/12/aws-lambda-supports-10gb-memory-6-vcpu-cores-lambda-functions/"
-      ],
       "metadata": {
         "created_at": "2025-11-04T23:07:44.651478Z",
         "updated_at": "2025-11-04T23:07:44.651478Z",
@@ -602,6 +225,383 @@
       "output_notes": null,
       "notes": null,
       "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "3bcb0076-e857-4761-988a-4982185813a5",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "ec2 network performance is not what is expected / paid for",
+      "alert_criteria": "using aws inventory stats, compare actual performance to that of expected...",
+      "recommendation_action": "upgrade to a modern ec2 instance type with guaranteed network performance; co-locate all ec2s",
+      "risk_detail": "performance",
+      "build_priority": 3,
+      "action_value": 2,
+      "effort_level": 3,
+      "risk_value": 1,
+      "recommendation_description_detailed": "\"noisy neighbors\" are stealing network I/O performance",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/enhanced-networking.html",
+        "https://www.quora.com/How-did-you-fix-the-noisy-neighbor-problem-while-using-Amazon-EC2"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "8dcdbfff-850b-40c9-96c7-3186a9fe04ea",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "Amazon EC2 to EBS Throughput Optimization",
+      "alert_criteria": "Compare the maximum throughput of your EBS volumes (see Amazon EBS Volume Types) with the maximum throughput of the EC2 instance they are attached to (see Instance Types That Support EBS Optimization). Consider attaching your volumes to an instance that supports higher throughput to EBS for optimal performance.; In the preceding day (UTC), the aggregate throughput (megabytes/sec) of the EBS volumes attached to the EC2 instance exceeded 95% of the published throughput between the instance and the EBS volumes more than 50% of time.",
+      "recommendation_action": "Compare the maximum throughput of your EBS volumes (see Amazon EBS Volume Types) with the maximum throughput of the EC2 instance they are attached to (see Instance Types That Support EBS Optimization). Consider attaching your volumes to an instance that supports higher throughput to EBS for optimal performance.",
+      "risk_detail": "performance",
+      "build_priority": 0,
+      "action_value": 1,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "Checks for Amazon EBS volumes whose performance might be affected by the maximum throughput capability of the Amazon EC2 instance they are attached to. To optimize performance, you should ensure that the maximum throughput of an EC2 instance is greater than the aggregate maximum throughput of the attached EBS volumes. This check computes the total EBS volume throughput for each five-minute period in the preceding day (UTC) for each EBS-optimized instance and alerts you if usage in more than half of those periods was greater than 95% of the maximum throughput of the EC2 instance",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html#ebs-optimization-support",
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using_cloudwatch_ebs.html",
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-volume-status.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "f15adfc7-d970-4925-b0fb-99dbe1796d3b",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "High Utilization Amazon EC2 Instances",
+      "alert_criteria": "An instance had more than 90% daily average CPU utilization on at least 4 of the previous 14 days.",
+      "recommendation_action": "- add more instanes OR increase instance size\n- add ALB to application",
+      "risk_detail": "performance",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 2,
+      "risk_value": 1,
+      "recommendation_description_detailed": "Checks the Amazon Elastic Compute Cloud (Amazon EC2) instances that were running at any time during the last 14 days and alerts you if the daily CPU utilization was more than 90% on 4 or more days. Consistent high utilization can indicate optimized, steady performance, but it can also indicate that an application does not have enough resources. To get daily CPU utilization data, download the report for this check",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "81a5a270-6eef-45f9-921b-593eb7ef6bd6",
+      "status": "open",
+      "service_name": "lambda",
+      "scenario": "time between when the last record in a batch was written to a stream (e.g., Kinesis, DynamoDB) and when Lambda received the batch increases dramatically",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "performance",
+      "build_priority": 3,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "There are a few scenarios that could increase the iterator age:\n    a high execution duration for a function\n    not enough shards in a stream\n    invocation errors\n    insufficient batch size",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "14e59ac7-8087-4489-8073-4bee498c0897",
+      "status": "open",
+      "service_name": "lambda",
+      "scenario": "user wants to limit the time it takes to load and initialize function calls (as the current initialization code runtime takes too long)",
+      "alert_criteria": "**requires x-ray to be enabled**\naverage and percentile of initialization latency is above threshold",
+      "recommendation_action": "provision resserved capacity to reduce cold-start time",
+      "risk_detail": "performance",
+      "build_priority": 2,
+      "action_value": 2,
+      "effort_level": 2,
+      "risk_value": 0,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "c8fd0f3c-90c1-45ec-9467-963920497527",
+      "status": "open",
+      "service_name": "lambda",
+      "scenario": "use wants to be made aware of any function throttling that ocurrs",
+      "alert_criteria": "function throttle counts are above threshold",
+      "recommendation_action": "- place limits on how many concurrent \"slices\" (percentage of total concurrency available to your account / region) a single function can have\n- request unreserved (5000) concurrency limit increases (no cost)\n- configure a dlq to capture failure(s)",
+      "risk_detail": "performance, operations",
+      "build_priority": 2,
+      "action_value": 2,
+      "effort_level": 2,
+      "risk_value": 3,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://aws.amazon.com/premiumsupport/knowledge-center/lambda-troubleshoot-throttling/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "1d169e83-e553-4a67-8796-1c4365265efc",
+      "status": "open",
+      "service_name": "lambda",
+      "scenario": "user wants to avoide lambda function throttling",
+      "alert_criteria": "concurrent executions in a period of time are predicted to exceed to concurrent execution limits (account limit -100)",
+      "recommendation_action": "- place limits on how many concurrent \"slices\" (percentage of total concurrency available to your account / region) a single function can have\n- request unreserved (5000) concurrency limit increases (no cost)\n- configure a dlq to capture failure(s)",
+      "risk_detail": "performance, operations",
+      "build_priority": 2,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 1,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "44183041-c87c-4bf2-ab10-3a593057135a",
+      "status": "open",
+      "service_name": "lambda",
+      "scenario": "lambda function consistently and significantly under memory limits",
+      "alert_criteria": "lambda functions' average memory used is less than threshold in time period",
+      "recommendation_action": "decrease lambda function memory",
+      "risk_detail": "performance",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://aws.amazon.com/about-aws/whats-new/2020/12/aws-lambda-supports-10gb-memory-6-vcpu-cores-lambda-functions/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "f11f43fb-072f-4a2a-9a4a-2851f8bae0aa",
+      "status": "open",
+      "service_name": "lambda",
+      "scenario": "lambda function consistently reaches memory limits",
+      "alert_criteria": "average percent use of concurrency pool is greater than threshold and lambda functions' average memory used is greater than threshold in time period",
+      "recommendation_action": "increase lambda function memory",
+      "risk_detail": "performance",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://aws.amazon.com/about-aws/whats-new/2020/12/aws-lambda-supports-10gb-memory-6-vcpu-cores-lambda-functions/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "e39158bd-8550-4a6e-ba9f-6060f584ec73",
+      "status": "ice",
+      "service_name": "route 53",
+      "scenario": "Amazon Route 53 Alias Resource Record Sets",
+      "alert_criteria": "A resource record set is a CNAME to an Amazon CloudFront distribution.",
+      "recommendation_action": "Replace the listed CNAME resource record sets with alias resource record sets; You also need to change the record type from CNAME to A or AAAA, depending on the AWS resource",
+      "risk_detail": "performance",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "Checks for resource record sets that can be changed to alias resource record sets to improve performance and save money. An alias resource record set routes DNS queries to an AWS resource (for example, an Elastic Load Balancing load balancer or an Amazon S3 bucket) or to another Route 53 resource record set. When you use alias resource record sets, Route 53 routes your DNS queries to AWS resources free of charge. Hosted zones created by AWS services won’t appear in your check results.",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-choosing-alias-non-alias.html",
+        "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-values.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "c5a5b3c1-b229-4839-8c91-63c630ad1fb9",
+      "status": "ice",
+      "service_name": "route 53",
+      "scenario": "Amazon Route 53 Alias Resource Record Sets",
+      "alert_criteria": "A resource record set is a CNAME to an Elastic Load Balancing load balancer.",
+      "recommendation_action": "Replace the listed CNAME resource record sets with alias resource record sets; You also need to change the record type from CNAME to A or AAAA, depending on the AWS resource",
+      "risk_detail": "performance",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "Checks for resource record sets that can be changed to alias resource record sets to improve performance and save money. An alias resource record set routes DNS queries to an AWS resource (for example, an Elastic Load Balancing load balancer or an Amazon S3 bucket) or to another Route 53 resource record set. When you use alias resource record sets, Route 53 routes your DNS queries to AWS resources free of charge. Hosted zones created by AWS services won’t appear in your check results.",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-choosing-alias-non-alias.html",
+        "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-values.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "444fd30a-f2f2-4a7f-afbc-063349fc900f",
+      "status": "open",
+      "service_name": "ebs",
+      "scenario": "Amazon EBS Provisioned IOPS (SSD) Volume Attachment Configuration",
+      "alert_criteria": "An Amazon EC2 instance that can be EBS-optimized has an attached Provisioned IOPS (SSD) volume but the instance is not EBS-optimized.",
+      "recommendation_action": "create new \"ebs-optimized\" ssd by provisioning a new instance",
+      "risk_detail": "performance",
+      "build_priority": 0,
+      "action_value": 1,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "Checks for Provisioned IOPS (SSD) volumes that are attached to an Amazon EBS-optimizable Amazon Elastic Compute Cloud (Amazon EC2) instance that is not EBS-optimized. Provisioned IOPS (SSD) volumes in the Amazon Elastic Block Store (Amazon EBS) are designed to deliver the expected performance only when they are attached to an EBS-optimized instance.",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html",
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "03060d2d-96d3-43aa-ba18-2968fc8a7189",
+      "status": "open",
+      "service_name": "ebs",
+      "scenario": "Overutilized Amazon EBS Magnetic Volumes",
+      "alert_criteria": "An Amazon EBS Magnetic volume is attached to an instance that can be EBS-optimized or is part of a cluster compute network with a daily median of more than 95 IOPS, and varies by less than 10% of the median value for at least 7 of the past 14 days.",
+      "recommendation_action": "- For consistently higher IOPS, you can use a Provisioned IOPS (SSD) volume. \n- For bursty IOPS, you can use a General Purpose (SSD) volume",
+      "risk_detail": "performance",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "Checks for Amazon Elastic Block Store (EBS) Magnetic volumes that are potentially overutilized and might benefit from a more efficient configuration. A Magnetic volume is designed for applications with moderate or bursty I/O requirements, and the IOPS rate is not guaranteed. It delivers approximately 100 IOPS on average, with a best-effort ability to burst to hundreds of IOPS. For consistently higher IOPS, you can use a Provisioned IOPS (SSD) volume. For bursty IOPS, you can use a General Purpose (SSD) volume. To get daily utilization metrics, download the report for this check. The detailed report shows a column for each of the last 14 days. If there is no active EBS volume, the cell is empty. If there is  insufficient data to make a reliable measurement, the cell contains \"N/A\". If there is sufficient data, the cell contains the daily median and the percentage of the variance in relation to the median (for example, \"256 / 20%\").",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html"
+      ],
       "metadata": {
         "created_at": "2025-11-04T23:07:44.651478Z",
         "updated_at": "2025-11-04T23:07:44.651478Z",

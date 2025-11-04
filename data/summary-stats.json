@@ -2,47 +2,47 @@
   "total_entries": 251,
   "by_status": {
     "done": 23,
-    "ice": 10,
     "open": 209,
-    "pending": 9
+    "pending": 9,
+    "ice": 10
   },
   "by_service": {
-    "iam": 6,
-    "elasticache": 1,
     "alb/elb": 4,
-    "elasticsearch": 1,
-    "general": 166,
-    "networking": 1,
-    "ebs": 5,
-    "ecs": 4,
-    "ec2": 19,
-    "s3": 3,
-    "elastic beanstalk": 2,
+    "elasticache": 1,
     "eks": 1,
-    "emr": 1,
-    "rds": 6,
-    "s3, rds, redshift, etc.": 1,
-    "route 53": 4,
-    "redshift": 3,
-    "lambda": 10,
+    "s3": 3,
     "cloudfront": 8,
+    "emr": 1,
+    "general": 166,
+    "redshift": 3,
+    "ec2": 19,
+    "lambda": 10,
+    "rds": 6,
+    "ecs": 4,
+    "ALL": 4,
+    "networking": 1,
     "cloudtrail": 1,
-    "ALL": 4
+    "elasticsearch": 1,
+    "route 53": 4,
+    "ebs": 5,
+    "iam": 6,
+    "elastic beanstalk": 2,
+    "s3, rds, redshift, etc.": 1
   },
   "by_category": {},
   "by_risk_type": {
-    "security": 9,
-    "operations": 196,
     "cost": 29,
     "reliabilty": 4,
     "performance": 21,
-    "reliability": 1,
-    "perforamnce": 1
+    "operations": 196,
+    "security": 9,
+    "perforamnce": 1,
+    "reliability": 1
   },
   "by_priority": {
     "0": 48,
-    "2": 8,
     "1": 8,
+    "2": 8,
     "3": 4
   }
 }
