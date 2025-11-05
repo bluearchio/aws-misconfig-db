@@ -1,6 +1,6 @@
 {
   "service": "eks",
-  "count": 1,
+  "count": 2,
   "misconfigurations": [
     {
       "id": "5fc3d4a9-96ef-4bba-82e9-bccabe531b34",
@@ -28,6 +28,40 @@
         "source": "Initial CSV Import"
       },
       "tags": []
+    },
+    {
+      "id": "38c186b1-36f2-4133-a6ef-9c1628f5c6f6",
+      "status": "open",
+      "service_name": "eks",
+      "scenario": "Amazon EKS clusters do not have GuardDuty Extended Threat Detection enabled",
+      "alert_criteria": "GuardDuty EKS Runtime Monitoring is not enabled with no threat detection for containerized workloads",
+      "recommendation_action": "Enable GuardDuty Extended Threat Detection for EKS to monitor container runtime behavior and detect threats in Kubernetes environments",
+      "risk_detail": "security",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "Announced at re:Inforce 2025, GuardDuty now provides runtime threat detection for EKS clusters. This monitors container behavior, Kubernetes API calls, and pod-level network activity to detect threats like cryptocurrency mining, privilege escalation, and lateral movement. Without this protection, compromised containers can operate undetected.",
+      "category": "security",
+      "output_notes": null,
+      "notes": "AWS re:Inforce 2025: GuardDuty Extended Threat Detection for EKS announced",
+      "references": [
+        "https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-eks-runtime-monitoring.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-05T21:07:18.013852Z",
+        "updated_at": "2025-11-05T21:07:18.013852Z",
+        "contributors": [
+          "aws-news-2025"
+        ],
+        "source": "AWS re:Inforce 2025 / Community Contribution"
+      },
+      "tags": [
+        "eks",
+        "kubernetes",
+        "runtime-monitoring",
+        "containers"
+      ]
     }
   ]
 }

@@ -1,0 +1,40 @@
+{
+  "service": "config",
+  "count": 1,
+  "misconfigurations": [
+    {
+      "id": "06f2bdc9-2b6e-4c70-895d-1b6d4e17f87c",
+      "status": "open",
+      "service_name": "config",
+      "scenario": "AWS Config is not enabled to track resource configuration changes and compliance",
+      "alert_criteria": "AWS Config is disabled with no configuration history tracking and compliance violations going undetected",
+      "recommendation_action": "Enable AWS Config with managed rules for CIS AWS Foundations Benchmark and organizational security policies",
+      "risk_detail": "security, operations",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "AWS Config continuously monitors and records AWS resource configurations, enabling compliance auditing, security analysis, and change tracking. Without Config, unauthorized changes go unnoticed and compliance violations remain undetected. Config integrates with Security Hub to provide compliance status against multiple standards and can automatically remediate non-compliant resources using Systems Manager.",
+      "category": "operations",
+      "output_notes": null,
+      "notes": "Config integrates with Security Hub for compliance reporting and Systems Manager for auto-remediation",
+      "references": [
+        "https://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html",
+        "https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-05T21:04:35.515148Z",
+        "updated_at": "2025-11-05T21:04:35.515148Z",
+        "contributors": [
+          "aws-news-2025"
+        ],
+        "source": "AWS Security Best Practices 2025 / Community Contribution"
+      },
+      "tags": [
+        "compliance",
+        "configuration-management",
+        "audit"
+      ]
+    }
+  ]
+}

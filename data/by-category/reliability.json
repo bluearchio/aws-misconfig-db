@@ -1,6 +1,6 @@
 {
   "category": "reliability",
-  "count": 5,
+  "count": 6,
   "misconfigurations": [
     {
       "id": "75ba739e-a10d-4233-9d93-233587bf1de5",
@@ -57,6 +57,40 @@
         "source": "Initial CSV Import"
       },
       "tags": []
+    },
+    {
+      "id": "3e1bfe64-1e5a-4b01-9a77-0f1c505ad6b1",
+      "status": "open",
+      "service_name": "shield",
+      "scenario": "Mission-critical applications lack AWS Shield Advanced DDoS protection",
+      "alert_criteria": "CloudFront distributions or ELBs handling critical traffic without Shield Advanced and no DDoS cost protection or 24/7 response team access",
+      "recommendation_action": "Enable AWS Shield Advanced for critical resources and configure DDoS Response Team (DRT) access for 24/7 support during attacks",
+      "risk_detail": "reliability, security",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "AWS Shield Standard provides basic DDoS protection, but Shield Advanced offers application-layer protection, cost protection against DDoS-related charges, and 24/7 access to the AWS DDoS Response Team. Critical applications handling financial transactions, healthcare data, or serving millions of users should use Shield Advanced to ensure availability during sophisticated DDoS attacks.",
+      "category": "networking",
+      "output_notes": null,
+      "notes": "Shield Advanced includes cost protection and access to AWS DDoS Response Team",
+      "references": [
+        "https://docs.aws.amazon.com/waf/latest/developerguide/shield-chapter.html",
+        "https://aws.amazon.com/shield/features/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-05T21:04:35.515148Z",
+        "updated_at": "2025-11-05T21:04:35.515148Z",
+        "contributors": [
+          "aws-news-2025"
+        ],
+        "source": "AWS Security Best Practices 2025 / Community Contribution"
+      },
+      "tags": [
+        "ddos-protection",
+        "availability",
+        "drt"
+      ]
     },
     {
       "id": "57fdeba4-4823-4bd7-957f-5cb8b0d9f84e",

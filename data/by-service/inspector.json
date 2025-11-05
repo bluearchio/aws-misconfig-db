@@ -1,0 +1,41 @@
+{
+  "service": "inspector",
+  "count": 1,
+  "misconfigurations": [
+    {
+      "id": "4ad76651-ce07-4d4e-bcf0-0a6fdff81146",
+      "status": "open",
+      "service_name": "inspector",
+      "scenario": "Infrastructure as Code (IaC) templates are not scanned for security vulnerabilities before deployment",
+      "alert_criteria": "CloudFormation, Terraform, or CDK templates not scanned and CI/CD pipeline lacks IaC security scanning",
+      "recommendation_action": "Enable Amazon Inspector Code Security in CI/CD pipelines to scan IaC templates, application code (SAST), and dependencies (SCA) before production deployment",
+      "risk_detail": "security, operations",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 2,
+      "recommendation_description_detailed": "Amazon Inspector Code Security (GA at re:Inforce 2025) provides shift left security by scanning Infrastructure as Code templates, application source code (SAST), and open-source dependencies (SCA). This identifies misconfigurations, vulnerabilities, and security issues before they reach production. Inspector integrates with CodePipeline, GitHub Actions, and GitLab CI to automatically scan pull requests.",
+      "category": "security",
+      "output_notes": null,
+      "notes": "AWS re:Inforce 2025: Amazon Inspector Code Security now Generally Available",
+      "references": [
+        "https://docs.aws.amazon.com/inspector/latest/user/scanning-code.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-05T21:07:52.450227Z",
+        "updated_at": "2025-11-05T21:07:52.450227Z",
+        "contributors": [
+          "aws-news-2025"
+        ],
+        "source": "AWS re:Inforce 2025 / Community Contribution"
+      },
+      "tags": [
+        "iac",
+        "sast",
+        "sca",
+        "shift-left",
+        "cicd"
+      ]
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "category": "security",
-  "count": 9,
+  "count": 19,
   "misconfigurations": [
     {
       "id": "85d589af-ca9b-4cb6-8311-6c9e50da0687",
@@ -30,6 +30,73 @@
       "tags": []
     },
     {
+      "id": "314f0d94-7381-454d-915d-45b962d801e3",
+      "status": "open",
+      "service_name": "iam",
+      "scenario": "AWS account root user does not have MFA enabled or enforced",
+      "alert_criteria": "Root account has no MFA device registered or root account accessed without MFA challenge",
+      "recommendation_action": "Enable hardware MFA (U2F security key) for root account and implement mandatory MFA enforcement policy",
+      "risk_detail": "security",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 3,
+      "recommendation_description_detailed": "As announced at re:Inforce 2025, AWS now enforces MFA for root users across all account types. The root account has unrestricted access to all resources. Without MFA, a compromised password grants complete account control. Hardware MFA (U2F security keys) provides stronger protection than virtual MFA apps. Root account credentials should be stored in a physical safe and only used for account recovery.",
+      "category": "security",
+      "output_notes": null,
+      "notes": "AWS re:Inforce 2025: Mandatory MFA enforcement for root users announced",
+      "references": [
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html#id_root-user_manage_mfa"
+      ],
+      "metadata": {
+        "created_at": "2025-11-05T21:07:18.013852Z",
+        "updated_at": "2025-11-05T21:07:18.013852Z",
+        "contributors": [
+          "aws-news-2025"
+        ],
+        "source": "AWS re:Inforce 2025 / Community Contribution"
+      },
+      "tags": [
+        "mfa",
+        "root-account",
+        "hardware-mfa"
+      ]
+    },
+    {
+      "id": "ffb6b99f-0dec-47a4-9274-6e1552c05c02",
+      "status": "open",
+      "service_name": "guardduty",
+      "scenario": "Amazon GuardDuty threat detection is not enabled in all regions",
+      "alert_criteria": "GuardDuty is disabled in one or more AWS regions with no threat detection monitoring active",
+      "recommendation_action": "Enable GuardDuty in all AWS regions and configure centralized log aggregation using AWS Organizations",
+      "risk_detail": "security",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 3,
+      "recommendation_description_detailed": "Amazon GuardDuty provides intelligent threat detection by continuously monitoring AWS accounts for malicious activities using machine learning. Without GuardDuty enabled, threats like unauthorized access, compromised credentials, and cryptocurrency mining go undetected. GuardDuty monitors CloudTrail events, VPC Flow Logs, and DNS logs to identify suspicious behavior patterns.",
+      "category": "security",
+      "output_notes": null,
+      "notes": "Announced at AWS re:Inforce 2025 with enhanced EKS runtime monitoring capabilities",
+      "references": [
+        "https://docs.aws.amazon.com/guardduty/latest/ug/what-is-guardduty.html",
+        "https://aws.github.io/aws-security-services-best-practices/guides/guardduty/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-05T21:04:35.515148Z",
+        "updated_at": "2025-11-05T21:04:35.515148Z",
+        "contributors": [
+          "aws-news-2025"
+        ],
+        "source": "AWS re:Inforce 2025 / Community Contribution"
+      },
+      "tags": [
+        "threat-detection",
+        "machine-learning",
+        "monitoring"
+      ]
+    },
+    {
       "id": "12f2d76b-5c61-403a-bcbe-71c1a4d3ec61",
       "status": "open",
       "service_name": "general",
@@ -57,6 +124,246 @@
         "source": "Initial CSV Import"
       },
       "tags": []
+    },
+    {
+      "id": "e4cc8c22-5fc3-41e7-b677-d313addf046d",
+      "status": "open",
+      "service_name": "secrets-manager",
+      "scenario": "Application credentials and API keys are hardcoded instead of using AWS Secrets Manager",
+      "alert_criteria": "Secrets are stored in environment variables, configuration files, or hardcoded in application code",
+      "recommendation_action": "Migrate all secrets to AWS Secrets Manager with automatic rotation enabled and KMS encryption",
+      "risk_detail": "security",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 3,
+      "recommendation_description_detailed": "Hardcoded secrets in code, configuration files, or container images are a critical security vulnerability. AWS Secrets Manager provides encrypted storage with automatic rotation capabilities and audit trails. Secrets Manager integrates with RDS, Redshift, DocumentDB, and other services for automatic credential rotation, eliminating the need to update application code when rotating secrets.",
+      "category": "security",
+      "output_notes": null,
+      "notes": "Secrets Manager provides automatic rotation for supported AWS services",
+      "references": [
+        "https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html",
+        "https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-05T21:04:35.515148Z",
+        "updated_at": "2025-11-05T21:04:35.515148Z",
+        "contributors": [
+          "aws-news-2025"
+        ],
+        "source": "AWS Security Best Practices 2025 / Community Contribution"
+      },
+      "tags": [
+        "secrets",
+        "rotation",
+        "encryption",
+        "credentials"
+      ]
+    },
+    {
+      "id": "e55a54dd-f7ab-4b75-bac7-8067de64ea1a",
+      "status": "open",
+      "service_name": "waf",
+      "scenario": "Public-facing applications do not have AWS WAF protection enabled",
+      "alert_criteria": "Application Load Balancer, API Gateway, or CloudFront distribution has no WAF association and no protection against OWASP Top 10 vulnerabilities",
+      "recommendation_action": "Enable AWS WAF with managed rule groups for OWASP protection, IP rate limiting, and geo-blocking",
+      "risk_detail": "security",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 3,
+      "recommendation_description_detailed": "AWS WAF protects web applications from common exploits like SQL injection, cross-site scripting (XSS), and DDoS attacks. Without WAF, applications are vulnerable to automated attacks and zero-day exploits. AWS Managed Rules provide continuously updated protection against emerging threats. WAF can be deployed on CloudFront, ALB, API Gateway, and AppSync.",
+      "category": "security",
+      "output_notes": null,
+      "notes": "AWS Managed Rules provide protection against OWASP Top 10 vulnerabilities",
+      "references": [
+        "https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html",
+        "https://aws.amazon.com/waf/features/managed-rules/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-05T21:04:35.515148Z",
+        "updated_at": "2025-11-05T21:04:35.515148Z",
+        "contributors": [
+          "aws-news-2025"
+        ],
+        "source": "AWS Security Best Practices 2025 / Community Contribution"
+      },
+      "tags": [
+        "web-application-firewall",
+        "owasp",
+        "ddos-protection"
+      ]
+    },
+    {
+      "id": "de2df33a-9650-4d05-86a8-5f2c716a6034",
+      "status": "open",
+      "service_name": "security-hub",
+      "scenario": "AWS Security Hub is not enabled to aggregate security findings",
+      "alert_criteria": "Security Hub is not enabled and no centralized security posture management exists",
+      "recommendation_action": "Enable AWS Security Hub to aggregate findings from GuardDuty, Inspector, Macie, and third-party security tools into a unified dashboard",
+      "risk_detail": "security, operations",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "AWS Security Hub aggregates security findings from multiple AWS services and third-party tools, providing a comprehensive view of your security posture. Without Security Hub, security teams must manually check multiple services, leading to missed vulnerabilities and delayed incident response. Security Hub includes automated compliance checks against standards like CIS AWS Foundations Benchmark, PCI-DSS, and AWS Best Practices.",
+      "category": "security",
+      "output_notes": null,
+      "notes": "Enhanced at re:Inforce 2025 with improved threat signal analysis",
+      "references": [
+        "https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-05T21:04:35.515148Z",
+        "updated_at": "2025-11-05T21:04:35.515148Z",
+        "contributors": [
+          "aws-news-2025"
+        ],
+        "source": "AWS re:Inforce 2025 / Community Contribution"
+      },
+      "tags": [
+        "compliance",
+        "aggregation",
+        "security-posture"
+      ]
+    },
+    {
+      "id": "06f2bdc9-2b6e-4c70-895d-1b6d4e17f87c",
+      "status": "open",
+      "service_name": "config",
+      "scenario": "AWS Config is not enabled to track resource configuration changes and compliance",
+      "alert_criteria": "AWS Config is disabled with no configuration history tracking and compliance violations going undetected",
+      "recommendation_action": "Enable AWS Config with managed rules for CIS AWS Foundations Benchmark and organizational security policies",
+      "risk_detail": "security, operations",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "AWS Config continuously monitors and records AWS resource configurations, enabling compliance auditing, security analysis, and change tracking. Without Config, unauthorized changes go unnoticed and compliance violations remain undetected. Config integrates with Security Hub to provide compliance status against multiple standards and can automatically remediate non-compliant resources using Systems Manager.",
+      "category": "operations",
+      "output_notes": null,
+      "notes": "Config integrates with Security Hub for compliance reporting and Systems Manager for auto-remediation",
+      "references": [
+        "https://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html",
+        "https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-05T21:04:35.515148Z",
+        "updated_at": "2025-11-05T21:04:35.515148Z",
+        "contributors": [
+          "aws-news-2025"
+        ],
+        "source": "AWS Security Best Practices 2025 / Community Contribution"
+      },
+      "tags": [
+        "compliance",
+        "configuration-management",
+        "audit"
+      ]
+    },
+    {
+      "id": "3e1bfe64-1e5a-4b01-9a77-0f1c505ad6b1",
+      "status": "open",
+      "service_name": "shield",
+      "scenario": "Mission-critical applications lack AWS Shield Advanced DDoS protection",
+      "alert_criteria": "CloudFront distributions or ELBs handling critical traffic without Shield Advanced and no DDoS cost protection or 24/7 response team access",
+      "recommendation_action": "Enable AWS Shield Advanced for critical resources and configure DDoS Response Team (DRT) access for 24/7 support during attacks",
+      "risk_detail": "reliability, security",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "AWS Shield Standard provides basic DDoS protection, but Shield Advanced offers application-layer protection, cost protection against DDoS-related charges, and 24/7 access to the AWS DDoS Response Team. Critical applications handling financial transactions, healthcare data, or serving millions of users should use Shield Advanced to ensure availability during sophisticated DDoS attacks.",
+      "category": "networking",
+      "output_notes": null,
+      "notes": "Shield Advanced includes cost protection and access to AWS DDoS Response Team",
+      "references": [
+        "https://docs.aws.amazon.com/waf/latest/developerguide/shield-chapter.html",
+        "https://aws.amazon.com/shield/features/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-05T21:04:35.515148Z",
+        "updated_at": "2025-11-05T21:04:35.515148Z",
+        "contributors": [
+          "aws-news-2025"
+        ],
+        "source": "AWS Security Best Practices 2025 / Community Contribution"
+      },
+      "tags": [
+        "ddos-protection",
+        "availability",
+        "drt"
+      ]
+    },
+    {
+      "id": "b792ba90-f7d5-4324-938d-3213142d9d01",
+      "status": "open",
+      "service_name": "ecs",
+      "scenario": "ECS task definitions are configured with unsafe defaults including public IPs, privileged mode, or plaintext secrets",
+      "alert_criteria": "ECS tasks assigned public IP addresses when not required, containers running in privileged mode, or secrets passed as plaintext environment variables",
+      "recommendation_action": "Configure ECS tasks without public IPs in private subnets, disable privileged mode, use Secrets Manager for credentials, and enable read-only root filesystems",
+      "risk_detail": "security",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 3,
+      "recommendation_description_detailed": "ECS task misconfigurations create significant security risks. Public IP assignments expose containers directly to the internet. Privileged mode grants containers host-level access. Plaintext secrets in environment variables can be extracted by anyone with task describe permissions. Security Hub includes checks for these misconfigurations and AWS recommends using private subnets with NAT gateways, non-privileged containers, and Secrets Manager integration.",
+      "category": "security",
+      "output_notes": null,
+      "notes": "Security Hub provides automated checks for ECS task definition misconfigurations",
+      "references": [
+        "https://docs.aws.amazon.com/AmazonECS/latest/bestpracticesguide/security-tasks-containers.html",
+        "https://docs.aws.amazon.com/securityhub/latest/userguide/ecs-controls.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-05T21:07:18.013852Z",
+        "updated_at": "2025-11-05T21:07:18.013852Z",
+        "contributors": [
+          "aws-news-2025"
+        ],
+        "source": "AWS Security Best Practices 2025 / Community Contribution"
+      },
+      "tags": [
+        "ecs",
+        "containers",
+        "task-definitions",
+        "secrets"
+      ]
+    },
+    {
+      "id": "4ad76651-ce07-4d4e-bcf0-0a6fdff81146",
+      "status": "open",
+      "service_name": "inspector",
+      "scenario": "Infrastructure as Code (IaC) templates are not scanned for security vulnerabilities before deployment",
+      "alert_criteria": "CloudFormation, Terraform, or CDK templates not scanned and CI/CD pipeline lacks IaC security scanning",
+      "recommendation_action": "Enable Amazon Inspector Code Security in CI/CD pipelines to scan IaC templates, application code (SAST), and dependencies (SCA) before production deployment",
+      "risk_detail": "security, operations",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 2,
+      "recommendation_description_detailed": "Amazon Inspector Code Security (GA at re:Inforce 2025) provides shift left security by scanning Infrastructure as Code templates, application source code (SAST), and open-source dependencies (SCA). This identifies misconfigurations, vulnerabilities, and security issues before they reach production. Inspector integrates with CodePipeline, GitHub Actions, and GitLab CI to automatically scan pull requests.",
+      "category": "security",
+      "output_notes": null,
+      "notes": "AWS re:Inforce 2025: Amazon Inspector Code Security now Generally Available",
+      "references": [
+        "https://docs.aws.amazon.com/inspector/latest/user/scanning-code.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-05T21:07:52.450227Z",
+        "updated_at": "2025-11-05T21:07:52.450227Z",
+        "contributors": [
+          "aws-news-2025"
+        ],
+        "source": "AWS re:Inforce 2025 / Community Contribution"
+      },
+      "tags": [
+        "iac",
+        "sast",
+        "sca",
+        "shift-left",
+        "cicd"
+      ]
     },
     {
       "id": "249dd667-4b1e-4200-bec5-19c6c718f958",
@@ -254,6 +561,40 @@
         "source": "Initial CSV Import"
       },
       "tags": []
+    },
+    {
+      "id": "38c186b1-36f2-4133-a6ef-9c1628f5c6f6",
+      "status": "open",
+      "service_name": "eks",
+      "scenario": "Amazon EKS clusters do not have GuardDuty Extended Threat Detection enabled",
+      "alert_criteria": "GuardDuty EKS Runtime Monitoring is not enabled with no threat detection for containerized workloads",
+      "recommendation_action": "Enable GuardDuty Extended Threat Detection for EKS to monitor container runtime behavior and detect threats in Kubernetes environments",
+      "risk_detail": "security",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "Announced at re:Inforce 2025, GuardDuty now provides runtime threat detection for EKS clusters. This monitors container behavior, Kubernetes API calls, and pod-level network activity to detect threats like cryptocurrency mining, privilege escalation, and lateral movement. Without this protection, compromised containers can operate undetected.",
+      "category": "security",
+      "output_notes": null,
+      "notes": "AWS re:Inforce 2025: GuardDuty Extended Threat Detection for EKS announced",
+      "references": [
+        "https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-eks-runtime-monitoring.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-05T21:07:18.013852Z",
+        "updated_at": "2025-11-05T21:07:18.013852Z",
+        "contributors": [
+          "aws-news-2025"
+        ],
+        "source": "AWS re:Inforce 2025 / Community Contribution"
+      },
+      "tags": [
+        "eks",
+        "kubernetes",
+        "runtime-monitoring",
+        "containers"
+      ]
     }
   ]
 }

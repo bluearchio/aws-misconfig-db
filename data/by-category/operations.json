@@ -1,6 +1,6 @@
 {
   "category": "operations",
-  "count": 196,
+  "count": 199,
   "misconfigurations": [
     {
       "id": "8c0a3d78-a5e3-4ac1-a1ca-f25306b46143",
@@ -4625,6 +4625,73 @@
       "tags": []
     },
     {
+      "id": "de2df33a-9650-4d05-86a8-5f2c716a6034",
+      "status": "open",
+      "service_name": "security-hub",
+      "scenario": "AWS Security Hub is not enabled to aggregate security findings",
+      "alert_criteria": "Security Hub is not enabled and no centralized security posture management exists",
+      "recommendation_action": "Enable AWS Security Hub to aggregate findings from GuardDuty, Inspector, Macie, and third-party security tools into a unified dashboard",
+      "risk_detail": "security, operations",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "AWS Security Hub aggregates security findings from multiple AWS services and third-party tools, providing a comprehensive view of your security posture. Without Security Hub, security teams must manually check multiple services, leading to missed vulnerabilities and delayed incident response. Security Hub includes automated compliance checks against standards like CIS AWS Foundations Benchmark, PCI-DSS, and AWS Best Practices.",
+      "category": "security",
+      "output_notes": null,
+      "notes": "Enhanced at re:Inforce 2025 with improved threat signal analysis",
+      "references": [
+        "https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-05T21:04:35.515148Z",
+        "updated_at": "2025-11-05T21:04:35.515148Z",
+        "contributors": [
+          "aws-news-2025"
+        ],
+        "source": "AWS re:Inforce 2025 / Community Contribution"
+      },
+      "tags": [
+        "compliance",
+        "aggregation",
+        "security-posture"
+      ]
+    },
+    {
+      "id": "06f2bdc9-2b6e-4c70-895d-1b6d4e17f87c",
+      "status": "open",
+      "service_name": "config",
+      "scenario": "AWS Config is not enabled to track resource configuration changes and compliance",
+      "alert_criteria": "AWS Config is disabled with no configuration history tracking and compliance violations going undetected",
+      "recommendation_action": "Enable AWS Config with managed rules for CIS AWS Foundations Benchmark and organizational security policies",
+      "risk_detail": "security, operations",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "AWS Config continuously monitors and records AWS resource configurations, enabling compliance auditing, security analysis, and change tracking. Without Config, unauthorized changes go unnoticed and compliance violations remain undetected. Config integrates with Security Hub to provide compliance status against multiple standards and can automatically remediate non-compliant resources using Systems Manager.",
+      "category": "operations",
+      "output_notes": null,
+      "notes": "Config integrates with Security Hub for compliance reporting and Systems Manager for auto-remediation",
+      "references": [
+        "https://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html",
+        "https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-05T21:04:35.515148Z",
+        "updated_at": "2025-11-05T21:04:35.515148Z",
+        "contributors": [
+          "aws-news-2025"
+        ],
+        "source": "AWS Security Best Practices 2025 / Community Contribution"
+      },
+      "tags": [
+        "compliance",
+        "configuration-management",
+        "audit"
+      ]
+    },
+    {
       "id": "4649adc3-53cc-4ccc-bd61-5c79f7fa6999",
       "status": "pending",
       "service_name": "ecs",
@@ -4677,6 +4744,41 @@
         "source": "Initial CSV Import"
       },
       "tags": []
+    },
+    {
+      "id": "4ad76651-ce07-4d4e-bcf0-0a6fdff81146",
+      "status": "open",
+      "service_name": "inspector",
+      "scenario": "Infrastructure as Code (IaC) templates are not scanned for security vulnerabilities before deployment",
+      "alert_criteria": "CloudFormation, Terraform, or CDK templates not scanned and CI/CD pipeline lacks IaC security scanning",
+      "recommendation_action": "Enable Amazon Inspector Code Security in CI/CD pipelines to scan IaC templates, application code (SAST), and dependencies (SCA) before production deployment",
+      "risk_detail": "security, operations",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 2,
+      "recommendation_description_detailed": "Amazon Inspector Code Security (GA at re:Inforce 2025) provides shift left security by scanning Infrastructure as Code templates, application source code (SAST), and open-source dependencies (SCA). This identifies misconfigurations, vulnerabilities, and security issues before they reach production. Inspector integrates with CodePipeline, GitHub Actions, and GitLab CI to automatically scan pull requests.",
+      "category": "security",
+      "output_notes": null,
+      "notes": "AWS re:Inforce 2025: Amazon Inspector Code Security now Generally Available",
+      "references": [
+        "https://docs.aws.amazon.com/inspector/latest/user/scanning-code.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-05T21:07:52.450227Z",
+        "updated_at": "2025-11-05T21:07:52.450227Z",
+        "contributors": [
+          "aws-news-2025"
+        ],
+        "source": "AWS re:Inforce 2025 / Community Contribution"
+      },
+      "tags": [
+        "iac",
+        "sast",
+        "sca",
+        "shift-left",
+        "cicd"
+      ]
     },
     {
       "id": "030f361e-eb21-4382-8d26-fcd86f47c8d5",

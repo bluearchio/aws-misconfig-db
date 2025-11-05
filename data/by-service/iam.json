@@ -1,6 +1,6 @@
 {
   "service": "iam",
-  "count": 6,
+  "count": 7,
   "misconfigurations": [
     {
       "id": "85d589af-ca9b-4cb6-8311-6c9e50da0687",
@@ -163,6 +163,39 @@
         "source": "Initial CSV Import"
       },
       "tags": []
+    },
+    {
+      "id": "314f0d94-7381-454d-915d-45b962d801e3",
+      "status": "open",
+      "service_name": "iam",
+      "scenario": "AWS account root user does not have MFA enabled or enforced",
+      "alert_criteria": "Root account has no MFA device registered or root account accessed without MFA challenge",
+      "recommendation_action": "Enable hardware MFA (U2F security key) for root account and implement mandatory MFA enforcement policy",
+      "risk_detail": "security",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 3,
+      "recommendation_description_detailed": "As announced at re:Inforce 2025, AWS now enforces MFA for root users across all account types. The root account has unrestricted access to all resources. Without MFA, a compromised password grants complete account control. Hardware MFA (U2F security keys) provides stronger protection than virtual MFA apps. Root account credentials should be stored in a physical safe and only used for account recovery.",
+      "category": "security",
+      "output_notes": null,
+      "notes": "AWS re:Inforce 2025: Mandatory MFA enforcement for root users announced",
+      "references": [
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html#id_root-user_manage_mfa"
+      ],
+      "metadata": {
+        "created_at": "2025-11-05T21:07:18.013852Z",
+        "updated_at": "2025-11-05T21:07:18.013852Z",
+        "contributors": [
+          "aws-news-2025"
+        ],
+        "source": "AWS re:Inforce 2025 / Community Contribution"
+      },
+      "tags": [
+        "mfa",
+        "root-account",
+        "hardware-mfa"
+      ]
     }
   ]
 }

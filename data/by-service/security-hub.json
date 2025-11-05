@@ -1,0 +1,39 @@
+{
+  "service": "security-hub",
+  "count": 1,
+  "misconfigurations": [
+    {
+      "id": "de2df33a-9650-4d05-86a8-5f2c716a6034",
+      "status": "open",
+      "service_name": "security-hub",
+      "scenario": "AWS Security Hub is not enabled to aggregate security findings",
+      "alert_criteria": "Security Hub is not enabled and no centralized security posture management exists",
+      "recommendation_action": "Enable AWS Security Hub to aggregate findings from GuardDuty, Inspector, Macie, and third-party security tools into a unified dashboard",
+      "risk_detail": "security, operations",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "AWS Security Hub aggregates security findings from multiple AWS services and third-party tools, providing a comprehensive view of your security posture. Without Security Hub, security teams must manually check multiple services, leading to missed vulnerabilities and delayed incident response. Security Hub includes automated compliance checks against standards like CIS AWS Foundations Benchmark, PCI-DSS, and AWS Best Practices.",
+      "category": "security",
+      "output_notes": null,
+      "notes": "Enhanced at re:Inforce 2025 with improved threat signal analysis",
+      "references": [
+        "https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-05T21:04:35.515148Z",
+        "updated_at": "2025-11-05T21:04:35.515148Z",
+        "contributors": [
+          "aws-news-2025"
+        ],
+        "source": "AWS re:Inforce 2025 / Community Contribution"
+      },
+      "tags": [
+        "compliance",
+        "aggregation",
+        "security-posture"
+      ]
+    }
+  ]
+}

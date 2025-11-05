@@ -1,6 +1,6 @@
 {
   "service": "ecs",
-  "count": 4,
+  "count": 5,
   "misconfigurations": [
     {
       "id": "4305d944-eb3c-473c-b9ce-99fe6911713b",
@@ -109,6 +109,41 @@
         "source": "Initial CSV Import"
       },
       "tags": []
+    },
+    {
+      "id": "b792ba90-f7d5-4324-938d-3213142d9d01",
+      "status": "open",
+      "service_name": "ecs",
+      "scenario": "ECS task definitions are configured with unsafe defaults including public IPs, privileged mode, or plaintext secrets",
+      "alert_criteria": "ECS tasks assigned public IP addresses when not required, containers running in privileged mode, or secrets passed as plaintext environment variables",
+      "recommendation_action": "Configure ECS tasks without public IPs in private subnets, disable privileged mode, use Secrets Manager for credentials, and enable read-only root filesystems",
+      "risk_detail": "security",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 3,
+      "recommendation_description_detailed": "ECS task misconfigurations create significant security risks. Public IP assignments expose containers directly to the internet. Privileged mode grants containers host-level access. Plaintext secrets in environment variables can be extracted by anyone with task describe permissions. Security Hub includes checks for these misconfigurations and AWS recommends using private subnets with NAT gateways, non-privileged containers, and Secrets Manager integration.",
+      "category": "security",
+      "output_notes": null,
+      "notes": "Security Hub provides automated checks for ECS task definition misconfigurations",
+      "references": [
+        "https://docs.aws.amazon.com/AmazonECS/latest/bestpracticesguide/security-tasks-containers.html",
+        "https://docs.aws.amazon.com/securityhub/latest/userguide/ecs-controls.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-05T21:07:18.013852Z",
+        "updated_at": "2025-11-05T21:07:18.013852Z",
+        "contributors": [
+          "aws-news-2025"
+        ],
+        "source": "AWS Security Best Practices 2025 / Community Contribution"
+      },
+      "tags": [
+        "ecs",
+        "containers",
+        "task-definitions",
+        "secrets"
+      ]
     }
   ]
 }

@@ -1,7 +1,7 @@
 # AWS Misconfiguration Database - Summary
 
-**Total Misconfigurations:** 251
-**Last Updated:** 2025-11-04 23:54:30 UTC
+**Total Misconfigurations:** 261
+**Last Updated:** 2025-11-05 21:08:22 UTC
 
 ## Overview
 
@@ -16,18 +16,18 @@ performance, reliability, and operational best practices.
 | ------ | ----- |
 | done | 23 |
 | ice | 10 |
-| open | 209 |
+| open | 219 |
 | pending | 9 |
 
 ### By Risk Type
 
 | Risk Type | Count |
 | --------- | ----- |
-| operations | 196 |
+| operations | 199 |
 | cost | 29 |
 | performance | 22 |
-| security | 9 |
-| reliability | 5 |
+| security | 19 |
+| reliability | 6 |
 
 ### Top 10 Services
 
@@ -37,24 +37,27 @@ performance, reliability, and operational best practices.
 | ec2 | 19 |
 | lambda | 10 |
 | cloudfront | 8 |
-| iam | 6 |
+| iam | 7 |
 | rds | 6 |
 | ebs | 5 |
+| ecs | 5 |
 | alb/elb | 4 |
-| ecs | 4 |
 | route 53 | 4 |
 
 ### By Category
 
 | Category | Count |
 | -------- | ----- |
+| security | 8 |
+| operations | 1 |
+| networking | 1 |
 
 ### By Priority
 
 | Priority Level | Count |
 | -------------- | ----- |
-| 0 | 48 |
-| 1 | 8 |
+| 0 | 54 |
+| 1 | 12 |
 | 2 | 8 |
 | 3 | 4 |
 

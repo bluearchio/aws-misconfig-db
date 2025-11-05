@@ -1,0 +1,40 @@
+{
+  "service": "guardduty",
+  "count": 1,
+  "misconfigurations": [
+    {
+      "id": "ffb6b99f-0dec-47a4-9274-6e1552c05c02",
+      "status": "open",
+      "service_name": "guardduty",
+      "scenario": "Amazon GuardDuty threat detection is not enabled in all regions",
+      "alert_criteria": "GuardDuty is disabled in one or more AWS regions with no threat detection monitoring active",
+      "recommendation_action": "Enable GuardDuty in all AWS regions and configure centralized log aggregation using AWS Organizations",
+      "risk_detail": "security",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 3,
+      "recommendation_description_detailed": "Amazon GuardDuty provides intelligent threat detection by continuously monitoring AWS accounts for malicious activities using machine learning. Without GuardDuty enabled, threats like unauthorized access, compromised credentials, and cryptocurrency mining go undetected. GuardDuty monitors CloudTrail events, VPC Flow Logs, and DNS logs to identify suspicious behavior patterns.",
+      "category": "security",
+      "output_notes": null,
+      "notes": "Announced at AWS re:Inforce 2025 with enhanced EKS runtime monitoring capabilities",
+      "references": [
+        "https://docs.aws.amazon.com/guardduty/latest/ug/what-is-guardduty.html",
+        "https://aws.github.io/aws-security-services-best-practices/guides/guardduty/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-05T21:04:35.515148Z",
+        "updated_at": "2025-11-05T21:04:35.515148Z",
+        "contributors": [
+          "aws-news-2025"
+        ],
+        "source": "AWS re:Inforce 2025 / Community Contribution"
+      },
+      "tags": [
+        "threat-detection",
+        "machine-learning",
+        "monitoring"
+      ]
+    }
+  ]
+}
