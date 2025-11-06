@@ -1,6 +1,6 @@
 {
   "service": "lambda",
-  "count": 10,
+  "count": 11,
   "misconfigurations": [
     {
       "id": "81a5a270-6eef-45f9-921b-593eb7ef6bd6",
@@ -283,6 +283,41 @@
         "source": "Initial CSV Import"
       },
       "tags": []
+    },
+    {
+      "id": "b2c8d3e9-4f1a-5b6c-9d7e-1a8f4b5c6d7e",
+      "status": "open",
+      "service_name": "lambda",
+      "scenario": "Lambda functions with provisioned concurrency enabled for workloads with variable or infrequent traffic",
+      "alert_criteria": "Lambda functions with provisioned concurrency >0, or provisioned concurrency utilization <50% over 30 days, or non-latency-sensitive workloads using provisioned concurrency",
+      "recommendation_action": "Evaluate necessity of provisioned concurrency - disable for non-latency-sensitive workloads, use Application Auto Scaling for provisioned concurrency to match traffic patterns, or migrate to on-demand invocation",
+      "risk_detail": "cost",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "Lambda provisioned concurrency eliminates cold starts but costs 10-20x more than on-demand ($0.000009722/GB-second provisioned vs $0.0000166667/GB-second on-demand). Only justified for: 1) latency-sensitive user-facing APIs requiring <50ms, 2) consistently high traffic. Most workloads should use on-demand. If provisioned concurrency needed: use Application Auto Scaling to schedule (disable nights/weekends), or scale based on traffic. Example: Function with 1GB memory, 100 provisioned concurrency 24/7 = $700/month vs on-demand for same invocations = $50/month. Audit provisioned concurrency monthly for utilization.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework - Provisioned concurrency often over-used due to cold start concerns",
+      "references": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/provisioned-concurrency.html",
+        "https://aws.amazon.com/lambda/pricing/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T17:41:02.278720+00:00",
+        "updated_at": "2025-11-06T17:41:02.278720+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "lambda-provisioned-concurrency",
+        "lambda-optimization",
+        "cold-start",
+        "serverless-cost"
+      ]
     }
   ]
 }

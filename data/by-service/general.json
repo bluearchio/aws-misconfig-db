@@ -1,6 +1,6 @@
 {
   "service": "general",
-  "count": 170,
+  "count": 175,
   "misconfigurations": [
     {
       "id": "40d46878-ac12-44c8-902f-196a18dc9f6c",
@@ -4629,6 +4629,182 @@
         "cost-controls",
         "spending-alerts",
         "governance"
+      ]
+    },
+    {
+      "id": "c6d9e5f2-7b3a-4c8e-9d1f-8a2b7e4c5d6e",
+      "status": "open",
+      "service_name": "general",
+      "scenario": "Organization lacks dedicated Cloud Financial Management team or FinOps function",
+      "alert_criteria": "No designated cost optimization owner, cost reviews occur reactively after bill shock, or finance and engineering teams operate in silos",
+      "recommendation_action": "Establish COST01-BP01: Create Cloud Center of Excellence (CCoE) or FinOps team with dedicated ownership for cost optimization, reporting to both finance and engineering leadership",
+      "risk_detail": "cost, operations",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 3,
+      "risk_value": 3,
+      "recommendation_description_detailed": "COST01-BP01: Organizations without dedicated cost management ownership experience 30-50% higher cloud costs. Establish a FinOps team (1-3 FTEs for organizations spending $1M+/year) responsible for: cost visibility, budget management, optimization recommendations, policy enforcement, and cultural enablement. Team should report to both CFO and CTO to bridge finance-technology gap. Key functions: monthly cost reviews, tagging enforcement, Savings Plan/RI management, cost allocation, showback/chargeback. ROI: FinOps teams typically drive 15-30% cost reduction within first year, far exceeding team cost.",
+      "category": "operations",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework COST01-BP01 - Foundation for all cost optimization",
+      "references": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/cost_cloud_financial_management_function.html",
+        "https://www.finops.org/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T17:41:02.278720+00:00",
+        "updated_at": "2025-11-06T17:41:02.278720+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "finops",
+        "cloud-financial-management",
+        "cost-optimization-function",
+        "governance"
+      ]
+    },
+    {
+      "id": "d7e4f8a2-9c5b-4d3e-8f6a-1b9c7e5d4a6f",
+      "status": "open",
+      "service_name": "general",
+      "scenario": "Workloads built with undifferentiated heavy lifting instead of leveraging managed services",
+      "alert_criteria": "Self-managed databases, message queues, container orchestration, or caching layers when AWS managed service equivalents exist (RDS vs self-managed MySQL, MQ vs self-managed RabbitMQ, EKS vs self-managed K8s)",
+      "recommendation_action": "Evaluate COST05-BP05: migrate to managed services (RDS, Aurora, ElastiCache, MQ, ECS/EKS, Lambda) to reduce operational overhead and often reduce total cost of ownership",
+      "risk_detail": "cost, operations",
+      "build_priority": 2,
+      "action_value": 3,
+      "effort_level": 3,
+      "risk_value": 2,
+      "recommendation_description_detailed": "COST05-BP05: Self-managed infrastructure requires EC2 instances, storage, licensing, patching, backups, monitoring, and engineering time. Managed services eliminate this overhead while often reducing costs. Example: Self-managed PostgreSQL on r5.2xlarge ($0.504/hr * 730hr = $368/month) + EBS ($50) + engineering time ($500/month) = $918/month vs RDS db.r5.2xlarge = $584/month (36% savings). Additional managed service benefits: automatic backups, patching, high availability, scalability. Evaluate migration for: databases (\u2192 RDS/Aurora), caching (\u2192 ElastiCache), message queues (\u2192 SQS/SNS/MQ), containers (\u2192 ECS/EKS/Fargate).",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework COST05-BP05 - Managed services reduce TCO",
+      "references": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/welcome.html",
+        "https://aws.amazon.com/products/databases/",
+        "https://aws.amazon.com/products/management-and-governance/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T17:41:02.278720+00:00",
+        "updated_at": "2025-11-06T17:41:02.278720+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "managed-services",
+        "total-cost-ownership",
+        "operational-efficiency",
+        "modernization"
+      ]
+    },
+    {
+      "id": "e8f5a9b3-1c6d-4e7f-9a8b-2c5d8f6e3b7a",
+      "status": "open",
+      "service_name": "general",
+      "scenario": "Workloads deployed without upfront cost modeling leading to budget overruns",
+      "alert_criteria": "New projects deployed without cost estimates, actual costs exceed projections by >30%, or architectural decisions made without cost analysis",
+      "recommendation_action": "Implement COST06-BP01: perform cost modeling using AWS Pricing Calculator before deployment, establish cost targets per workload, validate assumptions with pilots",
+      "risk_detail": "cost, operations",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 2,
+      "risk_value": 2,
+      "recommendation_description_detailed": "COST06-BP01: Organizations deploying without cost modeling experience 25-40% cost overruns. Use AWS Pricing Calculator to model costs across multiple architecture options before committing. Include: compute, storage, data transfer, managed services, and reserved capacity discounts. Compare options: serverless vs containers vs EC2, single-region vs multi-region, GP2 vs GP3 storage. Validate with proof-of-concept deployments. Establish cost per transaction/user/request metrics. Review monthly to track actuals vs model. Iterate architecture based on cost data. Example: modeling revealed serverless option was 60% cheaper than container option for variable traffic workload.",
+      "category": "operations",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework COST06-BP01 - Model before building",
+      "references": [
+        "https://calculator.aws/",
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/cost_type_size_number_resources_cost_modeling.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T17:41:02.278720+00:00",
+        "updated_at": "2025-11-06T17:41:02.278720+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "cost-modeling",
+        "pricing-calculator",
+        "budget-planning",
+        "architecture-decisions"
+      ]
+    },
+    {
+      "id": "f9a6b1c4-2d7e-4f8a-9b6c-3d8e9f7a5b1c",
+      "status": "open",
+      "service_name": "general",
+      "scenario": "Engineering teams lack cost awareness and accountability for cloud spending",
+      "alert_criteria": "Developers unaware of resource costs, no cost metrics in team dashboards, cost optimization not included in performance reviews or sprint planning",
+      "recommendation_action": "Establish COST01-BP08: create cost-aware culture by including cost metrics in engineering dashboards, making cost part of architecture reviews, recognizing cost optimization achievements",
+      "risk_detail": "cost, operations",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 2,
+      "recommendation_description_detailed": "COST01-BP08: Engineering teams make architecture decisions impacting 80% of cloud costs, yet often lack cost visibility. Build cost-aware culture: 1) Display cost dashboards in team spaces showing daily spend trends, 2) Include cost in sprint retrospectives and architecture reviews, 3) Implement cost per feature/transaction metrics, 4) Gamify optimization with team competitions and recognition, 5) Provide training on cost-effective architecture patterns. Integrate cost into CI/CD with tools showing estimated cost impact of changes. Organizations with strong cost culture achieve 20-35% lower costs while maintaining innovation velocity.",
+      "category": "operations",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework COST01-BP08 - Culture drives sustainable optimization",
+      "references": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/cost_cloud_financial_management_culture.html",
+        "https://www.finops.org/framework/capabilities/cost-culture/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T17:41:02.278720+00:00",
+        "updated_at": "2025-11-06T17:41:02.278720+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "cost-culture",
+        "engineering-culture",
+        "cost-awareness",
+        "organizational-change"
+      ]
+    },
+    {
+      "id": "a1b7c2d8-3e9f-4a5b-8c6d-9e1f7a4b3c5d",
+      "status": "open",
+      "service_name": "general",
+      "scenario": "Resources not leveraging shared infrastructure leading to resource sprawl and duplication",
+      "alert_criteria": "Each application team deploying separate NAT Gateways, Transit Gateways, VPCs, or shared services instead of using centralized shared resources",
+      "recommendation_action": "Implement COST06-BP04: establish shared service model for common infrastructure (centralized NAT Gateways, Transit Gateway, VPC, monitoring, security tools) with cost allocation via tags",
+      "risk_detail": "cost, operations",
+      "build_priority": 2,
+      "action_value": 2,
+      "effort_level": 3,
+      "risk_value": 1,
+      "recommendation_description_detailed": "COST06-BP04: Independent teams deploying duplicate infrastructure waste 40-60% on shared services. Implement shared service model: 1) Centralized networking (shared VPC with Transit Gateway, NAT Gateways), 2) Shared security tools (GuardDuty, Security Hub per organization vs per account), 3) Centralized monitoring (single CloudWatch/DataDog instance), 4) Shared CI/CD infrastructure. Use cost allocation tags for chargeback. Example: 20 teams each with NAT Gateway ($1,080/year) = $21,600/year vs centralized NAT Gateways with sharing = $3,240/year (85% savings). AWS Organizations enables cross-account resource sharing.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework COST06-BP04 - Shared resources reduce duplication",
+      "references": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/cost-06.html",
+        "https://aws.amazon.com/ram/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T17:41:02.278720+00:00",
+        "updated_at": "2025-11-06T17:41:02.278720+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "shared-resources",
+        "resource-sharing",
+        "centralization",
+        "infrastructure-consolidation"
       ]
     }
   ]

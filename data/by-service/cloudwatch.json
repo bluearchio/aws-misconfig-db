@@ -1,6 +1,6 @@
 {
   "service": "cloudwatch",
-  "count": 1,
+  "count": 2,
   "misconfigurations": [
     {
       "id": "83691b2b-0b0b-4549-b2da-fcbb1708c6cb",
@@ -35,6 +35,41 @@
         "billing-alarms",
         "proactive-monitoring",
         "ml-powered"
+      ]
+    },
+    {
+      "id": "e7b5c9a1-3f2d-4e8b-9c6a-1d5e8f2b4a3c",
+      "status": "open",
+      "service_name": "cloudwatch",
+      "scenario": "CloudWatch Logs groups without retention policies accumulating costs indefinitely",
+      "alert_criteria": "CloudWatch Logs groups with \"Never Expire\" retention policy, or log data older than 90 days consuming significant storage",
+      "recommendation_action": "Set appropriate retention periods (7, 14, 30, 90, or 180 days) based on compliance requirements, export old logs to S3 for long-term archival at 87% cost reduction",
+      "risk_detail": "cost",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "CloudWatch Logs charges $0.50/GB ingested and $0.03/GB-month for storage. Without retention policies, logs accumulate indefinitely. Most organizations only need 30-90 days of hot logs. Implementation: 1) Review log groups without retention policies, 2) Set retention based on compliance needs (30 days typical for non-production, 90+ for production), 3) Export logs older than retention period to S3 ($0.023/GB-month = 87% cheaper). One organization reduced logging costs from $1,200/month to $200/month by implementing 30-day retention plus S3 archival.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework - CloudWatch Logs is frequently overlooked cost optimization opportunity",
+      "references": [
+        "https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html",
+        "https://aws.amazon.com/cloudwatch/pricing/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T17:41:02.278720+00:00",
+        "updated_at": "2025-11-06T17:41:02.278720+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "cloudwatch-logs",
+        "log-retention",
+        "storage-optimization",
+        "archival"
       ]
     }
   ]

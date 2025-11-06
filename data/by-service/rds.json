@@ -1,6 +1,6 @@
 {
   "service": "rds",
-  "count": 6,
+  "count": 8,
   "misconfigurations": [
     {
       "id": "08c3c3cd-25d9-4cb6-8c30-926c823276a8",
@@ -167,6 +167,76 @@
         "source": "Initial CSV Import"
       },
       "tags": []
+    },
+    {
+      "id": "a4d8f3e1-9c2b-4f7e-8a5d-6b1c9e3f2a4d",
+      "status": "open",
+      "service_name": "rds",
+      "scenario": "RDS instances with over-provisioned storage capacity without auto-scaling enabled",
+      "alert_criteria": "RDS instances with <40% storage utilization, or storage manually increased multiple times, or auto-scaling not enabled",
+      "recommendation_action": "Enable RDS Storage Auto Scaling with appropriate maximum storage threshold to automatically scale storage as needed, reducing over-provisioning waste",
+      "risk_detail": "cost",
+      "build_priority": 2,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "RDS storage is billed based on provisioned capacity, not actual usage. Organizations often over-provision (e.g., 1TB when only 200GB used) to avoid manual scaling operations. RDS Storage Auto Scaling automatically increases storage capacity when free space falls below 10% or 5GB threshold, preventing over-provisioning. Configure maximum storage limit based on anticipated growth. Supports GP2, GP3, and Provisioned IOPS storage. Scaling occurs with zero downtime. Typical savings: 30-50% of RDS storage costs by right-sizing initial allocation.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework COST06 - Right-size RDS storage dynamically",
+      "references": [
+        "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html",
+        "https://aws.amazon.com/rds/features/storage/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T17:41:02.278720+00:00",
+        "updated_at": "2025-11-06T17:41:02.278720+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "rds-storage",
+        "auto-scaling",
+        "storage-optimization",
+        "rightsizing"
+      ]
+    },
+    {
+      "id": "b3c7e2d1-8a4f-4b6e-9c5d-7e1a8f3b2c4d",
+      "status": "open",
+      "service_name": "rds",
+      "scenario": "RDS instances using GP2 storage instead of cost-effective GP3 storage type",
+      "alert_criteria": "RDS instances with gp2 storage type, especially those with low IOPS requirements (<3000 IOPS)",
+      "recommendation_action": "Migrate RDS storage from GP2 to GP3 for 20% cost savings with same or better performance, using AWS console or modify-db-instance CLI command",
+      "risk_detail": "cost, performance",
+      "build_priority": 2,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "GP3 storage offers 20% lower cost than GP2 with better baseline performance (3000 IOPS and 125 MB/s regardless of size vs GP2 performance scaling with size). GP3 pricing: $0.08/GB-month vs GP2 $0.10/GB-month. Migration is online with no downtime for most engines. GP3 allows independent IOPS and throughput provisioning (cost-effective for workloads needing high throughput but not high IOPS). Best candidates: databases >100GB where GP2 over-provisions performance. Calculate savings: (current_storage_GB * $0.02) * 12 months.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework COST05 - GP3 is newer, faster, and 20% cheaper than GP2",
+      "references": [
+        "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html",
+        "https://aws.amazon.com/rds/features/storage/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T17:41:02.278720+00:00",
+        "updated_at": "2025-11-06T17:41:02.278720+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "rds-storage",
+        "gp3",
+        "gp2-migration",
+        "storage-type-optimization"
+      ]
     }
   ]
 }

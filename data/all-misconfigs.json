@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "generated_at": "2025-11-06T17:38:55.906949Z",
-  "total_count": 273,
+  "generated_at": "2025-11-06T17:41:22.031053Z",
+  "total_count": 283,
   "services": [
     "ALL",
     "alb/elb",
@@ -5072,6 +5072,182 @@
       ]
     },
     {
+      "id": "c6d9e5f2-7b3a-4c8e-9d1f-8a2b7e4c5d6e",
+      "status": "open",
+      "service_name": "general",
+      "scenario": "Organization lacks dedicated Cloud Financial Management team or FinOps function",
+      "alert_criteria": "No designated cost optimization owner, cost reviews occur reactively after bill shock, or finance and engineering teams operate in silos",
+      "recommendation_action": "Establish COST01-BP01: Create Cloud Center of Excellence (CCoE) or FinOps team with dedicated ownership for cost optimization, reporting to both finance and engineering leadership",
+      "risk_detail": "cost, operations",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 3,
+      "risk_value": 3,
+      "recommendation_description_detailed": "COST01-BP01: Organizations without dedicated cost management ownership experience 30-50% higher cloud costs. Establish a FinOps team (1-3 FTEs for organizations spending $1M+/year) responsible for: cost visibility, budget management, optimization recommendations, policy enforcement, and cultural enablement. Team should report to both CFO and CTO to bridge finance-technology gap. Key functions: monthly cost reviews, tagging enforcement, Savings Plan/RI management, cost allocation, showback/chargeback. ROI: FinOps teams typically drive 15-30% cost reduction within first year, far exceeding team cost.",
+      "category": "operations",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework COST01-BP01 - Foundation for all cost optimization",
+      "references": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/cost_cloud_financial_management_function.html",
+        "https://www.finops.org/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T17:41:02.278720+00:00",
+        "updated_at": "2025-11-06T17:41:02.278720+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "finops",
+        "cloud-financial-management",
+        "cost-optimization-function",
+        "governance"
+      ]
+    },
+    {
+      "id": "d7e4f8a2-9c5b-4d3e-8f6a-1b9c7e5d4a6f",
+      "status": "open",
+      "service_name": "general",
+      "scenario": "Workloads built with undifferentiated heavy lifting instead of leveraging managed services",
+      "alert_criteria": "Self-managed databases, message queues, container orchestration, or caching layers when AWS managed service equivalents exist (RDS vs self-managed MySQL, MQ vs self-managed RabbitMQ, EKS vs self-managed K8s)",
+      "recommendation_action": "Evaluate COST05-BP05: migrate to managed services (RDS, Aurora, ElastiCache, MQ, ECS/EKS, Lambda) to reduce operational overhead and often reduce total cost of ownership",
+      "risk_detail": "cost, operations",
+      "build_priority": 2,
+      "action_value": 3,
+      "effort_level": 3,
+      "risk_value": 2,
+      "recommendation_description_detailed": "COST05-BP05: Self-managed infrastructure requires EC2 instances, storage, licensing, patching, backups, monitoring, and engineering time. Managed services eliminate this overhead while often reducing costs. Example: Self-managed PostgreSQL on r5.2xlarge ($0.504/hr * 730hr = $368/month) + EBS ($50) + engineering time ($500/month) = $918/month vs RDS db.r5.2xlarge = $584/month (36% savings). Additional managed service benefits: automatic backups, patching, high availability, scalability. Evaluate migration for: databases (→ RDS/Aurora), caching (→ ElastiCache), message queues (→ SQS/SNS/MQ), containers (→ ECS/EKS/Fargate).",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework COST05-BP05 - Managed services reduce TCO",
+      "references": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/welcome.html",
+        "https://aws.amazon.com/products/databases/",
+        "https://aws.amazon.com/products/management-and-governance/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T17:41:02.278720+00:00",
+        "updated_at": "2025-11-06T17:41:02.278720+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "managed-services",
+        "total-cost-ownership",
+        "operational-efficiency",
+        "modernization"
+      ]
+    },
+    {
+      "id": "e8f5a9b3-1c6d-4e7f-9a8b-2c5d8f6e3b7a",
+      "status": "open",
+      "service_name": "general",
+      "scenario": "Workloads deployed without upfront cost modeling leading to budget overruns",
+      "alert_criteria": "New projects deployed without cost estimates, actual costs exceed projections by >30%, or architectural decisions made without cost analysis",
+      "recommendation_action": "Implement COST06-BP01: perform cost modeling using AWS Pricing Calculator before deployment, establish cost targets per workload, validate assumptions with pilots",
+      "risk_detail": "cost, operations",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 2,
+      "risk_value": 2,
+      "recommendation_description_detailed": "COST06-BP01: Organizations deploying without cost modeling experience 25-40% cost overruns. Use AWS Pricing Calculator to model costs across multiple architecture options before committing. Include: compute, storage, data transfer, managed services, and reserved capacity discounts. Compare options: serverless vs containers vs EC2, single-region vs multi-region, GP2 vs GP3 storage. Validate with proof-of-concept deployments. Establish cost per transaction/user/request metrics. Review monthly to track actuals vs model. Iterate architecture based on cost data. Example: modeling revealed serverless option was 60% cheaper than container option for variable traffic workload.",
+      "category": "operations",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework COST06-BP01 - Model before building",
+      "references": [
+        "https://calculator.aws/",
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/cost_type_size_number_resources_cost_modeling.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T17:41:02.278720+00:00",
+        "updated_at": "2025-11-06T17:41:02.278720+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "cost-modeling",
+        "pricing-calculator",
+        "budget-planning",
+        "architecture-decisions"
+      ]
+    },
+    {
+      "id": "f9a6b1c4-2d7e-4f8a-9b6c-3d8e9f7a5b1c",
+      "status": "open",
+      "service_name": "general",
+      "scenario": "Engineering teams lack cost awareness and accountability for cloud spending",
+      "alert_criteria": "Developers unaware of resource costs, no cost metrics in team dashboards, cost optimization not included in performance reviews or sprint planning",
+      "recommendation_action": "Establish COST01-BP08: create cost-aware culture by including cost metrics in engineering dashboards, making cost part of architecture reviews, recognizing cost optimization achievements",
+      "risk_detail": "cost, operations",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 2,
+      "recommendation_description_detailed": "COST01-BP08: Engineering teams make architecture decisions impacting 80% of cloud costs, yet often lack cost visibility. Build cost-aware culture: 1) Display cost dashboards in team spaces showing daily spend trends, 2) Include cost in sprint retrospectives and architecture reviews, 3) Implement cost per feature/transaction metrics, 4) Gamify optimization with team competitions and recognition, 5) Provide training on cost-effective architecture patterns. Integrate cost into CI/CD with tools showing estimated cost impact of changes. Organizations with strong cost culture achieve 20-35% lower costs while maintaining innovation velocity.",
+      "category": "operations",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework COST01-BP08 - Culture drives sustainable optimization",
+      "references": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/cost_cloud_financial_management_culture.html",
+        "https://www.finops.org/framework/capabilities/cost-culture/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T17:41:02.278720+00:00",
+        "updated_at": "2025-11-06T17:41:02.278720+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "cost-culture",
+        "engineering-culture",
+        "cost-awareness",
+        "organizational-change"
+      ]
+    },
+    {
+      "id": "a1b7c2d8-3e9f-4a5b-8c6d-9e1f7a4b3c5d",
+      "status": "open",
+      "service_name": "general",
+      "scenario": "Resources not leveraging shared infrastructure leading to resource sprawl and duplication",
+      "alert_criteria": "Each application team deploying separate NAT Gateways, Transit Gateways, VPCs, or shared services instead of using centralized shared resources",
+      "recommendation_action": "Implement COST06-BP04: establish shared service model for common infrastructure (centralized NAT Gateways, Transit Gateway, VPC, monitoring, security tools) with cost allocation via tags",
+      "risk_detail": "cost, operations",
+      "build_priority": 2,
+      "action_value": 2,
+      "effort_level": 3,
+      "risk_value": 1,
+      "recommendation_description_detailed": "COST06-BP04: Independent teams deploying duplicate infrastructure waste 40-60% on shared services. Implement shared service model: 1) Centralized networking (shared VPC with Transit Gateway, NAT Gateways), 2) Shared security tools (GuardDuty, Security Hub per organization vs per account), 3) Centralized monitoring (single CloudWatch/DataDog instance), 4) Shared CI/CD infrastructure. Use cost allocation tags for chargeback. Example: 20 teams each with NAT Gateway ($1,080/year) = $21,600/year vs centralized NAT Gateways with sharing = $3,240/year (85% savings). AWS Organizations enables cross-account resource sharing.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework COST06-BP04 - Shared resources reduce duplication",
+      "references": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/cost-06.html",
+        "https://aws.amazon.com/ram/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T17:41:02.278720+00:00",
+        "updated_at": "2025-11-06T17:41:02.278720+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "shared-resources",
+        "resource-sharing",
+        "centralization",
+        "infrastructure-consolidation"
+      ]
+    },
+    {
       "id": "04dbd22f-e862-4f8b-8a00-7ad7ac48836e",
       "status": "open",
       "service_name": "networking",
@@ -5131,6 +5307,42 @@
         "networking-costs",
         "cloudfront",
         "vpc-endpoints"
+      ]
+    },
+    {
+      "id": "2f8c9e4a-1d5b-4c8f-9a6e-7b3d2e1f4a5c",
+      "status": "open",
+      "service_name": "networking",
+      "scenario": "NAT Gateway incurring high costs from cross-AZ data transfer and AWS service traffic",
+      "alert_criteria": "NAT Gateway data processing charges >$100/month, or traffic to S3/DynamoDB/other AWS services routing through NAT Gateway instead of VPC endpoints",
+      "recommendation_action": "Deploy VPC endpoints for S3 and DynamoDB (free), use Interface VPC endpoints for other AWS services, ensure NAT Gateway per AZ to avoid cross-AZ charges, review VPC Flow Logs to identify optimization opportunities",
+      "risk_detail": "cost",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 1,
+      "recommendation_description_detailed": "NAT Gateways charge $0.045/GB for data processing plus hourly fees ($0.045/hour). Major cost drivers: 1) Cross-AZ traffic ($0.01/GB additional), 2) AWS service traffic (S3, DynamoDB) that could use free VPC endpoints, 3) Multiple idle NAT Gateways. Solution: Deploy VPC endpoints for S3/DynamoDB (free data transfer), use Interface endpoints for other services, deploy one NAT Gateway per AZ to eliminate cross-AZ charges. Use VPC Flow Logs temporarily to analyze traffic patterns. Typical savings: 40-60% of NAT Gateway costs.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework COST08 - NAT Gateway is often the #1 networking cost driver",
+      "references": [
+        "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html",
+        "https://aws.amazon.com/vpc/pricing/",
+        "https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T17:41:02.278720+00:00",
+        "updated_at": "2025-11-06T17:41:02.278720+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "nat-gateway",
+        "vpc-endpoints",
+        "data-transfer",
+        "networking-optimization"
       ]
     },
     {
@@ -5410,6 +5622,41 @@
         "billing-alarms",
         "proactive-monitoring",
         "ml-powered"
+      ]
+    },
+    {
+      "id": "e7b5c9a1-3f2d-4e8b-9c6a-1d5e8f2b4a3c",
+      "status": "open",
+      "service_name": "cloudwatch",
+      "scenario": "CloudWatch Logs groups without retention policies accumulating costs indefinitely",
+      "alert_criteria": "CloudWatch Logs groups with \"Never Expire\" retention policy, or log data older than 90 days consuming significant storage",
+      "recommendation_action": "Set appropriate retention periods (7, 14, 30, 90, or 180 days) based on compliance requirements, export old logs to S3 for long-term archival at 87% cost reduction",
+      "risk_detail": "cost",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "CloudWatch Logs charges $0.50/GB ingested and $0.03/GB-month for storage. Without retention policies, logs accumulate indefinitely. Most organizations only need 30-90 days of hot logs. Implementation: 1) Review log groups without retention policies, 2) Set retention based on compliance needs (30 days typical for non-production, 90+ for production), 3) Export logs older than retention period to S3 ($0.023/GB-month = 87% cheaper). One organization reduced logging costs from $1,200/month to $200/month by implementing 30-day retention plus S3 archival.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework - CloudWatch Logs is frequently overlooked cost optimization opportunity",
+      "references": [
+        "https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html",
+        "https://aws.amazon.com/cloudwatch/pricing/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T17:41:02.278720+00:00",
+        "updated_at": "2025-11-06T17:41:02.278720+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "cloudwatch-logs",
+        "log-retention",
+        "storage-optimization",
+        "archival"
       ]
     },
     {
@@ -6797,6 +7044,76 @@
       "tags": []
     },
     {
+      "id": "a4d8f3e1-9c2b-4f7e-8a5d-6b1c9e3f2a4d",
+      "status": "open",
+      "service_name": "rds",
+      "scenario": "RDS instances with over-provisioned storage capacity without auto-scaling enabled",
+      "alert_criteria": "RDS instances with <40% storage utilization, or storage manually increased multiple times, or auto-scaling not enabled",
+      "recommendation_action": "Enable RDS Storage Auto Scaling with appropriate maximum storage threshold to automatically scale storage as needed, reducing over-provisioning waste",
+      "risk_detail": "cost",
+      "build_priority": 2,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "RDS storage is billed based on provisioned capacity, not actual usage. Organizations often over-provision (e.g., 1TB when only 200GB used) to avoid manual scaling operations. RDS Storage Auto Scaling automatically increases storage capacity when free space falls below 10% or 5GB threshold, preventing over-provisioning. Configure maximum storage limit based on anticipated growth. Supports GP2, GP3, and Provisioned IOPS storage. Scaling occurs with zero downtime. Typical savings: 30-50% of RDS storage costs by right-sizing initial allocation.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework COST06 - Right-size RDS storage dynamically",
+      "references": [
+        "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html",
+        "https://aws.amazon.com/rds/features/storage/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T17:41:02.278720+00:00",
+        "updated_at": "2025-11-06T17:41:02.278720+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "rds-storage",
+        "auto-scaling",
+        "storage-optimization",
+        "rightsizing"
+      ]
+    },
+    {
+      "id": "b3c7e2d1-8a4f-4b6e-9c5d-7e1a8f3b2c4d",
+      "status": "open",
+      "service_name": "rds",
+      "scenario": "RDS instances using GP2 storage instead of cost-effective GP3 storage type",
+      "alert_criteria": "RDS instances with gp2 storage type, especially those with low IOPS requirements (<3000 IOPS)",
+      "recommendation_action": "Migrate RDS storage from GP2 to GP3 for 20% cost savings with same or better performance, using AWS console or modify-db-instance CLI command",
+      "risk_detail": "cost, performance",
+      "build_priority": 2,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "GP3 storage offers 20% lower cost than GP2 with better baseline performance (3000 IOPS and 125 MB/s regardless of size vs GP2 performance scaling with size). GP3 pricing: $0.08/GB-month vs GP2 $0.10/GB-month. Migration is online with no downtime for most engines. GP3 allows independent IOPS and throughput provisioning (cost-effective for workloads needing high throughput but not high IOPS). Best candidates: databases >100GB where GP2 over-provisions performance. Calculate savings: (current_storage_GB * $0.02) * 12 months.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework COST05 - GP3 is newer, faster, and 20% cheaper than GP2",
+      "references": [
+        "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html",
+        "https://aws.amazon.com/rds/features/storage/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T17:41:02.278720+00:00",
+        "updated_at": "2025-11-06T17:41:02.278720+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "rds-storage",
+        "gp3",
+        "gp2-migration",
+        "storage-type-optimization"
+      ]
+    },
+    {
       "id": "1d8ad405-4cb5-4d9a-9326-b436d9bbdfe2",
       "status": "ice",
       "service_name": "s3, rds, redshift, etc.",
@@ -7310,6 +7627,41 @@
         "source": "Initial CSV Import"
       },
       "tags": []
+    },
+    {
+      "id": "b2c8d3e9-4f1a-5b6c-9d7e-1a8f4b5c6d7e",
+      "status": "open",
+      "service_name": "lambda",
+      "scenario": "Lambda functions with provisioned concurrency enabled for workloads with variable or infrequent traffic",
+      "alert_criteria": "Lambda functions with provisioned concurrency >0, or provisioned concurrency utilization <50% over 30 days, or non-latency-sensitive workloads using provisioned concurrency",
+      "recommendation_action": "Evaluate necessity of provisioned concurrency - disable for non-latency-sensitive workloads, use Application Auto Scaling for provisioned concurrency to match traffic patterns, or migrate to on-demand invocation",
+      "risk_detail": "cost",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "Lambda provisioned concurrency eliminates cold starts but costs 10-20x more than on-demand ($0.000009722/GB-second provisioned vs $0.0000166667/GB-second on-demand). Only justified for: 1) latency-sensitive user-facing APIs requiring <50ms, 2) consistently high traffic. Most workloads should use on-demand. If provisioned concurrency needed: use Application Auto Scaling to schedule (disable nights/weekends), or scale based on traffic. Example: Function with 1GB memory, 100 provisioned concurrency 24/7 = $700/month vs on-demand for same invocations = $50/month. Audit provisioned concurrency monthly for utilization.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework - Provisioned concurrency often over-used due to cold start concerns",
+      "references": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/provisioned-concurrency.html",
+        "https://aws.amazon.com/lambda/pricing/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T17:41:02.278720+00:00",
+        "updated_at": "2025-11-06T17:41:02.278720+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "lambda-provisioned-concurrency",
+        "lambda-optimization",
+        "cold-start",
+        "serverless-cost"
+      ]
     },
     {
       "id": "937fff55-6361-4546-a3be-9b4769c904e4",

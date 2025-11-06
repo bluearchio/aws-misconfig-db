@@ -1,6 +1,6 @@
 {
   "service": "networking",
-  "count": 2,
+  "count": 3,
   "misconfigurations": [
     {
       "id": "04dbd22f-e862-4f8b-8a00-7ad7ac48836e",
@@ -62,6 +62,42 @@
         "networking-costs",
         "cloudfront",
         "vpc-endpoints"
+      ]
+    },
+    {
+      "id": "2f8c9e4a-1d5b-4c8f-9a6e-7b3d2e1f4a5c",
+      "status": "open",
+      "service_name": "networking",
+      "scenario": "NAT Gateway incurring high costs from cross-AZ data transfer and AWS service traffic",
+      "alert_criteria": "NAT Gateway data processing charges >$100/month, or traffic to S3/DynamoDB/other AWS services routing through NAT Gateway instead of VPC endpoints",
+      "recommendation_action": "Deploy VPC endpoints for S3 and DynamoDB (free), use Interface VPC endpoints for other AWS services, ensure NAT Gateway per AZ to avoid cross-AZ charges, review VPC Flow Logs to identify optimization opportunities",
+      "risk_detail": "cost",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 1,
+      "recommendation_description_detailed": "NAT Gateways charge $0.045/GB for data processing plus hourly fees ($0.045/hour). Major cost drivers: 1) Cross-AZ traffic ($0.01/GB additional), 2) AWS service traffic (S3, DynamoDB) that could use free VPC endpoints, 3) Multiple idle NAT Gateways. Solution: Deploy VPC endpoints for S3/DynamoDB (free data transfer), use Interface endpoints for other services, deploy one NAT Gateway per AZ to eliminate cross-AZ charges. Use VPC Flow Logs temporarily to analyze traffic patterns. Typical savings: 40-60% of NAT Gateway costs.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework COST08 - NAT Gateway is often the #1 networking cost driver",
+      "references": [
+        "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html",
+        "https://aws.amazon.com/vpc/pricing/",
+        "https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T17:41:02.278720+00:00",
+        "updated_at": "2025-11-06T17:41:02.278720+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "nat-gateway",
+        "vpc-endpoints",
+        "data-transfer",
+        "networking-optimization"
       ]
     }
   ]
