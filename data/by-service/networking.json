@@ -1,6 +1,6 @@
 {
   "service": "networking",
-  "count": 1,
+  "count": 2,
   "misconfigurations": [
     {
       "id": "04dbd22f-e862-4f8b-8a00-7ad7ac48836e",
@@ -28,6 +28,41 @@
         "source": "Initial CSV Import"
       },
       "tags": []
+    },
+    {
+      "id": "a03af80d-8c8a-492d-9aa7-d32a2bcbaa17",
+      "status": "open",
+      "service_name": "networking",
+      "scenario": "High data transfer costs from cross-region or internet data egress without optimization",
+      "alert_criteria": "Significant data transfer charges from cross-region transfers, CloudFront not used for content delivery, or compute/storage in different regions",
+      "recommendation_action": "Use CloudFront for content delivery (free S3-to-CloudFront transfer), co-locate resources in same region, use VPC endpoints, and PrivateLink for AWS service access",
+      "risk_detail": "cost",
+      "build_priority": 2,
+      "action_value": 2,
+      "effort_level": 3,
+      "risk_value": 1,
+      "recommendation_description_detailed": "Data transfer costs can represent 10-20% of AWS bills when not optimized. Key strategies: 1) Use CloudFront for content delivery (data transfer from S3 to CloudFront is free), 2) Keep compute and storage in same region/AZ, 3) Use VPC endpoints for S3/DynamoDB to avoid internet gateway charges, 4) Leverage AWS PrivateLink for service-to-service communication, 5) Use S3 Transfer Acceleration selectively. Cross-region transfers cost $0.02/GB while same-region is free.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework - Data transfer optimization",
+      "references": [
+        "https://aws.amazon.com/blogs/architecture/overview-of-data-transfer-costs-for-common-architectures/",
+        "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T05:13:46.581727+00:00",
+        "updated_at": "2025-11-06T05:13:46.581727+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "data-transfer",
+        "networking-costs",
+        "cloudfront",
+        "vpc-endpoints"
+      ]
     }
   ]
 }

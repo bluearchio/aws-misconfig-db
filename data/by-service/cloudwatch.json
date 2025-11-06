@@ -1,0 +1,41 @@
+{
+  "service": "cloudwatch",
+  "count": 1,
+  "misconfigurations": [
+    {
+      "id": "83691b2b-0b0b-4549-b2da-fcbb1708c6cb",
+      "status": "open",
+      "service_name": "cloudwatch",
+      "scenario": "No CloudWatch anomaly detection configured to identify unexpected cost increases",
+      "alert_criteria": "AWS accounts lack CloudWatch anomaly detection alarms for billing metrics and service-specific cost anomalies",
+      "recommendation_action": "Enable AWS Cost Anomaly Detection with ML-powered alerts, configure CloudWatch billing alarms, and integrate with SNS for proactive cost monitoring",
+      "risk_detail": "cost, operations",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "AWS Cost Anomaly Detection uses machine learning to identify unusual spending patterns and alert teams before bills become excessive. Configure detection for services, accounts, and cost categories with custom thresholds. Set up CloudWatch billing alarms for absolute spend thresholds. Integrate with SNS/Slack for real-time notifications. Early detection prevents runaway costs from misconfigurations (e.g., unintended data transfers, EC2 instances in wrong regions, misconfigured Auto Scaling). Organizations report catching 85-95% of cost anomalies within 24 hours.",
+      "category": "operations",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework - Proactive cost monitoring prevents bill shock",
+      "references": [
+        "https://docs.aws.amazon.com/cost-management/latest/userguide/manage-ad.html",
+        "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T05:13:46.581727+00:00",
+        "updated_at": "2025-11-06T05:13:46.581727+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "cost-anomaly-detection",
+        "billing-alarms",
+        "proactive-monitoring",
+        "ml-powered"
+      ]
+    }
+  ]
+}

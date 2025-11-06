@@ -1,6 +1,6 @@
 {
   "service": "s3",
-  "count": 3,
+  "count": 4,
   "misconfigurations": [
     {
       "id": "e9b21a0d-2fe8-4f5b-8875-52995b4cf2e7",
@@ -82,6 +82,40 @@
         "source": "Initial CSV Import"
       },
       "tags": []
+    },
+    {
+      "id": "ffc337be-4cb6-4899-b02c-d447af23221e",
+      "status": "open",
+      "service_name": "s3",
+      "scenario": "S3 buckets storing infrequently accessed data in Standard storage class without lifecycle policies",
+      "alert_criteria": "S3 buckets with >30 days old objects in Standard storage class, no lifecycle policies configured, and low GET request rates",
+      "recommendation_action": "Implement S3 Lifecycle policies to transition objects to S3 Standard-IA (30+ days), Intelligent-Tiering, Glacier (90+ days), or Deep Archive (180+ days)",
+      "risk_detail": "cost",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "S3 storage costs can be reduced by 30-60% by implementing lifecycle policies to automatically transition objects to appropriate storage classes. Standard-IA saves ~45% for infrequently accessed data (30+ days), Glacier saves ~77% for archival (90+ days), and Glacier Deep Archive saves ~95% for long-term retention (180+ days). S3 Intelligent-Tiering automatically optimizes costs by moving objects between tiers. Lifecycle policies are free to implement with no transition fees within the same region.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework - Organizations can reduce S3 costs by 30-60% with proper lifecycle management",
+      "references": [
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html",
+        "https://aws.amazon.com/s3/storage-classes/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T05:13:46.581727+00:00",
+        "updated_at": "2025-11-06T05:13:46.581727+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "s3-lifecycle",
+        "storage-optimization",
+        "intelligent-tiering"
+      ]
     }
   ]
 }

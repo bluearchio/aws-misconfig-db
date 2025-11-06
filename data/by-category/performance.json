@@ -1,6 +1,6 @@
 {
   "category": "performance",
-  "count": 22,
+  "count": 23,
   "misconfigurations": [
     {
       "id": "444fd30a-f2f2-4a7f-afbc-063349fc900f",
@@ -150,6 +150,41 @@
         "source": "Initial CSV Import"
       },
       "tags": []
+    },
+    {
+      "id": "863e1006-a446-4efb-99d3-b6408c851cd0",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "Production workloads without Auto Scaling unable to optimize costs during variable demand",
+      "alert_criteria": "EC2 workloads with variable traffic patterns running fixed capacity without Auto Scaling, or Auto Scaling groups using only simple scaling without target tracking",
+      "recommendation_action": "Configure AWS Auto Scaling with target tracking policies for CPU/memory, implement predictive scaling for known patterns, and use scheduled scaling for recurring events",
+      "risk_detail": "cost, performance",
+      "build_priority": 2,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 2,
+      "recommendation_description_detailed": "COST09-BP03: Auto Scaling ensures you only pay for needed capacity while maintaining performance. Use target tracking for automatic scaling based on metrics (e.g., CPU 50%), predictive scaling for traffic patterns (pre-scaling before daily spikes), and scheduled scaling for known events. Combine with mixed instance types (On-Demand + Spot) for additional savings. Implement across EC2, ECS, DynamoDB, and Aurora. Properly configured Auto Scaling reduces costs by 20-40% while improving availability.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework COST09-BP03 - Auto Scaling is fundamental to cloud cost optimization",
+      "references": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/cost_manage_demand_resources_dynamic.html",
+        "https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T05:13:46.581727+00:00",
+        "updated_at": "2025-11-06T05:13:46.581727+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "auto-scaling",
+        "target-tracking",
+        "predictive-scaling",
+        "dynamic-capacity"
+      ]
     },
     {
       "id": "5fc3d4a9-96ef-4bba-82e9-bccabe531b34",

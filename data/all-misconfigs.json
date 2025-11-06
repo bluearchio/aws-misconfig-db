@@ -1,12 +1,13 @@
 {
   "version": "1.0.0",
-  "generated_at": "2025-11-06T04:52:57.591949Z",
-  "total_count": 261,
+  "generated_at": "2025-11-06T05:14:00.892267Z",
+  "total_count": 273,
   "services": [
     "ALL",
     "alb/elb",
     "cloudfront",
     "cloudtrail",
+    "cloudwatch",
     "config",
     "ebs",
     "ec2",
@@ -33,6 +34,7 @@
     "waf"
   ],
   "categories": [
+    "cost",
     "networking",
     "operations",
     "security"
@@ -4933,6 +4935,143 @@
       "tags": []
     },
     {
+      "id": "ba16b11d-85b2-4f83-81e5-33e1255afce0",
+      "status": "open",
+      "service_name": "general",
+      "scenario": "AWS resources lack cost allocation tags for tracking and attribution",
+      "alert_criteria": "Resources exist without mandatory cost allocation tags (cost-center, project, owner, environment) preventing accurate chargeback and showback",
+      "recommendation_action": "Implement organization-wide tagging schema with mandatory tags and use AWS Tag Editor or Tag Policies to enforce compliance",
+      "risk_detail": "cost, operations",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 2,
+      "recommendation_description_detailed": "COST03-BP02: Without proper tagging, organizations cannot attribute costs to specific business units, projects, or applications. This prevents effective cost optimization, chargeback/showback, and financial accountability. Implement a consistent tagging schema including cost-center, project-id, owner, environment, and application tags. Use AWS Cost Categories to group costs, Tag Policies for governance, and Cost Explorer to analyze spending by tag dimensions.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework COST03-BP02",
+      "references": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/cost_monitor_usage_org_information.html",
+        "https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T05:13:46.581727+00:00",
+        "updated_at": "2025-11-06T05:13:46.581727+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "tagging",
+        "cost-allocation",
+        "chargeback",
+        "governance"
+      ]
+    },
+    {
+      "id": "a902454a-eb8f-43f0-82cc-37579ed18a47",
+      "status": "open",
+      "service_name": "general",
+      "scenario": "Workloads with predictable steady-state usage lack Savings Plan or Reserved Instance coverage",
+      "alert_criteria": "On-Demand usage >40% for production workloads with consistent 24/7 runtime and predictable capacity requirements",
+      "recommendation_action": "Purchase Compute Savings Plans or EC2 Instance Savings Plans to cover 60-80% of steady-state usage for up to 72% cost reduction",
+      "risk_detail": "cost",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 1,
+      "recommendation_description_detailed": "Organizations paying On-Demand rates for predictable workloads miss significant savings opportunities. Savings Plans offer up to 72% discount vs On-Demand pricing with flexible commitment options. Analyze usage patterns with AWS Cost Explorer, target 60-80% coverage for steady-state workloads, and combine with On-Demand/Spot for variable capacity. Compute Savings Plans apply across EC2, Fargate, and Lambda; EC2 Instance Savings Plans offer higher discounts for specific instance families.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework - Maintain 60-80% coverage leaving room for infrastructure evolution",
+      "references": [
+        "https://docs.aws.amazon.com/savingsplans/latest/userguide/what-is-savings-plans.html",
+        "https://aws.amazon.com/savingsplans/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T05:13:46.581727+00:00",
+        "updated_at": "2025-11-06T05:13:46.581727+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "savings-plans",
+        "reserved-instances",
+        "commitment-discounts"
+      ]
+    },
+    {
+      "id": "6bb5f985-d986-414b-851d-1cd985e89c4e",
+      "status": "open",
+      "service_name": "general",
+      "scenario": "No standardized decommissioning process resulting in abandoned resources accumulating costs",
+      "alert_criteria": "Resources exist for completed projects, no defined process for identifying and removing unused infrastructure, or resources without ownership tags",
+      "recommendation_action": "Implement COST04-BP02 decommissioning workflow: verify usage, document metadata, apply restrictive controls temporarily, then systematically remove resources",
+      "risk_detail": "cost, operations",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 3,
+      "risk_value": 2,
+      "recommendation_description_detailed": "COST04-BP02: Without a formal decommissioning process, organizations accumulate unused resources from completed projects, departed employees, or abandoned experiments. Implement a standardized workflow: 1) Identify resources for decommission, 2) Verify with stakeholders, 3) Document metadata (IPs, configs), 4) Create backups if needed, 5) Apply restrictive policies for observation period, 6) Remove from automation/monitoring, 7) Delete resources. Include load balancers, EC2 instances, Auto Scaling groups, EBS volumes/snapshots, Elastic IPs, AMIs, and Elastic Beanstalk environments.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework COST04-BP02 - High risk if not implemented",
+      "references": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/framework/cost_decomissioning_resources_implement_process.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T05:13:46.581727+00:00",
+        "updated_at": "2025-11-06T05:13:46.581727+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "decommissioning",
+        "resource-cleanup",
+        "lifecycle-management"
+      ]
+    },
+    {
+      "id": "cf28fb38-e084-42c6-9e82-49a836a7a1b3",
+      "status": "open",
+      "service_name": "general",
+      "scenario": "AWS accounts lack budgets and proactive spending controls resulting in cost overruns",
+      "alert_criteria": "No AWS Budgets configured for monthly spend, service costs, or Reserved Instance/Savings Plan utilization tracking",
+      "recommendation_action": "Create AWS Budgets for total monthly spend (with 50%, 80%, 100% thresholds), service-specific budgets, and RI/SP coverage tracking with SNS notifications",
+      "risk_detail": "cost, operations",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "COST02-BP05: AWS Budgets provide proactive cost controls through customizable alerts and thresholds. Create budgets for: 1) Total monthly spend with 50%/80%/100% alerts, 2) Individual service costs (EC2, S3, RDS), 3) Specific projects/teams using cost allocation tags, 4) RI/SP utilization and coverage. First 2 budgets are free; $0.02/day per additional budget. Integrate with SNS for email/Slack notifications. Advanced: Use Budget Actions to automatically apply IAM policies or SCPs when thresholds exceeded. Organizations with budgets reduce cost overruns by 60-80%.",
+      "category": "operations",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework COST02-BP05 - Implement cost controls",
+      "references": [
+        "https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html",
+        "https://aws.amazon.com/aws-cost-management/aws-budgets/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T05:13:46.581727+00:00",
+        "updated_at": "2025-11-06T05:13:46.581727+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "aws-budgets",
+        "cost-controls",
+        "spending-alerts",
+        "governance"
+      ]
+    },
+    {
       "id": "04dbd22f-e862-4f8b-8a00-7ad7ac48836e",
       "status": "open",
       "service_name": "networking",
@@ -4958,6 +5097,41 @@
         "source": "Initial CSV Import"
       },
       "tags": []
+    },
+    {
+      "id": "a03af80d-8c8a-492d-9aa7-d32a2bcbaa17",
+      "status": "open",
+      "service_name": "networking",
+      "scenario": "High data transfer costs from cross-region or internet data egress without optimization",
+      "alert_criteria": "Significant data transfer charges from cross-region transfers, CloudFront not used for content delivery, or compute/storage in different regions",
+      "recommendation_action": "Use CloudFront for content delivery (free S3-to-CloudFront transfer), co-locate resources in same region, use VPC endpoints, and PrivateLink for AWS service access",
+      "risk_detail": "cost",
+      "build_priority": 2,
+      "action_value": 2,
+      "effort_level": 3,
+      "risk_value": 1,
+      "recommendation_description_detailed": "Data transfer costs can represent 10-20% of AWS bills when not optimized. Key strategies: 1) Use CloudFront for content delivery (data transfer from S3 to CloudFront is free), 2) Keep compute and storage in same region/AZ, 3) Use VPC endpoints for S3/DynamoDB to avoid internet gateway charges, 4) Leverage AWS PrivateLink for service-to-service communication, 5) Use S3 Transfer Acceleration selectively. Cross-region transfers cost $0.02/GB while same-region is free.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework - Data transfer optimization",
+      "references": [
+        "https://aws.amazon.com/blogs/architecture/overview-of-data-transfer-costs-for-common-architectures/",
+        "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T05:13:46.581727+00:00",
+        "updated_at": "2025-11-06T05:13:46.581727+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "data-transfer",
+        "networking-costs",
+        "cloudfront",
+        "vpc-endpoints"
+      ]
     },
     {
       "id": "e4cc8c22-5fc3-41e7-b677-d313addf046d",
@@ -5167,6 +5341,76 @@
         "source": "Initial CSV Import"
       },
       "tags": []
+    },
+    {
+      "id": "8312c521-673e-48df-aca3-ae6a284f7079",
+      "status": "open",
+      "service_name": "ebs",
+      "scenario": "Orphaned EBS snapshots and AMIs consuming storage costs after source volumes deleted",
+      "alert_criteria": "EBS snapshots exist where source volume has been deleted, or AMIs registered without associated running instances for 90+ days",
+      "recommendation_action": "Use AWS Data Lifecycle Manager to automate snapshot retention policies and identify/delete orphaned snapshots and unused AMIs",
+      "risk_detail": "cost",
+      "build_priority": 2,
+      "action_value": 2,
+      "effort_level": 2,
+      "risk_value": 1,
+      "recommendation_description_detailed": "COST04-BP05: Orphaned snapshots accumulate when instances are terminated without cleanup processes. These snapshots incur storage costs (~$0.05/GB-month) indefinitely. Implement AWS Data Lifecycle Manager for automated snapshot creation/deletion policies. Identify orphaned snapshots by comparing snapshot volume IDs against active volumes. Review AMIs older than 90 days and deregister unused images along with associated snapshots. Typical organizations can reduce snapshot costs by 40-70% through proper lifecycle management.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework COST04-BP05 - Enforce data retention policies",
+      "references": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/cost_decomissioning_resources_data_retention.html",
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T05:13:46.581727+00:00",
+        "updated_at": "2025-11-06T05:13:46.581727+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "ebs-snapshots",
+        "orphaned-resources",
+        "data-lifecycle-manager",
+        "ami-cleanup"
+      ]
+    },
+    {
+      "id": "83691b2b-0b0b-4549-b2da-fcbb1708c6cb",
+      "status": "open",
+      "service_name": "cloudwatch",
+      "scenario": "No CloudWatch anomaly detection configured to identify unexpected cost increases",
+      "alert_criteria": "AWS accounts lack CloudWatch anomaly detection alarms for billing metrics and service-specific cost anomalies",
+      "recommendation_action": "Enable AWS Cost Anomaly Detection with ML-powered alerts, configure CloudWatch billing alarms, and integrate with SNS for proactive cost monitoring",
+      "risk_detail": "cost, operations",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "AWS Cost Anomaly Detection uses machine learning to identify unusual spending patterns and alert teams before bills become excessive. Configure detection for services, accounts, and cost categories with custom thresholds. Set up CloudWatch billing alarms for absolute spend thresholds. Integrate with SNS/Slack for real-time notifications. Early detection prevents runaway costs from misconfigurations (e.g., unintended data transfers, EC2 instances in wrong regions, misconfigured Auto Scaling). Organizations report catching 85-95% of cost anomalies within 24 hours.",
+      "category": "operations",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework - Proactive cost monitoring prevents bill shock",
+      "references": [
+        "https://docs.aws.amazon.com/cost-management/latest/userguide/manage-ad.html",
+        "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T05:13:46.581727+00:00",
+        "updated_at": "2025-11-06T05:13:46.581727+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "cost-anomaly-detection",
+        "billing-alarms",
+        "proactive-monitoring",
+        "ml-powered"
+      ]
     },
     {
       "id": "de2df33a-9650-4d05-86a8-5f2c716a6034",
@@ -5988,6 +6232,146 @@
       "tags": []
     },
     {
+      "id": "fb608bb0-abfd-4543-876d-b7d44bc64329",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "EC2 instances running with very low CPU utilization indicating rightsizing opportunity",
+      "alert_criteria": "EC2 instances with CPU utilization <= 2% over the past 14 days or consistent usage below 10% during business hours",
+      "recommendation_action": "Use AWS Compute Optimizer and Cost Explorer rightsizing recommendations to downsize or terminate idle instances",
+      "risk_detail": "cost",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "Idle and underutilized EC2 instances represent immediate cost savings opportunities. Instances with consistently low CPU usage (especially below 2%) should be evaluated for termination or downsizing to smaller instance types. Use AWS Compute Optimizer for ML-powered rightsizing recommendations, AWS Cost Explorer for utilization analysis, and CloudWatch for detailed metrics. Start with development/test environments to minimize risk. Potential savings of 30-60% for rightsized instances.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework - Start rightsizing with idle resources as they represent highest savings",
+      "references": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/welcome.html",
+        "https://aws.amazon.com/compute-optimizer/",
+        "https://wellarchitectedlabs.com/cost/100_labs/100_aws_resource_optimization/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T05:13:46.581727+00:00",
+        "updated_at": "2025-11-06T05:13:46.581727+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "rightsizing",
+        "idle-resources",
+        "compute-optimizer",
+        "cost-savings"
+      ]
+    },
+    {
+      "id": "4168462a-cff5-4404-92b1-b305e36762fd",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "Fault-tolerant and flexible workloads not leveraging EC2 Spot Instances for cost savings",
+      "alert_criteria": "Batch processing, containerized applications, CI/CD, or stateless workloads running 100% On-Demand without Spot Instance usage",
+      "recommendation_action": "Implement Spot Instances for eligible workloads using Spot Fleet, Auto Scaling groups with mixed instances, or ECS/EKS Spot capacity",
+      "risk_detail": "cost",
+      "build_priority": 2,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 1,
+      "recommendation_description_detailed": "Spot Instances offer up to 90% savings vs On-Demand pricing for fault-tolerant workloads. Ideal use cases include batch processing, data analysis, containerized applications, CI/CD pipelines, web servers with load balancers, and development/test environments. Use Spot Fleet or Auto Scaling with mixed instance types for diversification. Implement graceful handling of 2-minute termination notices. Not suitable for databases or stateful applications without proper architecture.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework - Spot diversification reduces interruption risk",
+      "references": [
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html",
+        "https://aws.amazon.com/ec2/spot/pricing/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T05:13:46.581727+00:00",
+        "updated_at": "2025-11-06T05:13:46.581727+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "spot-instances",
+        "cost-optimization",
+        "fault-tolerant"
+      ]
+    },
+    {
+      "id": "a0ffe81c-483b-448e-a899-884e5258a106",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "Development and test environments running 24/7 without scheduled shutdown during non-business hours",
+      "alert_criteria": "EC2 instances tagged as dev/test/staging running continuously outside business hours (nights, weekends) with no active connections",
+      "recommendation_action": "Implement AWS Instance Scheduler or Lambda-based automation to stop non-production instances during non-business hours (achieving 65-75% runtime reduction)",
+      "risk_detail": "cost",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "COST09-BP03: Development and test environments rarely need 24/7 availability. Implementing scheduled stop/start (e.g., 8am-6pm weekdays only) reduces runtime by 65-75%, directly cutting compute costs. Use AWS Instance Scheduler for centralized management across accounts, or Lambda with EventBridge for custom schedules. Include RDS databases, Redshift clusters, and other stoppable resources. Ensure proper tagging (environment=dev/test) for automation. Monthly savings: ~$500-2000 per medium-sized dev environment.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework COST09-BP03 - Simple but highly effective cost optimization",
+      "references": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/cost_manage_demand_resources_dynamic.html",
+        "https://aws.amazon.com/solutions/implementations/instance-scheduler-on-aws/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T05:13:46.581727+00:00",
+        "updated_at": "2025-11-06T05:13:46.581727+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "instance-scheduler",
+        "dev-environments",
+        "scheduled-scaling",
+        "automation"
+      ]
+    },
+    {
+      "id": "863e1006-a446-4efb-99d3-b6408c851cd0",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "Production workloads without Auto Scaling unable to optimize costs during variable demand",
+      "alert_criteria": "EC2 workloads with variable traffic patterns running fixed capacity without Auto Scaling, or Auto Scaling groups using only simple scaling without target tracking",
+      "recommendation_action": "Configure AWS Auto Scaling with target tracking policies for CPU/memory, implement predictive scaling for known patterns, and use scheduled scaling for recurring events",
+      "risk_detail": "cost, performance",
+      "build_priority": 2,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 2,
+      "recommendation_description_detailed": "COST09-BP03: Auto Scaling ensures you only pay for needed capacity while maintaining performance. Use target tracking for automatic scaling based on metrics (e.g., CPU 50%), predictive scaling for traffic patterns (pre-scaling before daily spikes), and scheduled scaling for known events. Combine with mixed instance types (On-Demand + Spot) for additional savings. Implement across EC2, ECS, DynamoDB, and Aurora. Properly configured Auto Scaling reduces costs by 20-40% while improving availability.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework COST09-BP03 - Auto Scaling is fundamental to cloud cost optimization",
+      "references": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/cost_manage_demand_resources_dynamic.html",
+        "https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T05:13:46.581727+00:00",
+        "updated_at": "2025-11-06T05:13:46.581727+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "auto-scaling",
+        "target-tracking",
+        "predictive-scaling",
+        "dynamic-capacity"
+      ]
+    },
+    {
       "id": "e9b21a0d-2fe8-4f5b-8875-52995b4cf2e7",
       "status": "open",
       "service_name": "s3",
@@ -6067,6 +6451,40 @@
         "source": "Initial CSV Import"
       },
       "tags": []
+    },
+    {
+      "id": "ffc337be-4cb6-4899-b02c-d447af23221e",
+      "status": "open",
+      "service_name": "s3",
+      "scenario": "S3 buckets storing infrequently accessed data in Standard storage class without lifecycle policies",
+      "alert_criteria": "S3 buckets with >30 days old objects in Standard storage class, no lifecycle policies configured, and low GET request rates",
+      "recommendation_action": "Implement S3 Lifecycle policies to transition objects to S3 Standard-IA (30+ days), Intelligent-Tiering, Glacier (90+ days), or Deep Archive (180+ days)",
+      "risk_detail": "cost",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "S3 storage costs can be reduced by 30-60% by implementing lifecycle policies to automatically transition objects to appropriate storage classes. Standard-IA saves ~45% for infrequently accessed data (30+ days), Glacier saves ~77% for archival (90+ days), and Glacier Deep Archive saves ~95% for long-term retention (180+ days). S3 Intelligent-Tiering automatically optimizes costs by moving objects between tiers. Lifecycle policies are free to implement with no transition fees within the same region.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework - Organizations can reduce S3 costs by 30-60% with proper lifecycle management",
+      "references": [
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html",
+        "https://aws.amazon.com/s3/storage-classes/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T05:13:46.581727+00:00",
+        "updated_at": "2025-11-06T05:13:46.581727+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "s3-lifecycle",
+        "storage-optimization",
+        "intelligent-tiering"
+      ]
     },
     {
       "id": "c727a01a-e43a-4157-a80c-21dc130a50c5",

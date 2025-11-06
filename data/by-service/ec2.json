@@ -1,6 +1,6 @@
 {
   "service": "ec2",
-  "count": 19,
+  "count": 23,
   "misconfigurations": [
     {
       "id": "6d6e48e1-29bb-49ac-a848-a33fba2a712a",
@@ -541,6 +541,146 @@
         "source": "Initial CSV Import"
       },
       "tags": []
+    },
+    {
+      "id": "fb608bb0-abfd-4543-876d-b7d44bc64329",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "EC2 instances running with very low CPU utilization indicating rightsizing opportunity",
+      "alert_criteria": "EC2 instances with CPU utilization <= 2% over the past 14 days or consistent usage below 10% during business hours",
+      "recommendation_action": "Use AWS Compute Optimizer and Cost Explorer rightsizing recommendations to downsize or terminate idle instances",
+      "risk_detail": "cost",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "Idle and underutilized EC2 instances represent immediate cost savings opportunities. Instances with consistently low CPU usage (especially below 2%) should be evaluated for termination or downsizing to smaller instance types. Use AWS Compute Optimizer for ML-powered rightsizing recommendations, AWS Cost Explorer for utilization analysis, and CloudWatch for detailed metrics. Start with development/test environments to minimize risk. Potential savings of 30-60% for rightsized instances.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework - Start rightsizing with idle resources as they represent highest savings",
+      "references": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/welcome.html",
+        "https://aws.amazon.com/compute-optimizer/",
+        "https://wellarchitectedlabs.com/cost/100_labs/100_aws_resource_optimization/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T05:13:46.581727+00:00",
+        "updated_at": "2025-11-06T05:13:46.581727+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "rightsizing",
+        "idle-resources",
+        "compute-optimizer",
+        "cost-savings"
+      ]
+    },
+    {
+      "id": "4168462a-cff5-4404-92b1-b305e36762fd",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "Fault-tolerant and flexible workloads not leveraging EC2 Spot Instances for cost savings",
+      "alert_criteria": "Batch processing, containerized applications, CI/CD, or stateless workloads running 100% On-Demand without Spot Instance usage",
+      "recommendation_action": "Implement Spot Instances for eligible workloads using Spot Fleet, Auto Scaling groups with mixed instances, or ECS/EKS Spot capacity",
+      "risk_detail": "cost",
+      "build_priority": 2,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 1,
+      "recommendation_description_detailed": "Spot Instances offer up to 90% savings vs On-Demand pricing for fault-tolerant workloads. Ideal use cases include batch processing, data analysis, containerized applications, CI/CD pipelines, web servers with load balancers, and development/test environments. Use Spot Fleet or Auto Scaling with mixed instance types for diversification. Implement graceful handling of 2-minute termination notices. Not suitable for databases or stateful applications without proper architecture.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework - Spot diversification reduces interruption risk",
+      "references": [
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html",
+        "https://aws.amazon.com/ec2/spot/pricing/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T05:13:46.581727+00:00",
+        "updated_at": "2025-11-06T05:13:46.581727+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "spot-instances",
+        "cost-optimization",
+        "fault-tolerant"
+      ]
+    },
+    {
+      "id": "a0ffe81c-483b-448e-a899-884e5258a106",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "Development and test environments running 24/7 without scheduled shutdown during non-business hours",
+      "alert_criteria": "EC2 instances tagged as dev/test/staging running continuously outside business hours (nights, weekends) with no active connections",
+      "recommendation_action": "Implement AWS Instance Scheduler or Lambda-based automation to stop non-production instances during non-business hours (achieving 65-75% runtime reduction)",
+      "risk_detail": "cost",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "COST09-BP03: Development and test environments rarely need 24/7 availability. Implementing scheduled stop/start (e.g., 8am-6pm weekdays only) reduces runtime by 65-75%, directly cutting compute costs. Use AWS Instance Scheduler for centralized management across accounts, or Lambda with EventBridge for custom schedules. Include RDS databases, Redshift clusters, and other stoppable resources. Ensure proper tagging (environment=dev/test) for automation. Monthly savings: ~$500-2000 per medium-sized dev environment.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework COST09-BP03 - Simple but highly effective cost optimization",
+      "references": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/cost_manage_demand_resources_dynamic.html",
+        "https://aws.amazon.com/solutions/implementations/instance-scheduler-on-aws/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T05:13:46.581727+00:00",
+        "updated_at": "2025-11-06T05:13:46.581727+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "instance-scheduler",
+        "dev-environments",
+        "scheduled-scaling",
+        "automation"
+      ]
+    },
+    {
+      "id": "863e1006-a446-4efb-99d3-b6408c851cd0",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "Production workloads without Auto Scaling unable to optimize costs during variable demand",
+      "alert_criteria": "EC2 workloads with variable traffic patterns running fixed capacity without Auto Scaling, or Auto Scaling groups using only simple scaling without target tracking",
+      "recommendation_action": "Configure AWS Auto Scaling with target tracking policies for CPU/memory, implement predictive scaling for known patterns, and use scheduled scaling for recurring events",
+      "risk_detail": "cost, performance",
+      "build_priority": 2,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 2,
+      "recommendation_description_detailed": "COST09-BP03: Auto Scaling ensures you only pay for needed capacity while maintaining performance. Use target tracking for automatic scaling based on metrics (e.g., CPU 50%), predictive scaling for traffic patterns (pre-scaling before daily spikes), and scheduled scaling for known events. Combine with mixed instance types (On-Demand + Spot) for additional savings. Implement across EC2, ECS, DynamoDB, and Aurora. Properly configured Auto Scaling reduces costs by 20-40% while improving availability.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework COST09-BP03 - Auto Scaling is fundamental to cloud cost optimization",
+      "references": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/cost_manage_demand_resources_dynamic.html",
+        "https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T05:13:46.581727+00:00",
+        "updated_at": "2025-11-06T05:13:46.581727+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "auto-scaling",
+        "target-tracking",
+        "predictive-scaling",
+        "dynamic-capacity"
+      ]
     }
   ]
 }

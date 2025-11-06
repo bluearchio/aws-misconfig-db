@@ -1,9 +1,9 @@
 {
-  "total_entries": 261,
+  "total_entries": 273,
   "by_status": {
     "done": 23,
     "ice": 10,
-    "open": 219,
+    "open": 231,
     "pending": 9
   },
   "by_service": {
@@ -12,18 +12,19 @@
     "guardduty": 1,
     "alb/elb": 4,
     "elasticsearch": 1,
-    "general": 166,
-    "networking": 1,
+    "general": 170,
+    "networking": 2,
     "secrets-manager": 1,
     "waf": 1,
-    "ebs": 5,
+    "ebs": 6,
+    "cloudwatch": 1,
     "security-hub": 1,
     "config": 1,
     "shield": 1,
     "ecs": 5,
     "inspector": 1,
-    "ec2": 19,
-    "s3": 3,
+    "ec2": 23,
+    "s3": 4,
     "elastic beanstalk": 2,
     "eks": 2,
     "emr": 1,
@@ -38,20 +39,21 @@
   },
   "by_category": {
     "security": 8,
-    "operations": 1,
+    "cost": 10,
+    "operations": 3,
     "networking": 1
   },
   "by_risk_type": {
     "security": 19,
-    "operations": 199,
-    "cost": 29,
+    "operations": 203,
+    "cost": 41,
     "reliability": 6,
-    "performance": 22
+    "performance": 23
   },
   "by_priority": {
-    "0": 54,
-    "2": 8,
-    "1": 12,
+    "0": 55,
+    "2": 12,
+    "1": 19,
     "3": 4
   }
 }
