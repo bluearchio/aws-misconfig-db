@@ -47,6 +47,7 @@ This repository contains a structured database of AWS misconfigurations covering
 - **Performance** improvements
 - **Reliability** enhancements
 - **Operational** best practices
+- **Architectural patterns** mapping and implementation guidance
 
 The database is designed with a standardized JSON format, making it ideal for:
 - Training and fine-tuning LLMs for AWS infrastructure analysis
@@ -55,12 +56,26 @@ The database is designed with a standardized JSON format, making it ideal for:
 - Developing infrastructure analysis platforms
 - Educational purposes and AWS best practices reference
 
+## What's New
+
+### 🎯 Architectural Pattern Integration (November 2025)
+
+The database now includes comprehensive architectural pattern mapping! Each misconfiguration can be linked to well-known cloud design patterns:
+
+- **Pattern Relationships**: Circuit Breaker, Retry with Exponential Backoff, Cache-Aside, Bulkhead, Queue-Based Load Leveling, and more
+- **Implementation Guidance**: AWS-specific guidance for implementing patterns using Lambda, API Gateway, SQS, ElastiCache, DynamoDB, etc.
+- **Code Examples**: Python, Terraform, and AWS CLI examples for pattern implementation
+- **Detection Methods**: CloudWatch metrics and alarms to identify pattern violations
+- **Enhanced Categorization**: Pattern-aware tagging and querying capabilities
+
+This makes the database uniquely valuable for understanding not just *what* is misconfigured, but *which architectural patterns* would solve the problem.
+
 ## Database Statistics
 
-- **Total Misconfigurations**: 251+
+- **Total Misconfigurations**: 288
 - **AWS Services Covered**: 21+
 - **Risk Categories**: Security, Cost, Performance, Operations, Reliability
-- **Status**: Done (23), In-Progress (10), Open (209), Pending (9)
+- **Status**: Done (23), Ice (10), Open (246), Pending (9)
 
 See [docs/SUMMARY.md](docs/SUMMARY.md) for detailed statistics.
 
@@ -122,8 +137,21 @@ ec2_misconfigs = [m for m in data['misconfigurations'] if m['service_name'] == '
 # Filter by risk type
 security_issues = [m for m in data['misconfigurations'] if 'security' in m.get('risk_detail', '')]
 
+# Filter by architectural pattern
+circuit_breaker_misconfigs = [
+    m for m in data['misconfigurations']
+    if any(p.get('pattern_name') == 'Circuit Breaker'
+           for p in m.get('architectural_patterns', []))
+]
+
+# Get pattern implementation guidance
+for m in circuit_breaker_misconfigs:
+    print(f"Service: {m['service_name']}")
+    print(f"Guidance: {m.get('pattern_implementation_guidance', 'N/A')}\n")
+
 print(f"Found {len(ec2_misconfigs)} EC2 misconfigurations")
 print(f"Found {len(security_issues)} security-related issues")
+print(f"Found {len(circuit_breaker_misconfigs)} Circuit Breaker pattern issues")
 ```
 
 ### JavaScript Example
@@ -138,7 +166,24 @@ async function loadMisconfigs() {
   // Filter high-priority issues
   const highPriority = data.misconfigurations.filter(m => m.build_priority === 0);
 
+  // Find misconfigurations with architectural patterns
+  const patternIssues = data.misconfigurations.filter(m =>
+    m.architectural_patterns && m.architectural_patterns.length > 0
+  );
+
+  // Group by pattern name
+  const patternGroups = {};
+  patternIssues.forEach(m => {
+    m.architectural_patterns.forEach(p => {
+      const name = p.pattern_name;
+      if (!patternGroups[name]) patternGroups[name] = [];
+      patternGroups[name].push(m);
+    });
+  });
+
   console.log(`Found ${highPriority.length} high-priority issues`);
+  console.log(`Found ${patternIssues.length} issues with pattern mapping`);
+  console.log(`Patterns covered: ${Object.keys(patternGroups).join(', ')}`);
 }
 
 loadMisconfigs();
@@ -150,29 +195,60 @@ Each misconfiguration entry follows this structure:
 
 ```json
 {
-  "id": "uuid",
+  "id": "a1b2c3d4-e5f6-4789-a012-3456789abcde",
   "status": "done|ice|open|pending",
-  "service_name": "ec2",
-  "scenario": "Description of the misconfiguration",
-  "alert_criteria": "Conditions that trigger this alert",
-  "recommendation_action": "Recommended remediation action",
-  "risk_detail": "cost|security|operations|performance|reliability",
-  "build_priority": 0,
-  "action_value": 1,
-  "effort_level": 1,
+  "service_name": "lambda",
+  "scenario": "Lambda functions making synchronous calls without circuit breaker implementation",
+  "alert_criteria": "Lambda error rate >5% or downstream service timeouts >1000ms",
+  "recommendation_action": "Implement circuit breaker pattern to prevent cascading failures",
+  "risk_detail": "reliability, performance",
+  "build_priority": 1,
+  "action_value": 3,
+  "effort_level": 2,
   "risk_value": 2,
-  "recommendation_description_detailed": "Detailed explanation",
-  "category": "compute|networking|database|storage|security",
-  "notes": "Additional context",
+  "recommendation_description_detailed": "Circuit breaker prevents repeated calls to failing services...",
+  "category": "compute",
+  "output_notes": "Benefits: Reduced latency, improved resilience. Trade-offs: Added complexity",
+  "notes": "AWS Well-Architected Reliability Pillar recommendation",
   "references": [
-    "https://docs.aws.amazon.com/..."
+    "https://docs.aws.amazon.com/lambda/latest/dg/best-practices.html",
+    "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/"
   ],
   "metadata": {
-    "created_at": "2025-01-01T00:00:00Z",
-    "updated_at": "2025-01-01T00:00:00Z",
-    "contributors": ["username"],
-    "source": "AWS Trusted Advisor"
-  }
+    "created_at": "2025-11-06T20:44:23.794745+00:00",
+    "updated_at": "2025-11-06T20:44:23.794745+00:00",
+    "contributors": ["pattern-integration-2025"],
+    "source": "AWS Prescriptive Guidance - Cloud Design Patterns"
+  },
+  "tags": [
+    "pattern:circuit-breaker",
+    "resilience-pattern",
+    "fault-tolerance"
+  ],
+  "architectural_patterns": [
+    {
+      "pattern_name": "Circuit Breaker",
+      "relationship": "missing_implementation",
+      "description": "Lambda lacks circuit breaker for downstream service calls"
+    }
+  ],
+  "pattern_implementation_guidance": "Implement using: 1) Lambda Layer with pybreaker/opossum library, 2) DynamoDB for circuit state storage, 3) CloudWatch alarms for monitoring...",
+  "detection_methods": [
+    {
+      "method": "CloudWatch Metric",
+      "details": "Lambda Errors metric >5% AND Duration p99 >1000ms"
+    }
+  ],
+  "remediation_examples": [
+    {
+      "language": "python",
+      "code": "from pybreaker import CircuitBreaker\nbreaker = CircuitBreaker(fail_max=5, timeout_duration=30)\n\n@breaker\ndef call_downstream_service():\n    # Your service call here\n    pass",
+      "description": "Python implementation using pybreaker library"
+    }
+  ],
+  "compliance_mappings": [
+    "AWS Well-Architected Framework - Reliability Pillar"
+  ]
 }
 ```
 
@@ -225,6 +301,43 @@ sorted_opts = sorted(
     cost_optimizations,
     key=lambda x: (x.get('effort_level', 99), -x.get('action_value', 0))
 )
+```
+
+### 4. Architectural Pattern Analysis
+
+```python
+# Find misconfigurations related to specific patterns
+circuit_breaker_issues = [
+    m for m in data['misconfigurations']
+    if any(p.get('pattern_name') == 'Circuit Breaker'
+           for p in m.get('architectural_patterns', []))
+]
+
+# Get implementation guidance for a pattern
+for issue in circuit_breaker_issues:
+    print(f"Service: {issue['service_name']}")
+    print(f"Scenario: {issue['scenario']}")
+    print(f"Pattern Guidance: {issue.get('pattern_implementation_guidance')}")
+
+    # Access remediation code examples
+    for example in issue.get('remediation_examples', []):
+        print(f"Language: {example['language']}")
+        print(f"Code:\n{example['code']}")
+
+# Query by pattern relationship type
+missing_patterns = [
+    m for m in data['misconfigurations']
+    if any(p.get('relationship') == 'missing_implementation'
+           for p in m.get('architectural_patterns', []))
+]
+
+# Find all unique patterns in the database
+all_patterns = set()
+for m in data['misconfigurations']:
+    for p in m.get('architectural_patterns', []):
+        all_patterns.add(p.get('pattern_name'))
+
+print(f"Patterns covered: {', '.join(sorted(all_patterns))}")
 ```
 
 ## Development
@@ -296,13 +409,26 @@ See the [examples/](examples/) directory for complete integration examples:
 
 ## Roadmap
 
-- [ ] Add CVE references for security-related misconfigurations
-- [ ] Include compliance framework mappings (PCI-DSS, HIPAA, SOC2, etc.)
-- [ ] Add detection methods (AWS Config rules, CLI commands, etc.)
-- [ ] Include remediation code examples (Terraform, CloudFormation, Python)
-- [ ] Create API for querying the database
-- [ ] Add severity scoring system
+### Completed ✅
+- [x] Add CVE references for security-related misconfigurations
+- [x] Include compliance framework mappings (PCI-DSS, HIPAA, SOC2, CIS, NIST)
+- [x] Add detection methods (AWS Config rules, CLI commands, CloudWatch metrics)
+- [x] Include remediation code examples (Terraform, CloudFormation, Python, AWS CLI)
+- [x] Add architectural pattern mapping and implementation guidance
+- [x] Support for pattern-aware tagging and querying
+
+### In Progress 🚧
+- [ ] Expand pattern coverage (Event Sourcing, Saga, CQRS, Strangler Fig, etc.)
+- [ ] Add more service-specific entries (AppSync, Cognito, SES, SNS, SQS)
 - [ ] Community voting on priority and impact
+
+### Planned 🔮
+- [ ] Create REST API for querying the database
+- [ ] Pattern visualization dashboard and relationship mapping
+- [ ] Automated detection rule generation (AWS Config, CloudFormation Guard)
+- [ ] Cost impact calculator for remediation actions
+- [ ] Integration with popular IaC scanning tools (Checkov, tfsec, etc.)
+- [ ] Multi-cloud pattern support (Azure, GCP)
 
 ## License
 
@@ -335,6 +461,6 @@ If you use this database in your research or project, please cite:
 
 ---
 
-**Last Updated**: 2025-01-04
-**Version**: 1.0.0
-**Total Entries**: 251
+**Last Updated**: 2025-11-06
+**Version**: 1.1.0 (Architectural Patterns Integration)
+**Total Entries**: 288
