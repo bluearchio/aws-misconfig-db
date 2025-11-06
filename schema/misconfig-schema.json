@@ -182,6 +182,34 @@
           }
         }
       }
+    },
+    "architectural_patterns": {
+      "type": "array",
+      "description": "Architectural patterns this misconfiguration relates to or violates (e.g., Circuit Breaker, Cache-Aside, Retry with Backoff)",
+      "items": {
+        "type": "object",
+        "properties": {
+          "pattern_name": {
+            "type": "string",
+            "description": "Name of the architectural pattern",
+            "examples": ["Circuit Breaker", "Retry with Exponential Backoff", "Cache-Aside", "Bulkhead", "Throttling", "Queue-Based Load Leveling", "Saga", "Event Sourcing", "Anti-corruption Layer"]
+          },
+          "relationship": {
+            "type": "string",
+            "enum": ["missing_implementation", "incorrect_implementation", "anti_pattern", "related_to"],
+            "description": "How this misconfiguration relates to the pattern"
+          },
+          "description": {
+            "type": "string",
+            "description": "Specific explanation of the pattern relationship to this misconfiguration"
+          }
+        },
+        "required": ["pattern_name", "relationship"]
+      }
+    },
+    "pattern_implementation_guidance": {
+      "type": "string",
+      "description": "Specific guidance on implementing the architectural pattern to resolve this misconfiguration, including AWS services, configuration steps, and best practices"
     }
   }
 }

@@ -1,6 +1,6 @@
 {
   "service": "lambda",
-  "count": 11,
+  "count": 15,
   "misconfigurations": [
     {
       "id": "81a5a270-6eef-45f9-921b-593eb7ef6bd6",
@@ -317,6 +317,216 @@
         "lambda-optimization",
         "cold-start",
         "serverless-cost"
+      ]
+    },
+    {
+      "id": "a1b2c3d4-e5f6-4789-a012-3456789abcde",
+      "status": "open",
+      "service_name": "lambda",
+      "scenario": "Lambda functions making synchronous calls to external services without circuit breaker implementation",
+      "alert_criteria": "Lambda functions with >20% timeout errors when calling downstream services, or Lambda functions with synchronous external API calls without fault tolerance",
+      "recommendation_action": "Implement circuit breaker pattern: 1) Use Step Functions with error handling, 2) Add circuit breaker logic in Lambda using ElastiCache/DynamoDB for state, 3) Configure Lambda reserved concurrency to prevent cascade failures",
+      "risk_detail": "reliability, performance, cost",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 3,
+      "recommendation_description_detailed": "Without circuit breaker pattern, Lambda functions repeatedly attempt to call unavailable downstream services, causing cascading failures and wasted costs. Circuit breaker detects failure threshold (e.g., 50% errors in 10 attempts), opens circuit to fail fast for 30 seconds, then half-opens to test recovery. AWS implementation: Lambda + DynamoDB for state tracking, or AWS Resilience Hub. Cost impact: Without circuit breaker, failed calls waste execution time; with fast-fail pattern, costs reduced by 80-90% during downstream outages.",
+      "category": "compute",
+      "architectural_patterns": [
+        {
+          "pattern_name": "Circuit Breaker",
+          "relationship": "missing_implementation",
+          "description": "No circuit breaker logic to prevent repeated calls to failing downstream services"
+        }
+      ],
+      "pattern_implementation_guidance": "Implement using: 1) Lambda Layer with circuit breaker library (pybreaker for Python, opossum for Node.js), 2) DynamoDB table to store circuit state (service_name, failure_count, circuit_state, last_failure_time), 3) Lambda environment variables for thresholds (failure_threshold=5, timeout=30s), 4) CloudWatch alarms when circuit opens. Example: pybreaker library with @breaker decorator.",
+      "output_notes": null,
+      "notes": "AWS Prescriptive Guidance - Circuit Breaker Pattern",
+      "references": [
+        "https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/circuit-breaker.html",
+        "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/",
+        "https://docs.aws.amazon.com/resilience-hub/latest/userguide/what-is.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T20:44:23.794745+00:00",
+        "updated_at": "2025-11-06T20:44:23.794745+00:00",
+        "contributors": [
+          "pattern-integration-2025"
+        ],
+        "source": "AWS Prescriptive Guidance - Circuit Breaker Pattern"
+      },
+      "tags": [
+        "pattern:circuit-breaker",
+        "resilience-pattern",
+        "fault-tolerance",
+        "cascade-failure-prevention"
+      ],
+      "detection_methods": [
+        {
+          "method": "CloudWatch Metric",
+          "details": "Lambda Errors metric > 20% for functions with external dependencies"
+        }
+      ],
+      "remediation_examples": [
+        {
+          "language": "python",
+          "code": "from pybreaker import CircuitBreaker\nbreaker = CircuitBreaker(fail_max=5, timeout_duration=30)\n\n@breaker\ndef call_external_service():\n    response = requests.get('https://api.example.com/data')\n    return response.json()\n\ndef lambda_handler(event, context):\n    try:\n        data = call_external_service()\n        return {'statusCode': 200, 'body': data}\n    except CircuitBreakerError:\n        return {'statusCode': 503, 'body': 'Service temporarily unavailable'}",
+          "description": "Python Lambda with pybreaker library - 5 failure threshold, 30-second timeout"
+        }
+      ]
+    },
+    {
+      "id": "c3d4e5f6-a7b8-4901-c234-56789abcdef0",
+      "status": "open",
+      "service_name": "lambda",
+      "scenario": "Lambda functions making external API calls without retry logic or using fixed-interval retries",
+      "alert_criteria": "Lambda functions with throttling errors from external APIs (429 responses), timeout errors >5%, or no SDK retry configuration",
+      "recommendation_action": "Implement Retry with Exponential Backoff: 1) Use AWS SDK built-in retry (Standard mode: 3 attempts, exponential backoff), 2) Add jitter to prevent thundering herd, 3) Configure Lambda reserved concurrency, 4) Use Step Functions for complex retry scenarios",
+      "risk_detail": "reliability, cost, performance",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "Fixed-interval retries or no retries waste Lambda execution time and potentially overwhelm recovering services. Exponential backoff: 1st retry after 1s, 2nd after 2s, 3rd after 4s (with jitter \u00b150%). AWS SDK default provides 3 retries with exponential backoff. Most transient failures (network timeouts, 429/503 errors) succeed on retry. Without retry: 10% transient failures = 100K errors per 1M invocations. With backoff retry: 95K recovered, 5K permanent failures, costs minimal extra execution time vs massive improvement in reliability.",
+      "category": "compute",
+      "architectural_patterns": [
+        {
+          "pattern_name": "Retry with Exponential Backoff",
+          "relationship": "missing_implementation",
+          "description": "No retry logic or fixed-interval retries causing thundering herd and service degradation"
+        }
+      ],
+      "pattern_implementation_guidance": "Configure AWS SDK retry mode in Lambda environment variables: AWS_RETRY_MODE=standard, AWS_MAX_ATTEMPTS=3. For custom retries: implement exponential backoff with jitter (delay = min(max_delay, base_delay * 2^attempt * random(0.5, 1.5))). Only retry transient errors (429, 500, 502, 503, 504, timeouts). For Step Functions: use Retry field with BackoffRate=2.0, MaxAttempts=3.",
+      "output_notes": null,
+      "notes": "AWS Builders Library - Timeouts, Retries, and Backoff with Jitter",
+      "references": [
+        "https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/retry-backoff.html",
+        "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/",
+        "https://docs.aws.amazon.com/general/latest/gr/api-retries.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T20:44:23.794745+00:00",
+        "updated_at": "2025-11-06T20:44:23.794745+00:00",
+        "contributors": [
+          "pattern-integration-2025"
+        ],
+        "source": "AWS Prescriptive Guidance - Retry with Backoff Pattern"
+      },
+      "tags": [
+        "pattern:retry-backoff",
+        "resilience-pattern",
+        "transient-error-handling",
+        "api-integration"
+      ],
+      "detection_methods": [
+        {
+          "method": "CloudWatch Logs Insights",
+          "details": "Query Lambda logs for HTTP 429/503 responses or timeout errors"
+        }
+      ],
+      "remediation_examples": [
+        {
+          "language": "python",
+          "code": "from botocore.config import Config\nimport boto3\n\n# Configure AWS SDK with retry\nconfig = Config(retries={'mode': 'adaptive', 'max_attempts': 5})\ndynamodb = boto3.client('dynamodb', config=config)",
+          "description": "Python Lambda with AWS SDK adaptive retry configuration"
+        }
+      ]
+    },
+    {
+      "id": "d4e5f6a7-b8c9-4012-d345-6789abcdef01",
+      "status": "open",
+      "service_name": "lambda",
+      "scenario": "Lambda functions processing variable workload spikes synchronously without message queue buffering",
+      "alert_criteria": "Lambda throttling errors >100/hour, API Gateway 5xx errors during traffic spikes, or direct synchronous invocation of compute-intensive functions",
+      "recommendation_action": "Implement Queue-Based Load Leveling: 1) Place SQS queue between API Gateway and Lambda, 2) Configure API Gateway to send messages to SQS, 3) Set Lambda as SQS consumer with batch size 10-100, 4) Configure DLQ for failed messages, 5) Monitor queue depth",
+      "risk_detail": "reliability, performance, cost",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 2,
+      "recommendation_description_detailed": "Synchronous processing fails during traffic spikes (10x spike = 90% failures). Queue-Based Load Leveling decouples request acceptance from processing: API Gateway succeeds immediately (200 OK after SQS write), Lambda processes at sustainable rate. Benefits: 1) No lost requests during spikes, 2) Consistent processing rate, 3) Auto-scaling based on queue depth. Example: E-commerce flash sale - 10K requests/sec spike vs 1K/sec capacity. Without queue: 9K failures. With SQS: all accepted, processed within SLA. Cost: SQS = $0.40 per million requests.",
+      "category": "messaging",
+      "architectural_patterns": [
+        {
+          "pattern_name": "Queue-Based Load Leveling",
+          "relationship": "missing_implementation",
+          "description": "Direct synchronous processing without queue buffer for variable workloads"
+        }
+      ],
+      "pattern_implementation_guidance": "Create SQS queue (Standard for throughput, FIFO for ordering), create DLQ, update API Gateway integration to SQS (Action=SendMessage), create Lambda trigger from SQS with BatchSize=10, set Lambda reserved concurrency to control rate, configure CloudWatch alarms: ApproximateAgeOfOldestMessage >300s.",
+      "output_notes": null,
+      "notes": "AWS Architecture - Queue-Based Load Leveling Pattern",
+      "references": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html",
+        "https://aws.amazon.com/blogs/compute/understanding-how-aws-lambda-scales-with-amazon-sqs-standard-queues/",
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/integrating-api-with-aws-services-sqs.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T20:44:23.794745+00:00",
+        "updated_at": "2025-11-06T20:44:23.794745+00:00",
+        "contributors": [
+          "pattern-integration-2025"
+        ],
+        "source": "AWS Architecture - Queue-Based Load Leveling Pattern"
+      },
+      "tags": [
+        "pattern:queue-load-leveling",
+        "resilience-pattern",
+        "sqs",
+        "traffic-spike-handling",
+        "decoupling"
+      ]
+    },
+    {
+      "id": "e5f6a7b8-c9d0-4123-e456-789abcdef012",
+      "status": "open",
+      "service_name": "lambda",
+      "scenario": "Multiple Lambda functions sharing unreserved concurrency pool without isolation",
+      "alert_criteria": "Account-level Lambda throttling, critical functions throttled due to non-critical functions consuming concurrency, or no reserved concurrency configured for production workloads",
+      "recommendation_action": "Implement Bulkhead pattern: 1) Allocate reserved concurrency to critical functions (payment=200, auth=150), 2) Leave unreserved pool for non-critical, 3) Monitor per-function concurrency, 4) Use Application Auto Scaling for dynamic adjustment",
+      "risk_detail": "reliability, operations, performance",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 3,
+      "recommendation_description_detailed": "Bulkhead pattern prevents single function from exhausting shared concurrency pool (default 1000 per account). Without bulkheads: batch job consuming 900 executions throttles payment processing (revenue loss). With reserved concurrency: payment=200 reserved, batch=100 reserved, 700 unreserved. If batch spikes, only impacts unreserved pool. Reserved concurrency is FREE, only pay for actual executions. Critical for: multi-tenant systems, mixed criticality workloads, production+development in same account.",
+      "category": "compute",
+      "architectural_patterns": [
+        {
+          "pattern_name": "Bulkhead",
+          "relationship": "missing_implementation",
+          "description": "No isolation between Lambda functions using shared concurrency pool"
+        }
+      ],
+      "pattern_implementation_guidance": "Identify critical vs non-critical functions, calculate required concurrency (avg * 1.5 + buffer), set reserved concurrency: aws lambda put-function-concurrency --function-name critical-api --reserved-concurrent-executions 200, monitor ConcurrentExecutions metric, set CloudWatch alarms when usage >80% of reserved.",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework - Bulkhead Pattern for Resource Isolation",
+      "references": [
+        "https://docs.aws.amazon.com/lambda/latest/dg/configuration-concurrency.html",
+        "https://aws.amazon.com/blogs/compute/managing-aws-lambda-function-concurrency/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T20:44:23.794745+00:00",
+        "updated_at": "2025-11-06T20:44:23.794745+00:00",
+        "contributors": [
+          "pattern-integration-2025"
+        ],
+        "source": "AWS Well-Architected Framework - Bulkhead Pattern"
+      },
+      "tags": [
+        "pattern:bulkhead",
+        "resilience-pattern",
+        "lambda-concurrency",
+        "resource-isolation",
+        "noisy-neighbor"
+      ],
+      "remediation_examples": [
+        {
+          "language": "aws-cli",
+          "code": "aws lambda put-function-concurrency --function-name payment-processing --reserved-concurrent-executions 200",
+          "description": "Set reserved concurrency for critical function isolation"
+        }
       ]
     }
   ]
