@@ -3,35 +3,6 @@
   "count": 55,
   "misconfigurations": [
     {
-      "id": "6aa5f0f0-2e69-4f2e-82f2-e4110654b102",
-      "status": "done",
-      "service_name": "elasticache",
-      "scenario": "Amazon ElastiCache Reserved Node Optimization",
-      "alert_criteria": "Optimizing the purchase of ElastiCache Reserved Nodes can help reduce costs",
-      "recommendation_action": "See the Cost Explorer page for more detailed recommendations, customization options (e.g. look-back period, payment option, etc.) and to purchase ElastiCache Reserved Nodes",
-      "risk_detail": "cost",
-      "build_priority": 2,
-      "action_value": null,
-      "effort_level": null,
-      "risk_value": null,
-      "recommendation_description_detailed": "Checks your usage of ElastiCache and provides recommendations on purchase of Reserved Nodes to help reduce costs incurred from using ElastiCache On-Demand. AWS generates these recommendations by analyzing your On-Demand usage for the past 30 days. We then simulate every combination of reservations in the generated category of usage in order to identify the best number of each type of Reserved Node to purchase to maximize your savings. This check covers recommendations based on partial upfront payment option with 1-year or 3-year commitment. This check is not available to accounts linked in Consolidated Billing. Recommendations are only available for the Paying Account.",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [
-        "https://aws.amazon.com/aws-cost-management/aws-cost-explorer/"
-      ],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
       "id": "475b24d9-4b5b-4ce4-8161-af25f89bee49",
       "status": "done",
       "service_name": "alb/elb",
@@ -91,24 +62,209 @@
       "tags": []
     },
     {
-      "id": "e1b071d7-7358-4318-9021-015de19b783b",
+      "id": "6aa5f0f0-2e69-4f2e-82f2-e4110654b102",
       "status": "done",
-      "service_name": "elasticsearch",
-      "scenario": "Amazon Elasticsearch Reserved Instance Optimization",
-      "alert_criteria": "Optimizing the purchase of Elasticsearch Reserved Instances can help reduce costs.",
-      "recommendation_action": "See the Cost Explorer page for more detailed recommendations, customization options (e.g. look-back period, payment option, etc.) and to purchase Elasticsearch Reserved Instances.",
+      "service_name": "elasticache",
+      "scenario": "Amazon ElastiCache Reserved Node Optimization",
+      "alert_criteria": "Optimizing the purchase of ElastiCache Reserved Nodes can help reduce costs",
+      "recommendation_action": "See the Cost Explorer page for more detailed recommendations, customization options (e.g. look-back period, payment option, etc.) and to purchase ElastiCache Reserved Nodes",
       "risk_detail": "cost",
       "build_priority": 2,
       "action_value": null,
       "effort_level": null,
       "risk_value": null,
-      "recommendation_description_detailed": "Checks your usage of Elasticsearch and provides recommendations on purchase of Reserved Instances to help reduce costs incurred from using Elasticsearch On-Demand. AWS generates these recommendations by analyzing your On-Demand usage for the past 30 days. We then simulate every combination of reservations in the generated category of usage in order to identify the best number of each type of Reserved Instance to purchase to maximize your savings. This check covers recommendations based on partial upfront payment option with 1-year or 3-year commitment. This check is not available to accounts linked in Consolidated Billing. Recommendations are only available for the Paying Account.",
+      "recommendation_description_detailed": "Checks your usage of ElastiCache and provides recommendations on purchase of Reserved Nodes to help reduce costs incurred from using ElastiCache On-Demand. AWS generates these recommendations by analyzing your On-Demand usage for the past 30 days. We then simulate every combination of reservations in the generated category of usage in order to identify the best number of each type of Reserved Node to purchase to maximize your savings. This check covers recommendations based on partial upfront payment option with 1-year or 3-year commitment. This check is not available to accounts linked in Consolidated Billing. Recommendations are only available for the Paying Account.",
       "category": null,
       "output_notes": null,
       "notes": null,
       "references": [
         "https://aws.amazon.com/aws-cost-management/aws-cost-explorer/"
       ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "5fc3d4a9-96ef-4bba-82e9-bccabe531b34",
+      "status": "open",
+      "service_name": "eks",
+      "scenario": "pods OR nodes within cluster are not appropriately sized (artur to clarify)",
+      "alert_criteria": "workloads (cpu, memory, network IOPs, etc.) for the previous 14, 30, 90 days, multiplied by 1.4 are too large...",
+      "recommendation_action": "recommend the proper size for each pod",
+      "risk_detail": "cost, performance",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "e9b21a0d-2fe8-4f5b-8875-52995b4cf2e7",
+      "status": "open",
+      "service_name": "s3",
+      "scenario": "users wants to automatically manage data storage tiers",
+      "alert_criteria": "s3 lifecycle manager is turned off; intelligent tiering is not enabled",
+      "recommendation_action": "turn on lifecycle manager",
+      "risk_detail": "cost, operations",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "ffc337be-4cb6-4899-b02c-d447af23221e",
+      "status": "open",
+      "service_name": "s3",
+      "scenario": "S3 buckets storing infrequently accessed data in Standard storage class without lifecycle policies",
+      "alert_criteria": "S3 buckets with >30 days old objects in Standard storage class, no lifecycle policies configured, and low GET request rates",
+      "recommendation_action": "Implement S3 Lifecycle policies to transition objects to S3 Standard-IA (30+ days), Intelligent-Tiering, Glacier (90+ days), or Deep Archive (180+ days)",
+      "risk_detail": "cost",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "S3 storage costs can be reduced by 30-60% by implementing lifecycle policies to automatically transition objects to appropriate storage classes. Standard-IA saves ~45% for infrequently accessed data (30+ days), Glacier saves ~77% for archival (90+ days), and Glacier Deep Archive saves ~95% for long-term retention (180+ days). S3 Intelligent-Tiering automatically optimizes costs by moving objects between tiers. Lifecycle policies are free to implement with no transition fees within the same region.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework - Organizations can reduce S3 costs by 30-60% with proper lifecycle management",
+      "references": [
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html",
+        "https://aws.amazon.com/s3/storage-classes/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T05:13:46.581727+00:00",
+        "updated_at": "2025-11-06T05:13:46.581727+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "s3-lifecycle",
+        "storage-optimization",
+        "intelligent-tiering"
+      ]
+    },
+    {
+      "id": "83691b2b-0b0b-4549-b2da-fcbb1708c6cb",
+      "status": "open",
+      "service_name": "cloudwatch",
+      "scenario": "No CloudWatch anomaly detection configured to identify unexpected cost increases",
+      "alert_criteria": "AWS accounts lack CloudWatch anomaly detection alarms for billing metrics and service-specific cost anomalies",
+      "recommendation_action": "Enable AWS Cost Anomaly Detection with ML-powered alerts, configure CloudWatch billing alarms, and integrate with SNS for proactive cost monitoring",
+      "risk_detail": "cost, operations",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "AWS Cost Anomaly Detection uses machine learning to identify unusual spending patterns and alert teams before bills become excessive. Configure detection for services, accounts, and cost categories with custom thresholds. Set up CloudWatch billing alarms for absolute spend thresholds. Integrate with SNS/Slack for real-time notifications. Early detection prevents runaway costs from misconfigurations (e.g., unintended data transfers, EC2 instances in wrong regions, misconfigured Auto Scaling). Organizations report catching 85-95% of cost anomalies within 24 hours.",
+      "category": "operations",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework - Proactive cost monitoring prevents bill shock",
+      "references": [
+        "https://docs.aws.amazon.com/cost-management/latest/userguide/manage-ad.html",
+        "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T05:13:46.581727+00:00",
+        "updated_at": "2025-11-06T05:13:46.581727+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "cost-anomaly-detection",
+        "billing-alarms",
+        "proactive-monitoring",
+        "ml-powered"
+      ]
+    },
+    {
+      "id": "e7b5c9a1-3f2d-4e8b-9c6a-1d5e8f2b4a3c",
+      "status": "open",
+      "service_name": "cloudwatch",
+      "scenario": "CloudWatch Logs groups without retention policies accumulating costs indefinitely",
+      "alert_criteria": "CloudWatch Logs groups with \"Never Expire\" retention policy, or log data older than 90 days consuming significant storage",
+      "recommendation_action": "Set appropriate retention periods (7, 14, 30, 90, or 180 days) based on compliance requirements, export old logs to S3 for long-term archival at 87% cost reduction",
+      "risk_detail": "cost",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "CloudWatch Logs charges $0.50/GB ingested and $0.03/GB-month for storage. Without retention policies, logs accumulate indefinitely. Most organizations only need 30-90 days of hot logs. Implementation: 1) Review log groups without retention policies, 2) Set retention based on compliance needs (30 days typical for non-production, 90+ for production), 3) Export logs older than retention period to S3 ($0.023/GB-month = 87% cheaper). One organization reduced logging costs from $1,200/month to $200/month by implementing 30-day retention plus S3 archival.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework - CloudWatch Logs is frequently overlooked cost optimization opportunity",
+      "references": [
+        "https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html",
+        "https://aws.amazon.com/cloudwatch/pricing/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T17:41:02.278720+00:00",
+        "updated_at": "2025-11-06T17:41:02.278720+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "cloudwatch-logs",
+        "log-retention",
+        "storage-optimization",
+        "archival"
+      ]
+    },
+    {
+      "id": "2b6ae2c7-d432-401b-8164-23782cb1b1dc",
+      "status": "open",
+      "service_name": "emr",
+      "scenario": "EMR (or other) cluster is used and task nodes are not utilizing spot instances",
+      "alert_criteria": "",
+      "recommendation_action": "use spot instances",
+      "risk_detail": "performance, cost",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 2,
+      "recommendation_description_detailed": "useful for high CPU but low Memory requirements; i.e. high processing requirement but low (or no) caching required",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
       "metadata": {
         "created_at": "2025-11-04T23:07:44.651478Z",
         "updated_at": "2025-11-04T23:07:44.651478Z",
@@ -463,93 +619,24 @@
       ]
     },
     {
-      "id": "a03af80d-8c8a-492d-9aa7-d32a2bcbaa17",
+      "id": "daa4711f-c1d3-4104-a9e4-f709af67ecf7",
       "status": "open",
-      "service_name": "networking",
-      "scenario": "High data transfer costs from cross-region or internet data egress without optimization",
-      "alert_criteria": "Significant data transfer charges from cross-region transfers, CloudFront not used for content delivery, or compute/storage in different regions",
-      "recommendation_action": "Use CloudFront for content delivery (free S3-to-CloudFront transfer), co-locate resources in same region, use VPC endpoints, and PrivateLink for AWS service access",
+      "service_name": "redshift",
+      "scenario": "Amazon Redshift Reserved Node Optimization",
+      "alert_criteria": "Optimizing the purchase of Redshift Reserved Nodes can help reduce costs.",
+      "recommendation_action": "See the Cost Explorer page for more detailed recommendations, customization options (e.g. look-back period, payment option, etc.) and to purchase Redshift Reserved Nodes",
       "risk_detail": "cost",
       "build_priority": 2,
-      "action_value": 2,
-      "effort_level": 3,
-      "risk_value": 1,
-      "recommendation_description_detailed": "Data transfer costs can represent 10-20% of AWS bills when not optimized. Key strategies: 1) Use CloudFront for content delivery (data transfer from S3 to CloudFront is free), 2) Keep compute and storage in same region/AZ, 3) Use VPC endpoints for S3/DynamoDB to avoid internet gateway charges, 4) Leverage AWS PrivateLink for service-to-service communication, 5) Use S3 Transfer Acceleration selectively. Cross-region transfers cost $0.02/GB while same-region is free.",
-      "category": "cost",
-      "output_notes": null,
-      "notes": "AWS Well-Architected Framework - Data transfer optimization",
-      "references": [
-        "https://aws.amazon.com/blogs/architecture/overview-of-data-transfer-costs-for-common-architectures/",
-        "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html"
-      ],
-      "metadata": {
-        "created_at": "2025-11-06T05:13:46.581727+00:00",
-        "updated_at": "2025-11-06T05:13:46.581727+00:00",
-        "contributors": [
-          "aws-well-architected-2025"
-        ],
-        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
-      },
-      "tags": [
-        "data-transfer",
-        "networking-costs",
-        "cloudfront",
-        "vpc-endpoints"
-      ]
-    },
-    {
-      "id": "2f8c9e4a-1d5b-4c8f-9a6e-7b3d2e1f4a5c",
-      "status": "open",
-      "service_name": "networking",
-      "scenario": "NAT Gateway incurring high costs from cross-AZ data transfer and AWS service traffic",
-      "alert_criteria": "NAT Gateway data processing charges >$100/month, or traffic to S3/DynamoDB/other AWS services routing through NAT Gateway instead of VPC endpoints",
-      "recommendation_action": "Deploy VPC endpoints for S3 and DynamoDB (free), use Interface VPC endpoints for other AWS services, ensure NAT Gateway per AZ to avoid cross-AZ charges, review VPC Flow Logs to identify optimization opportunities",
-      "risk_detail": "cost",
-      "build_priority": 1,
-      "action_value": 3,
-      "effort_level": 2,
-      "risk_value": 1,
-      "recommendation_description_detailed": "NAT Gateways charge $0.045/GB for data processing plus hourly fees ($0.045/hour). Major cost drivers: 1) Cross-AZ traffic ($0.01/GB additional), 2) AWS service traffic (S3, DynamoDB) that could use free VPC endpoints, 3) Multiple idle NAT Gateways. Solution: Deploy VPC endpoints for S3/DynamoDB (free data transfer), use Interface endpoints for other services, deploy one NAT Gateway per AZ to eliminate cross-AZ charges. Use VPC Flow Logs temporarily to analyze traffic patterns. Typical savings: 40-60% of NAT Gateway costs.",
-      "category": "cost",
-      "output_notes": null,
-      "notes": "AWS Well-Architected Framework COST08 - NAT Gateway is often the #1 networking cost driver",
-      "references": [
-        "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html",
-        "https://aws.amazon.com/vpc/pricing/",
-        "https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints.html"
-      ],
-      "metadata": {
-        "created_at": "2025-11-06T17:41:02.278720+00:00",
-        "updated_at": "2025-11-06T17:41:02.278720+00:00",
-        "contributors": [
-          "aws-well-architected-2025"
-        ],
-        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
-      },
-      "tags": [
-        "nat-gateway",
-        "vpc-endpoints",
-        "data-transfer",
-        "networking-optimization"
-      ]
-    },
-    {
-      "id": "8dfe3ba4-c72f-4ed8-9a07-f88c1ccc8b3b",
-      "status": "done",
-      "service_name": "ebs",
-      "scenario": "user wants to ensure that only necessary / needed snapshots are available for use",
-      "alert_criteria": "if snapshot is older than seven days and/or is older than another snapshot made from an identical volume, then recommend deletion",
-      "recommendation_action": "delete snapshot",
-      "risk_detail": "cost",
-      "build_priority": 0,
-      "action_value": 3,
-      "effort_level": 2,
-      "risk_value": 1,
-      "recommendation_description_detailed": "",
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "Checks your usage of Redshift and provides recommendations on purchase of Reserved Nodes to help reduce costs incurred from using Redshift On-Demand. AWS generates these recommendations by analyzing your On-Demand usage for the past 30 days. We then simulate every combination of reservations in the generated category of usage in order to identify the best number of each type of Reserved Nodes to purchase to maximize your savings. This check covers recommendations based on partial upfront payment option with 1-year or 3-year commitment. This check is not available to accounts linked in Consolidated Billing. Recommendations are only available for the Paying Account.",
       "category": null,
       "output_notes": null,
       "notes": null,
-      "references": [],
+      "references": [
+        "https://aws.amazon.com/aws-cost-management/aws-cost-explorer/"
+      ],
       "metadata": {
         "created_at": "2025-11-04T23:07:44.651478Z",
         "updated_at": "2025-11-04T23:07:44.651478Z",
@@ -561,22 +648,24 @@
       "tags": []
     },
     {
-      "id": "9b4bd9b6-9139-4e8d-a157-055bbb6bacc3",
+      "id": "7d5eed76-e0e9-41d3-98ca-5d1becff0c18",
       "status": "open",
-      "service_name": "ebs",
-      "scenario": "user wants to ensure ebs volumes are deleted when an instance is terminated",
-      "alert_criteria": "\"delete on termination\" flag on instances is set to false",
-      "recommendation_action": "set \"delete on termination\" flag to true (enable automatic deletion upon instance termination)",
+      "service_name": "redshift",
+      "scenario": "Underutilized Amazon Redshift Clusters",
+      "alert_criteria": "A running cluster has not had a connection in the last 7 days.",
+      "recommendation_action": "Consider shutting down the cluster and taking a final snapshot, or downsizing the cluster.",
       "risk_detail": "cost",
       "build_priority": 0,
-      "action_value": 1,
-      "effort_level": 0,
-      "risk_value": 0,
-      "recommendation_description_detailed": "",
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "Checks your Amazon Redshift configuration for clusters that appear to be underutilized. If an Amazon Redshift cluster has not had a connection for a prolonged period of time or is using a low amount of CPU, you can use lower-cost options such as downsizing the cluster or shutting down the cluster and taking a final snapshot. Final snapshots are retained even after you delete your cluster.",
       "category": null,
       "output_notes": null,
-      "notes": null,
-      "references": [],
+      "notes": "can beat our aws recommendations by determining which path is the correct path, and, if resizing is optimal, to which size",
+      "references": [
+        "https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-mgmt-shutdown-delete-cluster"
+      ],
       "metadata": {
         "created_at": "2025-11-04T23:07:44.651478Z",
         "updated_at": "2025-11-04T23:07:44.651478Z",
@@ -588,127 +677,24 @@
       "tags": []
     },
     {
-      "id": "8312c521-673e-48df-aca3-ae6a284f7079",
+      "id": "0c1b66db-e282-4fbe-91cb-5c49cc88427a",
       "status": "open",
-      "service_name": "ebs",
-      "scenario": "Orphaned EBS snapshots and AMIs consuming storage costs after source volumes deleted",
-      "alert_criteria": "EBS snapshots exist where source volume has been deleted, or AMIs registered without associated running instances for 90+ days",
-      "recommendation_action": "Use AWS Data Lifecycle Manager to automate snapshot retention policies and identify/delete orphaned snapshots and unused AMIs",
-      "risk_detail": "cost",
-      "build_priority": 2,
-      "action_value": 2,
-      "effort_level": 2,
-      "risk_value": 1,
-      "recommendation_description_detailed": "COST04-BP05: Orphaned snapshots accumulate when instances are terminated without cleanup processes. These snapshots incur storage costs (~$0.05/GB-month) indefinitely. Implement AWS Data Lifecycle Manager for automated snapshot creation/deletion policies. Identify orphaned snapshots by comparing snapshot volume IDs against active volumes. Review AMIs older than 90 days and deregister unused images along with associated snapshots. Typical organizations can reduce snapshot costs by 40-70% through proper lifecycle management.",
-      "category": "cost",
-      "output_notes": null,
-      "notes": "AWS Well-Architected Framework COST04-BP05 - Enforce data retention policies",
-      "references": [
-        "https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/cost_decomissioning_resources_data_retention.html",
-        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html"
-      ],
-      "metadata": {
-        "created_at": "2025-11-06T05:13:46.581727+00:00",
-        "updated_at": "2025-11-06T05:13:46.581727+00:00",
-        "contributors": [
-          "aws-well-architected-2025"
-        ],
-        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
-      },
-      "tags": [
-        "ebs-snapshots",
-        "orphaned-resources",
-        "data-lifecycle-manager",
-        "ami-cleanup"
-      ]
-    },
-    {
-      "id": "83691b2b-0b0b-4549-b2da-fcbb1708c6cb",
-      "status": "open",
-      "service_name": "cloudwatch",
-      "scenario": "No CloudWatch anomaly detection configured to identify unexpected cost increases",
-      "alert_criteria": "AWS accounts lack CloudWatch anomaly detection alarms for billing metrics and service-specific cost anomalies",
-      "recommendation_action": "Enable AWS Cost Anomaly Detection with ML-powered alerts, configure CloudWatch billing alarms, and integrate with SNS for proactive cost monitoring",
-      "risk_detail": "cost, operations",
-      "build_priority": 1,
-      "action_value": 2,
-      "effort_level": 1,
-      "risk_value": 2,
-      "recommendation_description_detailed": "AWS Cost Anomaly Detection uses machine learning to identify unusual spending patterns and alert teams before bills become excessive. Configure detection for services, accounts, and cost categories with custom thresholds. Set up CloudWatch billing alarms for absolute spend thresholds. Integrate with SNS/Slack for real-time notifications. Early detection prevents runaway costs from misconfigurations (e.g., unintended data transfers, EC2 instances in wrong regions, misconfigured Auto Scaling). Organizations report catching 85-95% of cost anomalies within 24 hours.",
-      "category": "operations",
-      "output_notes": null,
-      "notes": "AWS Well-Architected Framework - Proactive cost monitoring prevents bill shock",
-      "references": [
-        "https://docs.aws.amazon.com/cost-management/latest/userguide/manage-ad.html",
-        "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html"
-      ],
-      "metadata": {
-        "created_at": "2025-11-06T05:13:46.581727+00:00",
-        "updated_at": "2025-11-06T05:13:46.581727+00:00",
-        "contributors": [
-          "aws-well-architected-2025"
-        ],
-        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
-      },
-      "tags": [
-        "cost-anomaly-detection",
-        "billing-alarms",
-        "proactive-monitoring",
-        "ml-powered"
-      ]
-    },
-    {
-      "id": "e7b5c9a1-3f2d-4e8b-9c6a-1d5e8f2b4a3c",
-      "status": "open",
-      "service_name": "cloudwatch",
-      "scenario": "CloudWatch Logs groups without retention policies accumulating costs indefinitely",
-      "alert_criteria": "CloudWatch Logs groups with \"Never Expire\" retention policy, or log data older than 90 days consuming significant storage",
-      "recommendation_action": "Set appropriate retention periods (7, 14, 30, 90, or 180 days) based on compliance requirements, export old logs to S3 for long-term archival at 87% cost reduction",
-      "risk_detail": "cost",
-      "build_priority": 1,
-      "action_value": 2,
-      "effort_level": 1,
-      "risk_value": 1,
-      "recommendation_description_detailed": "CloudWatch Logs charges $0.50/GB ingested and $0.03/GB-month for storage. Without retention policies, logs accumulate indefinitely. Most organizations only need 30-90 days of hot logs. Implementation: 1) Review log groups without retention policies, 2) Set retention based on compliance needs (30 days typical for non-production, 90+ for production), 3) Export logs older than retention period to S3 ($0.023/GB-month = 87% cheaper). One organization reduced logging costs from $1,200/month to $200/month by implementing 30-day retention plus S3 archival.",
-      "category": "cost",
-      "output_notes": null,
-      "notes": "AWS Well-Architected Framework - CloudWatch Logs is frequently overlooked cost optimization opportunity",
-      "references": [
-        "https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html",
-        "https://aws.amazon.com/cloudwatch/pricing/"
-      ],
-      "metadata": {
-        "created_at": "2025-11-06T17:41:02.278720+00:00",
-        "updated_at": "2025-11-06T17:41:02.278720+00:00",
-        "contributors": [
-          "aws-well-architected-2025"
-        ],
-        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
-      },
-      "tags": [
-        "cloudwatch-logs",
-        "log-retention",
-        "storage-optimization",
-        "archival"
-      ]
-    },
-    {
-      "id": "4305d944-eb3c-473c-b9ce-99fe6911713b",
-      "status": "open",
-      "service_name": "ecs",
-      "scenario": "user wants to remove or update inactive tasks",
-      "alert_criteria": "ecs task definition set to inactive status",
-      "recommendation_action": "delete or update task",
+      "service_name": "redshift",
+      "scenario": "Underutilized Amazon Redshift Clusters",
+      "alert_criteria": "A running cluster had less than 5% cluster-wide average CPU utilization for 99% of the last 7 days.",
+      "recommendation_action": "Consider shutting down the cluster and taking a final snapshot, or downsizing the cluster.",
       "risk_detail": "cost",
       "build_priority": 0,
-      "action_value": 1,
-      "effort_level": 1,
-      "risk_value": 1,
-      "recommendation_description_detailed": "",
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "Checks your Amazon Redshift configuration for clusters that appear to be underutilized. If an Amazon Redshift cluster has not had a connection for a prolonged period of time or is using a low amount of CPU, you can use lower-cost options such as downsizing the cluster or shutting down the cluster and taking a final snapshot. Final snapshots are retained even after you delete your cluster.",
       "category": null,
       "output_notes": null,
-      "notes": null,
-      "references": [],
+      "notes": "can beat our aws recommendations by determining which path is the correct path, and, if resizing is optimal, to which size",
+      "references": [
+        "https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-mgmt-shutdown-delete-cluster"
+      ],
       "metadata": {
         "created_at": "2025-11-04T23:07:44.651478Z",
         "updated_at": "2025-11-04T23:07:44.651478Z",
@@ -1113,423 +1099,6 @@
       ]
     },
     {
-      "id": "e9b21a0d-2fe8-4f5b-8875-52995b4cf2e7",
-      "status": "open",
-      "service_name": "s3",
-      "scenario": "users wants to automatically manage data storage tiers",
-      "alert_criteria": "s3 lifecycle manager is turned off; intelligent tiering is not enabled",
-      "recommendation_action": "turn on lifecycle manager",
-      "risk_detail": "cost, operations",
-      "build_priority": 0,
-      "action_value": 3,
-      "effort_level": 1,
-      "risk_value": 2,
-      "recommendation_description_detailed": "",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "ffc337be-4cb6-4899-b02c-d447af23221e",
-      "status": "open",
-      "service_name": "s3",
-      "scenario": "S3 buckets storing infrequently accessed data in Standard storage class without lifecycle policies",
-      "alert_criteria": "S3 buckets with >30 days old objects in Standard storage class, no lifecycle policies configured, and low GET request rates",
-      "recommendation_action": "Implement S3 Lifecycle policies to transition objects to S3 Standard-IA (30+ days), Intelligent-Tiering, Glacier (90+ days), or Deep Archive (180+ days)",
-      "risk_detail": "cost",
-      "build_priority": 1,
-      "action_value": 3,
-      "effort_level": 1,
-      "risk_value": 1,
-      "recommendation_description_detailed": "S3 storage costs can be reduced by 30-60% by implementing lifecycle policies to automatically transition objects to appropriate storage classes. Standard-IA saves ~45% for infrequently accessed data (30+ days), Glacier saves ~77% for archival (90+ days), and Glacier Deep Archive saves ~95% for long-term retention (180+ days). S3 Intelligent-Tiering automatically optimizes costs by moving objects between tiers. Lifecycle policies are free to implement with no transition fees within the same region.",
-      "category": "cost",
-      "output_notes": null,
-      "notes": "AWS Well-Architected Framework - Organizations can reduce S3 costs by 30-60% with proper lifecycle management",
-      "references": [
-        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html",
-        "https://aws.amazon.com/s3/storage-classes/"
-      ],
-      "metadata": {
-        "created_at": "2025-11-06T05:13:46.581727+00:00",
-        "updated_at": "2025-11-06T05:13:46.581727+00:00",
-        "contributors": [
-          "aws-well-architected-2025"
-        ],
-        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
-      },
-      "tags": [
-        "s3-lifecycle",
-        "storage-optimization",
-        "intelligent-tiering"
-      ]
-    },
-    {
-      "id": "5fc3d4a9-96ef-4bba-82e9-bccabe531b34",
-      "status": "open",
-      "service_name": "eks",
-      "scenario": "pods OR nodes within cluster are not appropriately sized (artur to clarify)",
-      "alert_criteria": "workloads (cpu, memory, network IOPs, etc.) for the previous 14, 30, 90 days, multiplied by 1.4 are too large...",
-      "recommendation_action": "recommend the proper size for each pod",
-      "risk_detail": "cost, performance",
-      "build_priority": null,
-      "action_value": null,
-      "effort_level": null,
-      "risk_value": null,
-      "recommendation_description_detailed": "",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "2b6ae2c7-d432-401b-8164-23782cb1b1dc",
-      "status": "open",
-      "service_name": "emr",
-      "scenario": "EMR (or other) cluster is used and task nodes are not utilizing spot instances",
-      "alert_criteria": "",
-      "recommendation_action": "use spot instances",
-      "risk_detail": "performance, cost",
-      "build_priority": 1,
-      "action_value": 3,
-      "effort_level": 2,
-      "risk_value": 2,
-      "recommendation_description_detailed": "useful for high CPU but low Memory requirements; i.e. high processing requirement but low (or no) caching required",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "08c3c3cd-25d9-4cb6-8c30-926c823276a8",
-      "status": "done",
-      "service_name": "rds",
-      "scenario": "Amazon Relational Database Service (RDS) Reserved Instance Optimization",
-      "alert_criteria": "Optimizing the purchase of RDS Reserved Instances can help reduce costs.",
-      "recommendation_action": "See the Cost Explorer page for more detailed recommendations, customization options (e.g. look-back period, payment option, etc.) and to purchase RDS Reserved Instances.",
-      "risk_detail": "cost",
-      "build_priority": 2,
-      "action_value": null,
-      "effort_level": null,
-      "risk_value": null,
-      "recommendation_description_detailed": "Checks your usage of RDS and provides recommendations on purchase of Reserved Instances to help reduce costs incurred from using RDS On-Demand. AWS generates these recommendations by analyzing your On-Demand usage for the past 30 days. We then simulate every combination of reservations in the generated category of usage in order to identify the best number of each type of Reserved Instance to purchase to maximize your savings. This check covers recommendations based on partial upfront payment option with 1-year or 3-year commitment. This check is not available to accounts linked in Consolidated Billing. Recommendations are only available for the Paying Account.",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [
-        "https://aws.amazon.com/aws-cost-management/aws-cost-explorer/"
-      ],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "3afeb36c-4c09-400f-8f70-13314ff8d578",
-      "status": "done",
-      "service_name": "rds",
-      "scenario": "Amazon RDS Idle DB Instances",
-      "alert_criteria": "An active DB instance has not had a connection in the last 7 days.",
-      "recommendation_action": "Consider taking a snapshot of the idle DB instance and then either stopping it or deleting it. Stopping the DB instance removes some of the costs for it, but does not remove storage costs. A stopped instance keeps all automated backups based upon the configured retention period. Stopping a DB instance usually incurs additional costs when compared to deleting the instance and then retaining only the final snapshot",
-      "risk_detail": "cost",
-      "build_priority": 0,
-      "action_value": null,
-      "effort_level": null,
-      "risk_value": null,
-      "recommendation_description_detailed": "Checks the configuration of your Amazon Relational Database Service (Amazon RDS) for any DB instances that appear to be idle. If a DB instance has not had a connection for a prolonged period of time, you can delete the instance to reduce costs. If persistent storage is needed for data on the instance, you can use lower-cost options such as taking and retaining a DB snapshot. Manually created DB snapshots are retained until you delete them. Data for Amazon RDS instances created in the Asia Pacific (Seoul) region (sa-east-1) is not available. We are working to fix this issue as soon as possible",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [
-        "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html"
-      ],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "a4d8f3e1-9c2b-4f7e-8a5d-6b1c9e3f2a4d",
-      "status": "open",
-      "service_name": "rds",
-      "scenario": "RDS instances with over-provisioned storage capacity without auto-scaling enabled",
-      "alert_criteria": "RDS instances with <40% storage utilization, or storage manually increased multiple times, or auto-scaling not enabled",
-      "recommendation_action": "Enable RDS Storage Auto Scaling with appropriate maximum storage threshold to automatically scale storage as needed, reducing over-provisioning waste",
-      "risk_detail": "cost",
-      "build_priority": 2,
-      "action_value": 2,
-      "effort_level": 1,
-      "risk_value": 1,
-      "recommendation_description_detailed": "RDS storage is billed based on provisioned capacity, not actual usage. Organizations often over-provision (e.g., 1TB when only 200GB used) to avoid manual scaling operations. RDS Storage Auto Scaling automatically increases storage capacity when free space falls below 10% or 5GB threshold, preventing over-provisioning. Configure maximum storage limit based on anticipated growth. Supports GP2, GP3, and Provisioned IOPS storage. Scaling occurs with zero downtime. Typical savings: 30-50% of RDS storage costs by right-sizing initial allocation.",
-      "category": "cost",
-      "output_notes": null,
-      "notes": "AWS Well-Architected Framework COST06 - Right-size RDS storage dynamically",
-      "references": [
-        "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html",
-        "https://aws.amazon.com/rds/features/storage/"
-      ],
-      "metadata": {
-        "created_at": "2025-11-06T17:41:02.278720+00:00",
-        "updated_at": "2025-11-06T17:41:02.278720+00:00",
-        "contributors": [
-          "aws-well-architected-2025"
-        ],
-        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
-      },
-      "tags": [
-        "rds-storage",
-        "auto-scaling",
-        "storage-optimization",
-        "rightsizing"
-      ]
-    },
-    {
-      "id": "b3c7e2d1-8a4f-4b6e-9c5d-7e1a8f3b2c4d",
-      "status": "open",
-      "service_name": "rds",
-      "scenario": "RDS instances using GP2 storage instead of cost-effective GP3 storage type",
-      "alert_criteria": "RDS instances with gp2 storage type, especially those with low IOPS requirements (<3000 IOPS)",
-      "recommendation_action": "Migrate RDS storage from GP2 to GP3 for 20% cost savings with same or better performance, using AWS console or modify-db-instance CLI command",
-      "risk_detail": "cost, performance",
-      "build_priority": 2,
-      "action_value": 3,
-      "effort_level": 1,
-      "risk_value": 1,
-      "recommendation_description_detailed": "GP3 storage offers 20% lower cost than GP2 with better baseline performance (3000 IOPS and 125 MB/s regardless of size vs GP2 performance scaling with size). GP3 pricing: $0.08/GB-month vs GP2 $0.10/GB-month. Migration is online with no downtime for most engines. GP3 allows independent IOPS and throughput provisioning (cost-effective for workloads needing high throughput but not high IOPS). Best candidates: databases >100GB where GP2 over-provisions performance. Calculate savings: (current_storage_GB * $0.02) * 12 months.",
-      "category": "cost",
-      "output_notes": null,
-      "notes": "AWS Well-Architected Framework COST05 - GP3 is newer, faster, and 20% cheaper than GP2",
-      "references": [
-        "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html",
-        "https://aws.amazon.com/rds/features/storage/"
-      ],
-      "metadata": {
-        "created_at": "2025-11-06T17:41:02.278720+00:00",
-        "updated_at": "2025-11-06T17:41:02.278720+00:00",
-        "contributors": [
-          "aws-well-architected-2025"
-        ],
-        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
-      },
-      "tags": [
-        "rds-storage",
-        "gp3",
-        "gp2-migration",
-        "storage-type-optimization"
-      ]
-    },
-    {
-      "id": "b2c3d4e5-f6a7-4890-b123-456789abcdef",
-      "status": "open",
-      "service_name": "rds",
-      "scenario": "Database queries repeated without caching layer implementation",
-      "alert_criteria": "RDS DatabaseConnections >80% of max, identical SELECT queries >1000/min, or query response time >100ms for cacheable data",
-      "recommendation_action": "Implement Cache-Aside pattern: 1) Deploy ElastiCache Redis/Memcached cluster, 2) Modify application to check cache before database, 3) Set appropriate TTL (5min for product catalog, 1hr for reference data), 4) Monitor cache hit rate (target >80%)",
-      "risk_detail": "performance, cost, reliability",
-      "build_priority": 1,
-      "action_value": 3,
-      "effort_level": 2,
-      "risk_value": 2,
-      "recommendation_description_detailed": "Cache-Aside pattern reduces database load by 70-95% for read-heavy workloads. Application checks cache first; on miss, queries database and populates cache. Without caching: 10,000 reads/sec on RDS = $500/month + performance degradation. With ElastiCache: cache.r6g.large = $175/month + 95% cache hit rate = $200 total vs $500 (60% savings). Additional benefits: reduced RDS instance size, improved response time (1ms cache vs 50ms database). Critical for: product catalogs, user profiles, reference data, API responses.",
-      "category": "database",
-      "architectural_patterns": [
-        {
-          "pattern_name": "Cache-Aside",
-          "relationship": "missing_implementation",
-          "description": "No caching layer between application and database for frequently accessed data"
-        }
-      ],
-      "pattern_implementation_guidance": "Create ElastiCache Redis cluster (Multi-AZ for production), update application connection string, implement cache access pattern: GET from cache -> if miss -> GET from DB -> SET in cache with TTL, use consistent cache key format (service:entity:id), handle cache failures gracefully (fallback to DB), set CloudWatch alarms for cache hit rate <70%.",
-      "output_notes": null,
-      "notes": "AWS Database Caching Strategies - Cache-Aside Pattern",
-      "references": [
-        "https://docs.aws.amazon.com/whitepapers/latest/database-caching-strategies-using-redis/caching-patterns.html",
-        "https://aws.amazon.com/caching/best-practices/",
-        "https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Strategies.html"
-      ],
-      "metadata": {
-        "created_at": "2025-11-06T20:44:23.794745+00:00",
-        "updated_at": "2025-11-06T20:44:23.794745+00:00",
-        "contributors": [
-          "pattern-integration-2025"
-        ],
-        "source": "AWS Database Caching Strategies - Cache-Aside Pattern"
-      },
-      "tags": [
-        "pattern:cache-aside",
-        "performance-pattern",
-        "elasticache",
-        "database-optimization",
-        "read-heavy-workload"
-      ],
-      "detection_methods": [
-        {
-          "method": "RDS Performance Insights",
-          "details": "Top SQL queries showing identical SELECT statements with >1000 executions/minute"
-        }
-      ],
-      "remediation_examples": [
-        {
-          "language": "python",
-          "code": "import boto3\nimport json\nfrom redis import Redis\n\nredis_client = Redis(host='elasticache-endpoint', port=6379)\n\ndef get_user_profile(user_id):\n    cache_key = f'user:profile:{user_id}'\n    cached = redis_client.get(cache_key)\n    if cached:\n        return json.loads(cached)\n    \n    # Cache miss - query database\n    result = query_database(user_id)\n    redis_client.setex(cache_key, 300, json.dumps(result))  # 5-min TTL\n    return result",
-          "description": "Python implementation of Cache-Aside with ElastiCache Redis and RDS"
-        }
-      ]
-    },
-    {
-      "id": "57dd389a-4580-44db-a15e-499506415d56",
-      "status": "open",
-      "service_name": "route 53",
-      "scenario": "Amazon Route 53 Latency Resource Record Sets",
-      "alert_criteria": "resources exist in multiple regions and only one latency resource record set is configured for a particular domain name.",
-      "recommendation_action": "define a latency resource record set for each region",
-      "risk_detail": "cost, reliability",
-      "build_priority": 0,
-      "action_value": 2,
-      "effort_level": 3,
-      "risk_value": 1,
-      "recommendation_description_detailed": "Checks for Amazon Route 53 latency record sets that are configured inefficiently. To allow Amazon Route 53 to route queries to the region with the lowest network latency, you should create latency resource record sets for a particular domain name (such as example.com) in different regions. If you create only one latency resource record set for a domain name, all queries are routed to one region, and you pay extra for latency-based routing without getting the benefits. Hosted zones created by AWS services won’t appear in your check results.",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [
-        "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-latency"
-      ],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "daa4711f-c1d3-4104-a9e4-f709af67ecf7",
-      "status": "open",
-      "service_name": "redshift",
-      "scenario": "Amazon Redshift Reserved Node Optimization",
-      "alert_criteria": "Optimizing the purchase of Redshift Reserved Nodes can help reduce costs.",
-      "recommendation_action": "See the Cost Explorer page for more detailed recommendations, customization options (e.g. look-back period, payment option, etc.) and to purchase Redshift Reserved Nodes",
-      "risk_detail": "cost",
-      "build_priority": 2,
-      "action_value": null,
-      "effort_level": null,
-      "risk_value": null,
-      "recommendation_description_detailed": "Checks your usage of Redshift and provides recommendations on purchase of Reserved Nodes to help reduce costs incurred from using Redshift On-Demand. AWS generates these recommendations by analyzing your On-Demand usage for the past 30 days. We then simulate every combination of reservations in the generated category of usage in order to identify the best number of each type of Reserved Nodes to purchase to maximize your savings. This check covers recommendations based on partial upfront payment option with 1-year or 3-year commitment. This check is not available to accounts linked in Consolidated Billing. Recommendations are only available for the Paying Account.",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [
-        "https://aws.amazon.com/aws-cost-management/aws-cost-explorer/"
-      ],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "7d5eed76-e0e9-41d3-98ca-5d1becff0c18",
-      "status": "open",
-      "service_name": "redshift",
-      "scenario": "Underutilized Amazon Redshift Clusters",
-      "alert_criteria": "A running cluster has not had a connection in the last 7 days.",
-      "recommendation_action": "Consider shutting down the cluster and taking a final snapshot, or downsizing the cluster.",
-      "risk_detail": "cost",
-      "build_priority": 0,
-      "action_value": null,
-      "effort_level": null,
-      "risk_value": null,
-      "recommendation_description_detailed": "Checks your Amazon Redshift configuration for clusters that appear to be underutilized. If an Amazon Redshift cluster has not had a connection for a prolonged period of time or is using a low amount of CPU, you can use lower-cost options such as downsizing the cluster or shutting down the cluster and taking a final snapshot. Final snapshots are retained even after you delete your cluster.",
-      "category": null,
-      "output_notes": null,
-      "notes": "can beat our aws recommendations by determining which path is the correct path, and, if resizing is optimal, to which size",
-      "references": [
-        "https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-mgmt-shutdown-delete-cluster"
-      ],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "0c1b66db-e282-4fbe-91cb-5c49cc88427a",
-      "status": "open",
-      "service_name": "redshift",
-      "scenario": "Underutilized Amazon Redshift Clusters",
-      "alert_criteria": "A running cluster had less than 5% cluster-wide average CPU utilization for 99% of the last 7 days.",
-      "recommendation_action": "Consider shutting down the cluster and taking a final snapshot, or downsizing the cluster.",
-      "risk_detail": "cost",
-      "build_priority": 0,
-      "action_value": null,
-      "effort_level": null,
-      "risk_value": null,
-      "recommendation_description_detailed": "Checks your Amazon Redshift configuration for clusters that appear to be underutilized. If an Amazon Redshift cluster has not had a connection for a prolonged period of time or is using a low amount of CPU, you can use lower-cost options such as downsizing the cluster or shutting down the cluster and taking a final snapshot. Final snapshots are retained even after you delete your cluster.",
-      "category": null,
-      "output_notes": null,
-      "notes": "can beat our aws recommendations by determining which path is the correct path, and, if resizing is optimal, to which size",
-      "references": [
-        "https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-mgmt-shutdown-delete-cluster"
-      ],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
       "id": "51e22636-4dae-4f77-ab58-c4f4961013a2",
       "status": "open",
       "service_name": "lambda",
@@ -1784,6 +1353,219 @@
       ]
     },
     {
+      "id": "08c3c3cd-25d9-4cb6-8c30-926c823276a8",
+      "status": "done",
+      "service_name": "rds",
+      "scenario": "Amazon Relational Database Service (RDS) Reserved Instance Optimization",
+      "alert_criteria": "Optimizing the purchase of RDS Reserved Instances can help reduce costs.",
+      "recommendation_action": "See the Cost Explorer page for more detailed recommendations, customization options (e.g. look-back period, payment option, etc.) and to purchase RDS Reserved Instances.",
+      "risk_detail": "cost",
+      "build_priority": 2,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "Checks your usage of RDS and provides recommendations on purchase of Reserved Instances to help reduce costs incurred from using RDS On-Demand. AWS generates these recommendations by analyzing your On-Demand usage for the past 30 days. We then simulate every combination of reservations in the generated category of usage in order to identify the best number of each type of Reserved Instance to purchase to maximize your savings. This check covers recommendations based on partial upfront payment option with 1-year or 3-year commitment. This check is not available to accounts linked in Consolidated Billing. Recommendations are only available for the Paying Account.",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://aws.amazon.com/aws-cost-management/aws-cost-explorer/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "3afeb36c-4c09-400f-8f70-13314ff8d578",
+      "status": "done",
+      "service_name": "rds",
+      "scenario": "Amazon RDS Idle DB Instances",
+      "alert_criteria": "An active DB instance has not had a connection in the last 7 days.",
+      "recommendation_action": "Consider taking a snapshot of the idle DB instance and then either stopping it or deleting it. Stopping the DB instance removes some of the costs for it, but does not remove storage costs. A stopped instance keeps all automated backups based upon the configured retention period. Stopping a DB instance usually incurs additional costs when compared to deleting the instance and then retaining only the final snapshot",
+      "risk_detail": "cost",
+      "build_priority": 0,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "Checks the configuration of your Amazon Relational Database Service (Amazon RDS) for any DB instances that appear to be idle. If a DB instance has not had a connection for a prolonged period of time, you can delete the instance to reduce costs. If persistent storage is needed for data on the instance, you can use lower-cost options such as taking and retaining a DB snapshot. Manually created DB snapshots are retained until you delete them. Data for Amazon RDS instances created in the Asia Pacific (Seoul) region (sa-east-1) is not available. We are working to fix this issue as soon as possible",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "a4d8f3e1-9c2b-4f7e-8a5d-6b1c9e3f2a4d",
+      "status": "open",
+      "service_name": "rds",
+      "scenario": "RDS instances with over-provisioned storage capacity without auto-scaling enabled",
+      "alert_criteria": "RDS instances with <40% storage utilization, or storage manually increased multiple times, or auto-scaling not enabled",
+      "recommendation_action": "Enable RDS Storage Auto Scaling with appropriate maximum storage threshold to automatically scale storage as needed, reducing over-provisioning waste",
+      "risk_detail": "cost",
+      "build_priority": 2,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "RDS storage is billed based on provisioned capacity, not actual usage. Organizations often over-provision (e.g., 1TB when only 200GB used) to avoid manual scaling operations. RDS Storage Auto Scaling automatically increases storage capacity when free space falls below 10% or 5GB threshold, preventing over-provisioning. Configure maximum storage limit based on anticipated growth. Supports GP2, GP3, and Provisioned IOPS storage. Scaling occurs with zero downtime. Typical savings: 30-50% of RDS storage costs by right-sizing initial allocation.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework COST06 - Right-size RDS storage dynamically",
+      "references": [
+        "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html",
+        "https://aws.amazon.com/rds/features/storage/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T17:41:02.278720+00:00",
+        "updated_at": "2025-11-06T17:41:02.278720+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "rds-storage",
+        "auto-scaling",
+        "storage-optimization",
+        "rightsizing"
+      ]
+    },
+    {
+      "id": "b3c7e2d1-8a4f-4b6e-9c5d-7e1a8f3b2c4d",
+      "status": "open",
+      "service_name": "rds",
+      "scenario": "RDS instances using GP2 storage instead of cost-effective GP3 storage type",
+      "alert_criteria": "RDS instances with gp2 storage type, especially those with low IOPS requirements (<3000 IOPS)",
+      "recommendation_action": "Migrate RDS storage from GP2 to GP3 for 20% cost savings with same or better performance, using AWS console or modify-db-instance CLI command",
+      "risk_detail": "cost, performance",
+      "build_priority": 2,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "GP3 storage offers 20% lower cost than GP2 with better baseline performance (3000 IOPS and 125 MB/s regardless of size vs GP2 performance scaling with size). GP3 pricing: $0.08/GB-month vs GP2 $0.10/GB-month. Migration is online with no downtime for most engines. GP3 allows independent IOPS and throughput provisioning (cost-effective for workloads needing high throughput but not high IOPS). Best candidates: databases >100GB where GP2 over-provisions performance. Calculate savings: (current_storage_GB * $0.02) * 12 months.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework COST05 - GP3 is newer, faster, and 20% cheaper than GP2",
+      "references": [
+        "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html",
+        "https://aws.amazon.com/rds/features/storage/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T17:41:02.278720+00:00",
+        "updated_at": "2025-11-06T17:41:02.278720+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "rds-storage",
+        "gp3",
+        "gp2-migration",
+        "storage-type-optimization"
+      ]
+    },
+    {
+      "id": "b2c3d4e5-f6a7-4890-b123-456789abcdef",
+      "status": "open",
+      "service_name": "rds",
+      "scenario": "Database queries repeated without caching layer implementation",
+      "alert_criteria": "RDS DatabaseConnections >80% of max, identical SELECT queries >1000/min, or query response time >100ms for cacheable data",
+      "recommendation_action": "Implement Cache-Aside pattern: 1) Deploy ElastiCache Redis/Memcached cluster, 2) Modify application to check cache before database, 3) Set appropriate TTL (5min for product catalog, 1hr for reference data), 4) Monitor cache hit rate (target >80%)",
+      "risk_detail": "performance, cost, reliability",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 2,
+      "recommendation_description_detailed": "Cache-Aside pattern reduces database load by 70-95% for read-heavy workloads. Application checks cache first; on miss, queries database and populates cache. Without caching: 10,000 reads/sec on RDS = $500/month + performance degradation. With ElastiCache: cache.r6g.large = $175/month + 95% cache hit rate = $200 total vs $500 (60% savings). Additional benefits: reduced RDS instance size, improved response time (1ms cache vs 50ms database). Critical for: product catalogs, user profiles, reference data, API responses.",
+      "category": "database",
+      "architectural_patterns": [
+        {
+          "pattern_name": "Cache-Aside",
+          "relationship": "missing_implementation",
+          "description": "No caching layer between application and database for frequently accessed data"
+        }
+      ],
+      "pattern_implementation_guidance": "Create ElastiCache Redis cluster (Multi-AZ for production), update application connection string, implement cache access pattern: GET from cache -> if miss -> GET from DB -> SET in cache with TTL, use consistent cache key format (service:entity:id), handle cache failures gracefully (fallback to DB), set CloudWatch alarms for cache hit rate <70%.",
+      "output_notes": null,
+      "notes": "AWS Database Caching Strategies - Cache-Aside Pattern",
+      "references": [
+        "https://docs.aws.amazon.com/whitepapers/latest/database-caching-strategies-using-redis/caching-patterns.html",
+        "https://aws.amazon.com/caching/best-practices/",
+        "https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Strategies.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T20:44:23.794745+00:00",
+        "updated_at": "2025-11-06T20:44:23.794745+00:00",
+        "contributors": [
+          "pattern-integration-2025"
+        ],
+        "source": "AWS Database Caching Strategies - Cache-Aside Pattern"
+      },
+      "tags": [
+        "pattern:cache-aside",
+        "performance-pattern",
+        "elasticache",
+        "database-optimization",
+        "read-heavy-workload"
+      ],
+      "detection_methods": [
+        {
+          "method": "RDS Performance Insights",
+          "details": "Top SQL queries showing identical SELECT statements with >1000 executions/minute"
+        }
+      ],
+      "remediation_examples": [
+        {
+          "language": "python",
+          "code": "import boto3\nimport json\nfrom redis import Redis\n\nredis_client = Redis(host='elasticache-endpoint', port=6379)\n\ndef get_user_profile(user_id):\n    cache_key = f'user:profile:{user_id}'\n    cached = redis_client.get(cache_key)\n    if cached:\n        return json.loads(cached)\n    \n    # Cache miss - query database\n    result = query_database(user_id)\n    redis_client.setex(cache_key, 300, json.dumps(result))  # 5-min TTL\n    return result",
+          "description": "Python implementation of Cache-Aside with ElastiCache Redis and RDS"
+        }
+      ]
+    },
+    {
+      "id": "4305d944-eb3c-473c-b9ce-99fe6911713b",
+      "status": "open",
+      "service_name": "ecs",
+      "scenario": "user wants to remove or update inactive tasks",
+      "alert_criteria": "ecs task definition set to inactive status",
+      "recommendation_action": "delete or update task",
+      "risk_detail": "cost",
+      "build_priority": 0,
+      "action_value": 1,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
       "id": "277608d6-b89d-459a-ab2d-e2c05ac47af3",
       "status": "open",
       "service_name": "ALL",
@@ -1809,6 +1591,224 @@
         "source": "Initial CSV Import"
       },
       "tags": []
+    },
+    {
+      "id": "a03af80d-8c8a-492d-9aa7-d32a2bcbaa17",
+      "status": "open",
+      "service_name": "networking",
+      "scenario": "High data transfer costs from cross-region or internet data egress without optimization",
+      "alert_criteria": "Significant data transfer charges from cross-region transfers, CloudFront not used for content delivery, or compute/storage in different regions",
+      "recommendation_action": "Use CloudFront for content delivery (free S3-to-CloudFront transfer), co-locate resources in same region, use VPC endpoints, and PrivateLink for AWS service access",
+      "risk_detail": "cost",
+      "build_priority": 2,
+      "action_value": 2,
+      "effort_level": 3,
+      "risk_value": 1,
+      "recommendation_description_detailed": "Data transfer costs can represent 10-20% of AWS bills when not optimized. Key strategies: 1) Use CloudFront for content delivery (data transfer from S3 to CloudFront is free), 2) Keep compute and storage in same region/AZ, 3) Use VPC endpoints for S3/DynamoDB to avoid internet gateway charges, 4) Leverage AWS PrivateLink for service-to-service communication, 5) Use S3 Transfer Acceleration selectively. Cross-region transfers cost $0.02/GB while same-region is free.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework - Data transfer optimization",
+      "references": [
+        "https://aws.amazon.com/blogs/architecture/overview-of-data-transfer-costs-for-common-architectures/",
+        "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T05:13:46.581727+00:00",
+        "updated_at": "2025-11-06T05:13:46.581727+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "data-transfer",
+        "networking-costs",
+        "cloudfront",
+        "vpc-endpoints"
+      ]
+    },
+    {
+      "id": "2f8c9e4a-1d5b-4c8f-9a6e-7b3d2e1f4a5c",
+      "status": "open",
+      "service_name": "networking",
+      "scenario": "NAT Gateway incurring high costs from cross-AZ data transfer and AWS service traffic",
+      "alert_criteria": "NAT Gateway data processing charges >$100/month, or traffic to S3/DynamoDB/other AWS services routing through NAT Gateway instead of VPC endpoints",
+      "recommendation_action": "Deploy VPC endpoints for S3 and DynamoDB (free), use Interface VPC endpoints for other AWS services, ensure NAT Gateway per AZ to avoid cross-AZ charges, review VPC Flow Logs to identify optimization opportunities",
+      "risk_detail": "cost",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 1,
+      "recommendation_description_detailed": "NAT Gateways charge $0.045/GB for data processing plus hourly fees ($0.045/hour). Major cost drivers: 1) Cross-AZ traffic ($0.01/GB additional), 2) AWS service traffic (S3, DynamoDB) that could use free VPC endpoints, 3) Multiple idle NAT Gateways. Solution: Deploy VPC endpoints for S3/DynamoDB (free data transfer), use Interface endpoints for other services, deploy one NAT Gateway per AZ to eliminate cross-AZ charges. Use VPC Flow Logs temporarily to analyze traffic patterns. Typical savings: 40-60% of NAT Gateway costs.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework COST08 - NAT Gateway is often the #1 networking cost driver",
+      "references": [
+        "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html",
+        "https://aws.amazon.com/vpc/pricing/",
+        "https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T17:41:02.278720+00:00",
+        "updated_at": "2025-11-06T17:41:02.278720+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "nat-gateway",
+        "vpc-endpoints",
+        "data-transfer",
+        "networking-optimization"
+      ]
+    },
+    {
+      "id": "e1b071d7-7358-4318-9021-015de19b783b",
+      "status": "done",
+      "service_name": "elasticsearch",
+      "scenario": "Amazon Elasticsearch Reserved Instance Optimization",
+      "alert_criteria": "Optimizing the purchase of Elasticsearch Reserved Instances can help reduce costs.",
+      "recommendation_action": "See the Cost Explorer page for more detailed recommendations, customization options (e.g. look-back period, payment option, etc.) and to purchase Elasticsearch Reserved Instances.",
+      "risk_detail": "cost",
+      "build_priority": 2,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "Checks your usage of Elasticsearch and provides recommendations on purchase of Reserved Instances to help reduce costs incurred from using Elasticsearch On-Demand. AWS generates these recommendations by analyzing your On-Demand usage for the past 30 days. We then simulate every combination of reservations in the generated category of usage in order to identify the best number of each type of Reserved Instance to purchase to maximize your savings. This check covers recommendations based on partial upfront payment option with 1-year or 3-year commitment. This check is not available to accounts linked in Consolidated Billing. Recommendations are only available for the Paying Account.",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://aws.amazon.com/aws-cost-management/aws-cost-explorer/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "57dd389a-4580-44db-a15e-499506415d56",
+      "status": "open",
+      "service_name": "route 53",
+      "scenario": "Amazon Route 53 Latency Resource Record Sets",
+      "alert_criteria": "resources exist in multiple regions and only one latency resource record set is configured for a particular domain name.",
+      "recommendation_action": "define a latency resource record set for each region",
+      "risk_detail": "cost, reliability",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 3,
+      "risk_value": 1,
+      "recommendation_description_detailed": "Checks for Amazon Route 53 latency record sets that are configured inefficiently. To allow Amazon Route 53 to route queries to the region with the lowest network latency, you should create latency resource record sets for a particular domain name (such as example.com) in different regions. If you create only one latency resource record set for a domain name, all queries are routed to one region, and you pay extra for latency-based routing without getting the benefits. Hosted zones created by AWS services won’t appear in your check results.",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-latency"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "8dfe3ba4-c72f-4ed8-9a07-f88c1ccc8b3b",
+      "status": "done",
+      "service_name": "ebs",
+      "scenario": "user wants to ensure that only necessary / needed snapshots are available for use",
+      "alert_criteria": "if snapshot is older than seven days and/or is older than another snapshot made from an identical volume, then recommend deletion",
+      "recommendation_action": "delete snapshot",
+      "risk_detail": "cost",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 1,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "9b4bd9b6-9139-4e8d-a157-055bbb6bacc3",
+      "status": "open",
+      "service_name": "ebs",
+      "scenario": "user wants to ensure ebs volumes are deleted when an instance is terminated",
+      "alert_criteria": "\"delete on termination\" flag on instances is set to false",
+      "recommendation_action": "set \"delete on termination\" flag to true (enable automatic deletion upon instance termination)",
+      "risk_detail": "cost",
+      "build_priority": 0,
+      "action_value": 1,
+      "effort_level": 0,
+      "risk_value": 0,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "8312c521-673e-48df-aca3-ae6a284f7079",
+      "status": "open",
+      "service_name": "ebs",
+      "scenario": "Orphaned EBS snapshots and AMIs consuming storage costs after source volumes deleted",
+      "alert_criteria": "EBS snapshots exist where source volume has been deleted, or AMIs registered without associated running instances for 90+ days",
+      "recommendation_action": "Use AWS Data Lifecycle Manager to automate snapshot retention policies and identify/delete orphaned snapshots and unused AMIs",
+      "risk_detail": "cost",
+      "build_priority": 2,
+      "action_value": 2,
+      "effort_level": 2,
+      "risk_value": 1,
+      "recommendation_description_detailed": "COST04-BP05: Orphaned snapshots accumulate when instances are terminated without cleanup processes. These snapshots incur storage costs (~$0.05/GB-month) indefinitely. Implement AWS Data Lifecycle Manager for automated snapshot creation/deletion policies. Identify orphaned snapshots by comparing snapshot volume IDs against active volumes. Review AMIs older than 90 days and deregister unused images along with associated snapshots. Typical organizations can reduce snapshot costs by 40-70% through proper lifecycle management.",
+      "category": "cost",
+      "output_notes": null,
+      "notes": "AWS Well-Architected Framework COST04-BP05 - Enforce data retention policies",
+      "references": [
+        "https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/cost_decomissioning_resources_data_retention.html",
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T05:13:46.581727+00:00",
+        "updated_at": "2025-11-06T05:13:46.581727+00:00",
+        "contributors": [
+          "aws-well-architected-2025"
+        ],
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+      },
+      "tags": [
+        "ebs-snapshots",
+        "orphaned-resources",
+        "data-lifecycle-manager",
+        "ami-cleanup"
+      ]
     }
   ]
 }

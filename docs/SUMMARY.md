@@ -1,7 +1,7 @@
 # AWS Misconfiguration Database - Summary
 
 **Total Misconfigurations:** 288
-**Last Updated:** 2025-11-06 20:50:16 UTC
+**Last Updated:** 2025-11-06 20:50:45 UTC
 
 ## Overview
 
@@ -53,8 +53,8 @@ performance, reliability, and operational best practices.
 | operations | 6 |
 | compute | 3 |
 | networking | 1 |
-| database | 1 |
 | messaging | 1 |
+| database | 1 |
 
 ### By Priority
 

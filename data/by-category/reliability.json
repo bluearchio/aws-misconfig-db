@@ -93,149 +93,6 @@
       ]
     },
     {
-      "id": "57fdeba4-4823-4bd7-957f-5cb8b0d9f84e",
-      "status": "pending",
-      "service_name": "ecs",
-      "scenario": "- user wants to increase the reliability of their ecs sevices / tasks and/or\n- user has been experiencing frequent service failures and/or\n- users' ecs services have been failing health checks",
-      "alert_criteria": "- fargate launch type and/or\n- tasks have transitioned to a failed state > 3 times in the last 21 day and/or \n- are failing healthchecks",
-      "recommendation_action": "enable deployment rollback / circut breaker",
-      "risk_detail": "reliability",
-      "build_priority": 0,
-      "action_value": 2,
-      "effort_level": 1,
-      "risk_value": 3,
-      "recommendation_description_detailed": "this will cause the service to automatically rollback to the last stable state",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "c727a01a-e43a-4157-a80c-21dc130a50c5",
-      "status": "pending",
-      "service_name": "elastic beanstalk",
-      "scenario": "user wants to make sure all environments are healthy",
-      "alert_criteria": "environment != healthy",
-      "recommendation_action": "see logs to address issue or delete environment",
-      "risk_detail": "operations, reliability",
-      "build_priority": 0,
-      "action_value": 1,
-      "effort_level": 1,
-      "risk_value": 3,
-      "recommendation_description_detailed": "see documentation for alert message details",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [
-        "https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html"
-      ],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
-      "id": "b2c3d4e5-f6a7-4890-b123-456789abcdef",
-      "status": "open",
-      "service_name": "rds",
-      "scenario": "Database queries repeated without caching layer implementation",
-      "alert_criteria": "RDS DatabaseConnections >80% of max, identical SELECT queries >1000/min, or query response time >100ms for cacheable data",
-      "recommendation_action": "Implement Cache-Aside pattern: 1) Deploy ElastiCache Redis/Memcached cluster, 2) Modify application to check cache before database, 3) Set appropriate TTL (5min for product catalog, 1hr for reference data), 4) Monitor cache hit rate (target >80%)",
-      "risk_detail": "performance, cost, reliability",
-      "build_priority": 1,
-      "action_value": 3,
-      "effort_level": 2,
-      "risk_value": 2,
-      "recommendation_description_detailed": "Cache-Aside pattern reduces database load by 70-95% for read-heavy workloads. Application checks cache first; on miss, queries database and populates cache. Without caching: 10,000 reads/sec on RDS = $500/month + performance degradation. With ElastiCache: cache.r6g.large = $175/month + 95% cache hit rate = $200 total vs $500 (60% savings). Additional benefits: reduced RDS instance size, improved response time (1ms cache vs 50ms database). Critical for: product catalogs, user profiles, reference data, API responses.",
-      "category": "database",
-      "architectural_patterns": [
-        {
-          "pattern_name": "Cache-Aside",
-          "relationship": "missing_implementation",
-          "description": "No caching layer between application and database for frequently accessed data"
-        }
-      ],
-      "pattern_implementation_guidance": "Create ElastiCache Redis cluster (Multi-AZ for production), update application connection string, implement cache access pattern: GET from cache -> if miss -> GET from DB -> SET in cache with TTL, use consistent cache key format (service:entity:id), handle cache failures gracefully (fallback to DB), set CloudWatch alarms for cache hit rate <70%.",
-      "output_notes": null,
-      "notes": "AWS Database Caching Strategies - Cache-Aside Pattern",
-      "references": [
-        "https://docs.aws.amazon.com/whitepapers/latest/database-caching-strategies-using-redis/caching-patterns.html",
-        "https://aws.amazon.com/caching/best-practices/",
-        "https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Strategies.html"
-      ],
-      "metadata": {
-        "created_at": "2025-11-06T20:44:23.794745+00:00",
-        "updated_at": "2025-11-06T20:44:23.794745+00:00",
-        "contributors": [
-          "pattern-integration-2025"
-        ],
-        "source": "AWS Database Caching Strategies - Cache-Aside Pattern"
-      },
-      "tags": [
-        "pattern:cache-aside",
-        "performance-pattern",
-        "elasticache",
-        "database-optimization",
-        "read-heavy-workload"
-      ],
-      "detection_methods": [
-        {
-          "method": "RDS Performance Insights",
-          "details": "Top SQL queries showing identical SELECT statements with >1000 executions/minute"
-        }
-      ],
-      "remediation_examples": [
-        {
-          "language": "python",
-          "code": "import boto3\nimport json\nfrom redis import Redis\n\nredis_client = Redis(host='elasticache-endpoint', port=6379)\n\ndef get_user_profile(user_id):\n    cache_key = f'user:profile:{user_id}'\n    cached = redis_client.get(cache_key)\n    if cached:\n        return json.loads(cached)\n    \n    # Cache miss - query database\n    result = query_database(user_id)\n    redis_client.setex(cache_key, 300, json.dumps(result))  # 5-min TTL\n    return result",
-          "description": "Python implementation of Cache-Aside with ElastiCache Redis and RDS"
-        }
-      ]
-    },
-    {
-      "id": "57dd389a-4580-44db-a15e-499506415d56",
-      "status": "open",
-      "service_name": "route 53",
-      "scenario": "Amazon Route 53 Latency Resource Record Sets",
-      "alert_criteria": "resources exist in multiple regions and only one latency resource record set is configured for a particular domain name.",
-      "recommendation_action": "define a latency resource record set for each region",
-      "risk_detail": "cost, reliability",
-      "build_priority": 0,
-      "action_value": 2,
-      "effort_level": 3,
-      "risk_value": 1,
-      "recommendation_description_detailed": "Checks for Amazon Route 53 latency record sets that are configured inefficiently. To allow Amazon Route 53 to route queries to the region with the lowest network latency, you should create latency resource record sets for a particular domain name (such as example.com) in different regions. If you create only one latency resource record set for a domain name, all queries are routed to one region, and you pay extra for latency-based routing without getting the benefits. Hosted zones created by AWS services won’t appear in your check results.",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [
-        "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-latency"
-      ],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
       "id": "a1b2c3d4-e5f6-4789-a012-3456789abcde",
       "status": "open",
       "service_name": "lambda",
@@ -444,6 +301,149 @@
           "description": "Set reserved concurrency for critical function isolation"
         }
       ]
+    },
+    {
+      "id": "b2c3d4e5-f6a7-4890-b123-456789abcdef",
+      "status": "open",
+      "service_name": "rds",
+      "scenario": "Database queries repeated without caching layer implementation",
+      "alert_criteria": "RDS DatabaseConnections >80% of max, identical SELECT queries >1000/min, or query response time >100ms for cacheable data",
+      "recommendation_action": "Implement Cache-Aside pattern: 1) Deploy ElastiCache Redis/Memcached cluster, 2) Modify application to check cache before database, 3) Set appropriate TTL (5min for product catalog, 1hr for reference data), 4) Monitor cache hit rate (target >80%)",
+      "risk_detail": "performance, cost, reliability",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 2,
+      "recommendation_description_detailed": "Cache-Aside pattern reduces database load by 70-95% for read-heavy workloads. Application checks cache first; on miss, queries database and populates cache. Without caching: 10,000 reads/sec on RDS = $500/month + performance degradation. With ElastiCache: cache.r6g.large = $175/month + 95% cache hit rate = $200 total vs $500 (60% savings). Additional benefits: reduced RDS instance size, improved response time (1ms cache vs 50ms database). Critical for: product catalogs, user profiles, reference data, API responses.",
+      "category": "database",
+      "architectural_patterns": [
+        {
+          "pattern_name": "Cache-Aside",
+          "relationship": "missing_implementation",
+          "description": "No caching layer between application and database for frequently accessed data"
+        }
+      ],
+      "pattern_implementation_guidance": "Create ElastiCache Redis cluster (Multi-AZ for production), update application connection string, implement cache access pattern: GET from cache -> if miss -> GET from DB -> SET in cache with TTL, use consistent cache key format (service:entity:id), handle cache failures gracefully (fallback to DB), set CloudWatch alarms for cache hit rate <70%.",
+      "output_notes": null,
+      "notes": "AWS Database Caching Strategies - Cache-Aside Pattern",
+      "references": [
+        "https://docs.aws.amazon.com/whitepapers/latest/database-caching-strategies-using-redis/caching-patterns.html",
+        "https://aws.amazon.com/caching/best-practices/",
+        "https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Strategies.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-06T20:44:23.794745+00:00",
+        "updated_at": "2025-11-06T20:44:23.794745+00:00",
+        "contributors": [
+          "pattern-integration-2025"
+        ],
+        "source": "AWS Database Caching Strategies - Cache-Aside Pattern"
+      },
+      "tags": [
+        "pattern:cache-aside",
+        "performance-pattern",
+        "elasticache",
+        "database-optimization",
+        "read-heavy-workload"
+      ],
+      "detection_methods": [
+        {
+          "method": "RDS Performance Insights",
+          "details": "Top SQL queries showing identical SELECT statements with >1000 executions/minute"
+        }
+      ],
+      "remediation_examples": [
+        {
+          "language": "python",
+          "code": "import boto3\nimport json\nfrom redis import Redis\n\nredis_client = Redis(host='elasticache-endpoint', port=6379)\n\ndef get_user_profile(user_id):\n    cache_key = f'user:profile:{user_id}'\n    cached = redis_client.get(cache_key)\n    if cached:\n        return json.loads(cached)\n    \n    # Cache miss - query database\n    result = query_database(user_id)\n    redis_client.setex(cache_key, 300, json.dumps(result))  # 5-min TTL\n    return result",
+          "description": "Python implementation of Cache-Aside with ElastiCache Redis and RDS"
+        }
+      ]
+    },
+    {
+      "id": "57fdeba4-4823-4bd7-957f-5cb8b0d9f84e",
+      "status": "pending",
+      "service_name": "ecs",
+      "scenario": "- user wants to increase the reliability of their ecs sevices / tasks and/or\n- user has been experiencing frequent service failures and/or\n- users' ecs services have been failing health checks",
+      "alert_criteria": "- fargate launch type and/or\n- tasks have transitioned to a failed state > 3 times in the last 21 day and/or \n- are failing healthchecks",
+      "recommendation_action": "enable deployment rollback / circut breaker",
+      "risk_detail": "reliability",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 3,
+      "recommendation_description_detailed": "this will cause the service to automatically rollback to the last stable state",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "57dd389a-4580-44db-a15e-499506415d56",
+      "status": "open",
+      "service_name": "route 53",
+      "scenario": "Amazon Route 53 Latency Resource Record Sets",
+      "alert_criteria": "resources exist in multiple regions and only one latency resource record set is configured for a particular domain name.",
+      "recommendation_action": "define a latency resource record set for each region",
+      "risk_detail": "cost, reliability",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 3,
+      "risk_value": 1,
+      "recommendation_description_detailed": "Checks for Amazon Route 53 latency record sets that are configured inefficiently. To allow Amazon Route 53 to route queries to the region with the lowest network latency, you should create latency resource record sets for a particular domain name (such as example.com) in different regions. If you create only one latency resource record set for a domain name, all queries are routed to one region, and you pay extra for latency-based routing without getting the benefits. Hosted zones created by AWS services won’t appear in your check results.",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-latency"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "c727a01a-e43a-4157-a80c-21dc130a50c5",
+      "status": "pending",
+      "service_name": "elastic beanstalk",
+      "scenario": "user wants to make sure all environments are healthy",
+      "alert_criteria": "environment != healthy",
+      "recommendation_action": "see logs to address issue or delete environment",
+      "risk_detail": "operations, reliability",
+      "build_priority": 0,
+      "action_value": 1,
+      "effort_level": 1,
+      "risk_value": 3,
+      "recommendation_description_detailed": "see documentation for alert message details",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
     }
   ]
 }
