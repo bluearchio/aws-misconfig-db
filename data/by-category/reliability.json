@@ -120,35 +120,6 @@
       "tags": []
     },
     {
-      "id": "57dd389a-4580-44db-a15e-499506415d56",
-      "status": "open",
-      "service_name": "route 53",
-      "scenario": "Amazon Route 53 Latency Resource Record Sets",
-      "alert_criteria": "resources exist in multiple regions and only one latency resource record set is configured for a particular domain name.",
-      "recommendation_action": "define a latency resource record set for each region",
-      "risk_detail": "cost, reliability",
-      "build_priority": 0,
-      "action_value": 2,
-      "effort_level": 3,
-      "risk_value": 1,
-      "recommendation_description_detailed": "Checks for Amazon Route 53 latency record sets that are configured inefficiently. To allow Amazon Route 53 to route queries to the region with the lowest network latency, you should create latency resource record sets for a particular domain name (such as example.com) in different regions. If you create only one latency resource record set for a domain name, all queries are routed to one region, and you pay extra for latency-based routing without getting the benefits. Hosted zones created by AWS services won’t appear in your check results.",
-      "category": null,
-      "output_notes": null,
-      "notes": null,
-      "references": [
-        "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-latency"
-      ],
-      "metadata": {
-        "created_at": "2025-11-04T23:07:44.651478Z",
-        "updated_at": "2025-11-04T23:07:44.651478Z",
-        "contributors": [
-          "initial-import"
-        ],
-        "source": "Initial CSV Import"
-      },
-      "tags": []
-    },
-    {
       "id": "c727a01a-e43a-4157-a80c-21dc130a50c5",
       "status": "pending",
       "service_name": "elastic beanstalk",
@@ -166,6 +137,35 @@
       "notes": null,
       "references": [
         "https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2025-11-04T23:07:44.651478Z",
+        "contributors": [
+          "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "57dd389a-4580-44db-a15e-499506415d56",
+      "status": "open",
+      "service_name": "route 53",
+      "scenario": "Amazon Route 53 Latency Resource Record Sets",
+      "alert_criteria": "resources exist in multiple regions and only one latency resource record set is configured for a particular domain name.",
+      "recommendation_action": "define a latency resource record set for each region",
+      "risk_detail": "cost, reliability",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 3,
+      "risk_value": 1,
+      "recommendation_description_detailed": "Checks for Amazon Route 53 latency record sets that are configured inefficiently. To allow Amazon Route 53 to route queries to the region with the lowest network latency, you should create latency resource record sets for a particular domain name (such as example.com) in different regions. If you create only one latency resource record set for a domain name, all queries are routed to one region, and you pay extra for latency-based routing without getting the benefits. Hosted zones created by AWS services won’t appear in your check results.",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-latency"
       ],
       "metadata": {
         "created_at": "2025-11-04T23:07:44.651478Z",
