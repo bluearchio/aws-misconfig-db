@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "6d6e48e1-29bb-49ac-a848-a33fba2a712a",
-      "status": "done",
       "service_name": "ec2",
       "scenario": "Amazon EC2 Reserved Instance Lease Expiration",
       "alert_criteria": "The Reserved Instance lease expires in less than 30 days.",
@@ -34,7 +33,6 @@
     },
     {
       "id": "249dd667-4b1e-4200-bec5-19c6c718f958",
-      "status": "done",
       "service_name": "ec2",
       "scenario": "user has unencrypted volumes currently in use",
       "alert_criteria": "volumes (attached or not) are currently unencrypted",
@@ -61,7 +59,6 @@
     },
     {
       "id": "033ae438-4620-4f65-80cd-776fd0102bb0",
-      "status": "done",
       "service_name": "ec2",
       "scenario": "user has unattached or unused volumes",
       "alert_criteria": "volumes are not attached to instances and have little to no activity",
@@ -88,7 +85,6 @@
     },
     {
       "id": "e8fc5179-9193-4d19-808f-dee3aa5a08a1",
-      "status": "done",
       "service_name": "ec2",
       "scenario": "user has instances that are not being used regularly",
       "alert_criteria": "cpu utilization of instances is below threshold",
@@ -115,7 +111,6 @@
     },
     {
       "id": "b971de6f-9227-4782-a708-9d2999765755",
-      "status": "done",
       "service_name": "ec2",
       "scenario": "user has already reduced waste, has a deep understanding of their future compute usage requirements, and wants to save money on their instance usage rates going forward",
       "alert_criteria": "boto recommends \"reserved instances\" and the user has already gone through a \"waste reduction\" process\"",
@@ -142,7 +137,6 @@
     },
     {
       "id": "b21a13ee-39f2-4a77-bebc-c9a49613e826",
-      "status": "done",
       "service_name": "ec2",
       "scenario": "user has already reduced waste, has a good understanding of their future compute usage requirements, and wants to save money on their instance usage rates going forward",
       "alert_criteria": "boto recommends \"ec2 level savings plans\" and the user has already gone through a \"waste reduction\" process\"",
@@ -169,7 +163,6 @@
     },
     {
       "id": "3e17f505-9507-4244-b494-02c1c9e7f559",
-      "status": "done",
       "service_name": "ec2",
       "scenario": "user has already reduced waste, has an okay understanding of their future compute usage requirements, and wants to save money on their instance usage rates going forward",
       "alert_criteria": "boto recommends \"ec2 level savings plans\" and the user has already gone through a \"waste reduction\" process\"",
@@ -196,7 +189,6 @@
     },
     {
       "id": "030f361e-eb21-4382-8d26-fcd86f47c8d5",
-      "status": "done",
       "service_name": "ec2",
       "scenario": "EC2 instances are running on previous generations",
       "alert_criteria": "EC2 instances are running on previous generations",
@@ -223,7 +215,6 @@
     },
     {
       "id": "0f5cfb3e-623b-4140-a5ed-db4b5be406f8",
-      "status": "done",
       "service_name": "ec2",
       "scenario": "EBS volumes are running on previous generations",
       "alert_criteria": "EBS volumes are running on previous generations",
@@ -250,7 +241,6 @@
     },
     {
       "id": "6a2c2d54-b4ce-4d2c-a3c1-4ce04986052c",
-      "status": "done",
       "service_name": "ec2",
       "scenario": "user wants to be notified when/if their reserved instance lease is going to expire",
       "alert_criteria": "The Reserved Instance lease is set to expire in the preceding 30 days",
@@ -280,7 +270,6 @@
     },
     {
       "id": "3bcb0076-e857-4761-988a-4982185813a5",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "ec2 network performance is not what is expected / paid for",
       "alert_criteria": "using aws inventory stats, compare actual performance to that of expected...",
@@ -310,7 +299,6 @@
     },
     {
       "id": "b3fcf6d3-9c7f-4728-bdaa-6c2b06fc2709",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "user wants to ensure instances are only on when needed (used during business hours, during a jobs runtime schedule, etc.)",
       "alert_criteria": "- tag(s) denote the instance as a \"workday\" instance and/or \n- the instance is only active for predictable times throughout the day",
@@ -339,7 +327,6 @@
     },
     {
       "id": "8dcdbfff-850b-40c9-96c7-3186a9fe04ea",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "Amazon EC2 to EBS Throughput Optimization",
       "alert_criteria": "Compare the maximum throughput of your EBS volumes (see Amazon EBS Volume Types) with the maximum throughput of the EC2 instance they are attached to (see Instance Types That Support EBS Optimization). Consider attaching your volumes to an instance that supports higher throughput to EBS for optimal performance.; In the preceding day (UTC), the aggregate throughput (megabytes/sec) of the EBS volumes attached to the EC2 instance exceeded 95% of the published throughput between the instance and the EBS volumes more than 50% of time.",
@@ -370,7 +357,6 @@
     },
     {
       "id": "74492e33-2626-4630-bf53-2bd5ef074061",
-      "status": "done",
       "service_name": "ec2",
       "scenario": "Idle Amazon EC2 Instance",
       "alert_criteria": "An instance had less than 5% daily average CPU utilization and 5 MB or less network I/O on at least 4 of the previous 14 days.",
@@ -399,7 +385,6 @@
     },
     {
       "id": "63b4f412-c3ab-4ec8-af7f-ddfecbc25269",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "user wants to increase the security of their ec2 instances",
       "alert_criteria": "An Amazon EC2-VPC security group has more than 50 rules",
@@ -428,7 +413,6 @@
     },
     {
       "id": "e5bd9c73-a9fb-4dab-b90c-55d37577bc19",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "user wants to increase the security of their ec2 instances",
       "alert_criteria": "An Amazon EC2-Classic security group has more than 100 rules.",
@@ -457,7 +441,6 @@
     },
     {
       "id": "ebe7cf51-ecf8-4eee-a8f4-61d7e7d8fa1c",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "user wants to increase the security of their ec2 instances",
       "alert_criteria": "An Amazon EC2-VPC instance has more than 50 security group rules.",
@@ -486,7 +469,6 @@
     },
     {
       "id": "89e0797c-0de8-4d2a-826e-810dd6843d23",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "user wants to increase the security of their ec2 instances",
       "alert_criteria": "An Amazon EC2-Classic instance has more than 100 security group rules.",
@@ -515,7 +497,6 @@
     },
     {
       "id": "f15adfc7-d970-4925-b0fb-99dbe1796d3b",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "High Utilization Amazon EC2 Instances",
       "alert_criteria": "An instance had more than 90% daily average CPU utilization on at least 4 of the previous 14 days.",
@@ -544,7 +525,6 @@
     },
     {
       "id": "fb608bb0-abfd-4543-876d-b7d44bc64329",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "EC2 instances running with very low CPU utilization indicating rightsizing opportunity",
       "alert_criteria": "EC2 instances with CPU utilization <= 2% over the past 14 days or consistent usage below 10% during business hours",
@@ -580,7 +560,6 @@
     },
     {
       "id": "4168462a-cff5-4404-92b1-b305e36762fd",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "Fault-tolerant and flexible workloads not leveraging EC2 Spot Instances for cost savings",
       "alert_criteria": "Batch processing, containerized applications, CI/CD, or stateless workloads running 100% On-Demand without Spot Instance usage",
@@ -614,7 +593,6 @@
     },
     {
       "id": "a0ffe81c-483b-448e-a899-884e5258a106",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "Development and test environments running 24/7 without scheduled shutdown during non-business hours",
       "alert_criteria": "EC2 instances tagged as dev/test/staging running continuously outside business hours (nights, weekends) with no active connections",
@@ -649,7 +627,6 @@
     },
     {
       "id": "863e1006-a446-4efb-99d3-b6408c851cd0",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "Production workloads without Auto Scaling unable to optimize costs during variable demand",
       "alert_criteria": "EC2 workloads with variable traffic patterns running fixed capacity without Auto Scaling, or Auto Scaling groups using only simple scaling without target tracking",
@@ -684,7 +661,6 @@
     },
     {
       "id": "40d46878-ac12-44c8-902f-196a18dc9f6c",
-      "status": "done",
       "service_name": "ec2",
       "scenario": "Unassociated Elastic IP Addresses",
       "alert_criteria": "An allocated Elastic IP address (EIP) is not associated with a running Amazon EC2 instance.",
@@ -715,7 +691,6 @@
     },
     {
       "id": "f2efa818-c80e-433c-9c7a-a41336423e2c",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "service autoscaling",
       "alert_criteria": "",
@@ -746,7 +721,6 @@
     },
     {
       "id": "59fb7aa6-d2ef-48db-843a-042f56df477c",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "bin packing and consolidated instance types",
       "alert_criteria": "",
@@ -774,7 +748,6 @@
     },
     {
       "id": "f9c9fd97-68ee-4c50-8cfe-d1ce2fef132b",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "instance types differ too much + CapacityReservationSpecification is set to open + reserved instance capacity underutilized",
       "alert_criteria": "",
@@ -802,7 +775,6 @@
     },
     {
       "id": "f0b2c0d5-ae4d-49e6-b063-222a991b109a",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "pem key credentials stored on ec2 instance",
       "alert_criteria": "",
@@ -830,7 +802,6 @@
     },
     {
       "id": "8b61f08a-4b4d-483b-870c-ea4f613a8435",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "Reserved instance recommendation",
       "alert_criteria": "",
@@ -858,7 +829,6 @@
     },
     {
       "id": "e89b978c-c76a-4be3-8333-32c61af547c8",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "Spot fleet (spot + on demand) recommended",
       "alert_criteria": "",
@@ -886,7 +856,6 @@
     },
     {
       "id": "8b5352c8-2b0a-420a-a653-dd24694bd34a",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "Need more ec2 network performance, but don't care about reliability (eg big data workload)",
       "alert_criteria": "",
@@ -914,7 +883,6 @@
     },
     {
       "id": "23cd2bca-6852-444b-ba04-a7b624d2a9cb",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "Don't care about network performance, but need to maximize reliability of compute on small to medium workloads",
       "alert_criteria": "",
@@ -942,7 +910,6 @@
     },
     {
       "id": "bc4ad253-abd3-4931-81e0-f5b80b9026a7",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "Don't care about network performance, but need to maximize reliability of compute on large workloads (HDFS, Kafka, Hbase)",
       "alert_criteria": "",
@@ -970,7 +937,6 @@
     },
     {
       "id": "4a085886-dc3f-4573-bcb3-1ac3b6527f70",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "??? EC2 failing and web address not valid?",
       "alert_criteria": "",
@@ -998,7 +964,6 @@
     },
     {
       "id": "5bdf9fa1-673d-4360-968b-d3068417c76a",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "Max IOPs Hit (=32,000)",
       "alert_criteria": "",
@@ -1026,7 +991,6 @@
     },
     {
       "id": "a7704b72-96f9-4c82-bd21-8b107242085c",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "Licensing costs charge by the core + CPU is underutilized",
       "alert_criteria": "",
@@ -1054,7 +1018,6 @@
     },
     {
       "id": "e9b86ebe-9480-4618-b0b3-886757fb26f7",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "Helpful to increase HPC workloads",
       "alert_criteria": "",
@@ -1082,7 +1045,6 @@
     },
     {
       "id": "fd54bbf8-76c4-4475-a8b6-a3979e33a26f",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "Slow EC2 boot time",
       "alert_criteria": "",
@@ -1110,7 +1072,6 @@
     },
     {
       "id": "558c548a-8e9a-47d3-8f38-1240867af942",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "User is unsure how to decide between EFS, EBS, or instance store",
       "alert_criteria": "",
@@ -1138,7 +1099,6 @@
     },
     {
       "id": "0dfe8dc1-9e65-4aed-b143-30df906e82db",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "maximum cpu utlization is greater than the alarm value and your application has auto scaling groups enabled",
       "alert_criteria": "",
@@ -1166,7 +1126,6 @@
     },
     {
       "id": "c2868099-49ec-4473-8020-47a470a23414",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "unhealthy, orphaned ec2 instances exist",
       "alert_criteria": "",
@@ -1194,7 +1153,6 @@
     },
     {
       "id": "533911b3-772f-418e-bb8c-dce2e14bdee4",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "applications are exposed through an appication load balancer, and the load balancer is deployed on a VPC and the EC2s security on port 80 does not reference the ALBs security group",
       "alert_criteria": "",
@@ -1222,7 +1180,6 @@
     },
     {
       "id": "380cb25a-4494-4d13-9389-a2e0c249ede5",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "default auto scaling cooldown is too long and unecessary costs are being incurred as a result",
       "alert_criteria": "",
@@ -1250,7 +1207,6 @@
     },
     {
       "id": "f99e83f1-1109-486b-8210-fa3ef702cb8b",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "rds read replica has been created in another region",
       "alert_criteria": "",
@@ -1278,7 +1234,6 @@
     },
     {
       "id": "bc73c591-36b2-43dd-8ad3-4406fec4e694",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "infrequent, intermittent or unpredictable database workloads",
       "alert_criteria": "",
@@ -1306,7 +1261,6 @@
     },
     {
       "id": "7de705c0-ed35-4f5b-a023-aca48102cd22",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "As a solution architect managing a complex ERP software suite, you are orchestrating a migration to the AWS cloud. The software traditionally takes well over an hour to setup on a Linux machine, and you would like to make sure your application does leverage the ASG feature of auto scaling based on the demand.",
       "alert_criteria": "",
@@ -1334,7 +1288,6 @@
     },
     {
       "id": "f86cf839-ad7f-4d22-969c-4ba62fdd52c1",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "user wants to know which OS are deployed to EC2 instances",
       "alert_criteria": "",
@@ -1362,7 +1315,6 @@
     },
     {
       "id": "82a851f7-3ef6-4d02-9204-dde82c5a75da",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "user has an applicaiton that is running on ec2 that distributes software updates \"once and a while\"; when a new software update is out the user gets a lot of requests and the content distibuted in mass ovecr the network is very costly; user does NOT want to change or re-architect the applicaiton",
       "alert_criteria": "",
@@ -1390,7 +1342,6 @@
     },
     {
       "id": "9f8cd266-20b2-4bb8-867c-7ef54923cc00",
-      "status": "open",
       "service_name": "ec2",
       "scenario": "users application has connectivity issues and cannot determine why",
       "alert_criteria": "flow logs not enabled for vpc, subnets, or elastic network interfaces",

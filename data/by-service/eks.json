@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "5fc3d4a9-96ef-4bba-82e9-bccabe531b34",
-      "status": "open",
       "service_name": "eks",
       "scenario": "pods OR nodes within cluster are not appropriately sized (artur to clarify)",
       "alert_criteria": "workloads (cpu, memory, network IOPs, etc.) for the previous 14, 30, 90 days, multiplied by 1.4 are too large...",
@@ -31,7 +30,6 @@
     },
     {
       "id": "38c186b1-36f2-4133-a6ef-9c1628f5c6f6",
-      "status": "open",
       "service_name": "eks",
       "scenario": "Amazon EKS clusters do not have GuardDuty Extended Threat Detection enabled",
       "alert_criteria": "GuardDuty EKS Runtime Monitoring is not enabled with no threat detection for containerized workloads",

@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "c54ea650-2481-4d0d-a61c-9f08443c7cd1",
-      "status": "open",
       "service_name": "api-gateway",
       "scenario": "user wants to use api gateway with edge locations AND cares about performance",
       "alert_criteria": "",

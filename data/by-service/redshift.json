@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "daa4711f-c1d3-4104-a9e4-f709af67ecf7",
-      "status": "open",
       "service_name": "redshift",
       "scenario": "Amazon Redshift Reserved Node Optimization",
       "alert_criteria": "Optimizing the purchase of Redshift Reserved Nodes can help reduce costs.",
@@ -33,7 +32,6 @@
     },
     {
       "id": "7d5eed76-e0e9-41d3-98ca-5d1becff0c18",
-      "status": "open",
       "service_name": "redshift",
       "scenario": "Underutilized Amazon Redshift Clusters",
       "alert_criteria": "A running cluster has not had a connection in the last 7 days.",
@@ -62,7 +60,6 @@
     },
     {
       "id": "0c1b66db-e282-4fbe-91cb-5c49cc88427a",
-      "status": "open",
       "service_name": "redshift",
       "scenario": "Underutilized Amazon Redshift Clusters",
       "alert_criteria": "A running cluster had less than 5% cluster-wide average CPU utilization for 99% of the last 7 days.",

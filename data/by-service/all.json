@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "6ba41fc1-7084-4ae2-a0ee-aa50d85f1cea",
-      "status": "ice",
       "service_name": "ALL",
       "scenario": "user wants to associate user groups & roles to projects, teams, and other business units",
       "alert_criteria": "check if resoruce has ANY tags, if no tags send recommendation",
@@ -31,7 +30,6 @@
     },
     {
       "id": "6abe56fe-881d-404c-81e3-a87ed491685b",
-      "status": "ice",
       "service_name": "ALL",
       "scenario": "user wants to associate costs to cost centers, projects, teams, and other business units",
       "alert_criteria": "check if resoruce has ANY tags, if no tags send recommendation",
@@ -58,7 +56,6 @@
     },
     {
       "id": "277608d6-b89d-459a-ab2d-e2c05ac47af3",
-      "status": "open",
       "service_name": "ALL",
       "scenario": "user needs to have an index of resources across regions they can search for",
       "alert_criteria": "resource explorer is not enabled",
@@ -85,7 +82,6 @@
     },
     {
       "id": "3360f1f0-c035-4fc1-93d0-1b6afe58d609",
-      "status": "open",
       "service_name": "ALL",
       "scenario": "user requires immutable resource tags",
       "alert_criteria": "immutable aws tags have not been enabled",

@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "9be76839-271a-4733-b947-c4c3705da1f5",
-      "status": "open",
       "service_name": "acm",
       "scenario": "user wants SSL/TLS certificate expiration alert 1 month in advance",
       "alert_criteria": "",
@@ -32,7 +31,6 @@
     },
     {
       "id": "d8163f98-8bb2-4159-bde7-e7668e8ee21d",
-      "status": "open",
       "service_name": "acm",
       "scenario": "user wants SSL/TLS certificate expiration alert 1 week in advance",
       "alert_criteria": "",

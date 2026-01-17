@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "81a5a270-6eef-45f9-921b-593eb7ef6bd6",
-      "status": "open",
       "service_name": "lambda",
       "scenario": "time between when the last record in a batch was written to a stream (e.g., Kinesis, DynamoDB) and when Lambda received the batch increases dramatically",
       "alert_criteria": "",
@@ -31,7 +30,6 @@
     },
     {
       "id": "14e59ac7-8087-4489-8073-4bee498c0897",
-      "status": "open",
       "service_name": "lambda",
       "scenario": "user wants to limit the time it takes to load and initialize function calls (as the current initialization code runtime takes too long)",
       "alert_criteria": "**requires x-ray to be enabled**\naverage and percentile of initialization latency is above threshold",
@@ -58,7 +56,6 @@
     },
     {
       "id": "c8fd0f3c-90c1-45ec-9467-963920497527",
-      "status": "open",
       "service_name": "lambda",
       "scenario": "use wants to be made aware of any function throttling that ocurrs",
       "alert_criteria": "function throttle counts are above threshold",
@@ -87,7 +84,6 @@
     },
     {
       "id": "1d169e83-e553-4a67-8796-1c4365265efc",
-      "status": "open",
       "service_name": "lambda",
       "scenario": "user wants to avoide lambda function throttling",
       "alert_criteria": "concurrent executions in a period of time are predicted to exceed to concurrent execution limits (account limit -100)",
@@ -114,7 +110,6 @@
     },
     {
       "id": "44183041-c87c-4bf2-ab10-3a593057135a",
-      "status": "open",
       "service_name": "lambda",
       "scenario": "lambda function consistently and significantly under memory limits",
       "alert_criteria": "lambda functions' average memory used is less than threshold in time period",
@@ -143,7 +138,6 @@
     },
     {
       "id": "f11f43fb-072f-4a2a-9a4a-2851f8bae0aa",
-      "status": "open",
       "service_name": "lambda",
       "scenario": "lambda function consistently reaches memory limits",
       "alert_criteria": "average percent use of concurrency pool is greater than threshold and lambda functions' average memory used is greater than threshold in time period",
@@ -172,7 +166,6 @@
     },
     {
       "id": "51e22636-4dae-4f77-ab58-c4f4961013a2",
-      "status": "open",
       "service_name": "lambda",
       "scenario": "AWS Lambda Functions with Excessive Timeouts",
       "alert_criteria": "Functions where > 10% of invocations end in an error due to a timeout on any given day within the last 7 days.",
@@ -201,7 +194,6 @@
     },
     {
       "id": "59b90e10-df31-4a2e-9cd7-1a598eecb2a1",
-      "status": "open",
       "service_name": "lambda",
       "scenario": "AWS Lambda Functions with High Error Rates",
       "alert_criteria": "Functions where > 10% of invocations end in error on any given day within the last 7 days",
@@ -232,7 +224,6 @@
     },
     {
       "id": "d814745d-a655-4612-9d03-07f7236cab77",
-      "status": "open",
       "service_name": "lambda",
       "scenario": "user wants to clean up unused or inactive lambda functions",
       "alert_criteria": "if lambda function is older than threshold or does not have an invocation in the last n days",
@@ -259,7 +250,6 @@
     },
     {
       "id": "2cd8897d-8db5-4bde-8476-1edbe7f97894",
-      "status": "pending",
       "service_name": "lambda",
       "scenario": "user needs serverless (lambda) tracing functionality",
       "alert_criteria": "user does not have x-ray tracing installed",
@@ -286,7 +276,6 @@
     },
     {
       "id": "b2c8d3e9-4f1a-5b6c-9d7e-1a8f4b5c6d7e",
-      "status": "open",
       "service_name": "lambda",
       "scenario": "Lambda functions with provisioned concurrency enabled for workloads with variable or infrequent traffic",
       "alert_criteria": "Lambda functions with provisioned concurrency >0, or provisioned concurrency utilization <50% over 30 days, or non-latency-sensitive workloads using provisioned concurrency",
@@ -321,7 +310,6 @@
     },
     {
       "id": "a1b2c3d4-e5f6-4789-a012-3456789abcde",
-      "status": "open",
       "service_name": "lambda",
       "scenario": "Lambda functions making synchronous calls to external services without circuit breaker implementation",
       "alert_criteria": "Lambda functions with >20% timeout errors when calling downstream services, or Lambda functions with synchronous external API calls without fault tolerance",
@@ -378,7 +366,6 @@
     },
     {
       "id": "c3d4e5f6-a7b8-4901-c234-56789abcdef0",
-      "status": "open",
       "service_name": "lambda",
       "scenario": "Lambda functions making external API calls without retry logic or using fixed-interval retries",
       "alert_criteria": "Lambda functions with throttling errors from external APIs (429 responses), timeout errors >5%, or no SDK retry configuration",
@@ -388,7 +375,7 @@
       "action_value": 3,
       "effort_level": 1,
       "risk_value": 2,
-      "recommendation_description_detailed": "Fixed-interval retries or no retries waste Lambda execution time and potentially overwhelm recovering services. Exponential backoff: 1st retry after 1s, 2nd after 2s, 3rd after 4s (with jitter \u00b150%). AWS SDK default provides 3 retries with exponential backoff. Most transient failures (network timeouts, 429/503 errors) succeed on retry. Without retry: 10% transient failures = 100K errors per 1M invocations. With backoff retry: 95K recovered, 5K permanent failures, costs minimal extra execution time vs massive improvement in reliability.",
+      "recommendation_description_detailed": "Fixed-interval retries or no retries waste Lambda execution time and potentially overwhelm recovering services. Exponential backoff: 1st retry after 1s, 2nd after 2s, 3rd after 4s (with jitter ±50%). AWS SDK default provides 3 retries with exponential backoff. Most transient failures (network timeouts, 429/503 errors) succeed on retry. Without retry: 10% transient failures = 100K errors per 1M invocations. With backoff retry: 95K recovered, 5K permanent failures, costs minimal extra execution time vs massive improvement in reliability.",
       "category": "compute",
       "architectural_patterns": [
         {
@@ -435,7 +422,6 @@
     },
     {
       "id": "d4e5f6a7-b8c9-4012-d345-6789abcdef01",
-      "status": "open",
       "service_name": "lambda",
       "scenario": "Lambda functions processing variable workload spikes synchronously without message queue buffering",
       "alert_criteria": "Lambda throttling errors >100/hour, API Gateway 5xx errors during traffic spikes, or direct synchronous invocation of compute-intensive functions",
@@ -480,7 +466,6 @@
     },
     {
       "id": "e5f6a7b8-c9d0-4123-e456-789abcdef012",
-      "status": "open",
       "service_name": "lambda",
       "scenario": "Multiple Lambda functions sharing unreserved concurrency pool without isolation",
       "alert_criteria": "Account-level Lambda throttling, critical functions throttled due to non-critical functions consuming concurrency, or no reserved concurrency configured for production workloads",
@@ -531,7 +516,6 @@
     },
     {
       "id": "37841661-4dc1-4fe6-a5f5-3f95013da436",
-      "status": "open",
       "service_name": "lambda",
       "scenario": "lambda functions should not be used",
       "alert_criteria": "https://www.serverless.com/aws-lambda#limitations",
@@ -559,7 +543,6 @@
     },
     {
       "id": "64a6e315-cfef-4450-a761-247576cbe77e",
-      "status": "open",
       "service_name": "lambda",
       "scenario": "lambda function(s) has/have not been invoked in a long time",
       "alert_criteria": "if lambda has not been invoked in [1 YEAR], recommend deletion",
@@ -587,7 +570,6 @@
     },
     {
       "id": "1f780989-b697-4817-b38c-dee807324c6b",
-      "status": "open",
       "service_name": "lambda",
       "scenario": "processes that are controlled / run by lambda function are performing poorly",
       "alert_criteria": "ram, cpu, or networking performance is not enough",
@@ -615,7 +597,6 @@
     },
     {
       "id": "34fb31df-b922-42a7-a462-c684bda929a4",
-      "status": "open",
       "service_name": "lambda",
       "scenario": "user has an IoT system (e.g. AWS edge) and wants to filter requests before they get to the application",
       "alert_criteria": "",
@@ -643,7 +624,6 @@
     },
     {
       "id": "5539e36a-7ff0-4feb-9edf-02a6a51ebd51",
-      "status": "open",
       "service_name": "lambda",
       "scenario": "user wants to prevent lambda functions with admin priviliges",
       "alert_criteria": "",
@@ -671,7 +651,6 @@
     },
     {
       "id": "24a0eea7-9e43-4549-9c5d-17d1ddcaa4ef",
-      "status": "open",
       "service_name": "lambda",
       "scenario": "user wants to ensure that lambda functions do not share the same AWS iam execution role",
       "alert_criteria": "",

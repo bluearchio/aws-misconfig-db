@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "1d8ad405-4cb5-4d9a-9326-b436d9bbdfe2",
-      "status": "ice",
       "service_name": "s3, rds, redshift, etc.",
       "scenario": "user wants to associate costs to cost centers, projects, teams, and other business units",
       "alert_criteria": "check if resoruce has ANY tags, if no tags send recommendation",

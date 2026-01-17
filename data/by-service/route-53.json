@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "332b3d41-5118-4fa2-ab98-1b2181c80f84",
-      "status": "ice",
       "service_name": "route 53",
       "scenario": "Amazon Route 53 Alias Resource Record Sets",
       "alert_criteria": "A resource record set is a CNAME to an Amazon S3 website.",
@@ -14,7 +13,7 @@
       "action_value": null,
       "effort_level": null,
       "risk_value": null,
-      "recommendation_description_detailed": "Checks for resource record sets that can be changed to alias resource record sets to improve performance and save money. An alias resource record set routes DNS queries to an AWS resource (for example, an Elastic Load Balancing load balancer or an Amazon S3 bucket) or to another Route 53 resource record set. When you use alias resource record sets, Route 53 routes your DNS queries to AWS resources free of charge. Hosted zones created by AWS services won\u2019t appear in your check results.",
+      "recommendation_description_detailed": "Checks for resource record sets that can be changed to alias resource record sets to improve performance and save money. An alias resource record set routes DNS queries to an AWS resource (for example, an Elastic Load Balancing load balancer or an Amazon S3 bucket) or to another Route 53 resource record set. When you use alias resource record sets, Route 53 routes your DNS queries to AWS resources free of charge. Hosted zones created by AWS services won’t appear in your check results.",
       "category": null,
       "output_notes": null,
       "notes": null,
@@ -34,7 +33,6 @@
     },
     {
       "id": "e39158bd-8550-4a6e-ba9f-6060f584ec73",
-      "status": "ice",
       "service_name": "route 53",
       "scenario": "Amazon Route 53 Alias Resource Record Sets",
       "alert_criteria": "A resource record set is a CNAME to an Amazon CloudFront distribution.",
@@ -44,7 +42,7 @@
       "action_value": null,
       "effort_level": null,
       "risk_value": null,
-      "recommendation_description_detailed": "Checks for resource record sets that can be changed to alias resource record sets to improve performance and save money. An alias resource record set routes DNS queries to an AWS resource (for example, an Elastic Load Balancing load balancer or an Amazon S3 bucket) or to another Route 53 resource record set. When you use alias resource record sets, Route 53 routes your DNS queries to AWS resources free of charge. Hosted zones created by AWS services won\u2019t appear in your check results.",
+      "recommendation_description_detailed": "Checks for resource record sets that can be changed to alias resource record sets to improve performance and save money. An alias resource record set routes DNS queries to an AWS resource (for example, an Elastic Load Balancing load balancer or an Amazon S3 bucket) or to another Route 53 resource record set. When you use alias resource record sets, Route 53 routes your DNS queries to AWS resources free of charge. Hosted zones created by AWS services won’t appear in your check results.",
       "category": null,
       "output_notes": null,
       "notes": null,
@@ -64,7 +62,6 @@
     },
     {
       "id": "c5a5b3c1-b229-4839-8c91-63c630ad1fb9",
-      "status": "ice",
       "service_name": "route 53",
       "scenario": "Amazon Route 53 Alias Resource Record Sets",
       "alert_criteria": "A resource record set is a CNAME to an Elastic Load Balancing load balancer.",
@@ -74,7 +71,7 @@
       "action_value": null,
       "effort_level": null,
       "risk_value": null,
-      "recommendation_description_detailed": "Checks for resource record sets that can be changed to alias resource record sets to improve performance and save money. An alias resource record set routes DNS queries to an AWS resource (for example, an Elastic Load Balancing load balancer or an Amazon S3 bucket) or to another Route 53 resource record set. When you use alias resource record sets, Route 53 routes your DNS queries to AWS resources free of charge. Hosted zones created by AWS services won\u2019t appear in your check results.",
+      "recommendation_description_detailed": "Checks for resource record sets that can be changed to alias resource record sets to improve performance and save money. An alias resource record set routes DNS queries to an AWS resource (for example, an Elastic Load Balancing load balancer or an Amazon S3 bucket) or to another Route 53 resource record set. When you use alias resource record sets, Route 53 routes your DNS queries to AWS resources free of charge. Hosted zones created by AWS services won’t appear in your check results.",
       "category": null,
       "output_notes": null,
       "notes": null,
@@ -94,7 +91,6 @@
     },
     {
       "id": "57dd389a-4580-44db-a15e-499506415d56",
-      "status": "open",
       "service_name": "route 53",
       "scenario": "Amazon Route 53 Latency Resource Record Sets",
       "alert_criteria": "resources exist in multiple regions and only one latency resource record set is configured for a particular domain name.",
@@ -104,7 +100,7 @@
       "action_value": 2,
       "effort_level": 3,
       "risk_value": 1,
-      "recommendation_description_detailed": "Checks for Amazon Route 53 latency record sets that are configured inefficiently. To allow Amazon Route 53 to route queries to the region with the lowest network latency, you should create latency resource record sets for a particular domain name (such as example.com) in different regions. If you create only one latency resource record set for a domain name, all queries are routed to one region, and you pay extra for latency-based routing without getting the benefits. Hosted zones created by AWS services won\u2019t appear in your check results.",
+      "recommendation_description_detailed": "Checks for Amazon Route 53 latency record sets that are configured inefficiently. To allow Amazon Route 53 to route queries to the region with the lowest network latency, you should create latency resource record sets for a particular domain name (such as example.com) in different regions. If you create only one latency resource record set for a domain name, all queries are routed to one region, and you pay extra for latency-based routing without getting the benefits. Hosted zones created by AWS services won’t appear in your check results.",
       "category": null,
       "output_notes": null,
       "notes": null,
@@ -123,7 +119,6 @@
     },
     {
       "id": "761371b6-1c7d-4ba8-894e-b562375bacdb",
-      "status": "open",
       "service_name": "route 53",
       "scenario": "user wants to test a new app version with only a portion of the traffic sent",
       "alert_criteria": "",
@@ -151,7 +146,6 @@
     },
     {
       "id": "aaa2e18d-2765-4d71-b465-d3552091c9b6",
-      "status": "open",
       "service_name": "route 53",
       "scenario": "latency of applicaiton endpoints is not measured",
       "alert_criteria": "",
@@ -179,7 +173,6 @@
     },
     {
       "id": "3c011b9e-8392-43e5-ba2b-0436319cd6a4",
-      "status": "open",
       "service_name": "route 53",
       "scenario": "user needs to increase the traffic to a specific region or AZ",
       "alert_criteria": "",
@@ -207,7 +200,6 @@
     },
     {
       "id": "a1b7380e-dc29-411e-8847-5955cbde0c9a",
-      "status": "open",
       "service_name": "route 53",
       "scenario": "customer would like their users to get the least amount of latency when accessing thier application",
       "alert_criteria": "",

@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "d5001001-ef01-4001-b001-001000000001",
-      "status": "done",
       "service_name": "efs",
       "scenario": "Inactive and Unmounted EFS File System",
       "alert_criteria": "EFS file systems with no mount targets, zero client connections, or no I/O activity over extended periods",
@@ -46,7 +45,6 @@
     },
     {
       "id": "d5001002-ef02-4002-b002-002000000002",
-      "status": "done",
       "service_name": "efs",
       "scenario": "Missing Intelligent Tiering on EFS Lifecycle Policy",
       "alert_criteria": "EFS file systems without lifecycle policies to move infrequently accessed data to EFS Infrequent Access (IA) storage class",
@@ -82,7 +80,6 @@
     },
     {
       "id": "d5001003-ef03-4003-b003-003000000003",
-      "status": "done",
       "service_name": "efs",
       "scenario": "Missing Lifecycle Policy on Replicated EFS File System",
       "alert_criteria": "EFS file systems with replication enabled but no lifecycle policies on source or destination file systems",
@@ -118,7 +115,6 @@
     },
     {
       "id": "d5001004-ef04-4004-b004-004000000004",
-      "status": "done",
       "service_name": "efs",
       "scenario": "Overprovisioned Throughput in EFS",
       "alert_criteria": "EFS file systems using Provisioned Throughput mode with consistently low actual throughput utilization (<30%)",
@@ -160,7 +156,6 @@
     },
     {
       "id": "d5001005-ef05-4005-b005-005000000005",
-      "status": "done",
       "service_name": "efs",
       "scenario": "Suboptimal Use of EFS Storage Classes",
       "alert_criteria": "EFS file systems with data patterns unsuitable for current storage class configuration, or One Zone storage used for production workloads requiring high availability",
@@ -196,7 +191,6 @@
     },
     {
       "id": "eef7a0f5-ada3-4b40-988f-86a2055b59bc",
-      "status": "open",
       "service_name": "efs",
       "scenario": "user needs network file share system, but needs windows instances to access network files",
       "alert_criteria": "",
@@ -224,7 +218,6 @@
     },
     {
       "id": "74b0f0d7-fcb8-46ed-beb4-3d3ec6ecbe64",
-      "status": "open",
       "service_name": "efs",
       "scenario": "user wants to ensure amazon efs file systems are encrypted",
       "alert_criteria": "",
@@ -252,7 +245,6 @@
     },
     {
       "id": "4e33a295-b0c0-4cb5-a8ac-942a08de57b3",
-      "status": "open",
       "service_name": "efs",
       "scenario": "user wants to ensure amazon efs file systems are encrypted using KMS CMK",
       "alert_criteria": "",

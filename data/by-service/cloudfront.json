@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "937fff55-6361-4546-a3be-9b4769c904e4",
-      "status": "open",
       "service_name": "cloudfront",
       "scenario": "CloudFront Header Forwarding and Cache Hit Ratio",
       "alert_criteria": "One or more request headers that CloudFront forwards to your origin might significantly reduce your cache hit ratio.",
@@ -33,7 +32,6 @@
     },
     {
       "id": "915cc2d1-9ea7-4fab-83ad-92b623cb163b",
-      "status": "open",
       "service_name": "cloudfront",
       "scenario": "CloudFront Alternate Domain Names",
       "alert_criteria": "Yellow: A CloudFront distribution includes alternate domain names, but the DNS configuration is not correctly set up with a CNAME record or an Amazon Route 53 alias resource record.",
@@ -63,7 +61,6 @@
     },
     {
       "id": "4769bb75-f7b8-4604-8ad1-2fbdabd7420d",
-      "status": "open",
       "service_name": "cloudfront",
       "scenario": "CloudFront Content Delivery Optimization",
       "alert_criteria": "The amount of data transferred out of the bucket to your users by GET requests in the 30 days preceding the check is at least 25 times greater than the average amount of data stored in the bucket.",
@@ -93,7 +90,6 @@
     },
     {
       "id": "cc4250bc-4065-4a12-8fa8-74f386b45702",
-      "status": "open",
       "service_name": "cloudfront",
       "scenario": "CloudFront Content Delivery Optimization",
       "alert_criteria": "The amount of data transferred out of the bucket to your users by GET requests in the 30 days preceding the check is at least 10 TB and at least 25 times greater than the average amount of data stored in the bucket.",
@@ -123,7 +119,6 @@
     },
     {
       "id": "327f7304-6e47-4eff-93b2-e070afcfc180",
-      "status": "open",
       "service_name": "cloudfront",
       "scenario": "streaming service needs to reduce latency for its users",
       "alert_criteria": "",
@@ -150,7 +145,6 @@
     },
     {
       "id": "ef6b202e-cb88-4f1b-aadb-a2f17804a8e5",
-      "status": "open",
       "service_name": "cloudfront",
       "scenario": "CloudFront Alternate Domain Names",
       "alert_criteria": "Yellow: A CloudFront distribution includes alternate domain names, but Trusted Advisor could not evaluate the DNS configuration because there were too many redirects.",
@@ -180,7 +174,6 @@
     },
     {
       "id": "0d84ee37-e841-4b16-ae87-5b0ec720c927",
-      "status": "open",
       "service_name": "cloudfront",
       "scenario": "CloudFront Alternate Domain Names",
       "alert_criteria": "Yellow: A CloudFront distribution includes alternate domain names, but Trusted Advisor could not evaluate the DNS configuration for some other reason, most likely because of a timeout.",
@@ -210,7 +203,6 @@
     },
     {
       "id": "15ac6ce0-cfab-4e25-87dd-ff769faec385",
-      "status": "open",
       "service_name": "cloudfront",
       "scenario": "user wants their application optimized based on the command types (e,g, GET vs POST)",
       "alert_criteria": "",
@@ -237,7 +229,6 @@
     },
     {
       "id": "a9f10db4-5c47-4865-8b9f-648f09a81605",
-      "status": "open",
       "service_name": "cloudfront",
       "scenario": "cloudfront distributions are too expensive",
       "alert_criteria": "",
@@ -265,7 +256,6 @@
     },
     {
       "id": "f9b6e58a-21cb-47b1-92af-1841391713ff",
-      "status": "open",
       "service_name": "cloudfront",
       "scenario": "user wants to restrict users from accessing their content from a particular country",
       "alert_criteria": "",
@@ -293,7 +283,6 @@
     },
     {
       "id": "19e6e1a5-3569-460a-8be6-582246d05090",
-      "status": "open",
       "service_name": "cloudfront",
       "scenario": "You would like to provide your users access to hundreds of private files in your CloudFront distribution, which is fronting an HTTP web server behind an application load balancer",
       "alert_criteria": "",
@@ -321,7 +310,6 @@
     },
     {
       "id": "12f2d76b-5c61-403a-bcbe-71c1a4d3ec61",
-      "status": "open",
       "service_name": "cloudfront",
       "scenario": "user wants to ensure his CDN is secure",
       "alert_criteria": "When TLS is <= x",
@@ -351,7 +339,6 @@
     },
     {
       "id": "fa2ba14d-f984-4efb-a5ae-6a7da7f4257a",
-      "status": "open",
       "service_name": "cloudfront",
       "scenario": "user wants an encrypted connection between cloudfront and origin server",
       "alert_criteria": "",

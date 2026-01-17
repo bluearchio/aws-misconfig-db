@@ -35,9 +35,9 @@ def summary(conn):
     for row in conn.execute("SELECT * FROM summary_by_service").fetchall():
         print(f"  {row[0]:20} {row[1]:>5}")
 
-    print("\nBy Status:")
+    print("\nBy Risk Type:")
     print("-" * 40)
-    for row in conn.execute("SELECT * FROM summary_by_status").fetchall():
+    for row in conn.execute("SELECT * FROM summary_by_risk_type").fetchall():
         print(f"  {row[0]:20} {row[1]:>5}")
 
     print("\nBy Category:")
@@ -49,27 +49,6 @@ def summary(conn):
     print("-" * 40)
     for row in conn.execute("SELECT * FROM summary_by_priority").fetchall():
         print(f"  Priority {row[0]}:          {row[1]:>5}")
-
-    # Risk types
-    print("\nBy Risk Type:")
-    print("-" * 40)
-    risks = conn.execute("""
-        SELECT
-            CASE
-                WHEN risk_detail LIKE '%cost%' THEN 'cost'
-                WHEN risk_detail LIKE '%security%' THEN 'security'
-                WHEN risk_detail LIKE '%operations%' THEN 'operations'
-                WHEN risk_detail LIKE '%performance%' THEN 'performance'
-                WHEN risk_detail LIKE '%reliability%' THEN 'reliability'
-                ELSE 'other'
-            END as risk_type,
-            COUNT(*) as count
-        FROM recommendations
-        GROUP BY 1
-        ORDER BY count DESC
-    """).fetchall()
-    for row in risks:
-        print(f"  {row[0]:20} {row[1]:>5}")
 
 
 def search(conn, term):
@@ -93,7 +72,7 @@ def search(conn, term):
 def service(conn, service_name):
     """List recommendations for a specific service."""
     results = conn.execute("""
-        SELECT scenario, risk_detail, status, build_priority
+        SELECT scenario, risk_detail, build_priority
         FROM recommendations
         WHERE service_name = ?
         ORDER BY build_priority NULLS LAST
@@ -102,8 +81,8 @@ def service(conn, service_name):
     print(f"\nRecommendations for {service_name}:")
     print("-" * 60)
     for row in results:
-        priority = f"P{row[3]}" if row[3] is not None else "P?"
-        print(f"[{priority}] [{row[2]}] {row[0][:60]}...")
+        priority = f"P{row[2]}" if row[2] is not None else "P?"
+        print(f"[{priority}] {row[0][:65]}...")
         print(f"  Risk: {row[1]}\n")
 
     print(f"Total: {len(results)} recommendations")

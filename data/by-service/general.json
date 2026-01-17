@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "4931f8b7-1bff-4c2b-adf9-926a338b926f",
-      "status": "open",
       "service_name": "general",
       "scenario": "user wants to know WHEN the right time to purchase a savings plan in",
       "alert_criteria": "predictable usage data can be used to justify a savings plan recommendation",
@@ -31,7 +30,6 @@
     },
     {
       "id": "9c7e25a7-9655-4bb0-ab9f-287cf3cd9952",
-      "status": "open",
       "service_name": "general",
       "scenario": "user does not want instances with unencrypted ports",
       "alert_criteria": "",
@@ -58,7 +56,6 @@
     },
     {
       "id": "c6c883a7-949d-469c-a468-4acb0889dede",
-      "status": "open",
       "service_name": "general",
       "scenario": "user does not want networkloadbalancer with unencrypted ports",
       "alert_criteria": "",
@@ -85,7 +82,6 @@
     },
     {
       "id": "5aeeba22-fdc7-444a-9ba1-1fd5e11f3557",
-      "status": "open",
       "service_name": "general",
       "scenario": "language used is not ideal for the specific workload",
       "alert_criteria": "",
@@ -112,7 +108,6 @@
     },
     {
       "id": "a3a4dde9-da1b-4b50-bbb9-8bac2c25059e",
-      "status": "open",
       "service_name": "general",
       "scenario": "logs full & cpu utilization spiked",
       "alert_criteria": "",
@@ -139,7 +134,6 @@
     },
     {
       "id": "6562cd29-30a1-436b-835c-c38060e0501e",
-      "status": "open",
       "service_name": "general",
       "scenario": "Convertible Reserved instances recommended",
       "alert_criteria": "",
@@ -166,7 +160,6 @@
     },
     {
       "id": "77c37bf0-446e-4292-bc1e-cdb3dfb81a6a",
-      "status": "open",
       "service_name": "general",
       "scenario": "Scheduled reserved instances recommended",
       "alert_criteria": "",
@@ -193,7 +186,6 @@
     },
     {
       "id": "770874ca-2a47-4243-96fe-25014d6c403d",
-      "status": "open",
       "service_name": "general",
       "scenario": "Dedicated host recommended",
       "alert_criteria": "",
@@ -220,7 +212,6 @@
     },
     {
       "id": "a946417d-d42f-4c9e-b129-de887414717f",
-      "status": "open",
       "service_name": "general",
       "scenario": "client wants more detailed invoicing",
       "alert_criteria": "",
@@ -247,7 +238,6 @@
     },
     {
       "id": "2aae8134-3a6d-4207-b1e3-73687851270e",
-      "status": "open",
       "service_name": "general",
       "scenario": "customer wants to auto-scale their instances based on the number of requests per minute (or some other metric)",
       "alert_criteria": "",
@@ -274,7 +264,6 @@
     },
     {
       "id": "c121f7a5-3181-448f-a419-c64d6edb936b",
-      "status": "open",
       "service_name": "general",
       "scenario": "parameter groups or database is not configured to ONLY allow SSL connection",
       "alert_criteria": "",
@@ -301,7 +290,6 @@
     },
     {
       "id": "59d4888f-2041-4113-b08e-ee5353b37f14",
-      "status": "open",
       "service_name": "general",
       "scenario": "root volumes are not encrypted",
       "alert_criteria": "",
@@ -328,7 +316,6 @@
     },
     {
       "id": "98c656bb-8ca3-4ca9-a69a-3c8f30279ed3",
-      "status": "open",
       "service_name": "general",
       "scenario": "end-user would like to group costs based on their business logic or product catalog",
       "alert_criteria": "",
@@ -355,7 +342,6 @@
     },
     {
       "id": "88fbe98e-6f7d-481f-9c1d-5ac56aa50cac",
-      "status": "open",
       "service_name": "general",
       "scenario": "routing is currently set to a geolocation based policy, but does not have a default IP address",
       "alert_criteria": "",
@@ -382,7 +368,6 @@
     },
     {
       "id": "0e7afc00-2870-4cc7-a079-00e74c45fe6f",
-      "status": "open",
       "service_name": "general",
       "scenario": "user wants to supply their own encryption keys",
       "alert_criteria": "",
@@ -409,7 +394,6 @@
     },
     {
       "id": "40814f77-0b20-4cd2-92b9-ca3b36e1627b",
-      "status": "open",
       "service_name": "general",
       "scenario": "uaer needs on premise file data backed up in the cloud",
       "alert_criteria": "",
@@ -436,7 +420,6 @@
     },
     {
       "id": "26e95c6f-5656-46a5-a1fa-35a516468d41",
-      "status": "open",
       "service_name": "general",
       "scenario": "uaer needs on premise tape data backed up in the cloud",
       "alert_criteria": "",
@@ -463,7 +446,6 @@
     },
     {
       "id": "7cf0ec49-3d87-46ce-957a-72afa928c6ce",
-      "status": "open",
       "service_name": "general",
       "scenario": "user does not want to grant any external privileges via ACL",
       "alert_criteria": "",
@@ -490,7 +472,6 @@
     },
     {
       "id": "0c9148d4-9510-4da6-9512-33286d31a480",
-      "status": "open",
       "service_name": "general",
       "scenario": "user wants encrypted storage for instances that might host a database",
       "alert_criteria": "",
@@ -517,7 +498,6 @@
     },
     {
       "id": "d01ab648-6ef5-45fe-ad93-539da6d9a9bb",
-      "status": "open",
       "service_name": "general",
       "scenario": "user wants to ensure rotation for customer created CMKs is enabled",
       "alert_criteria": "",
@@ -544,7 +524,6 @@
     },
     {
       "id": "f44654fb-441f-489b-b814-fa7366050862",
-      "status": "open",
       "service_name": "general",
       "scenario": "user wants to be notified when a credentials report was generated in the last 24 hours",
       "alert_criteria": "",
@@ -571,7 +550,6 @@
     },
     {
       "id": "7f1dd337-60f3-4072-88a5-a67bcaef7fcd",
-      "status": "open",
       "service_name": "general",
       "scenario": "user does not want to allow get actions from all principals",
       "alert_criteria": "",
@@ -598,7 +576,6 @@
     },
     {
       "id": "58e96572-c0f4-466d-ab62-4452d7a1bca6",
-      "status": "open",
       "service_name": "general",
       "scenario": "user does not want to allow list actions from all principals",
       "alert_criteria": "",
@@ -625,7 +602,6 @@
     },
     {
       "id": "ba16b11d-85b2-4f83-81e5-33e1255afce0",
-      "status": "open",
       "service_name": "general",
       "scenario": "AWS resources lack cost allocation tags for tracking and attribution",
       "alert_criteria": "Resources exist without mandatory cost allocation tags (cost-center, project, owner, environment) preventing accurate chargeback and showback",
@@ -660,7 +636,6 @@
     },
     {
       "id": "a902454a-eb8f-43f0-82cc-37579ed18a47",
-      "status": "open",
       "service_name": "general",
       "scenario": "Workloads with predictable steady-state usage lack Savings Plan or Reserved Instance coverage",
       "alert_criteria": "On-Demand usage >40% for production workloads with consistent 24/7 runtime and predictable capacity requirements",
@@ -694,7 +669,6 @@
     },
     {
       "id": "6bb5f985-d986-414b-851d-1cd985e89c4e",
-      "status": "open",
       "service_name": "general",
       "scenario": "No standardized decommissioning process resulting in abandoned resources accumulating costs",
       "alert_criteria": "Resources exist for completed projects, no defined process for identifying and removing unused infrastructure, or resources without ownership tags",
@@ -727,7 +701,6 @@
     },
     {
       "id": "cf28fb38-e084-42c6-9e82-49a836a7a1b3",
-      "status": "open",
       "service_name": "general",
       "scenario": "AWS accounts lack budgets and proactive spending controls resulting in cost overruns",
       "alert_criteria": "No AWS Budgets configured for monthly spend, service costs, or Reserved Instance/Savings Plan utilization tracking",
@@ -762,7 +735,6 @@
     },
     {
       "id": "c6d9e5f2-7b3a-4c8e-9d1f-8a2b7e4c5d6e",
-      "status": "open",
       "service_name": "general",
       "scenario": "Organization lacks dedicated Cloud Financial Management team or FinOps function",
       "alert_criteria": "No designated cost optimization owner, cost reviews occur reactively after bill shock, or finance and engineering teams operate in silos",
@@ -797,7 +769,6 @@
     },
     {
       "id": "d7e4f8a2-9c5b-4d3e-8f6a-1b9c7e5d4a6f",
-      "status": "open",
       "service_name": "general",
       "scenario": "Workloads built with undifferentiated heavy lifting instead of leveraging managed services",
       "alert_criteria": "Self-managed databases, message queues, container orchestration, or caching layers when AWS managed service equivalents exist (RDS vs self-managed MySQL, MQ vs self-managed RabbitMQ, EKS vs self-managed K8s)",
@@ -807,7 +778,7 @@
       "action_value": 3,
       "effort_level": 3,
       "risk_value": 2,
-      "recommendation_description_detailed": "COST05-BP05: Self-managed infrastructure requires EC2 instances, storage, licensing, patching, backups, monitoring, and engineering time. Managed services eliminate this overhead while often reducing costs. Example: Self-managed PostgreSQL on r5.2xlarge ($0.504/hr * 730hr = $368/month) + EBS ($50) + engineering time ($500/month) = $918/month vs RDS db.r5.2xlarge = $584/month (36% savings). Additional managed service benefits: automatic backups, patching, high availability, scalability. Evaluate migration for: databases (\u2192 RDS/Aurora), caching (\u2192 ElastiCache), message queues (\u2192 SQS/SNS/MQ), containers (\u2192 ECS/EKS/Fargate).",
+      "recommendation_description_detailed": "COST05-BP05: Self-managed infrastructure requires EC2 instances, storage, licensing, patching, backups, monitoring, and engineering time. Managed services eliminate this overhead while often reducing costs. Example: Self-managed PostgreSQL on r5.2xlarge ($0.504/hr * 730hr = $368/month) + EBS ($50) + engineering time ($500/month) = $918/month vs RDS db.r5.2xlarge = $584/month (36% savings). Additional managed service benefits: automatic backups, patching, high availability, scalability. Evaluate migration for: databases (→ RDS/Aurora), caching (→ ElastiCache), message queues (→ SQS/SNS/MQ), containers (→ ECS/EKS/Fargate).",
       "category": "cost",
       "output_notes": null,
       "notes": "AWS Well-Architected Framework COST05-BP05 - Managed services reduce TCO",
@@ -833,7 +804,6 @@
     },
     {
       "id": "e8f5a9b3-1c6d-4e7f-9a8b-2c5d8f6e3b7a",
-      "status": "open",
       "service_name": "general",
       "scenario": "Workloads deployed without upfront cost modeling leading to budget overruns",
       "alert_criteria": "New projects deployed without cost estimates, actual costs exceed projections by >30%, or architectural decisions made without cost analysis",
@@ -868,7 +838,6 @@
     },
     {
       "id": "f9a6b1c4-2d7e-4f8a-9b6c-3d8e9f7a5b1c",
-      "status": "open",
       "service_name": "general",
       "scenario": "Engineering teams lack cost awareness and accountability for cloud spending",
       "alert_criteria": "Developers unaware of resource costs, no cost metrics in team dashboards, cost optimization not included in performance reviews or sprint planning",
@@ -903,7 +872,6 @@
     },
     {
       "id": "a1b7c2d8-3e9f-4a5b-8c6d-9e1f7a4b3c5d",
-      "status": "open",
       "service_name": "general",
       "scenario": "Resources not leveraging shared infrastructure leading to resource sprawl and duplication",
       "alert_criteria": "Each application team deploying separate NAT Gateways, Transit Gateways, VPCs, or shared services instead of using centralized shared resources",

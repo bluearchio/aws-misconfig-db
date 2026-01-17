@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "85d589af-ca9b-4cb6-8311-6c9e50da0687",
-      "status": "done",
       "service_name": "iam",
       "scenario": "user wants to know which keys need rotating (are old or expired)",
       "alert_criteria": "iam keys have not been rotated in X days",
@@ -31,7 +30,6 @@
     },
     {
       "id": "8c0a3d78-a5e3-4ac1-a1ca-f25306b46143",
-      "status": "done",
       "service_name": "iam",
       "scenario": "user wants to get notified / know of non-compliant IAM keys (keys older than 90 days)",
       "alert_criteria": "IAM key is older than 90 days",
@@ -58,7 +56,6 @@
     },
     {
       "id": "297883ae-5ece-4511-8c34-1a2008cf1ad4",
-      "status": "ice",
       "service_name": "iam",
       "scenario": "user wants to be notified of new security groups",
       "alert_criteria": "",
@@ -85,7 +82,6 @@
     },
     {
       "id": "f2ee54dd-37e7-4118-80f9-f164d89f3a8f",
-      "status": "open",
       "service_name": "iam",
       "scenario": "user wants the password policy to require at least one number (+ specific password requirements)",
       "alert_criteria": "",
@@ -112,7 +108,6 @@
     },
     {
       "id": "a2e6377a-b62c-47a6-b957-452e9b79883b",
-      "status": "open",
       "service_name": "iam",
       "scenario": "user wants to remove unused security groups",
       "alert_criteria": "",
@@ -139,7 +134,6 @@
     },
     {
       "id": "299fc2d0-a2f2-4b79-a3d2-2b479b25d07f",
-      "status": "open",
       "service_name": "iam",
       "scenario": "user wants to ensure second access key is rotated every 90 days or less",
       "alert_criteria": "access key has not been rotated in X days",
@@ -166,7 +160,6 @@
     },
     {
       "id": "314f0d94-7381-454d-915d-45b962d801e3",
-      "status": "open",
       "service_name": "iam",
       "scenario": "AWS account root user does not have MFA enabled or enforced",
       "alert_criteria": "Root account has no MFA device registered or root account accessed without MFA challenge",
@@ -199,7 +192,6 @@
     },
     {
       "id": "718ac930-9ba0-42a1-a31b-fad73f2a66da",
-      "status": "open",
       "service_name": "iam",
       "scenario": "user wants to enable least privilege access across all accounts",
       "alert_criteria": "using cloudwatch logs, determine if appropriate roles have been assigned to resources, roles, etc.",
@@ -227,7 +219,6 @@
     },
     {
       "id": "e831d84f-db29-456e-a4fa-21d1bfa57984",
-      "status": "open",
       "service_name": "iam",
       "scenario": "user wants to ensure virtual MFA is enabled for the 'root' account",
       "alert_criteria": "",
@@ -255,7 +246,6 @@
     },
     {
       "id": "6a285348-b16e-4905-b347-09df596d02d5",
-      "status": "open",
       "service_name": "iam",
       "scenario": "user wants to ensure iam policies are attached only to groups or roles",
       "alert_criteria": "",
@@ -283,7 +273,6 @@
     },
     {
       "id": "20da6654-9c4a-4b02-aaaf-5327efab6599",
-      "status": "open",
       "service_name": "iam",
       "scenario": "user wants to ensure iam policies that allow full \"*:*\" are not created",
       "alert_criteria": "",
@@ -311,7 +300,6 @@
     },
     {
       "id": "e3e22326-af1e-4fc5-89e6-757cf12a2f4a",
-      "status": "open",
       "service_name": "iam",
       "scenario": "user wants to ensure that MFA is enabled for all IAM users with console password",
       "alert_criteria": "",
@@ -339,7 +327,6 @@
     },
     {
       "id": "e53ff93a-a43d-4580-bf17-a915dfeba8ce",
-      "status": "open",
       "service_name": "iam",
       "scenario": "user wants to ensure no root account access key exists",
       "alert_criteria": "",
@@ -367,7 +354,6 @@
     },
     {
       "id": "07f63c10-f164-4f31-95fb-57c07eb87261",
-      "status": "open",
       "service_name": "iam",
       "scenario": "user wants to ensure a support role has been created to manage incidients with AWS support",
       "alert_criteria": "",
@@ -395,7 +381,6 @@
     },
     {
       "id": "13bddd8f-7a89-4fa4-8f4e-bce30b3da26c",
-      "status": "open",
       "service_name": "iam",
       "scenario": "user wants to ensure first access key is rotated every 90 days or less",
       "alert_criteria": "",
@@ -423,7 +408,6 @@
     },
     {
       "id": "a843c50e-63a8-4e20-8ef8-c7f6ec4a4500",
-      "status": "open",
       "service_name": "iam",
       "scenario": "user wants to ensure hardware MFA is enabled for the 'root' account",
       "alert_criteria": "",
@@ -451,7 +435,6 @@
     },
     {
       "id": "aead0be5-3b3f-4e96-b561-6bafc7162801",
-      "status": "open",
       "service_name": "iam",
       "scenario": "user wants to enforce password policy",
       "alert_criteria": "",
@@ -479,7 +462,6 @@
     },
     {
       "id": "50ba9f4d-388d-46dc-9b71-bd7a10c588c5",
-      "status": "open",
       "service_name": "iam",
       "scenario": "user wants the use of 'root' account to be avoided",
       "alert_criteria": "",

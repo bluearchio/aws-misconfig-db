@@ -1,7 +1,7 @@
 # AWS Misconfiguration Database - Summary
 
 **Total Recommendations:** 313
-**Last Updated:** 2026-01-17 05:16:28 UTC
+**Last Updated:** 2026-01-17 16:57:19 UTC
 
 ## Overview
 
@@ -11,15 +11,6 @@ performance, reliability, and operational best practices.
 **Source of Truth:** `data/by-service/*.json`
 
 ## Statistics
-
-### By Status
-
-| Status | Count |
-| ------ | ----- |
-| done | 48 |
-| ice | 10 |
-| open | 246 |
-| pending | 9 |
 
 ### By Risk Type
 

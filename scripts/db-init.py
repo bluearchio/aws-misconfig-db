@@ -29,7 +29,6 @@ def flatten_entry(entry):
     """Flatten nested fields for database storage."""
     flat = {
         'id': entry.get('id'),
-        'status': entry.get('status'),
         'service_name': entry.get('service_name'),
         'scenario': entry.get('scenario'),
         'alert_criteria': entry.get('alert_criteria'),
@@ -82,7 +81,6 @@ def create_database():
     conn.execute("""
         CREATE TABLE recommendations (
             id VARCHAR PRIMARY KEY,
-            status VARCHAR,
             service_name VARCHAR,
             scenario VARCHAR,
             alert_criteria VARCHAR,
@@ -114,7 +112,7 @@ def create_database():
     for entry in flat_entries:
         conn.execute("""
             INSERT INTO recommendations VALUES (
-                ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+                ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
             )
         """, list(entry.values()))
 
@@ -126,14 +124,6 @@ def create_database():
         SELECT service_name, COUNT(*) as count
         FROM recommendations
         GROUP BY service_name
-        ORDER BY count DESC
-    """)
-
-    conn.execute("""
-        CREATE VIEW summary_by_status AS
-        SELECT status, COUNT(*) as count
-        FROM recommendations
-        GROUP BY status
         ORDER BY count DESC
     """)
 
@@ -155,6 +145,23 @@ def create_database():
         ORDER BY build_priority
     """)
 
+    conn.execute("""
+        CREATE VIEW summary_by_risk_type AS
+        SELECT
+            CASE
+                WHEN risk_detail LIKE '%cost%' THEN 'cost'
+                WHEN risk_detail LIKE '%security%' THEN 'security'
+                WHEN risk_detail LIKE '%performance%' THEN 'performance'
+                WHEN risk_detail LIKE '%reliability%' THEN 'reliability'
+                WHEN risk_detail LIKE '%operations%' THEN 'operations'
+                ELSE 'other'
+            END as risk_type,
+            COUNT(*) as count
+        FROM recommendations
+        GROUP BY risk_type
+        ORDER BY count DESC
+    """)
+
     # Commit and show stats
     conn.commit()
 
@@ -165,23 +172,28 @@ def create_database():
     # Show summary
     print("\n📊 Summary Statistics:\n")
 
+    total = conn.execute("SELECT COUNT(*) FROM recommendations").fetchone()[0]
+    print(f"Total Recommendations: {total}\n")
+
     print("By Service (Top 10):")
     result = conn.execute("SELECT * FROM summary_by_service LIMIT 10").fetchall()
     for row in result:
-        print(f"  {row[0]}: {row[1]}")
+        print(f"  {row[0]:20} {row[1]:>5}")
 
-    print("\nBy Status:")
-    result = conn.execute("SELECT * FROM summary_by_status").fetchall()
+    print("\nBy Risk Type:")
+    result = conn.execute("SELECT * FROM summary_by_risk_type").fetchall()
     for row in result:
-        print(f"  {row[0]}: {row[1]}")
+        print(f"  {row[0]:20} {row[1]:>5}")
+
+    print("\nBy Category:")
+    result = conn.execute("SELECT * FROM summary_by_category").fetchall()
+    for row in result:
+        print(f"  {row[0]:20} {row[1]:>5}")
 
     print("\nBy Priority:")
     result = conn.execute("SELECT * FROM summary_by_priority").fetchall()
     for row in result:
-        print(f"  Priority {row[0]}: {row[1]}")
-
-    total = conn.execute("SELECT COUNT(*) FROM recommendations").fetchone()[0]
-    print(f"\nTotal recommendations: {total}")
+        print(f"  Priority {row[0]}:          {row[1]:>5}")
 
     conn.close()
     print(f"\n✓ Database saved to: {DB_PATH}")

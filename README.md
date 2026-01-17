@@ -60,7 +60,7 @@ The database is designed with a standardized JSON format, making it ideal for:
 
 - **Total Recommendations**: 313
 - **AWS Services Covered**: 41
-- **Risk Categories**: Security, Cost, Performance, Operations, Reliability
+- **Risk Types**: Operations (189), Cost (80), Performance (21), Security (19), Reliability (4)
 - **Architectural Patterns**: Circuit Breaker, Retry with Exponential Backoff, Cache-Aside, Bulkhead, Queue-Based Load Leveling
 
 See [docs/SUMMARY.md](docs/SUMMARY.md) for detailed statistics.
@@ -179,7 +179,6 @@ Each misconfiguration entry follows this structure:
 ```json
 {
   "id": "a1b2c3d4-e5f6-4789-a012-3456789abcde",
-  "status": "done|ice|open|pending",
   "service_name": "lambda",
   "scenario": "Lambda functions making synchronous calls without circuit breaker implementation",
   "alert_criteria": "Lambda error rate >5% or downstream service timeouts >1000ms",

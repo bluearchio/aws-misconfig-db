@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "4305d944-eb3c-473c-b9ce-99fe6911713b",
-      "status": "open",
       "service_name": "ecs",
       "scenario": "user wants to remove or update inactive tasks",
       "alert_criteria": "ecs task definition set to inactive status",
@@ -31,7 +30,6 @@
     },
     {
       "id": "4649adc3-53cc-4ccc-bd61-5c79f7fa6999",
-      "status": "pending",
       "service_name": "ecs",
       "scenario": "user wants to increase the performance of their ecs service(s)",
       "alert_criteria": "if max memory utilization is > 50% for more than 3 concecutive time periods AND autoscaling is not enabled",
@@ -58,7 +56,6 @@
     },
     {
       "id": "326eaec8-4b35-417d-b883-33c31948a9cd",
-      "status": "pending",
       "service_name": "ecs",
       "scenario": "user wants to make sure their services are all running the latest platform version",
       "alert_criteria": "platform version != LATEST",
@@ -85,7 +82,6 @@
     },
     {
       "id": "57fdeba4-4823-4bd7-957f-5cb8b0d9f84e",
-      "status": "pending",
       "service_name": "ecs",
       "scenario": "- user wants to increase the reliability of their ecs sevices / tasks and/or\n- user has been experiencing frequent service failures and/or\n- users' ecs services have been failing health checks",
       "alert_criteria": "- fargate launch type and/or\n- tasks have transitioned to a failed state > 3 times in the last 21 day and/or \n- are failing healthchecks",
@@ -112,7 +108,6 @@
     },
     {
       "id": "b792ba90-f7d5-4324-938d-3213142d9d01",
-      "status": "open",
       "service_name": "ecs",
       "scenario": "ECS task definitions are configured with unsafe defaults including public IPs, privileged mode, or plaintext secrets",
       "alert_criteria": "ECS tasks assigned public IP addresses when not required, containers running in privileged mode, or secrets passed as plaintext environment variables",
@@ -147,7 +142,6 @@
     },
     {
       "id": "e19c54e2-286b-4fbd-b1a8-5ea9f3495da1",
-      "status": "open",
       "service_name": "ecs",
       "scenario": "user wants ecs cluster to be encrypted at rest",
       "alert_criteria": "",

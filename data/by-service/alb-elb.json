@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "475b24d9-4b5b-4ce4-8161-af25f89bee49",
-      "status": "done",
       "service_name": "alb/elb",
       "scenario": "Idle Load Balancers",
       "alert_criteria": "A load balancer has had less than 100 requests per day for the last 7 days.",
@@ -33,7 +32,6 @@
     },
     {
       "id": "75ba739e-a10d-4233-9d93-233587bf1de5",
-      "status": "open",
       "service_name": "alb/elb",
       "scenario": "Idle Load Balancers",
       "alert_criteria": "A load balancer has no healthy back-end instances.",
@@ -62,7 +60,6 @@
     },
     {
       "id": "f8873ffb-d1ce-44d2-adf9-50148350fc92",
-      "status": "done",
       "service_name": "alb/elb",
       "scenario": "Idle Load Balancers",
       "alert_criteria": "A load balancer has no active back-end instances.",
@@ -92,7 +89,6 @@
     },
     {
       "id": "eba421cf-bea5-4fa2-982a-c992016bd34f",
-      "status": "pending",
       "service_name": "alb/elb",
       "scenario": "user wants to ensure the availability / performance of their auto scaling group(s)",
       "alert_criteria": "instance that is attached to the autoscaling group has been stopped or hibernated",
@@ -119,7 +115,6 @@
     },
     {
       "id": "b0ee1465-5cd5-4b8e-9ceb-c22ffcbdba88",
-      "status": "open",
       "service_name": "alb/elb",
       "scenario": "application / load balancers are not detecting failed connections fast enough",
       "alert_criteria": "",
@@ -147,7 +142,6 @@
     },
     {
       "id": "297a0e89-3930-4c98-aaae-108dd7dc6c90",
-      "status": "open",
       "service_name": "alb/elb",
       "scenario": "Your application load balancer is hosting X target groups with various hostnames; you would like to expose https traffic for each of these host names.",
       "alert_criteria": "",
@@ -175,7 +169,6 @@
     },
     {
       "id": "01e58c92-8f90-4ef0-a438-e35bf01ecfd8",
-      "status": "open",
       "service_name": "alb/elb",
       "scenario": "users are being routed to instances that are not running (or have performance issues)",
       "alert_criteria": "",
@@ -203,7 +196,6 @@
     },
     {
       "id": "be4fc192-947d-4012-aeb5-54bec0d07873",
-      "status": "open",
       "service_name": "alb/elb",
       "scenario": "You are creating an application that is going to expose an HTTP REST API. There is a need to provide request routing rules at the HTTP level. Due to security requirements, your application can only be exposed through the use of two static IPs.",
       "alert_criteria": "",
@@ -231,7 +223,6 @@
     },
     {
       "id": "71534f32-7b63-4d9b-8c41-9328ea305e23",
-      "status": "open",
       "service_name": "alb/elb",
       "scenario": "user wants to remove weak ciphers for ELB",
       "alert_criteria": "",
@@ -259,7 +250,6 @@
     },
     {
       "id": "00b372b2-8825-4bdf-834f-b10742dc715b",
-      "status": "open",
       "service_name": "alb/elb",
       "scenario": "user wants to ensure that elb has a recommended ssl/tls protocol version",
       "alert_criteria": "",
@@ -287,7 +277,6 @@
     },
     {
       "id": "8ac617e8-5a7a-4da8-8084-7ef5e5cbc74c",
-      "status": "open",
       "service_name": "alb/elb",
       "scenario": "user wants to ensure ELB are created with access logs enabled",
       "alert_criteria": "",
@@ -315,7 +304,6 @@
     },
     {
       "id": "b5337466-a827-460e-873e-613c28a101e4",
-      "status": "open",
       "service_name": "alb/elb",
       "scenario": "user wants to ensure ELB is setup with SSL for secure communication",
       "alert_criteria": "",
@@ -343,7 +331,6 @@
     },
     {
       "id": "a3e36ea7-b611-4706-bc1f-40f09a17dc70",
-      "status": "open",
       "service_name": "alb/elb",
       "scenario": "user wants to be notified when ELB securied listener certificate expires in 1 month",
       "alert_criteria": "",
@@ -371,7 +358,6 @@
     },
     {
       "id": "b70a15dd-4b86-4345-ab46-a3e02c6abfea",
-      "status": "open",
       "service_name": "alb/elb",
       "scenario": "user wants to be notified when ELB securied listener certificate expires in 1 week",
       "alert_criteria": "",
@@ -399,7 +385,6 @@
     },
     {
       "id": "38ef673f-016f-4b10-ba8c-e0ab9d15494a",
-      "status": "open",
       "service_name": "alb/elb",
       "scenario": "user wants to be notified when ALB securied listener certificate expires in 1 month",
       "alert_criteria": "",
@@ -427,7 +412,6 @@
     },
     {
       "id": "255365fe-3007-414f-85b6-713846173847",
-      "status": "open",
       "service_name": "alb/elb",
       "scenario": "user wants to be notified when ALB securied listener certificate expires in 1 week",
       "alert_criteria": "",

@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "293ff9bc-a6b4-46ac-a524-c967b965101d",
-      "status": "open",
       "service_name": "sqs",
       "scenario": "User wants to reduces duplicate messages in their queues",
       "alert_criteria": "SQS is sending duplicate messages",

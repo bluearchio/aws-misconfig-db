@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "e1b071d7-7358-4318-9021-015de19b783b",
-      "status": "done",
       "service_name": "elasticsearch",
       "scenario": "Amazon Elasticsearch Reserved Instance Optimization",
       "alert_criteria": "Optimizing the purchase of Elasticsearch Reserved Instances can help reduce costs.",

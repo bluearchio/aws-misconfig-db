@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "2b6ae2c7-d432-401b-8164-23782cb1b1dc",
-      "status": "open",
       "service_name": "emr",
       "scenario": "EMR (or other) cluster is used and task nodes are not utilizing spot instances",
       "alert_criteria": "",

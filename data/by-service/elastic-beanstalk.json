@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "c727a01a-e43a-4157-a80c-21dc130a50c5",
-      "status": "pending",
       "service_name": "elastic beanstalk",
       "scenario": "user wants to make sure all environments are healthy",
       "alert_criteria": "environment != healthy",
@@ -33,7 +32,6 @@
     },
     {
       "id": "ceb5228b-8733-4978-8fed-36588bfb638d",
-      "status": "pending",
       "service_name": "elastic beanstalk",
       "scenario": "user wants to make sure all environments are up to date",
       "alert_criteria": "platform state == deprecated",

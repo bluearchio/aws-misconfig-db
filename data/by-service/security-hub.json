@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "de2df33a-9650-4d05-86a8-5f2c716a6034",
-      "status": "open",
       "service_name": "security-hub",
       "scenario": "AWS Security Hub is not enabled to aggregate security findings",
       "alert_criteria": "Security Hub is not enabled and no centralized security posture management exists",

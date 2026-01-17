@@ -34,7 +34,6 @@ def generate_stats(entries: List[Dict[str, Any]]) -> Dict[str, Any]:
     """Generate summary statistics from entries."""
     stats = {
         "total_entries": len(entries),
-        "by_status": defaultdict(int),
         "by_service": defaultdict(int),
         "by_category": defaultdict(int),
         "by_risk_type": defaultdict(int),
@@ -42,7 +41,6 @@ def generate_stats(entries: List[Dict[str, Any]]) -> Dict[str, Any]:
     }
 
     for entry in entries:
-        stats['by_status'][entry.get('status', 'unknown')] += 1
         stats['by_service'][entry.get('service_name', 'unknown')] += 1
 
         if entry.get('category'):
@@ -56,7 +54,7 @@ def generate_stats(entries: List[Dict[str, Any]]) -> Dict[str, Any]:
             stats['by_priority'][str(entry['build_priority'])] += 1
 
     # Convert to regular dicts
-    for key in ['by_status', 'by_service', 'by_category', 'by_risk_type', 'by_priority']:
+    for key in ['by_service', 'by_category', 'by_risk_type', 'by_priority']:
         stats[key] = dict(stats[key])
 
     return stats
@@ -79,22 +77,11 @@ def generate_markdown_summary(stats: Dict[str, Any], output_path: Path):
         "",
         "## Statistics",
         "",
-        "### By Status",
-        "",
-        "| Status | Count |",
-        "| ------ | ----- |",
-    ]
-
-    for status, count in sorted(stats['by_status'].items()):
-        lines.append(f"| {status} | {count} |")
-
-    lines.extend([
-        "",
         "### By Risk Type",
         "",
         "| Risk Type | Count |",
         "| --------- | ----- |",
-    ])
+    ]
 
     for risk, count in sorted(stats['by_risk_type'].items(), key=lambda x: x[1], reverse=True):
         lines.append(f"| {risk} | {count} |")

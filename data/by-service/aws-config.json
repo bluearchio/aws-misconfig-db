@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "e6001001-cf01-4001-a001-001000000001",
-      "status": "done",
       "service_name": "aws-config",
       "scenario": "Continuous AWS Config Recording in Non-Production Environments",
       "alert_criteria": "AWS Config continuously recording all resource types in development, test, or staging environments",
@@ -39,7 +38,6 @@
     },
     {
       "id": "e6001002-cf02-4002-a002-002000000002",
-      "status": "done",
       "service_name": "aws-config",
       "scenario": "Excessive AWS Config Costs from Spot Instances",
       "alert_criteria": "AWS Config recording configuration changes for frequently provisioned/terminated Spot instances or Auto Scaling groups with high churn",
@@ -75,7 +73,6 @@
     },
     {
       "id": "e6001003-cf03-4003-a003-003000000003",
-      "status": "done",
       "service_name": "aws-config",
       "scenario": "Unfiltered Recording of High-Churn Resource Types in AWS Config",
       "alert_criteria": "AWS Config recording all resource types including those with frequent state changes (CloudWatch alarms, Lambda invocations, ECS tasks)",
@@ -111,7 +108,6 @@
     },
     {
       "id": "e6001004-cf04-4004-a004-004000000004",
-      "status": "done",
       "service_name": "aws-config",
       "scenario": "Unnecessarily High Recording Granularity in AWS Config",
       "alert_criteria": "AWS Config using continuous recording when periodic recording would suffice for compliance requirements",
@@ -147,7 +143,6 @@
     },
     {
       "id": "6e839f06-4474-45c8-82a9-84003aade522",
-      "status": "open",
       "service_name": "aws-config",
       "scenario": "user wants to ensure AWS config is enabled in all regions",
       "alert_criteria": "",

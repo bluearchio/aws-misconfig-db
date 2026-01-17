@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "6aa5f0f0-2e69-4f2e-82f2-e4110654b102",
-      "status": "done",
       "service_name": "elasticache",
       "scenario": "Amazon ElastiCache Reserved Node Optimization",
       "alert_criteria": "Optimizing the purchase of ElastiCache Reserved Nodes can help reduce costs",
@@ -33,7 +32,6 @@
     },
     {
       "id": "30397890-41a8-4c51-a957-c1fe893cdbe7",
-      "status": "open",
       "service_name": "elasticache",
       "scenario": "client wants to build a gaming leaderboard that guarantees both uniqueness and element ordering;",
       "alert_criteria": "",

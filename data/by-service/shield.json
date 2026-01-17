@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "3e1bfe64-1e5a-4b01-9a77-0f1c505ad6b1",
-      "status": "open",
       "service_name": "shield",
       "scenario": "Mission-critical applications lack AWS Shield Advanced DDoS protection",
       "alert_criteria": "CloudFront distributions or ELBs handling critical traffic without Shield Advanced and no DDoS cost protection or 24/7 response team access",

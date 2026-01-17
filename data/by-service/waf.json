@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "e55a54dd-f7ab-4b75-bac7-8067de64ea1a",
-      "status": "open",
       "service_name": "waf",
       "scenario": "Public-facing applications do not have AWS WAF protection enabled",
       "alert_criteria": "Application Load Balancer, API Gateway, or CloudFront distribution has no WAF association and no protection against OWASP Top 10 vulnerabilities",

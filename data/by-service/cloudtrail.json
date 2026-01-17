@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "1a48e014-dc5b-4b3d-9e8a-4fa00ebd4223",
-      "status": "open",
       "service_name": "cloudtrail",
       "scenario": "user wants to ensure CloudTrail is enabled in all regions",
       "alert_criteria": "cloudtrail is not enabled in region X",
@@ -31,7 +30,6 @@
     },
     {
       "id": "a947ee7d-2155-4f72-8c3f-4097c7ec3974",
-      "status": "open",
       "service_name": "cloudtrail",
       "scenario": "user wants to ensure multi-region trail exists for each AWS CloudTrail",
       "alert_criteria": "",
@@ -59,7 +57,6 @@
     },
     {
       "id": "450eb05d-23fe-47dc-83f0-4e13c1149c00",
-      "status": "open",
       "service_name": "cloudtrail",
       "scenario": "user wants to ensure CloudTrail log file validation is enabled",
       "alert_criteria": "",
@@ -87,7 +84,6 @@
     },
     {
       "id": "bbeaea1f-8aeb-4a4b-978c-7f05c0ed0722",
-      "status": "open",
       "service_name": "cloudtrail",
       "scenario": "user wants to ensure CLoudTrail logs are encrypted at rest using KMS CMKs",
       "alert_criteria": "",
@@ -115,7 +111,6 @@
     },
     {
       "id": "3eae64a8-7a42-4ffc-b552-6e7a8555d3c3",
-      "status": "open",
       "service_name": "cloudtrail",
       "scenario": "user wants to ensure CloudTrail trails are integrated with CloudWatch",
       "alert_criteria": "",

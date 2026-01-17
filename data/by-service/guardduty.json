@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "ffb6b99f-0dec-47a4-9274-6e1552c05c02",
-      "status": "open",
       "service_name": "guardduty",
       "scenario": "Amazon GuardDuty threat detection is not enabled in all regions",
       "alert_criteria": "GuardDuty is disabled in one or more AWS regions with no threat detection monitoring active",

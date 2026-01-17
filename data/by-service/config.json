@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "06f2bdc9-2b6e-4c70-895d-1b6d4e17f87c",
-      "status": "open",
       "service_name": "config",
       "scenario": "AWS Config is not enabled to track resource configuration changes and compliance",
       "alert_criteria": "AWS Config is disabled with no configuration history tracking and compliance violations going undetected",

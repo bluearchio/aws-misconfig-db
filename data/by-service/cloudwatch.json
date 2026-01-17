@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "83691b2b-0b0b-4549-b2da-fcbb1708c6cb",
-      "status": "open",
       "service_name": "cloudwatch",
       "scenario": "No CloudWatch anomaly detection configured to identify unexpected cost increases",
       "alert_criteria": "AWS accounts lack CloudWatch anomaly detection alarms for billing metrics and service-specific cost anomalies",
@@ -39,7 +38,6 @@
     },
     {
       "id": "e7b5c9a1-3f2d-4e8b-9c6a-1d5e8f2b4a3c",
-      "status": "open",
       "service_name": "cloudwatch",
       "scenario": "CloudWatch Logs groups without retention policies accumulating costs indefinitely",
       "alert_criteria": "CloudWatch Logs groups with \"Never Expire\" retention policy, or log data older than 90 days consuming significant storage",
@@ -74,7 +72,6 @@
     },
     {
       "id": "4e7fe812-5f0d-478f-9959-2409c8dc0b45",
-      "status": "open",
       "service_name": "cloudwatch",
       "scenario": "HTTP/S & TCP endpoint health checks are not linked to cloudwatch",
       "alert_criteria": "",

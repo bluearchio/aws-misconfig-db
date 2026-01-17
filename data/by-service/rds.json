@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "08c3c3cd-25d9-4cb6-8c30-926c823276a8",
-      "status": "done",
       "service_name": "rds",
       "scenario": "Amazon Relational Database Service (RDS) Reserved Instance Optimization",
       "alert_criteria": "Optimizing the purchase of RDS Reserved Instances can help reduce costs.",
@@ -33,7 +32,6 @@
     },
     {
       "id": "3afeb36c-4c09-400f-8f70-13314ff8d578",
-      "status": "done",
       "service_name": "rds",
       "scenario": "Amazon RDS Idle DB Instances",
       "alert_criteria": "An active DB instance has not had a connection in the last 7 days.",
@@ -62,7 +60,6 @@
     },
     {
       "id": "a1f5645b-0bce-475a-b036-d34b9abd5dbb",
-      "status": "done",
       "service_name": "rds",
       "scenario": "RDS instances are running on previous generations",
       "alert_criteria": "RDS instances are running on previous generations",
@@ -89,7 +86,6 @@
     },
     {
       "id": "c0764b9f-5241-46c5-af3f-3bcf30721fec",
-      "status": "ice",
       "service_name": "rds",
       "scenario": "user does not want RDS to have public interface",
       "alert_criteria": "",
@@ -116,7 +112,6 @@
     },
     {
       "id": "d5daba29-69b4-4a46-8223-73ece5a7b5ef",
-      "status": "open",
       "service_name": "rds",
       "scenario": "rightsize RDS instances",
       "alert_criteria": "",
@@ -143,7 +138,6 @@
     },
     {
       "id": "4a77b3fb-647d-4f79-8605-28d7ab946ad2",
-      "status": "done",
       "service_name": "rds",
       "scenario": "user wants the rds storage to be encrypted",
       "alert_criteria": "",
@@ -170,7 +164,6 @@
     },
     {
       "id": "a4d8f3e1-9c2b-4f7e-8a5d-6b1c9e3f2a4d",
-      "status": "open",
       "service_name": "rds",
       "scenario": "RDS instances with over-provisioned storage capacity without auto-scaling enabled",
       "alert_criteria": "RDS instances with <40% storage utilization, or storage manually increased multiple times, or auto-scaling not enabled",
@@ -205,7 +198,6 @@
     },
     {
       "id": "b3c7e2d1-8a4f-4b6e-9c5d-7e1a8f3b2c4d",
-      "status": "open",
       "service_name": "rds",
       "scenario": "RDS instances using GP2 storage instead of cost-effective GP3 storage type",
       "alert_criteria": "RDS instances with gp2 storage type, especially those with low IOPS requirements (<3000 IOPS)",
@@ -240,7 +232,6 @@
     },
     {
       "id": "b2c3d4e5-f6a7-4890-b123-456789abcdef",
-      "status": "open",
       "service_name": "rds",
       "scenario": "Database queries repeated without caching layer implementation",
       "alert_criteria": "RDS DatabaseConnections >80% of max, identical SELECT queries >1000/min, or query response time >100ms for cacheable data",
@@ -298,7 +289,6 @@
     },
     {
       "id": "b5d48d1f-0c91-4abb-97cb-fb1c04bb59ba",
-      "status": "open",
       "service_name": "rds",
       "scenario": "provisioned aurora db or serverless v1",
       "alert_criteria": "",
@@ -326,7 +316,6 @@
     },
     {
       "id": "2ba334ec-3d39-40fd-9753-a7efec8e3091",
-      "status": "open",
       "service_name": "rds",
       "scenario": "reporting / analytics team wants to generate insights from your production relational database (e.g. RDS) but your production database is already taking on a normal load and you do not want to risk performance declines",
       "alert_criteria": "",
@@ -354,7 +343,6 @@
     },
     {
       "id": "3660d10c-dcb8-4539-a478-17568ea89eba",
-      "status": "open",
       "service_name": "rds",
       "scenario": "high cpu / write frequency to aurora read replicas are causing performance issues, or you would like to specify custom endpoints for analytical queries",
       "alert_criteria": "",
@@ -382,7 +370,6 @@
     },
     {
       "id": "615f34d8-5c68-4f9e-bb45-69e66714b2cf",
-      "status": "open",
       "service_name": "rds",
       "scenario": "client wants ml predictins to your applications via sql",
       "alert_criteria": "",
@@ -410,7 +397,6 @@
     },
     {
       "id": "daff4201-ab90-42a9-a503-17ec9374a89e",
-      "status": "open",
       "service_name": "rds",
       "scenario": "rds struggles to keep up with demand of users on the website. users mostly read news / content and we (the company) do not post news / content often",
       "alert_criteria": "",
@@ -438,7 +424,6 @@
     },
     {
       "id": "e6108cb9-4ece-4882-b763-fa29ec6b1bd3",
-      "status": "open",
       "service_name": "rds",
       "scenario": "user is experiencing poor performance on the website / application",
       "alert_criteria": "",
@@ -466,7 +451,6 @@
     },
     {
       "id": "b0c84bfb-87ed-4bc0-8cd5-76289fc81aa1",
-      "status": "open",
       "service_name": "rds",
       "scenario": "user is experiencing poor performance on the website / application",
       "alert_criteria": "",
@@ -494,7 +478,6 @@
     },
     {
       "id": "67c7713f-5866-4e0e-bd65-2fd445775878",
-      "status": "open",
       "service_name": "rds",
       "scenario": "user wants multi az disaster recovery for their application",
       "alert_criteria": "",
@@ -522,7 +505,6 @@
     },
     {
       "id": "f70af24d-8ea3-4434-a18a-7f4ceb78c1d3",
-      "status": "open",
       "service_name": "rds",
       "scenario": "customer needs a database but is not sure which one to select or what to configure",
       "alert_criteria": "Heavy writes / simple queries = NoSQL",
@@ -550,7 +532,6 @@
     },
     {
       "id": "02c10f83-1d4e-4889-b707-a7a564032af3",
-      "status": "open",
       "service_name": "rds",
       "scenario": "customer needs a database but is not sure which one to select or what to configure",
       "alert_criteria": "Heavy reads / complex queries and joins = SQL",

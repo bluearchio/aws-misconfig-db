@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "c7739001-aa01-4001-b001-001000000001",
-      "status": "done",
       "service_name": "nat-gateway",
       "scenario": "Inactive NAT Gateway",
       "alert_criteria": "NAT Gateways with zero data transfer activity over the review period, no private subnet or route table actively directing traffic through the gateway",
@@ -46,7 +45,6 @@
     },
     {
       "id": "c7739002-aa02-4002-b002-002000000002",
-      "status": "done",
       "service_name": "nat-gateway",
       "scenario": "Inactive VPC Interface Endpoint",
       "alert_criteria": "VPC Interface Endpoints (PrivateLink) with zero data transfer or no active connections over extended periods",
@@ -82,7 +80,6 @@
     },
     {
       "id": "c8908001-aa03-4003-b003-003000000003",
-      "status": "done",
       "service_name": "nat-gateway",
       "scenario": "Missing VPC Endpoints for High-Volume AWS Service Access",
       "alert_criteria": "EC2 instances, Lambda functions, or containerized workloads accessing S3, DynamoDB, or other AWS services through NAT Gateway or Internet Gateway instead of VPC Endpoints",
@@ -128,7 +125,6 @@
     },
     {
       "id": "c7739004-aa04-4004-b004-004000000004",
-      "status": "done",
       "service_name": "nat-gateway",
       "scenario": "Suboptimal Cross-AZ Routing to NAT Gateway",
       "alert_criteria": "Private subnets in one Availability Zone routing traffic through NAT Gateway in a different Availability Zone",
@@ -164,7 +160,6 @@
     },
     {
       "id": "c7739005-aa05-4005-b005-005000000005",
-      "status": "done",
       "service_name": "nat-gateway",
       "scenario": "Routing Through NAT Gateway Instead of VPC Endpoint for AWS Services",
       "alert_criteria": "Traffic to supported AWS services (S3, DynamoDB, etc.) routed through NAT Gateway when VPC Endpoints could be used",
@@ -200,7 +195,6 @@
     },
     {
       "id": "c7739006-aa06-4006-b006-006000000006",
-      "status": "done",
       "service_name": "nat-gateway",
       "scenario": "Imbalanced Data Transfer Between Availability Zones",
       "alert_criteria": "Significant data transfer between resources in different Availability Zones within the same region",

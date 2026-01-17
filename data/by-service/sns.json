@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "55db77af-694b-428d-8337-fa10d770e17f",
-      "status": "open",
       "service_name": "sns",
       "scenario": "user wants to ensure appropriate subscribers to each SNS topic",
       "alert_criteria": "",

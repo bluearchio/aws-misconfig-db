@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "a1382001-fbbe-4001-b001-001000000001",
-      "status": "done",
       "service_name": "bedrock",
       "scenario": "Suboptimal Bedrock Custom Model Configuration",
       "alert_criteria": "Custom models using older architectures, oversized GPU/accelerators, full-precision weights, or unoptimized model artifacts",
@@ -46,7 +45,6 @@
     },
     {
       "id": "a1382002-08c0-4002-b002-002000000002",
-      "status": "done",
       "service_name": "bedrock",
       "scenario": "Suboptimal Bedrock Inference Profile Model Selection",
       "alert_criteria": "Inference profiles using models with higher compute requirements than necessary for the use case, or using on-demand when provisioned throughput would be more cost-effective",
@@ -82,7 +80,6 @@
     },
     {
       "id": "a1382003-6144-4003-b003-003000000003",
-      "status": "done",
       "service_name": "bedrock",
       "scenario": "Suboptimal Bedrock Model Type for Use Case",
       "alert_criteria": "Using large foundation models for tasks that smaller, specialized models could handle, or using general-purpose models when fine-tuned models would be more efficient",
@@ -118,7 +115,6 @@
     },
     {
       "id": "a1382004-5e31-4004-b004-004000000004",
-      "status": "done",
       "service_name": "bedrock",
       "scenario": "Missing Caching Layer for Repetitive Bedrock Inference Workloads",
       "alert_criteria": "High volume of identical or similar inference requests, applications repeatedly invoking models with deterministic prompts, or no semantic caching layer implemented",
@@ -162,7 +158,6 @@
     },
     {
       "id": "a1382005-734c-4005-b005-005000000005",
-      "status": "done",
       "service_name": "bedrock",
       "scenario": "Using High-Cost Bedrock Models for Low-Complexity Tasks",
       "alert_criteria": "Using Claude 3 Opus/Sonnet or similar high-tier models for simple classification, extraction, or templated generation tasks that could use Haiku or smaller models",

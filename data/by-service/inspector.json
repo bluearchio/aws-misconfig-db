@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "4ad76651-ce07-4d4e-bcf0-0a6fdff81146",
-      "status": "open",
       "service_name": "inspector",
       "scenario": "Infrastructure as Code (IaC) templates are not scanned for security vulnerabilities before deployment",
       "alert_criteria": "CloudFormation, Terraform, or CDK templates not scanned and CI/CD pipeline lacks IaC security scanning",
@@ -39,7 +38,6 @@
     },
     {
       "id": "fc98e70f-8e79-439d-9453-1e786bd5846e",
-      "status": "open",
       "service_name": "inspector",
       "scenario": "user wants to be notified if there has not been an inspector run in the last 30 days",
       "alert_criteria": "",
@@ -67,7 +65,6 @@
     },
     {
       "id": "be5dfe89-42e6-489b-9b70-3c32a154ffc8",
-      "status": "open",
       "service_name": "inspector",
       "scenario": "user wanst to be notified when there are any high level findings in inspector scan",
       "alert_criteria": "",

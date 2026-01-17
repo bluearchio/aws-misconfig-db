@@ -16,11 +16,6 @@
       "description": "Unique identifier for the misconfiguration entry (UUID format)",
       "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
     },
-    "status": {
-      "type": "string",
-      "description": "Current status of the misconfiguration entry",
-      "enum": ["done", "ice", "open", "pending"]
-    },
     "service_name": {
       "type": "string",
       "description": "AWS service affected by this misconfiguration",

@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "b4839001-ddb1-4001-c001-001000000001",
-      "status": "done",
       "service_name": "dynamodb",
       "scenario": "Inactive DynamoDB Table",
       "alert_criteria": "DynamoDB tables showing zero read or write activity over 7, 14, or 30+ day lookback period",
@@ -46,7 +45,6 @@
     },
     {
       "id": "b4839002-ddb2-4002-c002-002000000002",
-      "status": "done",
       "service_name": "dynamodb",
       "scenario": "Inefficient Use of On-Demand Capacity in DynamoDB",
       "alert_criteria": "DynamoDB tables using on-demand capacity mode with consistent, predictable traffic patterns that would benefit from provisioned capacity with auto-scaling",
@@ -82,7 +80,6 @@
     },
     {
       "id": "b4839003-ddb3-4003-c003-003000000003",
-      "status": "done",
       "service_name": "dynamodb",
       "scenario": "Suboptimal Storage Type for DynamoDB Table",
       "alert_criteria": "Tables with infrequently accessed data using Standard storage class, or tables with high-frequency access using Standard-IA",
@@ -117,7 +114,6 @@
     },
     {
       "id": "b4839004-ddb4-4004-c004-004000000004",
-      "status": "done",
       "service_name": "dynamodb",
       "scenario": "Underutilized Read Capacity on DynamoDB Table",
       "alert_criteria": "Provisioned read capacity units (RCUs) consistently underutilized (<30% utilization) over extended periods",
@@ -159,7 +155,6 @@
     },
     {
       "id": "b4839005-ddb5-4005-c005-005000000005",
-      "status": "done",
       "service_name": "dynamodb",
       "scenario": "Underutilized Write Capacity on DynamoDB Table",
       "alert_criteria": "Provisioned write capacity units (WCUs) consistently underutilized (<30% utilization) over extended periods",
@@ -201,7 +196,6 @@
     },
     {
       "id": "e3de8e59-c849-4544-8b17-e66164d45a64",
-      "status": "open",
       "service_name": "dynamodb",
       "scenario": "dynamo table read and write capacity is too low",
       "alert_criteria": "lambda fails when trying to read dynamo taber; provisionedThroughputErrorException in logs' consumed read capacity is high, provisioned read capacity units are low",
@@ -229,7 +223,6 @@
     },
     {
       "id": "d9e86614-ba81-4bee-9a3f-5e3457216033",
-      "status": "open",
       "service_name": "dynamodb",
       "scenario": "dynamoDB hot shards",
       "alert_criteria": "",
@@ -259,7 +252,6 @@
     },
     {
       "id": "ef9201c9-a59f-4006-b52d-fe50003e8e32",
-      "status": "open",
       "service_name": "dynamodb",
       "scenario": "user has the \"hot key\" problem (too many reads) with dynamo",
       "alert_criteria": "",
@@ -287,7 +279,6 @@
     },
     {
       "id": "b950825d-41ae-4637-a0c8-281f8903596f",
-      "status": "open",
       "service_name": "dynamodb",
       "scenario": "user cannot predict the capacity needed with dynamo (RCUs / WCUs)",
       "alert_criteria": "ProvisionedThroughputExceededException",
@@ -315,7 +306,6 @@
     },
     {
       "id": "169e3c58-a78a-4525-bcef-eb0656ec5bb0",
-      "status": "open",
       "service_name": "dynamodb",
       "scenario": "read latency is not performant for dynamodb tables OR user needs full replication (high reliability) of their dynamo tables",
       "alert_criteria": "",
@@ -343,7 +333,6 @@
     },
     {
       "id": "a2a0dabe-1714-4a11-ab47-5ae2c539eb77",
-      "status": "open",
       "service_name": "dynamodb",
       "scenario": "user wants to know whether they should cache read content (in a serverless architecture) at the api gateway level or with a DAX caching layer (or other)",
       "alert_criteria": "",

@@ -4,7 +4,6 @@
   "misconfigurations": [
     {
       "id": "8dfe3ba4-c72f-4ed8-9a07-f88c1ccc8b3b",
-      "status": "done",
       "service_name": "ebs",
       "scenario": "user wants to ensure that only necessary / needed snapshots are available for use",
       "alert_criteria": "if snapshot is older than seven days and/or is older than another snapshot made from an identical volume, then recommend deletion",
@@ -31,7 +30,6 @@
     },
     {
       "id": "9b4bd9b6-9139-4e8d-a157-055bbb6bacc3",
-      "status": "open",
       "service_name": "ebs",
       "scenario": "user wants to ensure ebs volumes are deleted when an instance is terminated",
       "alert_criteria": "\"delete on termination\" flag on instances is set to false",
@@ -58,7 +56,6 @@
     },
     {
       "id": "444fd30a-f2f2-4a7f-afbc-063349fc900f",
-      "status": "open",
       "service_name": "ebs",
       "scenario": "Amazon EBS Provisioned IOPS (SSD) Volume Attachment Configuration",
       "alert_criteria": "An Amazon EC2 instance that can be EBS-optimized has an attached Provisioned IOPS (SSD) volume but the instance is not EBS-optimized.",
@@ -88,7 +85,6 @@
     },
     {
       "id": "9962a78d-7100-4d15-bc9c-c62a6c0d3b91",
-      "status": "open",
       "service_name": "ebs",
       "scenario": "user wants to prevent volumes (root or attached) from filling up, forcing a restart and leading to a new IP address (if an elastic ip has not been assigned)",
       "alert_criteria": "volume storage capacity has less than threshold (%) remaining",
@@ -115,7 +111,6 @@
     },
     {
       "id": "03060d2d-96d3-43aa-ba18-2968fc8a7189",
-      "status": "open",
       "service_name": "ebs",
       "scenario": "Overutilized Amazon EBS Magnetic Volumes",
       "alert_criteria": "An Amazon EBS Magnetic volume is attached to an instance that can be EBS-optimized or is part of a cluster compute network with a daily median of more than 95 IOPS, and varies by less than 10% of the median value for at least 7 of the past 14 days.",
@@ -144,7 +139,6 @@
     },
     {
       "id": "8312c521-673e-48df-aca3-ae6a284f7079",
-      "status": "open",
       "service_name": "ebs",
       "scenario": "Orphaned EBS snapshots and AMIs consuming storage costs after source volumes deleted",
       "alert_criteria": "EBS snapshots exist where source volume has been deleted, or AMIs registered without associated running instances for 90+ days",
@@ -179,7 +173,6 @@
     },
     {
       "id": "33fc1c4b-3302-4eb4-8f10-a43041c80105",
-      "status": "open",
       "service_name": "ebs",
       "scenario": "Max IOPs hit (<32,000)",
       "alert_criteria": "",
@@ -207,7 +200,6 @@
     },
     {
       "id": "257affcf-d8a7-479b-92b7-80d7d91c59c5",
-      "status": "open",
       "service_name": "ebs",
       "scenario": "Clustered Linux powered application needs higher availability (eg Teradata)",
       "alert_criteria": "",
@@ -235,7 +227,6 @@
     },
     {
       "id": "61ee7b36-d8eb-4bff-a1f5-01e5a4d55c1e",
-      "status": "open",
       "service_name": "ebs",
       "scenario": "Need up to 100k IOPS or more throughput on Linux or Windows machine",
       "alert_criteria": "",
@@ -263,7 +254,6 @@
     },
     {
       "id": "f12f548d-4986-4309-883e-a3673a5c3ef8",
-      "status": "open",
       "service_name": "ebs",
       "scenario": "uaer needs on premise volume data backed up in the cloud",
       "alert_criteria": "",
