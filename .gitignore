@@ -51,3 +51,7 @@ yarn-error.log*
 
 # Claude Code
 .claude/
+
+# DuckDB database (generated)
+db/*.duckdb
+db/*.duckdb.wal

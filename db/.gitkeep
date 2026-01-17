@@ -1,0 +1,2 @@
+# This directory contains the DuckDB database
+# Run `python3 scripts/db-init.py` to generate recommendations.duckdb

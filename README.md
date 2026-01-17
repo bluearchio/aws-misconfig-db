@@ -56,26 +56,12 @@ The database is designed with a standardized JSON format, making it ideal for:
 - Developing infrastructure analysis platforms
 - Educational purposes and AWS best practices reference
 
-## What's New
-
-### 🎯 Architectural Pattern Integration (November 2025)
-
-The database now includes comprehensive architectural pattern mapping! Each misconfiguration can be linked to well-known cloud design patterns:
-
-- **Pattern Relationships**: Circuit Breaker, Retry with Exponential Backoff, Cache-Aside, Bulkhead, Queue-Based Load Leveling, and more
-- **Implementation Guidance**: AWS-specific guidance for implementing patterns using Lambda, API Gateway, SQS, ElastiCache, DynamoDB, etc.
-- **Code Examples**: Python, Terraform, and AWS CLI examples for pattern implementation
-- **Detection Methods**: CloudWatch metrics and alarms to identify pattern violations
-- **Enhanced Categorization**: Pattern-aware tagging and querying capabilities
-
-This makes the database uniquely valuable for understanding not just *what* is misconfigured, but *which architectural patterns* would solve the problem.
-
 ## Database Statistics
 
-- **Total Misconfigurations**: 288
-- **AWS Services Covered**: 21+
+- **Total Recommendations**: 313
+- **AWS Services Covered**: 41
 - **Risk Categories**: Security, Cost, Performance, Operations, Reliability
-- **Status**: Done (23), Ice (10), Open (246), Pending (9)
+- **Architectural Patterns**: Circuit Breaker, Retry with Exponential Backoff, Cache-Aside, Bulkhead, Queue-Based Load Leveling
 
 See [docs/SUMMARY.md](docs/SUMMARY.md) for detailed statistics.
 
@@ -83,110 +69,107 @@ See [docs/SUMMARY.md](docs/SUMMARY.md) for detailed statistics.
 
 ```
 ├── data/
-│   ├── by-service/          # Organized by AWS service (ec2, s3, rds, etc.)
-│   ├── by-category/         # Organized by risk type (cost, security, etc.)
-│   └── all-misconfigs.json  # Complete unified dataset
+│   └── by-service/           # Source of truth - organized by AWS service
+│       ├── ec2.json          # EC2 recommendations (49 entries)
+│       ├── s3.json           # S3 recommendations (24 entries)
+│       ├── lambda.json       # Lambda recommendations (21 entries)
+│       ├── rds.json          # RDS recommendations (19 entries)
+│       ├── iam.json          # IAM recommendations (18 entries)
+│       └── ...               # 41 service files total
+├── db/
+│   └── recommendations.duckdb  # DuckDB database for querying
 ├── schema/
-│   └── misconfig-schema.json  # JSON Schema definition
+│   └── misconfig-schema.json   # JSON Schema definition
 ├── scripts/
-│   ├── validate.py          # Validate entries against schema
-│   ├── generate.py          # Generate aggregated files
-│   └── import-csv.py        # Import from CSV format
+│   ├── validate.py           # Validate entries against schema
+│   ├── generate.py           # Generate docs/SUMMARY.md
+│   ├── classify-general.py   # Classify entries by service
+│   └── db-init.py            # Initialize DuckDB database
 ├── examples/
-│   ├── python/              # Python integration examples
-│   ├── javascript/          # JavaScript integration examples
-│   └── llm-prompts/         # LLM prompt templates
+│   ├── python/               # Python integration examples
+│   ├── javascript/           # JavaScript integration examples
+│   └── llm-prompts/          # LLM prompt templates
 └── docs/
-    ├── SCHEMA.md            # Schema documentation
-    ├── CONTRIBUTING.md      # Contribution guidelines
-    └── SUMMARY.md           # Database statistics
+    ├── SCHEMA.md             # Schema documentation
+    ├── CONTRIBUTING.md       # Contribution guidelines
+    └── SUMMARY.md            # Database statistics
 ```
 
 ## Quick Start
 
 ### Accessing the Data
 
-**Load all misconfigurations:**
-```bash
-curl https://raw.githubusercontent.com/[your-org]/aws-misconfig-db/main/data/all-misconfigs.json
-```
-
 **Load by service (e.g., EC2):**
 ```bash
-curl https://raw.githubusercontent.com/[your-org]/aws-misconfig-db/main/data/by-service/ec2.json
+curl https://raw.githubusercontent.com/bluearchio/aws-misconfig-db/main/data/by-service/ec2.json
 ```
 
-**Load by risk type (e.g., security):**
+**Load all services via script:**
 ```bash
-curl https://raw.githubusercontent.com/[your-org]/aws-misconfig-db/main/data/by-category/security.json
+# Clone and use DuckDB for queries
+git clone https://github.com/bluearchio/aws-misconfig-db.git
+cd aws-misconfig-db
+python3 scripts/db-init.py
 ```
 
 ### Python Example
 
 ```python
 import json
-import requests
+from pathlib import Path
 
-# Load all misconfigurations
-response = requests.get('https://raw.githubusercontent.com/[your-org]/aws-misconfig-db/main/data/all-misconfigs.json')
-data = response.json()
+# Load all recommendations from by-service files
+def load_all_recommendations():
+    entries = []
+    for json_file in Path('data/by-service').glob('*.json'):
+        with open(json_file) as f:
+            data = json.load(f)
+            entries.extend(data.get('misconfigurations', []))
+    return entries
+
+data = load_all_recommendations()
 
 # Filter by service
-ec2_misconfigs = [m for m in data['misconfigurations'] if m['service_name'] == 'ec2']
+ec2_misconfigs = [m for m in data if m['service_name'] == 'ec2']
 
 # Filter by risk type
-security_issues = [m for m in data['misconfigurations'] if 'security' in m.get('risk_detail', '')]
+security_issues = [m for m in data if 'security' in m.get('risk_detail', '')]
 
 # Filter by architectural pattern
 circuit_breaker_misconfigs = [
-    m for m in data['misconfigurations']
+    m for m in data
     if any(p.get('pattern_name') == 'Circuit Breaker'
            for p in m.get('architectural_patterns', []))
 ]
-
-# Get pattern implementation guidance
-for m in circuit_breaker_misconfigs:
-    print(f"Service: {m['service_name']}")
-    print(f"Guidance: {m.get('pattern_implementation_guidance', 'N/A')}\n")
 
 print(f"Found {len(ec2_misconfigs)} EC2 misconfigurations")
 print(f"Found {len(security_issues)} security-related issues")
 print(f"Found {len(circuit_breaker_misconfigs)} Circuit Breaker pattern issues")
 ```
 
-### JavaScript Example
+### DuckDB Example
 
-```javascript
-const fetch = require('node-fetch');
+```python
+import duckdb
 
-async function loadMisconfigs() {
-  const response = await fetch('https://raw.githubusercontent.com/[your-org]/aws-misconfig-db/main/data/all-misconfigs.json');
-  const data = await response.json();
+# Connect to the database
+conn = duckdb.connect('db/recommendations.duckdb')
 
-  // Filter high-priority issues
-  const highPriority = data.misconfigurations.filter(m => m.build_priority === 0);
+# Query summary stats
+print(conn.execute("""
+    SELECT service_name, COUNT(*) as count
+    FROM recommendations
+    GROUP BY service_name
+    ORDER BY count DESC
+    LIMIT 10
+""").fetchdf())
 
-  // Find misconfigurations with architectural patterns
-  const patternIssues = data.misconfigurations.filter(m =>
-    m.architectural_patterns && m.architectural_patterns.length > 0
-  );
-
-  // Group by pattern name
-  const patternGroups = {};
-  patternIssues.forEach(m => {
-    m.architectural_patterns.forEach(p => {
-      const name = p.pattern_name;
-      if (!patternGroups[name]) patternGroups[name] = [];
-      patternGroups[name].push(m);
-    });
-  });
-
-  console.log(`Found ${highPriority.length} high-priority issues`);
-  console.log(`Found ${patternIssues.length} issues with pattern mapping`);
-  console.log(`Patterns covered: ${Object.keys(patternGroups).join(', ')}`);
-}
-
-loadMisconfigs();
+# Find security issues
+print(conn.execute("""
+    SELECT service_name, scenario
+    FROM recommendations
+    WHERE risk_detail LIKE '%security%'
+""").fetchdf())
 ```
 
 ## Data Format
@@ -208,11 +191,8 @@ Each misconfiguration entry follows this structure:
   "risk_value": 2,
   "recommendation_description_detailed": "Circuit breaker prevents repeated calls to failing services...",
   "category": "compute",
-  "output_notes": "Benefits: Reduced latency, improved resilience. Trade-offs: Added complexity",
-  "notes": "AWS Well-Architected Reliability Pillar recommendation",
   "references": [
-    "https://docs.aws.amazon.com/lambda/latest/dg/best-practices.html",
-    "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/"
+    "https://docs.aws.amazon.com/lambda/latest/dg/best-practices.html"
   ],
   "metadata": {
     "created_at": "2025-11-06T20:44:23.794745+00:00",
@@ -220,11 +200,7 @@ Each misconfiguration entry follows this structure:
     "contributors": ["pattern-integration-2025"],
     "source": "AWS Prescriptive Guidance - Cloud Design Patterns"
   },
-  "tags": [
-    "pattern:circuit-breaker",
-    "resilience-pattern",
-    "fault-tolerance"
-  ],
+  "tags": ["pattern:circuit-breaker", "resilience-pattern"],
   "architectural_patterns": [
     {
       "pattern_name": "Circuit Breaker",
@@ -232,132 +208,58 @@ Each misconfiguration entry follows this structure:
       "description": "Lambda lacks circuit breaker for downstream service calls"
     }
   ],
-  "pattern_implementation_guidance": "Implement using: 1) Lambda Layer with pybreaker/opossum library, 2) DynamoDB for circuit state storage, 3) CloudWatch alarms for monitoring...",
+  "pattern_implementation_guidance": "Implement using: 1) Lambda Layer with pybreaker library...",
   "detection_methods": [
     {
       "method": "CloudWatch Metric",
-      "details": "Lambda Errors metric >5% AND Duration p99 >1000ms"
+      "details": "Lambda Errors metric >5%"
     }
   ],
   "remediation_examples": [
     {
       "language": "python",
-      "code": "from pybreaker import CircuitBreaker\nbreaker = CircuitBreaker(fail_max=5, timeout_duration=30)\n\n@breaker\ndef call_downstream_service():\n    # Your service call here\n    pass",
+      "code": "from pybreaker import CircuitBreaker\nbreaker = CircuitBreaker(fail_max=5)...",
       "description": "Python implementation using pybreaker library"
     }
-  ],
-  "compliance_mappings": [
-    "AWS Well-Architected Framework - Reliability Pillar"
   ]
 }
 ```
 
+### Architectural Patterns
+
+The database includes mappings to these cloud design patterns:
+
+| Pattern | Description | Relationship Types |
+|---------|-------------|-------------------|
+| **Circuit Breaker** | Prevent cascading failures by stopping calls to failing services | missing_implementation, incorrect_implementation |
+| **Retry with Exponential Backoff** | Handle transient failures with intelligent retry logic | missing_implementation, incorrect_implementation |
+| **Cache-Aside** | Reduce database load by caching frequently accessed data | missing_implementation |
+| **Bulkhead** | Isolate resources to prevent failures from spreading | missing_implementation |
+| **Queue-Based Load Leveling** | Buffer traffic spikes with message queues | missing_implementation |
+
 See [docs/SCHEMA.md](docs/SCHEMA.md) for complete schema documentation.
-
-## Use Cases
-
-### 1. LLM Training & Fine-tuning
-
-```python
-# Example: Prepare data for LLM training
-for misconfig in data['misconfigurations']:
-    prompt = f"Service: {misconfig['service_name']}\nIssue: {misconfig['scenario']}"
-    response = f"Recommendation: {misconfig['recommendation_action']}\nRisk: {misconfig['risk_detail']}"
-    # Feed to your training pipeline
-```
-
-### 2. Security Scanning Tool
-
-```python
-def check_unencrypted_volumes(aws_client, misconfig_db):
-    # Load relevant misconfiguration
-    unencrypted_rule = next(
-        m for m in misconfig_db
-        if 'unencrypted volumes' in m['scenario'].lower()
-    )
-
-    # Apply detection logic
-    volumes = aws_client.describe_volumes()
-    for vol in volumes:
-        if not vol['Encrypted']:
-            return {
-                'finding': unencrypted_rule,
-                'resource': vol['VolumeId'],
-                'severity': unencrypted_rule['risk_value']
-            }
-```
-
-### 3. Cost Optimization Recommendations
-
-```python
-# Find all cost-related misconfigurations
-cost_optimizations = [
-    m for m in data['misconfigurations']
-    if 'cost' in m.get('risk_detail', '')
-]
-
-# Prioritize by effort vs value
-sorted_opts = sorted(
-    cost_optimizations,
-    key=lambda x: (x.get('effort_level', 99), -x.get('action_value', 0))
-)
-```
-
-### 4. Architectural Pattern Analysis
-
-```python
-# Find misconfigurations related to specific patterns
-circuit_breaker_issues = [
-    m for m in data['misconfigurations']
-    if any(p.get('pattern_name') == 'Circuit Breaker'
-           for p in m.get('architectural_patterns', []))
-]
-
-# Get implementation guidance for a pattern
-for issue in circuit_breaker_issues:
-    print(f"Service: {issue['service_name']}")
-    print(f"Scenario: {issue['scenario']}")
-    print(f"Pattern Guidance: {issue.get('pattern_implementation_guidance')}")
-
-    # Access remediation code examples
-    for example in issue.get('remediation_examples', []):
-        print(f"Language: {example['language']}")
-        print(f"Code:\n{example['code']}")
-
-# Query by pattern relationship type
-missing_patterns = [
-    m for m in data['misconfigurations']
-    if any(p.get('relationship') == 'missing_implementation'
-           for p in m.get('architectural_patterns', []))
-]
-
-# Find all unique patterns in the database
-all_patterns = set()
-for m in data['misconfigurations']:
-    for p in m.get('architectural_patterns', []):
-        all_patterns.add(p.get('pattern_name'))
-
-print(f"Patterns covered: {', '.join(sorted(all_patterns))}")
-```
 
 ## Development
 
 ### Prerequisites
 
 - Python 3.8+
-- pip (for Python dependencies)
+- DuckDB (`pip install duckdb`)
 
 ### Setup
 
 ```bash
 # Clone the repository
-git clone https://github.com/[your-org]/aws-misconfig-db.git
+git clone https://github.com/bluearchio/aws-misconfig-db.git
 cd aws-misconfig-db
 
 # Validate the database
-python3 scripts/validate.py data/
+python3 scripts/validate.py data/by-service/
 
-# Generate aggregated files
+# Initialize DuckDB database
+python3 scripts/db-init.py
+
+# Generate documentation
 python3 scripts/generate.py
 ```
 
@@ -369,98 +271,22 @@ python3 scripts/validate.py data/by-service/
 
 # Validate specific file
 python3 scripts/validate.py data/by-service/ec2.json
-
-# Strict mode (exit with error on validation failure)
-python3 scripts/validate.py --strict data/
 ```
 
 ## Contributing
 
-We welcome contributions from the community! Please see [CONTRIBUTING.md](docs/CONTRIBUTING.md) for guidelines on:
+We welcome contributions! Please see [CONTRIBUTING.md](docs/CONTRIBUTING.md) for guidelines on:
 
 - Adding new misconfiguration entries
 - Improving existing entries
 - Suggesting new categories or services
-- Reporting issues
-
-## Schema Validation
-
-All entries are validated against a JSON Schema. The schema ensures:
-
-- Required fields are present
-- Data types are correct
-- Enum values are valid
-- UUID format is correct
-- Reference URLs are valid
-
-Run validation before submitting PRs:
-
-```bash
-python3 scripts/validate.py data/by-service/
-```
-
-## Integration Examples
-
-See the [examples/](examples/) directory for complete integration examples:
-
-- **Python**: Loading, filtering, and analyzing misconfigurations
-- **JavaScript**: Node.js and browser-based integration
-- **LLM Prompts**: Template prompts for various use cases
-
-## Roadmap
-
-### Completed ✅
-- [x] Add CVE references for security-related misconfigurations
-- [x] Include compliance framework mappings (PCI-DSS, HIPAA, SOC2, CIS, NIST)
-- [x] Add detection methods (AWS Config rules, CLI commands, CloudWatch metrics)
-- [x] Include remediation code examples (Terraform, CloudFormation, Python, AWS CLI)
-- [x] Add architectural pattern mapping and implementation guidance
-- [x] Support for pattern-aware tagging and querying
-
-### In Progress 🚧
-- [ ] Expand pattern coverage (Event Sourcing, Saga, CQRS, Strangler Fig, etc.)
-- [ ] Add more service-specific entries (AppSync, Cognito, SES, SNS, SQS)
-- [ ] Community voting on priority and impact
-
-### Planned 🔮
-- [ ] Create REST API for querying the database
-- [ ] Pattern visualization dashboard and relationship mapping
-- [ ] Automated detection rule generation (AWS Config, CloudFormation Guard)
-- [ ] Cost impact calculator for remediation actions
-- [ ] Integration with popular IaC scanning tools (Checkov, tfsec, etc.)
-- [ ] Multi-cloud pattern support (Azure, GCP)
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Acknowledgments
-
-- Initial data sourced from AWS Trusted Advisor recommendations
-- Community contributors (see [CONTRIBUTORS.md](CONTRIBUTORS.md))
-- Inspired by the OWASP Top 10 and CIS Benchmarks
-
-## Support
-
-- **Issues**: [GitHub Issues](https://github.com/[your-org]/aws-misconfig-db/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/[your-org]/aws-misconfig-db/discussions)
-- **Security Issues**: Please email security@[your-domain].com
-
-## Citation
-
-If you use this database in your research or project, please cite:
-
-```bibtex
-@misc{aws-misconfig-db,
-  title={AWS Misconfiguration Database},
-  author={Your Organization},
-  year={2025},
-  url={https://github.com/[your-org]/aws-misconfig-db}
-}
-```
-
 ---
 
-**Last Updated**: 2025-11-06
-**Version**: 1.1.0 (Architectural Patterns Integration)
-**Total Entries**: 288
+**Last Updated**: 2026-01-17
+**Version**: 2.0.0
+**Total Entries**: 313
