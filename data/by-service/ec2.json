@@ -1,6 +1,6 @@
 {
   "service": "ec2",
-  "count": 23,
+  "count": 49,
   "misconfigurations": [
     {
       "id": "6d6e48e1-29bb-49ac-a848-a33fba2a712a",
@@ -681,6 +681,740 @@
         "predictive-scaling",
         "dynamic-capacity"
       ]
+    },
+    {
+      "id": "40d46878-ac12-44c8-902f-196a18dc9f6c",
+      "status": "done",
+      "service_name": "ec2",
+      "scenario": "Unassociated Elastic IP Addresses",
+      "alert_criteria": "An allocated Elastic IP address (EIP) is not associated with a running Amazon EC2 instance.",
+      "recommendation_action": "Associate the EIP with a running active instance, or release the unassociated EIP.",
+      "risk_detail": "cost",
+      "build_priority": 0,
+      "action_value": 1,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "Checks for Elastic IP addresses (EIPs) that are not associated with a running Amazon Elastic Compute Cloud (Amazon EC2) instance. EIPs are static IP addresses designed for dynamic cloud computing. Unlike traditional static IP addresses, EIPs can mask the failure of an instance or Availability Zone by remapping a public IP address to another instance in your account. A nominal charge is imposed for an EIP that is not associated with a running instance.",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#using-instance-addressing-eips-associating-different",
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#using-instance-addressing-eips-releasing"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.199482+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "f2efa818-c80e-433c-9c7a-a41336423e2c",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "service autoscaling",
+      "alert_criteria": "",
+      "recommendation_action": "implement autoscaling ECS",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "microservice architecture has a way to handle scaling of instances, but not scaling of containers; microservices are not scaling appropriately",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://aws.amazon.com/blogs/compute/automatic-scaling-with-amazon-ecs/",
+        "https://segment.com/blog/the-million-dollar-eng-problem/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.204444+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "59fb7aa6-d2ef-48db-843a-042f56df477c",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "bin packing and consolidated instance types",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.204455+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "f9c9fd97-68ee-4c50-8cfe-d1ce2fef132b",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "instance types differ too much + CapacityReservationSpecification is set to open + reserved instance capacity underutilized",
+      "alert_criteria": "",
+      "recommendation_action": "standardize ec2 instance type, platform, and Availability Zones",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.204477+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "f0b2c0d5-ae4d-49e6-b063-222a991b109a",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "pem key credentials stored on ec2 instance",
+      "alert_criteria": "",
+      "recommendation_action": "create a role that mimics desired user credentials",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "iam roles should be used to ssh into ec2 instances, aws user credentials should never be stored on ec2 instances",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.204772+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "8b61f08a-4b4d-483b-870c-ea4f613a8435",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "Reserved instance recommendation",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "Good for long predictable workloads",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.204783+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "e89b978c-c76a-4be3-8333-32c61af547c8",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "Spot fleet (spot + on demand) recommended",
+      "alert_criteria": "",
+      "recommendation_action": "Spot fleets deployed with specific spot fleet strategy (lowestPrice, diversified, capacity optimized)",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.205488+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "8b5352c8-2b0a-420a-a653-dd24694bd34a",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "Need more ec2 network performance, but don't care about reliability (eg big data workload)",
+      "alert_criteria": "",
+      "recommendation_action": "Placement group, type cluster",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.205504+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "23cd2bca-6852-444b-ba04-a7b624d2a9cb",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "Don't care about network performance, but need to maximize reliability of compute on small to medium workloads",
+      "alert_criteria": "",
+      "recommendation_action": "Placement group, type spread",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.205526+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "bc4ad253-abd3-4931-81e0-f5b80b9026a7",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "Don't care about network performance, but need to maximize reliability of compute on large workloads (HDFS, Kafka, Hbase)",
+      "alert_criteria": "",
+      "recommendation_action": "Placement group, type partition",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.205551+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "4a085886-dc3f-4573-bcb3-1ac3b6527f70",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "??? EC2 failing and web address not valid?",
+      "alert_criteria": "",
+      "recommendation_action": "Create ENI and assignment logic for ec2 failover prevention",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.205566+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "5bdf9fa1-673d-4360-968b-d3068417c76a",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "Max IOPs Hit (=32,000)",
+      "alert_criteria": "",
+      "recommendation_action": "Use ec2 nitro for improved max EBS IOPs",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.205604+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "a7704b72-96f9-4c82-bd21-8b107242085c",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "Licensing costs charge by the core + CPU is underutilized",
+      "alert_criteria": "",
+      "recommendation_action": "Decrease ec2 core count",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "Helpful if you have high ram and low number of cpu",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.205622+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "e9b86ebe-9480-4618-b0b3-886757fb26f7",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "Helpful to increase HPC workloads",
+      "alert_criteria": "",
+      "recommendation_action": "Disable ec2 multi threading",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.205633+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "fd54bbf8-76c4-4475-a8b6-a3979e33a26f",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "Slow EC2 boot time",
+      "alert_criteria": "",
+      "recommendation_action": "Create AMI",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.205643+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "558c548a-8e9a-47d3-8f38-1240867af942",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "User is unsure how to decide between EFS, EBS, or instance store",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.205762+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "0dfe8dc1-9e65-4aed-b143-30df906e82db",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "maximum cpu utlization is greater than the alarm value and your application has auto scaling groups enabled",
+      "alert_criteria": "",
+      "recommendation_action": "alter desired capacity and maximum capacity to fit trending demand / workload requirements",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "You are running at desired capacity of 3 and the maximum capacity of 3. You have alarms set at 60% CPU to scale out your application. Your application is now running at 80% capacity.",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.206789+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "c2868099-49ec-4473-8020-47a470a23414",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "unhealthy, orphaned ec2 instances exist",
+      "alert_criteria": "",
+      "recommendation_action": "setup both ASG and ALB and enable ALB health checks; ASG should be configured to terminate any unhealthy EC2 instances",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.206808+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "533911b3-772f-418e-bb8c-dce2e14bdee4",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "applications are exposed through an appication load balancer, and the load balancer is deployed on a VPC and the EC2s security on port 80 does not reference the ALBs security group",
+      "alert_criteria": "",
+      "recommendation_action": "open up the ec2 security on port 80 to the ALBs security group",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.206853+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "380cb25a-4494-4d13-9389-a2e0c249ede5",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "default auto scaling cooldown is too long and unecessary costs are being incurred as a result",
+      "alert_criteria": "",
+      "recommendation_action": "reduce costs by applying scaling-specific cool down and reducing the cooldown period",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "default cooldown period is 300 seconds; if a scale-in policy is used - that is, a policy that is used to terminate instances based on a specific criteria or metric - EC2 auto scaling needs less time to determine whether to terminate additional resources.",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.207084+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "f99e83f1-1109-486b-8210-fa3ef702cb8b",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "rds read replica has been created in another region",
+      "alert_criteria": "",
+      "recommendation_action": "move the rds read replica to the same region as the rds db instance",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "cross region rds read replicas incur additional cost... business may have a reason for the setup, but it is likely a mistake",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.207251+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "bc73c591-36b2-43dd-8ad3-4406fec4e694",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "infrequent, intermittent or unpredictable database workloads",
+      "alert_criteria": "",
+      "recommendation_action": "recommend aurora serverless",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "automated database instantiation and autoscaling based on actual usage; pay per second; no capacity planning needed",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.207732+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "7de705c0-ed35-4f5b-a023-aca48102cd22",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "As a solution architect managing a complex ERP software suite, you are orchestrating a migration to the AWS cloud. The software traditionally takes well over an hour to setup on a Linux machine, and you would like to make sure your application does leverage the ASG feature of auto scaling based on the demand.",
+      "alert_criteria": "",
+      "recommendation_action": "Use golden images to incense provision resource time",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "User currently uses CloudFormation templates, AWS SDKs, or other IaC templates",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.209941+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "f86cf839-ad7f-4d22-969c-4ba62fdd52c1",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "user wants to know which OS are deployed to EC2 instances",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.216348+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "82a851f7-3ef6-4d02-9204-dde82c5a75da",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "user has an applicaiton that is running on ec2 that distributes software updates \"once and a while\"; when a new software update is out the user gets a lot of requests and the content distibuted in mass ovecr the network is very costly; user does NOT want to change or re-architect the applicaiton",
+      "alert_criteria": "",
+      "recommendation_action": "put cloudfront in front of the alb (and ec2 instances)",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "the addition of cloudfront does not require any changes to the existing infrastructures, allows the yuser to cach software update files at the edge (they are static, not dymic / changing files), cloudfront is serverless and will scale for the user, saving ASG & EC2 costs; i.e. cloudfront is a good way to scale and cheapen an application that serves / manages mostly static content",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.222141+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "9f8cd266-20b2-4bb8-867c-7ef54923cc00",
+      "status": "open",
+      "service_name": "ec2",
+      "scenario": "users application has connectivity issues and cannot determine why",
+      "alert_criteria": "flow logs not enabled for vpc, subnets, or elastic network interfaces",
+      "recommendation_action": "enable flow logs for VPC, Subnet, and / or ENI",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.222175+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
     }
   ]
 }

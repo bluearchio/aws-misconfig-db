@@ -1,6 +1,6 @@
 {
   "service": "ebs",
-  "count": 6,
+  "count": 10,
   "misconfigurations": [
     {
       "id": "8dfe3ba4-c72f-4ed8-9a07-f88c1ccc8b3b",
@@ -176,6 +176,118 @@
         "data-lifecycle-manager",
         "ami-cleanup"
       ]
+    },
+    {
+      "id": "33fc1c4b-3302-4eb4-8f10-a43041c80105",
+      "status": "open",
+      "service_name": "ebs",
+      "scenario": "Max IOPs hit (<32,000)",
+      "alert_criteria": "",
+      "recommendation_action": "Increase EBS volume performance grade",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.205593+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "257affcf-d8a7-479b-92b7-80d7d91c59c5",
+      "status": "open",
+      "service_name": "ebs",
+      "scenario": "Clustered Linux powered application needs higher availability (eg Teradata)",
+      "alert_criteria": "",
+      "recommendation_action": "EBS multi-attach (io1/io2 volume family)",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "Application must mange concurrent read and write operations",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.205695+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "61ee7b36-d8eb-4bff-a1f5-01e5a4d55c1e",
+      "status": "open",
+      "service_name": "ebs",
+      "scenario": "Need up to 100k IOPS or more throughput on Linux or Windows machine",
+      "alert_criteria": "",
+      "recommendation_action": "enable EBS RAID 0",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "Good for high performance, High fault tolerance (or already enabled replication) applications",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.205749+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "f12f548d-4986-4309-883e-a3673a5c3ef8",
+      "status": "open",
+      "service_name": "ebs",
+      "scenario": "uaer needs on premise volume data backed up in the cloud",
+      "alert_criteria": "",
+      "recommendation_action": "use storage (volume) gateway",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "block storage using the iScsi protocol",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.213844+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "service": "lambda",
-  "count": 15,
+  "count": 21,
   "misconfigurations": [
     {
       "id": "81a5a270-6eef-45f9-921b-593eb7ef6bd6",
@@ -528,6 +528,174 @@
           "description": "Set reserved concurrency for critical function isolation"
         }
       ]
+    },
+    {
+      "id": "37841661-4dc1-4fe6-a5f5-3f95013da436",
+      "status": "open",
+      "service_name": "lambda",
+      "scenario": "lambda functions should not be used",
+      "alert_criteria": "https://www.serverless.com/aws-lambda#limitations",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "https://www.serverless.com/aws-lambda#limitations",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.204573+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "64a6e315-cfef-4450-a761-247576cbe77e",
+      "status": "open",
+      "service_name": "lambda",
+      "scenario": "lambda function(s) has/have not been invoked in a long time",
+      "alert_criteria": "if lambda has not been invoked in [1 YEAR], recommend deletion",
+      "recommendation_action": "delete lambda",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "waste removal",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.214422+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "1f780989-b697-4817-b38c-dee807324c6b",
+      "status": "open",
+      "service_name": "lambda",
+      "scenario": "processes that are controlled / run by lambda function are performing poorly",
+      "alert_criteria": "ram, cpu, or networking performance is not enough",
+      "recommendation_action": "increase ram",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "increasing ram of a lambda function also increases the cpu and network performance",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.215498+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "34fb31df-b922-42a7-a462-c684bda929a4",
+      "status": "open",
+      "service_name": "lambda",
+      "scenario": "user has an IoT system (e.g. AWS edge) and wants to filter requests before they get to the application",
+      "alert_criteria": "",
+      "recommendation_action": "deploy a CDN with cloudfront along side your lambda functions",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "i.e. use lambda to customize cdn content",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.215651+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "5539e36a-7ff0-4feb-9edf-02a6a51ebd51",
+      "status": "open",
+      "service_name": "lambda",
+      "scenario": "user wants to prevent lambda functions with admin priviliges",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.217786+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "24a0eea7-9e43-4549-9c5d-17d1ddcaa4ef",
+      "status": "open",
+      "service_name": "lambda",
+      "scenario": "user wants to ensure that lambda functions do not share the same AWS iam execution role",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.218314+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "service": "iam",
-  "count": 7,
+  "count": 18,
   "misconfigurations": [
     {
       "id": "85d589af-ca9b-4cb6-8311-6c9e50da0687",
@@ -196,6 +196,314 @@
         "root-account",
         "hardware-mfa"
       ]
+    },
+    {
+      "id": "718ac930-9ba0-42a1-a31b-fad73f2a66da",
+      "status": "open",
+      "service_name": "iam",
+      "scenario": "user wants to enable least privilege access across all accounts",
+      "alert_criteria": "using cloudwatch logs, determine if appropriate roles have been assigned to resources, roles, etc.",
+      "recommendation_action": "reduce privileges where applicable",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.215344+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "e831d84f-db29-456e-a4fa-21d1bfa57984",
+      "status": "open",
+      "service_name": "iam",
+      "scenario": "user wants to ensure virtual MFA is enabled for the 'root' account",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.218599+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "6a285348-b16e-4905-b347-09df596d02d5",
+      "status": "open",
+      "service_name": "iam",
+      "scenario": "user wants to ensure iam policies are attached only to groups or roles",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.218892+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "20da6654-9c4a-4b02-aaaf-5327efab6599",
+      "status": "open",
+      "service_name": "iam",
+      "scenario": "user wants to ensure iam policies that allow full \"*:*\" are not created",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.219002+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "e3e22326-af1e-4fc5-89e6-757cf12a2f4a",
+      "status": "open",
+      "service_name": "iam",
+      "scenario": "user wants to ensure that MFA is enabled for all IAM users with console password",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.219117+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "e53ff93a-a43d-4580-bf17-a915dfeba8ce",
+      "status": "open",
+      "service_name": "iam",
+      "scenario": "user wants to ensure no root account access key exists",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.219347+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "07f63c10-f164-4f31-95fb-57c07eb87261",
+      "status": "open",
+      "service_name": "iam",
+      "scenario": "user wants to ensure a support role has been created to manage incidients with AWS support",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.219468+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "13bddd8f-7a89-4fa4-8f4e-bce30b3da26c",
+      "status": "open",
+      "service_name": "iam",
+      "scenario": "user wants to ensure first access key is rotated every 90 days or less",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.220168+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "a843c50e-63a8-4e20-8ef8-c7f6ec4a4500",
+      "status": "open",
+      "service_name": "iam",
+      "scenario": "user wants to ensure hardware MFA is enabled for the 'root' account",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.220265+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "aead0be5-3b3f-4e96-b561-6bafc7162801",
+      "status": "open",
+      "service_name": "iam",
+      "scenario": "user wants to enforce password policy",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.220337+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "50ba9f4d-388d-46dc-9b71-bd7a10c588c5",
+      "status": "open",
+      "service_name": "iam",
+      "scenario": "user wants the use of 'root' account to be avoided",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.221230+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
     }
   ]
 }

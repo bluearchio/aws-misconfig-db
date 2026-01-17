@@ -1,0 +1,373 @@
+{
+  "service": "dynamodb",
+  "count": 11,
+  "misconfigurations": [
+    {
+      "id": "b4839001-ddb1-4001-c001-001000000001",
+      "status": "done",
+      "service_name": "dynamodb",
+      "scenario": "Inactive DynamoDB Table",
+      "alert_criteria": "DynamoDB tables showing zero read or write activity over 7, 14, or 30+ day lookback period",
+      "recommendation_action": "Delete the table if no longer required, export data to S3 before deletion if retention needed, implement lifecycle tagging and ownership metadata to prevent future orphaned storage",
+      "risk_detail": "cost",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "This issue occurs when a DynamoDB table continues to accumulate storage charges despite having no active workload accessing it. Tables often become orphaned after project completion, feature retirement, or data migration elsewhere. They represent a cost liability without providing functional value. Detection requires: confirmation that no dependencies exist from applications, analytics jobs, backups, or event streams; review of metadata (tags, names, creation dates) to establish purpose and ownership; validation with data owners regarding compliance or reference retention requirements.",
+      "category": "database",
+      "output_notes": "DynamoDB charges apply continuously for storage (per GB-month) and read/write activity, making inactive tables a perpetual cost burden",
+      "notes": "CER ID: AWS-Databases-4839. Source: PointFive Hub",
+      "references": [
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html",
+        "https://hub.pointfive.co/inefficiencies/inactive-dynamodb-table"
+      ],
+      "metadata": {
+        "created_at": "2026-01-16T00:00:00.000000Z",
+        "updated_at": "2026-01-16T00:00:00.000000Z",
+        "contributors": [
+          "pointfive-hub-sync"
+        ],
+        "source": "PointFive Cloud Efficiency Hub"
+      },
+      "tags": [
+        "dynamodb",
+        "inactive-resource",
+        "storage-cost",
+        "cost-optimization",
+        "unused-resource"
+      ],
+      "detection_methods": [
+        {
+          "method": "CloudWatch Metric",
+          "details": "Monitor ConsumedReadCapacityUnits and ConsumedWriteCapacityUnits = 0 over extended period"
+        }
+      ]
+    },
+    {
+      "id": "b4839002-ddb2-4002-c002-002000000002",
+      "status": "done",
+      "service_name": "dynamodb",
+      "scenario": "Inefficient Use of On-Demand Capacity in DynamoDB",
+      "alert_criteria": "DynamoDB tables using on-demand capacity mode with consistent, predictable traffic patterns that would benefit from provisioned capacity with auto-scaling",
+      "recommendation_action": "Analyze traffic patterns over 2+ weeks, switch to provisioned capacity with auto-scaling for predictable workloads, maintain on-demand only for truly unpredictable or spiky workloads",
+      "risk_detail": "cost",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "On-demand capacity mode is convenient but costs approximately 6x more than provisioned capacity for steady-state workloads. Tables with predictable traffic patterns (consistent daily/weekly cycles) can significantly reduce costs by switching to provisioned capacity with auto-scaling. On-demand should be reserved for: new tables with unknown workload patterns, highly variable/spiky traffic, or development/test environments with sporadic usage.",
+      "category": "database",
+      "output_notes": "On-demand: $1.25/million WCU, $0.25/million RCU vs Provisioned: ~$0.00065/WCU-hour, ~$0.00013/RCU-hour",
+      "notes": "Source: PointFive Hub",
+      "references": [
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html",
+        "https://hub.pointfive.co/inefficiencies/inefficient-use-of-on-demand-capacity-in-dynamodb"
+      ],
+      "metadata": {
+        "created_at": "2026-01-16T00:00:00.000000Z",
+        "updated_at": "2026-01-16T00:00:00.000000Z",
+        "contributors": [
+          "pointfive-hub-sync"
+        ],
+        "source": "PointFive Cloud Efficiency Hub"
+      },
+      "tags": [
+        "dynamodb",
+        "capacity-mode",
+        "on-demand",
+        "provisioned",
+        "cost-optimization"
+      ]
+    },
+    {
+      "id": "b4839003-ddb3-4003-c003-003000000003",
+      "status": "done",
+      "service_name": "dynamodb",
+      "scenario": "Suboptimal Storage Type for DynamoDB Table",
+      "alert_criteria": "Tables with infrequently accessed data using Standard storage class, or tables with high-frequency access using Standard-IA",
+      "recommendation_action": "Enable Standard-Infrequent Access (Standard-IA) table class for tables with infrequent access patterns, use Standard class for frequently accessed data",
+      "risk_detail": "cost",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "DynamoDB offers two table classes: Standard and Standard-Infrequent Access (Standard-IA). Standard-IA reduces storage costs by up to 60% but has higher read/write costs. Tables storing historical data, logs, or archives that are rarely accessed can benefit from Standard-IA. Analyze read/write patterns: if storage costs exceed throughput costs, Standard-IA is likely beneficial.",
+      "category": "database",
+      "output_notes": "Standard-IA: 60% lower storage cost but higher throughput cost - ideal for storage-heavy, access-light workloads",
+      "notes": "Source: PointFive Hub",
+      "references": [
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.TableClasses.html",
+        "https://hub.pointfive.co/inefficiencies/suboptimal-storage-type-for-dynamodb-table"
+      ],
+      "metadata": {
+        "created_at": "2026-01-16T00:00:00.000000Z",
+        "updated_at": "2026-01-16T00:00:00.000000Z",
+        "contributors": [
+          "pointfive-hub-sync"
+        ],
+        "source": "PointFive Cloud Efficiency Hub"
+      },
+      "tags": [
+        "dynamodb",
+        "storage-class",
+        "standard-ia",
+        "cost-optimization"
+      ]
+    },
+    {
+      "id": "b4839004-ddb4-4004-c004-004000000004",
+      "status": "done",
+      "service_name": "dynamodb",
+      "scenario": "Underutilized Read Capacity on DynamoDB Table",
+      "alert_criteria": "Provisioned read capacity units (RCUs) consistently underutilized (<30% utilization) over extended periods",
+      "recommendation_action": "Reduce provisioned RCUs to match actual demand, enable auto-scaling with appropriate min/max bounds, consider switching to on-demand for highly variable workloads",
+      "risk_detail": "cost",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "Over-provisioned read capacity wastes money on unused capacity. Tables with provisioned capacity should maintain 70-80% target utilization. If actual usage consistently falls below 30%, the table is significantly over-provisioned. Enable Application Auto Scaling to dynamically adjust capacity based on demand, or reduce provisioned capacity to match actual patterns.",
+      "category": "database",
+      "output_notes": "Pay for provisioned capacity whether used or not; auto-scaling can optimize utilization",
+      "notes": "Source: PointFive Hub",
+      "references": [
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/AutoScaling.html",
+        "https://hub.pointfive.co/inefficiencies/underutilized-read-capacity-on-a-dynamodb-table"
+      ],
+      "metadata": {
+        "created_at": "2026-01-16T00:00:00.000000Z",
+        "updated_at": "2026-01-16T00:00:00.000000Z",
+        "contributors": [
+          "pointfive-hub-sync"
+        ],
+        "source": "PointFive Cloud Efficiency Hub"
+      },
+      "tags": [
+        "dynamodb",
+        "read-capacity",
+        "underutilized",
+        "auto-scaling",
+        "cost-optimization"
+      ],
+      "detection_methods": [
+        {
+          "method": "CloudWatch Metric",
+          "details": "ConsumedReadCapacityUnits / ProvisionedReadCapacityUnits < 0.3 over 7+ days"
+        }
+      ]
+    },
+    {
+      "id": "b4839005-ddb5-4005-c005-005000000005",
+      "status": "done",
+      "service_name": "dynamodb",
+      "scenario": "Underutilized Write Capacity on DynamoDB Table",
+      "alert_criteria": "Provisioned write capacity units (WCUs) consistently underutilized (<30% utilization) over extended periods",
+      "recommendation_action": "Reduce provisioned WCUs to match actual demand, enable auto-scaling with appropriate min/max bounds, consider switching to on-demand for highly variable workloads",
+      "risk_detail": "cost",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "Over-provisioned write capacity wastes money on unused capacity. Write capacity is approximately 5x more expensive than read capacity, making over-provisioning particularly costly. Tables with provisioned capacity should maintain 70-80% target utilization. Enable Application Auto Scaling to dynamically adjust capacity, or reduce provisioned capacity to match actual patterns.",
+      "category": "database",
+      "output_notes": "Write capacity costs ~5x read capacity; over-provisioning is especially costly",
+      "notes": "Source: PointFive Hub",
+      "references": [
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/AutoScaling.html",
+        "https://hub.pointfive.co/inefficiencies/underutilized-write-capacity-on-a-dynamodb-table"
+      ],
+      "metadata": {
+        "created_at": "2026-01-16T00:00:00.000000Z",
+        "updated_at": "2026-01-16T00:00:00.000000Z",
+        "contributors": [
+          "pointfive-hub-sync"
+        ],
+        "source": "PointFive Cloud Efficiency Hub"
+      },
+      "tags": [
+        "dynamodb",
+        "write-capacity",
+        "underutilized",
+        "auto-scaling",
+        "cost-optimization"
+      ],
+      "detection_methods": [
+        {
+          "method": "CloudWatch Metric",
+          "details": "ConsumedWriteCapacityUnits / ProvisionedWriteCapacityUnits < 0.3 over 7+ days"
+        }
+      ]
+    },
+    {
+      "id": "e3de8e59-c849-4544-8b17-e66164d45a64",
+      "status": "open",
+      "service_name": "dynamodb",
+      "scenario": "dynamo table read and write capacity is too low",
+      "alert_criteria": "lambda fails when trying to read dynamo taber; provisionedThroughputErrorException in logs' consumed read capacity is high, provisioned read capacity units are low",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": "how do we determine what value to set as the read/write parameter? might be done automatically",
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.204038+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "d9e86614-ba81-4bee-9a3f-5e3457216033",
+      "status": "open",
+      "service_name": "dynamodb",
+      "scenario": "dynamoDB hot shards",
+      "alert_criteria": "",
+      "recommendation_action": "implement kafka (or other) tool upstream to properly partition data prior to serving dynamodb",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "improper partitioning of dynamodb keys leading to excess capacity requirements; partitions (despite the aws documentation) do not happen linearly, thus upstream partitions are necessary",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://segment.com/blog/the-million-dollar-eng-problem/"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.204409+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "ef9201c9-a59f-4006-b52d-fe50003e8e32",
+      "status": "open",
+      "service_name": "dynamodb",
+      "scenario": "user has the \"hot key\" problem (too many reads) with dynamo",
+      "alert_criteria": "",
+      "recommendation_action": "use dynamodb accelerator (DAX)",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.215724+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "b950825d-41ae-4637-a0c8-281f8903596f",
+      "status": "open",
+      "service_name": "dynamodb",
+      "scenario": "user cannot predict the capacity needed with dynamo (RCUs / WCUs)",
+      "alert_criteria": "ProvisionedThroughputExceededException",
+      "recommendation_action": "use on demand capacity (unlimited rcu & wcu)",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "on demand is 2.5x more expensive than provisioned capacity",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.215859+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "169e3c58-a78a-4525-bcef-eb0656ec5bb0",
+      "status": "open",
+      "service_name": "dynamodb",
+      "scenario": "read latency is not performant for dynamodb tables OR user needs full replication (high reliability) of their dynamo tables",
+      "alert_criteria": "",
+      "recommendation_action": "use global tables feature in dynamo db; NOTE dynamo db streams must be enabled",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.215975+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "a2a0dabe-1714-4a11-ab47-5ae2c539eb77",
+      "status": "open",
+      "service_name": "dynamodb",
+      "scenario": "user wants to know whether they should cache read content (in a serverless architecture) at the api gateway level or with a DAX caching layer (or other)",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.222085+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    }
+  ]
+}

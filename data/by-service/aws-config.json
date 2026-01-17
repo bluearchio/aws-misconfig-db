@@ -1,0 +1,177 @@
+{
+  "service": "aws-config",
+  "count": 5,
+  "misconfigurations": [
+    {
+      "id": "e6001001-cf01-4001-a001-001000000001",
+      "status": "done",
+      "service_name": "aws-config",
+      "scenario": "Continuous AWS Config Recording in Non-Production Environments",
+      "alert_criteria": "AWS Config continuously recording all resource types in development, test, or staging environments",
+      "recommendation_action": "Disable continuous recording in non-production environments, use periodic recording or on-demand evaluation, limit recording to critical resource types only",
+      "risk_detail": "cost",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "AWS Config charges per configuration item recorded. In non-production environments where compliance requirements are less stringent, continuous recording of all resource types generates significant costs without proportional value. Consider disabling Config in dev/test, using periodic recording, or recording only a subset of critical resource types.",
+      "category": "management",
+      "output_notes": "AWS Config: $0.003 per configuration item recorded; high-churn resources can generate thousands of items per month",
+      "notes": "Source: PointFive Hub",
+      "references": [
+        "https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html",
+        "https://hub.pointfive.co/inefficiencies/continuous-aws-config-recording-in-non-production-environments"
+      ],
+      "metadata": {
+        "created_at": "2026-01-16T00:00:00.000000Z",
+        "updated_at": "2026-01-16T00:00:00.000000Z",
+        "contributors": [
+          "pointfive-hub-sync"
+        ],
+        "source": "PointFive Cloud Efficiency Hub"
+      },
+      "tags": [
+        "aws-config",
+        "non-production",
+        "configuration-recording",
+        "cost-optimization"
+      ]
+    },
+    {
+      "id": "e6001002-cf02-4002-a002-002000000002",
+      "status": "done",
+      "service_name": "aws-config",
+      "scenario": "Excessive AWS Config Costs from Spot Instances",
+      "alert_criteria": "AWS Config recording configuration changes for frequently provisioned/terminated Spot instances or Auto Scaling groups with high churn",
+      "recommendation_action": "Exclude ephemeral resource types like Spot instances from AWS Config recording, use resource type filtering to exclude high-churn resources",
+      "risk_detail": "cost",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "Spot instances and Auto Scaling groups with frequent scaling events generate numerous configuration items. Each launch, termination, or configuration change is recorded. For fleets with hundreds of Spot instances cycling frequently, this can generate thousands of configuration items daily. Exclude ephemeral resources from recording if compliance doesn't require it.",
+      "category": "management",
+      "output_notes": "High-churn resources can generate 10x+ normal configuration items; filtering saves significant costs",
+      "notes": "Source: PointFive Hub",
+      "references": [
+        "https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html",
+        "https://hub.pointfive.co/inefficiencies/excessive-aws-config-costs-from-spot-instances"
+      ],
+      "metadata": {
+        "created_at": "2026-01-16T00:00:00.000000Z",
+        "updated_at": "2026-01-16T00:00:00.000000Z",
+        "contributors": [
+          "pointfive-hub-sync"
+        ],
+        "source": "PointFive Cloud Efficiency Hub"
+      },
+      "tags": [
+        "aws-config",
+        "spot-instances",
+        "auto-scaling",
+        "high-churn",
+        "cost-optimization"
+      ]
+    },
+    {
+      "id": "e6001003-cf03-4003-a003-003000000003",
+      "status": "done",
+      "service_name": "aws-config",
+      "scenario": "Unfiltered Recording of High-Churn Resource Types in AWS Config",
+      "alert_criteria": "AWS Config recording all resource types including those with frequent state changes (CloudWatch alarms, Lambda invocations, ECS tasks)",
+      "recommendation_action": "Use resource type selection to exclude high-churn resources that don't require compliance tracking, focus recording on resources that change infrequently but have compliance implications",
+      "risk_detail": "cost",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "Some AWS resource types change state frequently and generate many configuration items. Examples include CloudWatch alarms (state changes), ECS tasks (scaling), and Lambda function versions. Recording all resources without filtering includes these high-churn types unnecessarily. Selective recording reduces costs while maintaining compliance for important resources.",
+      "category": "management",
+      "output_notes": "Recording all 200+ resource types vs selective recording can differ by 10x in cost",
+      "notes": "Source: PointFive Hub",
+      "references": [
+        "https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html",
+        "https://hub.pointfive.co/inefficiencies/unfiltered-recording-of-high-churn-resource-types-in-aws-config"
+      ],
+      "metadata": {
+        "created_at": "2026-01-16T00:00:00.000000Z",
+        "updated_at": "2026-01-16T00:00:00.000000Z",
+        "contributors": [
+          "pointfive-hub-sync"
+        ],
+        "source": "PointFive Cloud Efficiency Hub"
+      },
+      "tags": [
+        "aws-config",
+        "resource-filtering",
+        "high-churn",
+        "selective-recording",
+        "cost-optimization"
+      ]
+    },
+    {
+      "id": "e6001004-cf04-4004-a004-004000000004",
+      "status": "done",
+      "service_name": "aws-config",
+      "scenario": "Unnecessarily High Recording Granularity in AWS Config",
+      "alert_criteria": "AWS Config using continuous recording when periodic recording would suffice for compliance requirements",
+      "recommendation_action": "Evaluate if periodic recording meets compliance needs, switch to periodic recording with appropriate frequency (daily, weekly) for non-critical resources",
+      "risk_detail": "cost",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "AWS Config offers continuous recording (every change) and periodic recording (daily snapshots). Continuous recording captures every state change but generates more configuration items. For resources where point-in-time compliance snapshots are sufficient, periodic recording significantly reduces costs while still providing audit capability.",
+      "category": "management",
+      "output_notes": "Periodic recording can reduce configuration items by 80-90% for stable resources",
+      "notes": "Source: PointFive Hub",
+      "references": [
+        "https://docs.aws.amazon.com/config/latest/developerguide/stop-start-recorder.html",
+        "https://hub.pointfive.co/inefficiencies/unnecessarily-high-recording-granularity-in-aws-config"
+      ],
+      "metadata": {
+        "created_at": "2026-01-16T00:00:00.000000Z",
+        "updated_at": "2026-01-16T00:00:00.000000Z",
+        "contributors": [
+          "pointfive-hub-sync"
+        ],
+        "source": "PointFive Cloud Efficiency Hub"
+      },
+      "tags": [
+        "aws-config",
+        "recording-frequency",
+        "periodic-recording",
+        "continuous-recording",
+        "cost-optimization"
+      ]
+    },
+    {
+      "id": "6e839f06-4474-45c8-82a9-84003aade522",
+      "status": "open",
+      "service_name": "aws-config",
+      "scenario": "user wants to ensure AWS config is enabled in all regions",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.219729+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    }
+  ]
+}

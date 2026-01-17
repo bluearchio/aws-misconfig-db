@@ -1,6 +1,6 @@
 {
   "service": "elasticache",
-  "count": 1,
+  "count": 2,
   "misconfigurations": [
     {
       "id": "6aa5f0f0-2e69-4f2e-82f2-e4110654b102",
@@ -26,6 +26,34 @@
         "updated_at": "2025-11-04T23:07:44.651478Z",
         "contributors": [
           "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "30397890-41a8-4c51-a957-c1fe893cdbe7",
+      "status": "open",
+      "service_name": "elasticache",
+      "scenario": "client wants to build a gaming leaderboard that guarantees both uniqueness and element ordering;",
+      "alert_criteria": "",
+      "recommendation_action": "elasticache - build redis with sorted sets",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "everytime a new element is added it is ranked in real time, then added to correct order",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.208155+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
         ],
         "source": "Initial CSV Import"
       },

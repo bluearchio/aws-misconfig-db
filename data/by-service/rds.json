@@ -1,6 +1,6 @@
 {
   "service": "rds",
-  "count": 9,
+  "count": 19,
   "misconfigurations": [
     {
       "id": "08c3c3cd-25d9-4cb6-8c30-926c823276a8",
@@ -295,6 +295,286 @@
           "description": "Python implementation of Cache-Aside with ElastiCache Redis and RDS"
         }
       ]
+    },
+    {
+      "id": "b5d48d1f-0c91-4abb-97cb-fb1c04bb59ba",
+      "status": "open",
+      "service_name": "rds",
+      "scenario": "provisioned aurora db or serverless v1",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "determines, based on predictabilty of the workloads, which db type should be used",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.204114+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "2ba334ec-3d39-40fd-9753-a7efec8e3091",
+      "status": "open",
+      "service_name": "rds",
+      "scenario": "reporting / analytics team wants to generate insights from your production relational database (e.g. RDS) but your production database is already taking on a normal load and you do not want to risk performance declines",
+      "alert_criteria": "",
+      "recommendation_action": "create a read replica to run the analyitcs workloads",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.207223+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "3660d10c-dcb8-4539-a478-17568ea89eba",
+      "status": "open",
+      "service_name": "rds",
+      "scenario": "high cpu / write frequency to aurora read replicas are causing performance issues, or you would like to specify custom endpoints for analytical queries",
+      "alert_criteria": "",
+      "recommendation_action": "create custom endpoints to query specific subsets of your aurora replicas",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "you know there are various sizes of aurora read replicas and you want to separate workloads by type",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.207694+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "615f34d8-5c68-4f9e-bb45-69e66714b2cf",
+      "status": "open",
+      "service_name": "rds",
+      "scenario": "client wants ml predictins to your applications via sql",
+      "alert_criteria": "",
+      "recommendation_action": "aurora machine learning with sagemaker or amazon comprehend",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.207804+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "daff4201-ab90-42a9-a503-17ec9374a89e",
+      "status": "open",
+      "service_name": "rds",
+      "scenario": "rds struggles to keep up with demand of users on the website. users mostly read news / content and we (the company) do not post news / content often",
+      "alert_criteria": "",
+      "recommendation_action": "scale reads with ElastiCache or RDS Read Replicas",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.208267+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "e6108cb9-4ece-4882-b763-fa29ec6b1bd3",
+      "status": "open",
+      "service_name": "rds",
+      "scenario": "user is experiencing poor performance on the website / application",
+      "alert_criteria": "",
+      "recommendation_action": "scale reads using a write through architecture, leveraging elasticache (or dynamo) and RDS",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": "less traffic on rds (decreases CPU usage) and improves performance in parallel; requires cache maintenance now, must be implemented on the application side (more costly)",
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.211216+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "b0c84bfb-87ed-4bc0-8cd5-76289fc81aa1",
+      "status": "open",
+      "service_name": "rds",
+      "scenario": "user is experiencing poor performance on the website / application",
+      "alert_criteria": "",
+      "recommendation_action": "scale reads by increasing RDS read replicas (up to a maximum of 5)",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.211297+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "67c7713f-5866-4e0e-bd65-2fd445775878",
+      "status": "open",
+      "service_name": "rds",
+      "scenario": "user wants multi az disaster recovery for their application",
+      "alert_criteria": "",
+      "recommendation_action": "if users application leverages RDS and Elasticasche, ensure multi-az is enabled for both applications",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "this assumes the user is using RDS and/or elasticache to manage applicaiton state",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.211408+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "f70af24d-8ea3-4434-a18a-7f4ceb78c1d3",
+      "status": "open",
+      "service_name": "rds",
+      "scenario": "customer needs a database but is not sure which one to select or what to configure",
+      "alert_criteria": "Heavy writes / simple queries = NoSQL",
+      "recommendation_action": "use amazon dynamo db",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "read-heavy, write-heavy, or balanced workload? How many reads and writes are you going to need to per second? How will these values change if the numbers of users increases? How much data will you need to store? For how long? How quickly will this grow? Is there an upper limit in the near future? What are the sizes of each object? How will these objects be accessed? What are your requirements in terms of durability of data? Is this data store your source of truth? What are your latency requirements? How many concurrent users do you need to support? What is your data model and how are you going to query the data? Etc.",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.214805+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "02c10f83-1d4e-4889-b707-a7a564032af3",
+      "status": "open",
+      "service_name": "rds",
+      "scenario": "customer needs a database but is not sure which one to select or what to configure",
+      "alert_criteria": "Heavy reads / complex queries and joins = SQL",
+      "recommendation_action": "use amaon RDS",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "(continuation from this)",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.214905+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
     }
   ]
 }

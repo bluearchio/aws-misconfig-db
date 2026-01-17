@@ -1,0 +1,34 @@
+{
+  "service": "snow",
+  "count": 1,
+  "misconfigurations": [
+    {
+      "id": "e9b3934d-8bfb-4584-bc59-9c6477fc1169",
+      "status": "open",
+      "service_name": "snow",
+      "scenario": "User wants to migrateTB or PB scale data to aws, but has a slow network",
+      "alert_criteria": "",
+      "recommendation_action": "use AWS SNOW family: \n- 0-8TB usable, snowcone\n- 0-80TB usable, snowball\n- <100PB snowmobile",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "common scenarios: data center migration / decommision, disater recovery, etc.",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.213603+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    }
+  ]
+}

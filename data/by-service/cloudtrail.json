@@ -1,6 +1,6 @@
 {
   "service": "cloudtrail",
-  "count": 1,
+  "count": 5,
   "misconfigurations": [
     {
       "id": "1a48e014-dc5b-4b3d-9e8a-4fa00ebd4223",
@@ -24,6 +24,118 @@
         "updated_at": "2025-11-04T23:07:44.651478Z",
         "contributors": [
           "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "a947ee7d-2155-4f72-8c3f-4097c7ec3974",
+      "status": "open",
+      "service_name": "cloudtrail",
+      "scenario": "user wants to ensure multi-region trail exists for each AWS CloudTrail",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.219236+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "450eb05d-23fe-47dc-83f0-4e13c1149c00",
+      "status": "open",
+      "service_name": "cloudtrail",
+      "scenario": "user wants to ensure CloudTrail log file validation is enabled",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.219829+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "bbeaea1f-8aeb-4a4b-978c-7f05c0ed0722",
+      "status": "open",
+      "service_name": "cloudtrail",
+      "scenario": "user wants to ensure CLoudTrail logs are encrypted at rest using KMS CMKs",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.219955+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "3eae64a8-7a42-4ffc-b552-6e7a8555d3c3",
+      "status": "open",
+      "service_name": "cloudtrail",
+      "scenario": "user wants to ensure CloudTrail trails are integrated with CloudWatch",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.220064+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
         ],
         "source": "Initial CSV Import"
       },

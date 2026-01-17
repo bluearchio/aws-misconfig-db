@@ -1,0 +1,282 @@
+{
+  "service": "efs",
+  "count": 8,
+  "misconfigurations": [
+    {
+      "id": "d5001001-ef01-4001-b001-001000000001",
+      "status": "done",
+      "service_name": "efs",
+      "scenario": "Inactive and Unmounted EFS File System",
+      "alert_criteria": "EFS file systems with no mount targets, zero client connections, or no I/O activity over extended periods",
+      "recommendation_action": "Delete unused EFS file systems after confirming no dependencies, backup data if needed before deletion, implement lifecycle tagging for ownership tracking",
+      "risk_detail": "cost",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "EFS charges for storage continuously regardless of access. File systems created for projects that have ended, migrations that completed, or development environments no longer in use continue accumulating costs. Detection requires checking for mount targets, active connections, and I/O metrics over time.",
+      "category": "storage",
+      "output_notes": "EFS Standard: $0.30/GB-month; EFS IA: $0.025/GB-month - even IA storage costs add up for unused data",
+      "notes": "Source: PointFive Hub",
+      "references": [
+        "https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html",
+        "https://hub.pointfive.co/inefficiencies/inactive-and-unmounted-efs-file-system"
+      ],
+      "metadata": {
+        "created_at": "2026-01-16T00:00:00.000000Z",
+        "updated_at": "2026-01-16T00:00:00.000000Z",
+        "contributors": [
+          "pointfive-hub-sync"
+        ],
+        "source": "PointFive Cloud Efficiency Hub"
+      },
+      "tags": [
+        "efs",
+        "inactive-resource",
+        "storage-cost",
+        "cost-optimization",
+        "unused-resource"
+      ],
+      "detection_methods": [
+        {
+          "method": "CloudWatch Metric",
+          "details": "ClientConnections = 0 and TotalIOBytes = 0 over extended period"
+        }
+      ]
+    },
+    {
+      "id": "d5001002-ef02-4002-b002-002000000002",
+      "status": "done",
+      "service_name": "efs",
+      "scenario": "Missing Intelligent Tiering on EFS Lifecycle Policy",
+      "alert_criteria": "EFS file systems without lifecycle policies to move infrequently accessed data to EFS Infrequent Access (IA) storage class",
+      "recommendation_action": "Enable EFS Intelligent-Tiering lifecycle policy to automatically move files not accessed for 7/14/30/60/90 days to IA storage class",
+      "risk_detail": "cost",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "EFS Standard storage costs $0.30/GB-month while Infrequent Access (IA) costs $0.025/GB-month - a 92% cost reduction. Without lifecycle policies, all data remains in Standard tier regardless of access patterns. Enabling Intelligent-Tiering automatically moves files to IA after a configurable period (7-90 days) of no access, then transparently moves them back to Standard upon access.",
+      "category": "storage",
+      "output_notes": "Standard: $0.30/GB-month vs IA: $0.025/GB-month - 92% savings for infrequently accessed data",
+      "notes": "Source: PointFive Hub",
+      "references": [
+        "https://docs.aws.amazon.com/efs/latest/ug/lifecycle-management-efs.html",
+        "https://hub.pointfive.co/inefficiencies/missing-intelligent-tiering-on-efs-lifecycle-policy"
+      ],
+      "metadata": {
+        "created_at": "2026-01-16T00:00:00.000000Z",
+        "updated_at": "2026-01-16T00:00:00.000000Z",
+        "contributors": [
+          "pointfive-hub-sync"
+        ],
+        "source": "PointFive Cloud Efficiency Hub"
+      },
+      "tags": [
+        "efs",
+        "lifecycle-policy",
+        "intelligent-tiering",
+        "infrequent-access",
+        "cost-optimization"
+      ]
+    },
+    {
+      "id": "d5001003-ef03-4003-b003-003000000003",
+      "status": "done",
+      "service_name": "efs",
+      "scenario": "Missing Lifecycle Policy on Replicated EFS File System",
+      "alert_criteria": "EFS file systems with replication enabled but no lifecycle policies on source or destination file systems",
+      "recommendation_action": "Enable lifecycle policies on both source and destination EFS file systems to optimize storage costs, ensure policies are aligned between replicated systems",
+      "risk_detail": "cost",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "EFS replication creates a copy of data in another region for disaster recovery. Without lifecycle policies, both the source and replicated file systems store all data in Standard tier. This doubles the potential savings opportunity - lifecycle policies should be enabled on both ends to minimize costs while maintaining DR capability.",
+      "category": "storage",
+      "output_notes": "Replication doubles storage costs; lifecycle policies on both ends maximize savings",
+      "notes": "Source: PointFive Hub",
+      "references": [
+        "https://docs.aws.amazon.com/efs/latest/ug/efs-replication.html",
+        "https://hub.pointfive.co/inefficiencies/missing-lifecycle-policy-on-replicated-efs-file-system"
+      ],
+      "metadata": {
+        "created_at": "2026-01-16T00:00:00.000000Z",
+        "updated_at": "2026-01-16T00:00:00.000000Z",
+        "contributors": [
+          "pointfive-hub-sync"
+        ],
+        "source": "PointFive Cloud Efficiency Hub"
+      },
+      "tags": [
+        "efs",
+        "replication",
+        "lifecycle-policy",
+        "disaster-recovery",
+        "cost-optimization"
+      ]
+    },
+    {
+      "id": "d5001004-ef04-4004-b004-004000000004",
+      "status": "done",
+      "service_name": "efs",
+      "scenario": "Overprovisioned Throughput in EFS",
+      "alert_criteria": "EFS file systems using Provisioned Throughput mode with consistently low actual throughput utilization (<30%)",
+      "recommendation_action": "Switch to Bursting Throughput mode for workloads with variable I/O, or reduce provisioned throughput to match actual usage patterns",
+      "risk_detail": "cost",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "EFS Provisioned Throughput charges $6.00 per MB/s-month provisioned. Over-provisioning to handle occasional spikes wastes money during normal operations. For workloads with variable I/O patterns, Bursting Throughput mode (included with storage costs) may be more cost-effective. For Elastic Throughput mode, you pay only for what you use.",
+      "category": "storage",
+      "output_notes": "Provisioned Throughput: $6.00/MB/s-month; Elastic Throughput: pay per use; Bursting: included with storage",
+      "notes": "Source: PointFive Hub",
+      "references": [
+        "https://docs.aws.amazon.com/efs/latest/ug/performance.html",
+        "https://hub.pointfive.co/inefficiencies/overprovisioned-throughput-in-efs"
+      ],
+      "metadata": {
+        "created_at": "2026-01-16T00:00:00.000000Z",
+        "updated_at": "2026-01-16T00:00:00.000000Z",
+        "contributors": [
+          "pointfive-hub-sync"
+        ],
+        "source": "PointFive Cloud Efficiency Hub"
+      },
+      "tags": [
+        "efs",
+        "throughput",
+        "provisioned",
+        "overprovisioned",
+        "cost-optimization"
+      ],
+      "detection_methods": [
+        {
+          "method": "CloudWatch Metric",
+          "details": "MeteredIOBytes / ProvisionedThroughputInMibps < 0.3 over extended period"
+        }
+      ]
+    },
+    {
+      "id": "d5001005-ef05-4005-b005-005000000005",
+      "status": "done",
+      "service_name": "efs",
+      "scenario": "Suboptimal Use of EFS Storage Classes",
+      "alert_criteria": "EFS file systems with data patterns unsuitable for current storage class configuration, or One Zone storage used for production workloads requiring high availability",
+      "recommendation_action": "Evaluate Regional vs One Zone based on availability requirements, use One Zone for dev/test to save 47%, ensure lifecycle policies leverage IA classes appropriately",
+      "risk_detail": "cost, reliability",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "EFS offers multiple storage class combinations: Regional (Standard + IA) and One Zone (One Zone + One Zone-IA). One Zone storage costs 47% less than Regional but stores data in a single AZ, making it unsuitable for production workloads requiring high availability. Conversely, using Regional storage for dev/test environments wastes money on unnecessary redundancy.",
+      "category": "storage",
+      "output_notes": "One Zone: 47% cheaper than Regional; use for dev/test, not production",
+      "notes": "Source: PointFive Hub",
+      "references": [
+        "https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html",
+        "https://hub.pointfive.co/inefficiencies/suboptimal-use-of-efs-storage-classes"
+      ],
+      "metadata": {
+        "created_at": "2026-01-16T00:00:00.000000Z",
+        "updated_at": "2026-01-16T00:00:00.000000Z",
+        "contributors": [
+          "pointfive-hub-sync"
+        ],
+        "source": "PointFive Cloud Efficiency Hub"
+      },
+      "tags": [
+        "efs",
+        "storage-class",
+        "one-zone",
+        "regional",
+        "cost-optimization"
+      ]
+    },
+    {
+      "id": "eef7a0f5-ada3-4b40-988f-86a2055b59bc",
+      "status": "open",
+      "service_name": "efs",
+      "scenario": "user needs network file share system, but needs windows instances to access network files",
+      "alert_criteria": "",
+      "recommendation_action": "use FSx",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "(EFS for windows)",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.214236+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "74b0f0d7-fcb8-46ed-beb4-3d3ec6ecbe64",
+      "status": "open",
+      "service_name": "efs",
+      "scenario": "user wants to ensure amazon efs file systems are encrypted",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.218122+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "4e33a295-b0c0-4cb5-a8ac-942a08de57b3",
+      "status": "open",
+      "service_name": "efs",
+      "scenario": "user wants to ensure amazon efs file systems are encrypted using KMS CMK",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.218239+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    }
+  ]
+}

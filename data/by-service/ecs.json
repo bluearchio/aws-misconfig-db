@@ -1,6 +1,6 @@
 {
   "service": "ecs",
-  "count": 5,
+  "count": 6,
   "misconfigurations": [
     {
       "id": "4305d944-eb3c-473c-b9ce-99fe6911713b",
@@ -144,6 +144,34 @@
         "task-definitions",
         "secrets"
       ]
+    },
+    {
+      "id": "e19c54e2-286b-4fbd-b1a8-5ea9f3495da1",
+      "status": "open",
+      "service_name": "ecs",
+      "scenario": "user wants ecs cluster to be encrypted at rest",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.220771+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
     }
   ]
 }

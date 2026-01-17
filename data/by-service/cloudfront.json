@@ -1,6 +1,6 @@
 {
   "service": "cloudfront",
-  "count": 8,
+  "count": 13,
   "misconfigurations": [
     {
       "id": "937fff55-6361-4546-a3be-9b4769c904e4",
@@ -230,6 +230,148 @@
         "updated_at": "2025-11-04T23:07:44.651478Z",
         "contributors": [
           "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "a9f10db4-5c47-4865-8b9f-648f09a81605",
+      "status": "open",
+      "service_name": "cloudfront",
+      "scenario": "cloudfront distributions are too expensive",
+      "alert_criteria": "",
+      "recommendation_action": "optimize routes, pricing table, and ingress (?) traffic to set proper cloudfront configurations based on path patterns (eg route images to foo and api requests to bar)",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.212409+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "f9b6e58a-21cb-47b1-92af-1841391713ff",
+      "status": "open",
+      "service_name": "cloudfront",
+      "scenario": "user wants to restrict users from accessing their content from a particular country",
+      "alert_criteria": "",
+      "recommendation_action": "use cloudfront geo restriction",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.212687+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "19e6e1a5-3569-460a-8be6-582246d05090",
+      "status": "open",
+      "service_name": "cloudfront",
+      "scenario": "You would like to provide your users access to hundreds of private files in your CloudFront distribution, which is fronting an HTTP web server behind an application load balancer",
+      "alert_criteria": "",
+      "recommendation_action": "use cloudfront signed cookies",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.212856+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "12f2d76b-5c61-403a-bcbe-71c1a4d3ec61",
+      "status": "open",
+      "service_name": "cloudfront",
+      "scenario": "user wants to ensure his CDN is secure",
+      "alert_criteria": "When TLS is <= x",
+      "recommendation_action": "Update the CDN to use valid cyphers from TLS 1.2/1.3",
+      "risk_detail": "security",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [
+        "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/secure-connections-supported-viewer-protocols-ciphers.html"
+      ],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.216440+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "fa2ba14d-f984-4efb-a5ae-6a7da7f4257a",
+      "status": "open",
+      "service_name": "cloudfront",
+      "scenario": "user wants an encrypted connection between cloudfront and origin server",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.217208+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
         ],
         "source": "Initial CSV Import"
       },

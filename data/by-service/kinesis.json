@@ -1,0 +1,202 @@
+{
+  "service": "kinesis",
+  "count": 7,
+  "misconfigurations": [
+    {
+      "id": "9f926c3f-adce-47e7-8d55-e2fad047d3a9",
+      "status": "open",
+      "service_name": "kinesis",
+      "scenario": "user wants AWS kinesis server data to have SSE at rest",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.221340+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "df37f539-ce9b-4eb3-9ff9-fc8b820b6e7d",
+      "status": "open",
+      "service_name": "kinesis",
+      "scenario": "user wants AWS kinesis streams to be encrypted with KMS CMK",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.221454+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "56a298fa-1fb1-4371-8d22-b7fa5c273cb2",
+      "status": "open",
+      "service_name": "kinesis",
+      "scenario": "user wants to rotate kinesis streams",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.221542+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "dcd9838a-b5dc-4c19-ab0f-b239a25b8fc7",
+      "status": "open",
+      "service_name": "kinesis",
+      "scenario": "1 - user wants to do streaming ETL, select columns, and make simple transformations\n2 - user wants to generate metrics continuosly, like a live leaderboard game\n3 - responsive analytics, look for a certain criteria and build alerting",
+      "alert_criteria": "",
+      "recommendation_action": "use kinesis data analytics",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.222629+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "5428f26e-ffe7-4c6a-89a0-4d953c2ec068",
+      "status": "open",
+      "service_name": "kinesis",
+      "scenario": "user wants to detect anomalous behavior in their data streams",
+      "alert_criteria": "",
+      "recommendation_action": "enable RANDOM_CUT_FOREST in kinesis data analytics",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.222800+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "48fb1784-79f1-4c41-a4fc-3b05282f2e45",
+      "status": "open",
+      "service_name": "kinesis",
+      "scenario": "user wants to detect dense areas in their data streams",
+      "alert_criteria": "",
+      "recommendation_action": "enable HOTSPOTS in kinesis data analytics",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.222948+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "4c8b68a6-06b5-4fb2-8b6a-c8090bc0124e",
+      "status": "open",
+      "service_name": "kinesis",
+      "scenario": "user wants to stream videos, such as camera footage, or a producer sdk",
+      "alert_criteria": "",
+      "recommendation_action": "use kinesis video stream",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.223099+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    }
+  ]
+}

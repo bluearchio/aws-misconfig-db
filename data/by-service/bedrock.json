@@ -1,0 +1,200 @@
+{
+  "service": "bedrock",
+  "count": 5,
+  "misconfigurations": [
+    {
+      "id": "a1382001-fbbe-4001-b001-001000000001",
+      "status": "done",
+      "service_name": "bedrock",
+      "scenario": "Suboptimal Bedrock Custom Model Configuration",
+      "alert_criteria": "Custom models using older architectures, oversized GPU/accelerators, full-precision weights, or unoptimized model artifacts",
+      "recommendation_action": "Upgrade to newer model versions, apply model distillation/pruning/quantization, deploy smaller architectures for light workloads, right-size accelerator class to match latency/throughput needs",
+      "risk_detail": "cost",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 2,
+      "recommendation_description_detailed": "Teams frequently deploy custom models to AWS Bedrock with inefficient configurations inherited from training environments. The core issue involves deploying outdated models, oversized architectures, or full-precision weights when more efficient alternatives exist. Since Bedrock bills continuously for dedicated compute resources, these suboptimal choices create substantial ongoing costs without performance improvements. Common issues include: deploying outdated custom models despite newer variants, running full-size models for quantization-suitable tasks, using overpowered accelerators for actual latency needs, and default model artifacts without inference optimization.",
+      "category": "ai",
+      "output_notes": "Hourly charges for dedicated compute; model size and precision directly influence resource requirements",
+      "notes": "CER ID: AWS-AI-1382. Source: PointFive Hub",
+      "references": [
+        "https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html",
+        "https://hub.pointfive.co/inefficiencies/suboptimal-bedrock-custom-model-fbbe4"
+      ],
+      "metadata": {
+        "created_at": "2026-01-16T00:00:00.000000Z",
+        "updated_at": "2026-01-16T00:00:00.000000Z",
+        "contributors": [
+          "pointfive-hub-sync"
+        ],
+        "source": "PointFive Cloud Efficiency Hub"
+      },
+      "tags": [
+        "bedrock",
+        "custom-model",
+        "model-optimization",
+        "cost-optimization",
+        "ai-ml"
+      ],
+      "detection_methods": [
+        {
+          "method": "Manual Review",
+          "details": "Review custom model configurations for older architectures, compute class selection, and model precision settings"
+        }
+      ]
+    },
+    {
+      "id": "a1382002-08c0-4002-b002-002000000002",
+      "status": "done",
+      "service_name": "bedrock",
+      "scenario": "Suboptimal Bedrock Inference Profile Model Selection",
+      "alert_criteria": "Inference profiles using models with higher compute requirements than necessary for the use case, or using on-demand when provisioned throughput would be more cost-effective",
+      "recommendation_action": "Evaluate model selection against actual accuracy requirements, consider smaller/faster models for appropriate use cases, evaluate provisioned throughput for predictable workloads",
+      "risk_detail": "cost",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "Inference profiles may be configured with models that exceed the requirements for the specific use case. Using more capable (and expensive) models when simpler models would produce equivalent results wastes resources. Additionally, workloads with predictable traffic patterns may benefit from provisioned throughput rather than on-demand pricing.",
+      "category": "ai",
+      "output_notes": "Model selection directly impacts per-token costs; provisioned throughput can reduce costs for steady workloads",
+      "notes": "Source: PointFive Hub",
+      "references": [
+        "https://docs.aws.amazon.com/bedrock/latest/userguide/inference-profiles.html",
+        "https://hub.pointfive.co/inefficiencies/suboptimal-bedrock-inference-profile-model-08c00"
+      ],
+      "metadata": {
+        "created_at": "2026-01-16T00:00:00.000000Z",
+        "updated_at": "2026-01-16T00:00:00.000000Z",
+        "contributors": [
+          "pointfive-hub-sync"
+        ],
+        "source": "PointFive Cloud Efficiency Hub"
+      },
+      "tags": [
+        "bedrock",
+        "inference-profile",
+        "model-selection",
+        "cost-optimization",
+        "ai-ml"
+      ]
+    },
+    {
+      "id": "a1382003-6144-4003-b003-003000000003",
+      "status": "done",
+      "service_name": "bedrock",
+      "scenario": "Suboptimal Bedrock Model Type for Use Case",
+      "alert_criteria": "Using large foundation models for tasks that smaller, specialized models could handle, or using general-purpose models when fine-tuned models would be more efficient",
+      "recommendation_action": "Match model capabilities to task complexity, consider fine-tuned or smaller models for specialized tasks, evaluate model benchmarks against actual requirements",
+      "risk_detail": "cost",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "Organizations often default to the largest, most capable models regardless of task complexity. Simple tasks like classification, summarization of short texts, or structured data extraction may not require the most advanced models. Using appropriately-sized models for each use case can significantly reduce costs while maintaining acceptable quality.",
+      "category": "ai",
+      "output_notes": "Model pricing varies significantly by capability; right-sizing reduces cost without quality loss for simple tasks",
+      "notes": "Source: PointFive Hub",
+      "references": [
+        "https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html",
+        "https://hub.pointfive.co/inefficiencies/suboptimal-bedrock-model-type-61442"
+      ],
+      "metadata": {
+        "created_at": "2026-01-16T00:00:00.000000Z",
+        "updated_at": "2026-01-16T00:00:00.000000Z",
+        "contributors": [
+          "pointfive-hub-sync"
+        ],
+        "source": "PointFive Cloud Efficiency Hub"
+      },
+      "tags": [
+        "bedrock",
+        "model-selection",
+        "right-sizing",
+        "cost-optimization",
+        "ai-ml"
+      ]
+    },
+    {
+      "id": "a1382004-5e31-4004-b004-004000000004",
+      "status": "done",
+      "service_name": "bedrock",
+      "scenario": "Missing Caching Layer for Repetitive Bedrock Inference Workloads",
+      "alert_criteria": "High volume of identical or similar inference requests, applications repeatedly invoking models with deterministic prompts, or no semantic caching layer implemented",
+      "recommendation_action": "Implement prompt caching using ElastiCache or DynamoDB, use semantic similarity for cache hits on near-identical prompts, configure TTL based on content volatility",
+      "risk_detail": "cost, performance",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 2,
+      "recommendation_description_detailed": "Bedrock does not provide native inference caching, so applications repeatedly invoking identical or semantically similar prompts waste tokens on deterministic outputs. Implementing a caching layer (using ElastiCache for low-latency lookups or DynamoDB for persistence) can dramatically reduce costs for repetitive workloads like FAQ systems, standard report generation, or templated responses.",
+      "category": "ai",
+      "output_notes": "Caching can reduce inference costs by 50-90% for repetitive workloads",
+      "notes": "Source: PointFive Hub",
+      "references": [
+        "https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html",
+        "https://hub.pointfive.co/inefficiencies/suboptimal-cache-usage-for-repetitive-bedrock-inference-workloads-5e314"
+      ],
+      "metadata": {
+        "created_at": "2026-01-16T00:00:00.000000Z",
+        "updated_at": "2026-01-16T00:00:00.000000Z",
+        "contributors": [
+          "pointfive-hub-sync"
+        ],
+        "source": "PointFive Cloud Efficiency Hub"
+      },
+      "tags": [
+        "bedrock",
+        "caching",
+        "inference-optimization",
+        "cost-optimization",
+        "ai-ml"
+      ],
+      "architectural_patterns": [
+        {
+          "pattern_name": "Cache-Aside",
+          "relationship": "missing_implementation",
+          "description": "No caching layer to store and reuse inference results for identical or similar prompts"
+        }
+      ],
+      "pattern_implementation_guidance": "Implement cache-aside pattern: 1) Hash prompt to create cache key, 2) Check ElastiCache/DynamoDB before calling Bedrock, 3) Store results with appropriate TTL, 4) For semantic caching, use embeddings to find similar cached prompts within threshold."
+    },
+    {
+      "id": "a1382005-734c-4005-b005-005000000005",
+      "status": "done",
+      "service_name": "bedrock",
+      "scenario": "Using High-Cost Bedrock Models for Low-Complexity Tasks",
+      "alert_criteria": "Using Claude 3 Opus/Sonnet or similar high-tier models for simple classification, extraction, or templated generation tasks that could use Haiku or smaller models",
+      "recommendation_action": "Audit model usage by task type, migrate simple tasks to cost-effective models (e.g., Haiku for classification), implement model routing based on task complexity",
+      "risk_detail": "cost",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "Organizations often use the most capable (and expensive) models uniformly across all tasks. Simple tasks like sentiment classification, named entity extraction, or templated responses can be handled by smaller, faster, and cheaper models with equivalent quality. For example, Claude 3 Haiku can handle many tasks at 1/10th the cost of Opus. Implementing intelligent model routing based on task complexity can significantly reduce costs.",
+      "category": "ai",
+      "output_notes": "Haiku costs ~$0.25/MTok input vs Opus ~$15/MTok input - 60x difference for simple tasks",
+      "notes": "Source: PointFive Hub",
+      "references": [
+        "https://aws.amazon.com/bedrock/pricing/",
+        "https://hub.pointfive.co/inefficiencies/using-high-cost-bedrock-models-for-low-complexity-tasks-734ca"
+      ],
+      "metadata": {
+        "created_at": "2026-01-16T00:00:00.000000Z",
+        "updated_at": "2026-01-16T00:00:00.000000Z",
+        "contributors": [
+          "pointfive-hub-sync"
+        ],
+        "source": "PointFive Cloud Efficiency Hub"
+      },
+      "tags": [
+        "bedrock",
+        "model-selection",
+        "cost-optimization",
+        "model-routing",
+        "ai-ml"
+      ]
+    }
+  ]
+}

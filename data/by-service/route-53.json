@@ -1,6 +1,6 @@
 {
   "service": "route 53",
-  "count": 4,
+  "count": 8,
   "misconfigurations": [
     {
       "id": "332b3d41-5118-4fa2-ab98-1b2181c80f84",
@@ -14,7 +14,7 @@
       "action_value": null,
       "effort_level": null,
       "risk_value": null,
-      "recommendation_description_detailed": "Checks for resource record sets that can be changed to alias resource record sets to improve performance and save money. An alias resource record set routes DNS queries to an AWS resource (for example, an Elastic Load Balancing load balancer or an Amazon S3 bucket) or to another Route 53 resource record set. When you use alias resource record sets, Route 53 routes your DNS queries to AWS resources free of charge. Hosted zones created by AWS services won’t appear in your check results.",
+      "recommendation_description_detailed": "Checks for resource record sets that can be changed to alias resource record sets to improve performance and save money. An alias resource record set routes DNS queries to an AWS resource (for example, an Elastic Load Balancing load balancer or an Amazon S3 bucket) or to another Route 53 resource record set. When you use alias resource record sets, Route 53 routes your DNS queries to AWS resources free of charge. Hosted zones created by AWS services won\u2019t appear in your check results.",
       "category": null,
       "output_notes": null,
       "notes": null,
@@ -44,7 +44,7 @@
       "action_value": null,
       "effort_level": null,
       "risk_value": null,
-      "recommendation_description_detailed": "Checks for resource record sets that can be changed to alias resource record sets to improve performance and save money. An alias resource record set routes DNS queries to an AWS resource (for example, an Elastic Load Balancing load balancer or an Amazon S3 bucket) or to another Route 53 resource record set. When you use alias resource record sets, Route 53 routes your DNS queries to AWS resources free of charge. Hosted zones created by AWS services won’t appear in your check results.",
+      "recommendation_description_detailed": "Checks for resource record sets that can be changed to alias resource record sets to improve performance and save money. An alias resource record set routes DNS queries to an AWS resource (for example, an Elastic Load Balancing load balancer or an Amazon S3 bucket) or to another Route 53 resource record set. When you use alias resource record sets, Route 53 routes your DNS queries to AWS resources free of charge. Hosted zones created by AWS services won\u2019t appear in your check results.",
       "category": null,
       "output_notes": null,
       "notes": null,
@@ -74,7 +74,7 @@
       "action_value": null,
       "effort_level": null,
       "risk_value": null,
-      "recommendation_description_detailed": "Checks for resource record sets that can be changed to alias resource record sets to improve performance and save money. An alias resource record set routes DNS queries to an AWS resource (for example, an Elastic Load Balancing load balancer or an Amazon S3 bucket) or to another Route 53 resource record set. When you use alias resource record sets, Route 53 routes your DNS queries to AWS resources free of charge. Hosted zones created by AWS services won’t appear in your check results.",
+      "recommendation_description_detailed": "Checks for resource record sets that can be changed to alias resource record sets to improve performance and save money. An alias resource record set routes DNS queries to an AWS resource (for example, an Elastic Load Balancing load balancer or an Amazon S3 bucket) or to another Route 53 resource record set. When you use alias resource record sets, Route 53 routes your DNS queries to AWS resources free of charge. Hosted zones created by AWS services won\u2019t appear in your check results.",
       "category": null,
       "output_notes": null,
       "notes": null,
@@ -104,7 +104,7 @@
       "action_value": 2,
       "effort_level": 3,
       "risk_value": 1,
-      "recommendation_description_detailed": "Checks for Amazon Route 53 latency record sets that are configured inefficiently. To allow Amazon Route 53 to route queries to the region with the lowest network latency, you should create latency resource record sets for a particular domain name (such as example.com) in different regions. If you create only one latency resource record set for a domain name, all queries are routed to one region, and you pay extra for latency-based routing without getting the benefits. Hosted zones created by AWS services won’t appear in your check results.",
+      "recommendation_description_detailed": "Checks for Amazon Route 53 latency record sets that are configured inefficiently. To allow Amazon Route 53 to route queries to the region with the lowest network latency, you should create latency resource record sets for a particular domain name (such as example.com) in different regions. If you create only one latency resource record set for a domain name, all queries are routed to one region, and you pay extra for latency-based routing without getting the benefits. Hosted zones created by AWS services won\u2019t appear in your check results.",
       "category": null,
       "output_notes": null,
       "notes": null,
@@ -116,6 +116,118 @@
         "updated_at": "2025-11-04T23:07:44.651478Z",
         "contributors": [
           "initial-import"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "761371b6-1c7d-4ba8-894e-b562375bacdb",
+      "status": "open",
+      "service_name": "route 53",
+      "scenario": "user wants to test a new app version with only a portion of the traffic sent",
+      "alert_criteria": "",
+      "recommendation_action": "create weighted routing policy",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.209289+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "aaa2e18d-2765-4d71-b465-d3552091c9b6",
+      "status": "open",
+      "service_name": "route 53",
+      "scenario": "latency of applicaiton endpoints is not measured",
+      "alert_criteria": "",
+      "recommendation_action": "",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "route 53 endpoint healthchecks can detect request latency; this is valuable for companies who care about the performance of their web application",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.209868+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "3c011b9e-8392-43e5-ba2b-0436319cd6a4",
+      "status": "open",
+      "service_name": "route 53",
+      "scenario": "user needs to increase the traffic to a specific region or AZ",
+      "alert_criteria": "",
+      "recommendation_action": "increase geolocation routing policy bias of the region you would like to target / increase traffic on",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "e.g. user has a legal a requirement that people outside of France cannot access applicaiton content",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.210721+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
+        ],
+        "source": "Initial CSV Import"
+      },
+      "tags": []
+    },
+    {
+      "id": "a1b7380e-dc29-411e-8847-5955cbde0c9a",
+      "status": "open",
+      "service_name": "route 53",
+      "scenario": "customer would like their users to get the least amount of latency when accessing thier application",
+      "alert_criteria": "",
+      "recommendation_action": "create a latency specific routing poilicy",
+      "risk_detail": "operations",
+      "build_priority": null,
+      "action_value": null,
+      "effort_level": null,
+      "risk_value": null,
+      "recommendation_description_detailed": "",
+      "category": null,
+      "output_notes": null,
+      "notes": null,
+      "references": [],
+      "metadata": {
+        "created_at": "2025-11-04T23:07:44.651478Z",
+        "updated_at": "2026-01-17T05:07:12.210941+00:00",
+        "contributors": [
+          "initial-import",
+          "classification-2026"
         ],
         "source": "Initial CSV Import"
       },

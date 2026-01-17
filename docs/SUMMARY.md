@@ -1,12 +1,14 @@
 # AWS Misconfiguration Database - Summary
 
-**Total Misconfigurations:** 288
-**Last Updated:** 2025-11-06 20:50:45 UTC
+**Total Recommendations:** 313
+**Last Updated:** 2026-01-17 05:16:28 UTC
 
 ## Overview
 
-This database contains AWS misconfiguration entries covering security, cost optimization,
+This database contains AWS misconfiguration recommendations covering security, cost optimization,
 performance, reliability, and operational best practices.
+
+**Source of Truth:** `data/by-service/*.json`
 
 ## Statistics
 
@@ -14,7 +16,7 @@ performance, reliability, and operational best practices.
 
 | Status | Count |
 | ------ | ----- |
-| done | 23 |
+| done | 48 |
 | ice | 10 |
 | open | 246 |
 | pending | 9 |
@@ -24,25 +26,56 @@ performance, reliability, and operational best practices.
 | Risk Type | Count |
 | --------- | ----- |
 | operations | 209 |
-| cost | 55 |
-| performance | 29 |
+| cost | 80 |
+| performance | 33 |
 | security | 19 |
-| reliability | 11 |
+| reliability | 12 |
 
-### Top 10 Services
+### By Service
 
 | Service | Count |
 | ------- | ----- |
-| general | 175 |
-| ec2 | 23 |
-| lambda | 15 |
-| rds | 9 |
-| cloudfront | 8 |
-| iam | 7 |
-| ebs | 6 |
-| ecs | 5 |
-| alb/elb | 4 |
-| s3 | 4 |
+| ec2 | 49 |
+| general | 32 |
+| s3 | 24 |
+| lambda | 21 |
+| rds | 19 |
+| iam | 18 |
+| alb/elb | 16 |
+| networking | 15 |
+| cloudfront | 13 |
+| dynamodb | 11 |
+| ebs | 10 |
+| efs | 8 |
+| route 53 | 8 |
+| kinesis | 7 |
+| ecs | 6 |
+| nat-gateway | 6 |
+| aws-config | 5 |
+| bedrock | 5 |
+| cloudtrail | 5 |
+| ALL | 4 |
+| cloudwatch | 3 |
+| inspector | 3 |
+| redshift | 3 |
+| acm | 2 |
+| eks | 2 |
+| elastic beanstalk | 2 |
+| elasticache | 2 |
+| api-gateway | 1 |
+| config | 1 |
+| elasticsearch | 1 |
+| emr | 1 |
+| guardduty | 1 |
+| kms | 1 |
+| s3, rds, redshift, etc. | 1 |
+| secrets-manager | 1 |
+| security-hub | 1 |
+| shield | 1 |
+| snow | 1 |
+| sns | 1 |
+| sqs | 1 |
+| waf | 1 |
 
 ### By Category
 
@@ -50,18 +83,21 @@ performance, reliability, and operational best practices.
 | -------- | ----- |
 | cost | 17 |
 | security | 8 |
+| networking | 7 |
 | operations | 6 |
+| database | 6 |
+| ai | 5 |
+| storage | 5 |
+| management | 4 |
 | compute | 3 |
-| networking | 1 |
 | messaging | 1 |
-| database | 1 |
 
 ### By Priority
 
-| Priority Level | Count |
-| -------------- | ----- |
-| 0 | 56 |
-| 1 | 29 |
+| Priority | Count |
+| -------- | ----- |
+| 0 | 61 |
+| 1 | 49 |
 | 2 | 16 |
 | 3 | 4 |
 
@@ -71,5 +107,4 @@ See the main [README.md](../README.md) for usage instructions and integration ex
 
 ## Contributing
 
-See [CONTRIBUTING.md](../CONTRIBUTING.md) for guidelines on how to contribute new
-misconfiguration entries.
+See [CONTRIBUTING.md](../CONTRIBUTING.md) for guidelines on how to contribute new entries.

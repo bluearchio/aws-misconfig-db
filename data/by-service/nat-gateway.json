@@ -1,0 +1,238 @@
+{
+  "service": "nat-gateway",
+  "count": 6,
+  "misconfigurations": [
+    {
+      "id": "c7739001-aa01-4001-b001-001000000001",
+      "status": "done",
+      "service_name": "nat-gateway",
+      "scenario": "Inactive NAT Gateway",
+      "alert_criteria": "NAT Gateways with zero data transfer activity over the review period, no private subnet or route table actively directing traffic through the gateway",
+      "recommendation_action": "Remove NAT Gateways with zero data transfer activity and confirmed redundancy, review associated route tables to prevent connectivity disruption upon removal, implement automated periodic audits of NAT Gateway utilization",
+      "risk_detail": "cost",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "NAT Gateways frequently remain active after environments are redesigned or workloads cease, continuing to accrue hourly charges despite carrying no traffic. These idle resources generate recurring costs without delivering value since billing is based on existence rather than usage. There is no minimum usage threshold - even an idle NAT Gateway accrues full hourly charges. Detection requires: inventory of all NAT Gateways across regions, examination of flow logs/CloudWatch metrics/billing data for activity, verification that no private subnet or route table directs traffic through the gateway, identification of deprecated dev/staging/legacy environments.",
+      "category": "networking",
+      "output_notes": "Hourly charges applied per gateway per Availability Zone regardless of usage; data processing fees per GB of throughput",
+      "notes": "CER ID: AWS-Networking-7739. Source: PointFive Hub",
+      "references": [
+        "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html",
+        "https://hub.pointfive.co/inefficiencies/inactive-nat-gateway"
+      ],
+      "metadata": {
+        "created_at": "2026-01-16T00:00:00.000000Z",
+        "updated_at": "2026-01-16T00:00:00.000000Z",
+        "contributors": [
+          "pointfive-hub-sync"
+        ],
+        "source": "PointFive Cloud Efficiency Hub"
+      },
+      "tags": [
+        "nat-gateway",
+        "inactive-resource",
+        "networking",
+        "cost-optimization",
+        "unused-resource"
+      ],
+      "detection_methods": [
+        {
+          "method": "CloudWatch Metric",
+          "details": "BytesOutToDestination and BytesOutToSource = 0 over extended period"
+        }
+      ]
+    },
+    {
+      "id": "c7739002-aa02-4002-b002-002000000002",
+      "status": "done",
+      "service_name": "nat-gateway",
+      "scenario": "Inactive VPC Interface Endpoint",
+      "alert_criteria": "VPC Interface Endpoints (PrivateLink) with zero data transfer or no active connections over extended periods",
+      "recommendation_action": "Delete unused VPC Interface Endpoints, verify no dependencies before removal, consolidate endpoints where possible",
+      "risk_detail": "cost",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 1,
+      "recommendation_description_detailed": "VPC Interface Endpoints (powered by AWS PrivateLink) incur hourly charges per endpoint per Availability Zone, plus data processing charges. Endpoints created for services no longer in use, or in unused environments, generate ongoing costs. Each interface endpoint costs approximately $7.30/month per AZ just for existence.",
+      "category": "networking",
+      "output_notes": "Interface Endpoints: ~$0.01/hour per AZ + data processing charges",
+      "notes": "Source: PointFive Hub",
+      "references": [
+        "https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints.html",
+        "https://hub.pointfive.co/inefficiencies/inactive-vpc-interface-endpoint"
+      ],
+      "metadata": {
+        "created_at": "2026-01-16T00:00:00.000000Z",
+        "updated_at": "2026-01-16T00:00:00.000000Z",
+        "contributors": [
+          "pointfive-hub-sync"
+        ],
+        "source": "PointFive Cloud Efficiency Hub"
+      },
+      "tags": [
+        "vpc-endpoint",
+        "privatelink",
+        "inactive-resource",
+        "networking",
+        "cost-optimization"
+      ]
+    },
+    {
+      "id": "c8908001-aa03-4003-b003-003000000003",
+      "status": "done",
+      "service_name": "nat-gateway",
+      "scenario": "Missing VPC Endpoints for High-Volume AWS Service Access",
+      "alert_criteria": "EC2 instances, Lambda functions, or containerized workloads accessing S3, DynamoDB, or other AWS services through NAT Gateway or Internet Gateway instead of VPC Endpoints",
+      "recommendation_action": "Deploy Gateway Endpoints for S3 and DynamoDB across each VPC, establish Interface Endpoints for frequently accessed services (Secrets Manager, SSM, KMS), configure routing tables and DNS for private AWS service resolution, integrate VPC endpoint provisioning into infrastructure-as-code",
+      "risk_detail": "cost, performance",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 2,
+      "recommendation_description_detailed": "When EC2 instances, Lambda functions, or containerized workloads access AWS-managed services without VPC Endpoints, traffic unnecessarily exits the VPC through NAT or Internet Gateways. This approach incurs avoidable egress fees and NAT processing costs, particularly for data-intensive operations. Gateway Endpoints for S3 and DynamoDB are FREE and only require route table updates. Interface Endpoints cost ~$7.30/month per AZ but eliminate NAT Gateway data processing fees which can be substantial for high-volume services like Secrets Manager, SSM, or KMS.",
+      "category": "networking",
+      "output_notes": "Gateway Endpoints (S3, DynamoDB) are FREE; Interface Endpoints cost ~$0.01/hour but eliminate NAT data processing fees",
+      "notes": "CER ID: AWS-Networking-8908. Source: PointFive Hub",
+      "references": [
+        "https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints.html",
+        "https://hub.pointfive.co/inefficiencies/missing-vpc-endpoints-for-high-volume-aws-service-access"
+      ],
+      "metadata": {
+        "created_at": "2026-01-16T00:00:00.000000Z",
+        "updated_at": "2026-01-16T00:00:00.000000Z",
+        "contributors": [
+          "pointfive-hub-sync"
+        ],
+        "source": "PointFive Cloud Efficiency Hub"
+      },
+      "tags": [
+        "vpc-endpoint",
+        "gateway-endpoint",
+        "nat-gateway",
+        "data-transfer",
+        "cost-optimization"
+      ],
+      "detection_methods": [
+        {
+          "method": "CloudWatch Metric",
+          "details": "Monitor NAT Gateway BytesOutToDestination for traffic to AWS service IP ranges"
+        },
+        {
+          "method": "VPC Flow Logs",
+          "details": "Analyze flow logs for traffic to AWS service CIDR ranges going through NAT Gateway"
+        }
+      ]
+    },
+    {
+      "id": "c7739004-aa04-4004-b004-004000000004",
+      "status": "done",
+      "service_name": "nat-gateway",
+      "scenario": "Suboptimal Cross-AZ Routing to NAT Gateway",
+      "alert_criteria": "Private subnets in one Availability Zone routing traffic through NAT Gateway in a different Availability Zone",
+      "recommendation_action": "Deploy NAT Gateways in each AZ with private subnets, update route tables to use local-AZ NAT Gateway, implement high-availability NAT architecture",
+      "risk_detail": "cost, performance",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 2,
+      "risk_value": 2,
+      "recommendation_description_detailed": "Cross-AZ data transfer incurs $0.01/GB in each direction. When private subnets route through NAT Gateways in different AZs, all outbound internet traffic incurs cross-AZ fees in addition to NAT Gateway processing charges. Deploying NAT Gateways in each AZ with private subnets and configuring route tables to use the local NAT Gateway eliminates these cross-AZ costs and improves latency.",
+      "category": "networking",
+      "output_notes": "Cross-AZ data transfer: $0.01/GB each direction; deploying NAT per AZ eliminates this cost",
+      "notes": "Source: PointFive Hub",
+      "references": [
+        "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating",
+        "https://hub.pointfive.co/inefficiencies/suboptimal-cross-az-routing-to-nat-gateway"
+      ],
+      "metadata": {
+        "created_at": "2026-01-16T00:00:00.000000Z",
+        "updated_at": "2026-01-16T00:00:00.000000Z",
+        "contributors": [
+          "pointfive-hub-sync"
+        ],
+        "source": "PointFive Cloud Efficiency Hub"
+      },
+      "tags": [
+        "nat-gateway",
+        "cross-az",
+        "data-transfer",
+        "networking",
+        "cost-optimization"
+      ]
+    },
+    {
+      "id": "c7739005-aa05-4005-b005-005000000005",
+      "status": "done",
+      "service_name": "nat-gateway",
+      "scenario": "Routing Through NAT Gateway Instead of VPC Endpoint for AWS Services",
+      "alert_criteria": "Traffic to supported AWS services (S3, DynamoDB, etc.) routed through NAT Gateway when VPC Endpoints could be used",
+      "recommendation_action": "Create Gateway Endpoints for S3 and DynamoDB (free), create Interface Endpoints for other frequently accessed AWS services, update route tables to prefer VPC Endpoint routes",
+      "risk_detail": "cost",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "NAT Gateway charges $0.045/GB for data processing. For high-volume access to AWS services like S3, this adds significant costs. S3 and DynamoDB Gateway Endpoints are completely free and route traffic directly to the service without NAT Gateway charges. For a workload transferring 1TB/month to S3 through NAT Gateway, the monthly cost is $45 in NAT processing alone - entirely eliminated with a free Gateway Endpoint.",
+      "category": "networking",
+      "output_notes": "NAT Gateway: $0.045/GB data processing; S3/DynamoDB Gateway Endpoints: FREE",
+      "notes": "Source: PointFive Hub",
+      "references": [
+        "https://docs.aws.amazon.com/vpc/latest/userguide/vpce-gateway.html",
+        "https://hub.pointfive.co/inefficiencies/suboptimal-routing-through-nat-gateway-instead-of-vpc-endpoint"
+      ],
+      "metadata": {
+        "created_at": "2026-01-16T00:00:00.000000Z",
+        "updated_at": "2026-01-16T00:00:00.000000Z",
+        "contributors": [
+          "pointfive-hub-sync"
+        ],
+        "source": "PointFive Cloud Efficiency Hub"
+      },
+      "tags": [
+        "nat-gateway",
+        "vpc-endpoint",
+        "gateway-endpoint",
+        "s3",
+        "cost-optimization"
+      ]
+    },
+    {
+      "id": "c7739006-aa06-4006-b006-006000000006",
+      "status": "done",
+      "service_name": "nat-gateway",
+      "scenario": "Imbalanced Data Transfer Between Availability Zones",
+      "alert_criteria": "Significant data transfer between resources in different Availability Zones within the same region",
+      "recommendation_action": "Co-locate communicating resources in the same AZ where possible, use placement groups for latency-sensitive workloads, implement data locality patterns in application architecture",
+      "risk_detail": "cost, performance",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 2,
+      "risk_value": 2,
+      "recommendation_description_detailed": "Cross-AZ data transfer incurs $0.01/GB in each direction ($0.02/GB round-trip). For chatty microservices or data-intensive applications, this can add significant costs. While multi-AZ deployment is essential for high availability, the placement of frequently communicating services should minimize cross-AZ traffic. Database read replicas, cache nodes, and application tiers that communicate frequently should be co-located when possible.",
+      "category": "networking",
+      "output_notes": "Cross-AZ: $0.01/GB each direction; same-AZ: free. Balance HA requirements with cost optimization",
+      "notes": "Source: PointFive Hub",
+      "references": [
+        "https://aws.amazon.com/ec2/pricing/on-demand/#Data_Transfer",
+        "https://hub.pointfive.co/inefficiencies/imbalanced-data-transfer-between-availability-zones"
+      ],
+      "metadata": {
+        "created_at": "2026-01-16T00:00:00.000000Z",
+        "updated_at": "2026-01-16T00:00:00.000000Z",
+        "contributors": [
+          "pointfive-hub-sync"
+        ],
+        "source": "PointFive Cloud Efficiency Hub"
+      },
+      "tags": [
+        "cross-az",
+        "data-transfer",
+        "networking",
+        "cost-optimization",
+        "placement"
+      ]
+    }
+  ]
+}
