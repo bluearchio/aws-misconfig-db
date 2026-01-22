@@ -6,7 +6,7 @@
       "id": "2b6ae2c7-d432-401b-8164-23782cb1b1dc",
       "service_name": "emr",
       "scenario": "EMR (or other) cluster is used and task nodes are not utilizing spot instances",
-      "alert_criteria": "",
+      "alert_criteria": "Resource cost could be optimized",
       "recommendation_action": "use spot instances",
       "risk_detail": "performance, cost",
       "build_priority": 1,
