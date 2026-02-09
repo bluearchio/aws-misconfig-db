@@ -1,6 +1,6 @@
 {
   "service": "rds",
-  "count": 19,
+  "count": 22,
   "misconfigurations": [
     {
       "id": "08c3c3cd-25d9-4cb6-8c30-926c823276a8",
@@ -556,6 +556,107 @@
         "source": "Initial CSV Import"
       },
       "tags": []
+    },
+    {
+      "id": "4dd1933d-e014-4a2f-b044-497c050c5983",
+      "service_name": "rds",
+      "scenario": "RDS Proxy subnets have insufficient available IP addresses causing connection failures and blocking security patches",
+      "alert_criteria": "Amazon RDS event ID RDS-EVENT-0243 is generated indicating insufficient available IP addresses in subnets configured for RDS Proxy. Available IP addresses in RDS Proxy subnets fall below the minimum reservation threshold for the database instance class size.",
+      "recommendation_action": "Monitor RDS Proxy subnet IP utilization using CloudWatch and RDS events. When IP address exhaustion is detected, expand VPC CIDR ranges, create new subnets with adequate address space, and migrate the RDS Proxy to the new subnet configuration using a parallel deployment approach. For long-term resolution, consider migrating to IPv6 if workloads support it. Plan subnet sizing based on the IP reservation requirements documented for each RDS instance class.",
+      "risk_detail": "security, reliability, performance",
+      "build_priority": 1,
+      "action_value": 2,
+      "effort_level": 2,
+      "risk_value": 2,
+      "recommendation_description_detailed": "Amazon RDS Proxy dynamically adjusts its capacity based on database instance size, number of registered instances, and scaling operations. When subnets lack sufficient available IP addresses, RDS Proxy performance degrades through increased query latency and connection failures. More critically, IP address exhaustion prevents the Amazon RDS team from applying essential OS security patches to Proxy servers, exposing infrastructure to security vulnerabilities. It also blocks new feature availability for the proxy. Organizations should proactively monitor subnet IP utilization and plan capacity based on the minimum IP reservation requirements documented for each database instance class. The RDS-EVENT-0243 event provides an early warning signal before critical impact occurs.",
+      "category": "database",
+      "references": [
+        "https://aws.amazon.com/blogs/database/managing-ip-address-exhaustion-for-amazon-rds-proxy/"
+      ],
+      "metadata": {
+        "created_at": "2026-02-09T05:38:18Z",
+        "updated_at": "2026-02-09T05:38:18Z",
+        "contributors": [
+          "ingest-pipeline"
+        ],
+        "source": "AWS Database Blog"
+      },
+      "tags": [
+        "rds",
+        "rds-proxy",
+        "networking",
+        "ip-exhaustion",
+        "vpc",
+        "subnet-planning",
+        "capacity"
+      ]
+    },
+    {
+      "id": "5c3d02fe-0ca2-45fe-be46-ef6ac1c678be",
+      "service_name": "rds",
+      "scenario": "RDS for SQL Server multi-tenant instances expose all database names to authenticated users by default",
+      "alert_criteria": "RDS for SQL Server instances hosting multiple tenant databases have not used the rds_manage_view_db_permission stored procedure to restrict database name visibility per login. All authenticated users can view all database names in the instance.",
+      "recommendation_action": "Use the Amazon RDS for SQL Server custom stored procedure msdb.dbo.rds_manage_view_db_permission to deny database visibility for tenant-specific logins. Apply this procedure to each tenant login so they can only see their own database names while maintaining full access to their authorized databases. Validate the configuration by confirming restricted visibility and document the process for new tenant onboarding.",
+      "risk_detail": "security",
+      "build_priority": 2,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "By default, SQL Server's PUBLIC role allows all authenticated users to view every database name on the instance. In multi-tenant environments where database names may contain or reveal tenant identifiers, this default behavior creates an information disclosure risk. Tenants can discover the existence of other tenants, potentially revealing business relationships, customer names, or organizational structure. For ISVs and SaaS providers hosting multiple customer databases on shared RDS for SQL Server instances, this is a significant concern that can violate data isolation requirements and tenant confidentiality expectations. The RDS-specific stored procedure rds_manage_view_db_permission provides per-login control over database visibility without requiring server-level permission changes that are not available in the managed RDS environment.",
+      "category": "database",
+      "references": [
+        "https://aws.amazon.com/blogs/database/control-database-name-visibility-in-amazon-rds-for-sql-server-instances/"
+      ],
+      "metadata": {
+        "created_at": "2026-02-09T05:38:18Z",
+        "updated_at": "2026-02-09T05:38:18Z",
+        "contributors": [
+          "ingest-pipeline"
+        ],
+        "source": "AWS Database Blog"
+      },
+      "tags": [
+        "rds",
+        "sql-server",
+        "multi-tenant",
+        "information-disclosure",
+        "tenant-isolation",
+        "saas"
+      ]
+    },
+    {
+      "id": "edc58eac-b68f-45ff-9905-28165178d256",
+      "service_name": "rds",
+      "scenario": "Amazon RDS for MySQL or Aurora MySQL audit logs are not exported to S3 for long-term retention and compliance analysis",
+      "alert_criteria": "RDS for MySQL or Aurora MySQL instances have audit logging enabled but no automated export mechanism to Amazon S3 is configured. Audit logs remain only in CloudWatch Logs without long-term archival or structured analysis capability.",
+      "recommendation_action": "Implement automated export of MySQL audit logs to Amazon S3 using either batch processing (CloudWatch Logs export tasks triggered by EventBridge on a schedule) or real-time processing (Amazon Data Firehose subscribed to CloudWatch Logs). Configure S3 lifecycle policies for cost-effective long-term retention. Set up Athena tables for SQL-based audit log querying and consider QuickSight dashboards for ongoing monitoring.",
+      "risk_detail": "security, operations",
+      "build_priority": 2,
+      "action_value": 2,
+      "effort_level": 2,
+      "risk_value": 2,
+      "recommendation_description_detailed": "Database audit logs are essential for security investigations, compliance reporting, and tracking user activities including queries executed, data changes, and authentication attempts. While RDS for MySQL and Aurora MySQL provide built-in audit logging to CloudWatch Logs, retaining logs solely in CloudWatch is not cost-effective for long-term storage and limits analysis capabilities. Exporting audit logs to S3 enables durable, cost-effective retention with integration into analytics tools like Athena for ad-hoc SQL queries, QuickSight for visual dashboards, and Lambda/SNS for automated alerting on suspicious patterns such as failed login spikes or after-hours access to sensitive tables. This is a requirement for multiple regulatory frameworks including PCI DSS, HIPAA, and SOX, which mandate retention and regular analysis of database audit logs.",
+      "category": "database",
+      "references": [
+        "https://aws.amazon.com/blogs/database/automate-the-export-of-amazon-rds-for-mysql-or-amazon-aurora-mysql-audit-logs-to-amazon-s3-with-batching-or-near-real-time-processing/"
+      ],
+      "metadata": {
+        "created_at": "2026-02-09T05:38:18Z",
+        "updated_at": "2026-02-09T05:38:18Z",
+        "contributors": [
+          "ingest-pipeline"
+        ],
+        "source": "AWS Database Blog"
+      },
+      "tags": [
+        "rds",
+        "aurora",
+        "mysql",
+        "audit-logs",
+        "compliance",
+        "s3-export",
+        "long-term-retention"
+      ]
     }
   ]
 }

@@ -1,0 +1,39 @@
+{
+  "service": "network-firewall",
+  "count": 1,
+  "misconfigurations": [
+    {
+      "id": "b86ef141-f21b-4818-9062-fee738816c22",
+      "service_name": "network-firewall",
+      "scenario": "AWS Network Firewall does not have active threat defense enabled for real-time malware protection",
+      "alert_criteria": "AWS Network Firewall rule groups do not include managed threat intelligence rule groups for active threat defense. No active threat defense subscription is configured.",
+      "recommendation_action": "Enable AWS Network Firewall active threat defense by subscribing to managed threat intelligence rule groups. Configure the firewall to use MadPot-sourced threat intelligence for DNS, HTTP, and TLS SNI inspection layers. Review and enable all available threat defense rule categories including malware, command-and-control, and reconnaissance blocking.",
+      "risk_detail": "security",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 3,
+      "recommendation_description_detailed": "AWS Network Firewall active threat defense provides real-time protection by leveraging threat intelligence from MadPot, Amazon's network of honeypot sensors that actively monitor global attack patterns. Without active threat defense, your VPC workloads lack automated protection against emerging threats such as new malware distribution domains, command-and-control servers, and reconnaissance scanning. Active threat defense automatically translates new threat intelligence into protective firewall rules within 30 minutes of discovery, using a multi-layered Swiss cheese defense model that blocks threats across DNS, HTTP, and TLS inspection points. This is critical for defending against cryptomining campaigns and other automated attacks that can compromise instances within minutes of discovery.",
+      "category": "networking",
+      "references": [
+        "https://aws.amazon.com/blogs/security/real-time-malware-defense-leveraging-aws-network-firewall-active-threat-defense/"
+      ],
+      "metadata": {
+        "created_at": "2026-02-09T05:38:18Z",
+        "updated_at": "2026-02-09T05:38:18Z",
+        "contributors": [
+          "ingest-pipeline"
+        ],
+        "source": "AWS Security Blog"
+      },
+      "tags": [
+        "network-firewall",
+        "threat-intelligence",
+        "malware",
+        "ids-ips",
+        "madpot",
+        "real-time-protection"
+      ]
+    }
+  ]
+}

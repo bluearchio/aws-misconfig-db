@@ -1,6 +1,6 @@
 {
   "service": "acm",
-  "count": 2,
+  "count": 3,
   "misconfigurations": [
     {
       "id": "9be76839-271a-4733-b947-c4c3705da1f5",
@@ -55,6 +55,40 @@
         "source": "Initial CSV Import"
       },
       "tags": []
+    },
+    {
+      "id": "75a780d7-e8f9-4175-bc93-8c5c5039fd4e",
+      "service_name": "acm",
+      "scenario": "RSA certificates managed by ACM use a key length smaller than 2048 bits",
+      "alert_criteria": "An ACM-managed RSA certificate has a key length below 2048 bits. Security Hub control ACM.2 fails.",
+      "recommendation_action": "Delete RSA certificates with key lengths smaller than 2048 bits and replace them with certificates using at least 2048-bit keys. For ACM-issued certificates, request new certificates which default to 2048 bits. For imported certificates, regenerate them with the proper key length before re-importing.",
+      "risk_detail": "security",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 3,
+      "recommendation_description_detailed": "The strength of RSA encryption directly correlates with key size. Certificates with key lengths below 2048 bits are considered cryptographically weak and may be vulnerable to brute-force attacks as computing power increases. Major browser vendors and certificate authorities have mandated 2048-bit minimums since 2014. PCI DSS v4.0.1 (control 4.2.1) requires strong cryptography for data in transit. ACM automatically issues certificates with 2048-bit keys, but imported certificates may have shorter keys if generated externally with weak parameters. Since key length cannot be changed after import, affected certificates must be replaced entirely.",
+      "category": "security",
+      "references": [
+        "https://docs.aws.amazon.com/securityhub/latest/userguide/acm-controls.html#acm-2"
+      ],
+      "metadata": {
+        "created_at": "2026-02-09T05:38:18Z",
+        "updated_at": "2026-02-09T05:38:18Z",
+        "contributors": [
+          "ingest-pipeline"
+        ],
+        "source": "AWS Security Hub Controls"
+      },
+      "tags": [
+        "security-hub",
+        "acm",
+        "certificates",
+        "encryption",
+        "pci-dss",
+        "tls",
+        "key-management"
+      ]
     }
   ]
 }

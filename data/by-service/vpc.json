@@ -1,0 +1,40 @@
+{
+  "service": "vpc",
+  "count": 1,
+  "misconfigurations": [
+    {
+      "id": "e7615b72-a401-4432-bb8f-df41c69497f7",
+      "service_name": "vpc",
+      "scenario": "Network edge devices have exposed management interfaces accessible from the internet",
+      "alert_criteria": "Security groups or network ACLs allow inbound traffic on management ports (SSH/22, RDP/3389, HTTPS/443 management consoles) to network appliances, VPN concentrators, or routing infrastructure from 0.0.0.0/0 or overly broad CIDR ranges.",
+      "recommendation_action": "Restrict management interface access on all network edge devices (routers, VPN concentrators, firewalls, network management appliances) to specific trusted IP ranges or VPN-only access. Use AWS Systems Manager Session Manager for administrative access instead of exposing SSH or RDP. Implement security groups that limit management port access to known administrative CIDR blocks.",
+      "risk_detail": "security",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 3,
+      "recommendation_description_detailed": "Amazon Threat Intelligence has identified sustained campaigns by state-sponsored threat actors (including Russia's GRU/Sandworm) that target misconfigured network edge devices as a primary initial access vector. These actors exploit exposed management interfaces on enterprise routers, VPN concentrators, and network management appliances to perform credential harvesting and lateral movement into victim organizations' online services and infrastructure. The shift from vulnerability exploitation to targeting misconfigured devices represents a tactical evolution that reduces the attacker's exposure while achieving the same strategic objectives. Organizations must prioritize securing network edge device management interfaces and monitoring for credential replay attacks. This affects both EC2-hosted network appliances and third-party virtual appliances running in VPCs.",
+      "category": "networking",
+      "references": [
+        "https://aws.amazon.com/blogs/security/amazon-threat-intelligence-identifies-russian-cyber-threat-group-targeting-western-critical-infrastructure/"
+      ],
+      "metadata": {
+        "created_at": "2026-02-09T05:38:18Z",
+        "updated_at": "2026-02-09T05:38:18Z",
+        "contributors": [
+          "ingest-pipeline"
+        ],
+        "source": "AWS Security Blog"
+      },
+      "tags": [
+        "vpc",
+        "security-groups",
+        "network-security",
+        "threat-intelligence",
+        "management-access",
+        "edge-devices",
+        "zero-trust"
+      ]
+    }
+  ]
+}

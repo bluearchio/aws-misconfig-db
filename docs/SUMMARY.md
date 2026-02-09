@@ -1,7 +1,7 @@
 # AWS Misconfiguration Database - Summary
 
-**Total Recommendations:** 313
-**Last Updated:** 2026-01-17 16:57:19 UTC
+**Total Recommendations:** 323
+**Last Updated:** 2026-02-09 22:47:17 UTC
 
 ## Overview
 
@@ -16,11 +16,11 @@ performance, reliability, and operational best practices.
 
 | Risk Type | Count |
 | --------- | ----- |
-| operations | 209 |
-| cost | 80 |
-| performance | 33 |
-| security | 19 |
-| reliability | 12 |
+| operations | 213 |
+| cost | 81 |
+| performance | 34 |
+| security | 29 |
+| reliability | 14 |
 
 ### By Service
 
@@ -29,13 +29,13 @@ performance, reliability, and operational best practices.
 | ec2 | 49 |
 | general | 32 |
 | s3 | 24 |
+| rds | 22 |
 | lambda | 21 |
-| rds | 19 |
 | iam | 18 |
 | alb/elb | 16 |
 | networking | 15 |
 | cloudfront | 13 |
-| dynamodb | 11 |
+| dynamodb | 12 |
 | ebs | 10 |
 | efs | 8 |
 | route 53 | 8 |
@@ -46,19 +46,22 @@ performance, reliability, and operational best practices.
 | bedrock | 5 |
 | cloudtrail | 5 |
 | ALL | 4 |
+| acm | 3 |
 | cloudwatch | 3 |
 | inspector | 3 |
 | redshift | 3 |
-| acm | 2 |
 | eks | 2 |
 | elastic beanstalk | 2 |
 | elasticache | 2 |
+| account | 1 |
 | api-gateway | 1 |
 | config | 1 |
 | elasticsearch | 1 |
 | emr | 1 |
 | guardduty | 1 |
 | kms | 1 |
+| network-firewall | 1 |
+| organizations | 1 |
 | s3, rds, redshift, etc. | 1 |
 | secrets-manager | 1 |
 | security-hub | 1 |
@@ -66,6 +69,8 @@ performance, reliability, and operational best practices.
 | snow | 1 |
 | sns | 1 |
 | sqs | 1 |
+| systems-manager | 1 |
+| vpc | 1 |
 | waf | 1 |
 
 ### By Category
@@ -73,23 +78,23 @@ performance, reliability, and operational best practices.
 | Category | Count |
 | -------- | ----- |
 | cost | 17 |
-| security | 8 |
-| networking | 7 |
+| security | 11 |
+| database | 10 |
+| networking | 9 |
 | operations | 6 |
-| database | 6 |
 | ai | 5 |
 | storage | 5 |
 | management | 4 |
-| compute | 3 |
+| compute | 4 |
 | messaging | 1 |
 
 ### By Priority
 
 | Priority | Count |
 | -------- | ----- |
-| 0 | 61 |
-| 1 | 49 |
-| 2 | 16 |
+| 0 | 63 |
+| 1 | 54 |
+| 2 | 19 |
 | 3 | 4 |
 
 ## Usage

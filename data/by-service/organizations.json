@@ -1,0 +1,39 @@
+{
+  "service": "organizations",
+  "count": 1,
+  "misconfigurations": [
+    {
+      "id": "77ef079b-c64e-403b-973f-6782b3f8087d",
+      "service_name": "organizations",
+      "scenario": "AWS account is not part of an AWS Organizations organization for centralized governance",
+      "alert_criteria": "AWS account is standalone and not a member of any AWS Organizations organization. Security Hub control Account.2 fails.",
+      "recommendation_action": "Create or join an AWS Organizations organization to enable centralized management, consolidated billing, service control policies (SCPs), and cross-account security governance. Use AWS Organizations to implement guardrails and manage permissions across all accounts.",
+      "risk_detail": "security, operations, cost",
+      "build_priority": 1,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 2,
+      "recommendation_description_detailed": "Operating AWS accounts outside of AWS Organizations prevents centralized governance, making it difficult to enforce security policies consistently, manage budgets, and maintain compliance. Without Organizations, you cannot leverage Service Control Policies (SCPs) to set permission guardrails, use AWS CloudFormation StackSets for cross-account deployments, or enable delegated administration for services like Security Hub, GuardDuty, and AWS Config. This control maps to NIST 800-53 CA-9(1) and CM-2. Organizations also enables consolidated billing for cost optimization and simplified account management at scale.",
+      "category": "security",
+      "references": [
+        "https://docs.aws.amazon.com/securityhub/latest/userguide/account-controls.html#account-2"
+      ],
+      "metadata": {
+        "created_at": "2026-02-09T05:38:18Z",
+        "updated_at": "2026-02-09T05:38:18Z",
+        "contributors": [
+          "ingest-pipeline"
+        ],
+        "source": "AWS Security Hub Controls"
+      },
+      "tags": [
+        "security-hub",
+        "organizations",
+        "governance",
+        "multi-account",
+        "scp",
+        "centralized-management"
+      ]
+    }
+  ]
+}
