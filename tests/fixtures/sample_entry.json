@@ -1,0 +1,30 @@
+{
+  "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "service_name": "s3",
+  "scenario": "S3 bucket versioning not enabled",
+  "alert_criteria": "S3 bucket does not have versioning enabled",
+  "recommendation_action": "Enable versioning on the S3 bucket",
+  "risk_detail": "security",
+  "build_priority": 1,
+  "action_value": 2,
+  "effort_level": 1,
+  "risk_value": 2,
+  "recommendation_description_detailed": "Enable versioning to protect against accidental deletion.",
+  "category": "storage",
+  "references": [
+    "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html"
+  ],
+  "metadata": {
+    "created_at": "2026-02-08T12:00:00Z",
+    "updated_at": "2026-02-08T12:00:00Z",
+    "contributors": [
+      "ingest-pipeline"
+    ],
+    "source": "Test RSS Source"
+  },
+  "tags": [
+    "versioning",
+    "s3",
+    "data-protection"
+  ]
+}

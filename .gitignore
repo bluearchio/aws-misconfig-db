@@ -55,3 +55,8 @@ yarn-error.log*
 # DuckDB database (generated)
 db/*.duckdb
 db/*.duckdb.wal
+
+# Ingest pipeline state (generated, not source of truth)
+data/ingest/state.json
+data/ingest/state.json.tmp
+data/ingest/state.corrupt.*

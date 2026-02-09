@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head><title>AWS Security Hub Controls Reference</title></head>
+<body>
+  <div class="rule-item">
+    <h3>[S3.1] S3 general purpose buckets should have block public access settings enabled</h3>
+    <p>This control checks whether S3 buckets have bucket-level public access blocks applied. The control fails if any of the public access block settings are set to false.</p>
+  </div>
+  <div class="rule-item">
+    <h3>[S3.2] S3 general purpose buckets should block public read access</h3>
+    <p>This control checks whether S3 buckets allow public read access by evaluating the bucket policy and the bucket ACL.</p>
+  </div>
+  <div class="rule-item">
+    <h3>[EC2.1] Amazon EBS snapshots should not be publicly restorable</h3>
+    <p>This control checks whether Amazon EBS snapshots are publicly restorable. EBS snapshots should not be publicly accessible unless you explicitly want to share the data.</p>
+  </div>
+</body>
+</html>

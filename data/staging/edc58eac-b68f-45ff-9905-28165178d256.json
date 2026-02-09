@@ -1,0 +1,42 @@
+{
+  "staged_at": "2026-02-09T05:38:18Z",
+  "staged_by": "ingest-pipeline",
+  "source_id": "aws-database-blog",
+  "source_url": "https://aws.amazon.com/blogs/database/automate-the-export-of-amazon-rds-for-mysql-or-amazon-aurora-mysql-audit-logs-to-amazon-s3-with-batching-or-near-real-time-processing/",
+  "dedup_score": 0.211,
+  "closest_existing": "CloudWatch Logs groups without retention policies accumulating costs indefinitely",
+  "recommendation": {
+    "id": "edc58eac-b68f-45ff-9905-28165178d256",
+    "service_name": "rds",
+    "scenario": "Amazon RDS for MySQL or Aurora MySQL audit logs are not exported to S3 for long-term retention and compliance analysis",
+    "alert_criteria": "RDS for MySQL or Aurora MySQL instances have audit logging enabled but no automated export mechanism to Amazon S3 is configured. Audit logs remain only in CloudWatch Logs without long-term archival or structured analysis capability.",
+    "recommendation_action": "Implement automated export of MySQL audit logs to Amazon S3 using either batch processing (CloudWatch Logs export tasks triggered by EventBridge on a schedule) or real-time processing (Amazon Data Firehose subscribed to CloudWatch Logs). Configure S3 lifecycle policies for cost-effective long-term retention. Set up Athena tables for SQL-based audit log querying and consider QuickSight dashboards for ongoing monitoring.",
+    "risk_detail": "security, operations",
+    "build_priority": 2,
+    "action_value": 2,
+    "effort_level": 2,
+    "risk_value": 2,
+    "recommendation_description_detailed": "Database audit logs are essential for security investigations, compliance reporting, and tracking user activities including queries executed, data changes, and authentication attempts. While RDS for MySQL and Aurora MySQL provide built-in audit logging to CloudWatch Logs, retaining logs solely in CloudWatch is not cost-effective for long-term storage and limits analysis capabilities. Exporting audit logs to S3 enables durable, cost-effective retention with integration into analytics tools like Athena for ad-hoc SQL queries, QuickSight for visual dashboards, and Lambda/SNS for automated alerting on suspicious patterns such as failed login spikes or after-hours access to sensitive tables. This is a requirement for multiple regulatory frameworks including PCI DSS, HIPAA, and SOX, which mandate retention and regular analysis of database audit logs.",
+    "category": "database",
+    "references": [
+      "https://aws.amazon.com/blogs/database/automate-the-export-of-amazon-rds-for-mysql-or-amazon-aurora-mysql-audit-logs-to-amazon-s3-with-batching-or-near-real-time-processing/"
+    ],
+    "metadata": {
+      "created_at": "2026-02-09T05:38:18Z",
+      "updated_at": "2026-02-09T05:38:18Z",
+      "contributors": [
+        "ingest-pipeline"
+      ],
+      "source": "AWS Database Blog"
+    },
+    "tags": [
+      "rds",
+      "aurora",
+      "mysql",
+      "audit-logs",
+      "compliance",
+      "s3-export",
+      "long-term-retention"
+    ]
+  }
+}

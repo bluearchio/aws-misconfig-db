@@ -1,0 +1,33 @@
+{
+  "version": "1.0.0",
+  "sources": [
+    {
+      "id": "test-rss",
+      "name": "Test RSS",
+      "type": "rss",
+      "url": "https://example.com/feed",
+      "categories": [
+        "security"
+      ],
+      "enabled": true,
+      "fetch_config": {
+        "max_items": 5
+      }
+    },
+    {
+      "id": "test-html",
+      "name": "Test HTML",
+      "type": "html",
+      "url": "https://example.com/docs",
+      "categories": [
+        "operations"
+      ],
+      "enabled": true,
+      "fetch_config": {},
+      "parse_config": {
+        "item_selector": ".rule-item",
+        "title_selector": "h3"
+      }
+    }
+  ]
+}

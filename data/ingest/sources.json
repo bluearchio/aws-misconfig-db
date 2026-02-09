@@ -1,0 +1,686 @@
+{
+  "version": "1.0.0",
+  "description": "Source configuration for the AWS Misconfiguration Ingest Pipeline. Sources are organized by type (rss, html, github) and mapped to categories matching the recommendation library.",
+  "sources": [
+    {
+      "id": "aws-security-blog",
+      "name": "AWS Security Blog",
+      "type": "rss",
+      "url": "https://aws.amazon.com/blogs/security/feed/",
+      "categories": ["security"],
+      "enabled": true,
+      "fetch_config": {
+        "max_items": 50
+      }
+    },
+    {
+      "id": "aws-architecture-blog",
+      "name": "AWS Architecture Blog",
+      "type": "rss",
+      "url": "https://aws.amazon.com/blogs/architecture/feed/",
+      "categories": ["reliability", "performance", "operations"],
+      "enabled": true,
+      "fetch_config": {
+        "max_items": 50
+      }
+    },
+    {
+      "id": "aws-news-blog",
+      "name": "AWS News Blog",
+      "type": "rss",
+      "url": "https://aws.amazon.com/blogs/aws/feed/",
+      "categories": ["security", "cost", "performance", "reliability", "operations"],
+      "enabled": false,
+      "fetch_config": {
+        "max_items": 50
+      }
+    },
+    {
+      "id": "aws-whats-new",
+      "name": "AWS What's New",
+      "type": "rss",
+      "url": "https://aws.amazon.com/about-aws/whats-new/recent/feed/",
+      "categories": ["security", "cost", "performance", "reliability", "operations"],
+      "enabled": false,
+      "fetch_config": {
+        "max_items": 50
+      }
+    },
+    {
+      "id": "aws-cost-management-blog",
+      "name": "AWS Cost Management Blog",
+      "type": "rss",
+      "url": "https://aws.amazon.com/blogs/aws-cost-management/feed/",
+      "categories": ["cost"],
+      "enabled": true,
+      "fetch_config": {
+        "max_items": 50
+      }
+    },
+    {
+      "id": "aws-devops-blog",
+      "name": "AWS DevOps Blog",
+      "type": "rss",
+      "url": "https://aws.amazon.com/blogs/devops/feed/",
+      "categories": ["operations"],
+      "enabled": false,
+      "fetch_config": {
+        "max_items": 50
+      }
+    },
+    {
+      "id": "aws-database-blog",
+      "name": "AWS Database Blog",
+      "type": "rss",
+      "url": "https://aws.amazon.com/blogs/database/feed/",
+      "categories": ["performance", "reliability", "security"],
+      "enabled": true,
+      "fetch_config": {
+        "max_items": 50
+      }
+    },
+    {
+      "id": "aws-networking-blog",
+      "name": "AWS Networking Blog",
+      "type": "rss",
+      "url": "https://aws.amazon.com/blogs/networking-and-content-delivery/feed/",
+      "categories": ["performance", "operations"],
+      "enabled": false,
+      "fetch_config": {
+        "max_items": 50
+      }
+    },
+    {
+      "id": "aws-compute-blog",
+      "name": "AWS Compute Blog",
+      "type": "rss",
+      "url": "https://aws.amazon.com/blogs/compute/feed/",
+      "categories": ["performance", "cost", "operations"],
+      "enabled": false,
+      "fetch_config": {
+        "max_items": 50
+      }
+    },
+    {
+      "id": "aws-storage-blog",
+      "name": "AWS Storage Blog",
+      "type": "rss",
+      "url": "https://aws.amazon.com/blogs/storage/feed/",
+      "categories": ["cost", "reliability"],
+      "enabled": false,
+      "fetch_config": {
+        "max_items": 50
+      }
+    },
+    {
+      "id": "aws-containers-blog",
+      "name": "AWS Containers Blog",
+      "type": "rss",
+      "url": "https://aws.amazon.com/blogs/containers/feed/",
+      "categories": ["operations", "security"],
+      "enabled": false,
+      "fetch_config": {
+        "max_items": 50
+      }
+    },
+    {
+      "id": "well-architected-rss",
+      "name": "Well-Architected Framework RSS",
+      "type": "rss",
+      "url": "https://docs.aws.amazon.com/wellarchitected/latest/framework/wellarchitected-framework.rss",
+      "categories": ["security", "cost", "performance", "reliability", "operations"],
+      "enabled": false,
+      "fetch_config": {
+        "max_items": 50
+      }
+    },
+    {
+      "id": "aws-service-health",
+      "name": "AWS Service Health Dashboard",
+      "type": "rss",
+      "url": "https://status.aws.amazon.com/rss/all.rss",
+      "categories": ["reliability"],
+      "enabled": false,
+      "fetch_config": {
+        "max_items": 50
+      }
+    },
+    {
+      "id": "security-hub-controls",
+      "name": "AWS Security Hub Controls",
+      "type": "html",
+      "url": "https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-controls-reference.html",
+      "categories": ["security"],
+      "enabled": true,
+      "fetch_config": {
+        "follow_links": true,
+        "link_pattern": "securityhub.*controls",
+        "max_pages": 20
+      },
+      "parse_config": {
+        "title_selector": "h2, h3",
+        "body_selector": "p"
+      }
+    },
+    {
+      "id": "aws-config-rules",
+      "name": "AWS Config Managed Rules",
+      "type": "html",
+      "url": "https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html",
+      "categories": ["security", "operations"],
+      "enabled": false,
+      "fetch_config": {
+        "follow_links": true,
+        "link_pattern": "managed-rules",
+        "max_pages": 20
+      },
+      "parse_config": {
+        "title_selector": "h2, h3"
+      }
+    },
+    {
+      "id": "trusted-advisor-checks",
+      "name": "AWS Trusted Advisor Checks",
+      "type": "html",
+      "url": "https://docs.aws.amazon.com/awssupport/latest/user/trusted-advisor-check-reference.html",
+      "categories": ["cost", "security", "performance", "reliability", "operations"],
+      "enabled": false,
+      "fetch_config": {
+        "follow_links": true,
+        "link_pattern": "trusted-advisor",
+        "max_pages": 20
+      },
+      "parse_config": {
+        "title_selector": "h2, h3"
+      }
+    },
+    {
+      "id": "control-tower-controls",
+      "name": "AWS Control Tower Controls",
+      "type": "html",
+      "url": "https://docs.aws.amazon.com/controltower/latest/controlreference/controls-reference.html",
+      "categories": ["security", "operations"],
+      "enabled": false,
+      "fetch_config": {
+        "follow_links": true,
+        "link_pattern": "controls-reference",
+        "max_pages": 20
+      },
+      "parse_config": {
+        "title_selector": "h2, h3"
+      }
+    },
+    {
+      "id": "cis-aws-benchmarks",
+      "name": "CIS AWS Foundations Benchmark",
+      "type": "html",
+      "url": "https://www.cisecurity.org/benchmark/amazon_web_services",
+      "categories": ["security"],
+      "enabled": false,
+      "fetch_config": {},
+      "parse_config": {
+        "title_selector": "h2, h3"
+      }
+    },
+    {
+      "id": "well-architected-framework",
+      "name": "Well-Architected Framework",
+      "type": "html",
+      "url": "https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html",
+      "categories": ["security", "cost", "performance", "reliability", "operations"],
+      "enabled": false,
+      "fetch_config": {
+        "follow_links": true,
+        "link_pattern": "wellarchitected.*framework",
+        "max_pages": 20
+      },
+      "parse_config": {
+        "title_selector": "h2, h3"
+      }
+    },
+    {
+      "id": "aws-security-reference-architecture",
+      "name": "AWS Security Reference Architecture",
+      "type": "html",
+      "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/security-reference-architecture/",
+      "categories": ["security"],
+      "enabled": false,
+      "fetch_config": {
+        "follow_links": true,
+        "link_pattern": "security-reference-architecture",
+        "max_pages": 20
+      },
+      "parse_config": {
+        "title_selector": "h2, h3"
+      }
+    },
+    {
+      "id": "cur-column-dictionary",
+      "name": "CUR Column Dictionary",
+      "type": "html",
+      "url": "https://docs.aws.amazon.com/cur/latest/userguide/table-dictionary-cor-columns.html",
+      "categories": ["cost"],
+      "enabled": false,
+      "fetch_config": {},
+      "parse_config": {
+        "title_selector": "h2, h3"
+      }
+    },
+    {
+      "id": "prowler",
+      "name": "Prowler",
+      "type": "github",
+      "url": "https://github.com/prowler-cloud/prowler",
+      "categories": ["security"],
+      "enabled": true,
+      "fetch_config": {
+        "branch": "main",
+        "rules_path": "prowler/providers/aws/services/",
+        "file_pattern": "*.py",
+        "max_files": 50
+      }
+    },
+    {
+      "id": "checkov",
+      "name": "Checkov",
+      "type": "github",
+      "url": "https://github.com/bridgecrewio/checkov",
+      "categories": ["security"],
+      "enabled": false,
+      "fetch_config": {
+        "branch": "main",
+        "rules_path": "checkov/arm/checks/",
+        "file_pattern": "*.py",
+        "max_files": 50
+      }
+    },
+    {
+      "id": "scoutsuite",
+      "name": "ScoutSuite",
+      "type": "github",
+      "url": "https://github.com/nccgroup/ScoutSuite",
+      "categories": ["security"],
+      "enabled": false,
+      "fetch_config": {
+        "branch": "master",
+        "rules_path": "ScoutSuite/providers/aws/rules/",
+        "file_pattern": "*.json",
+        "max_files": 50
+      }
+    },
+    {
+      "id": "kics",
+      "name": "KICS",
+      "type": "github",
+      "url": "https://github.com/Checkmarx/kics",
+      "categories": ["security"],
+      "enabled": false,
+      "fetch_config": {
+        "branch": "master",
+        "rules_path": "assets/queries/terraform/aws/",
+        "file_pattern": "*.json",
+        "max_files": 50
+      }
+    },
+    {
+      "id": "trivy",
+      "name": "Trivy",
+      "type": "github",
+      "url": "https://github.com/aquasecurity/trivy",
+      "categories": ["security"],
+      "enabled": false,
+      "fetch_config": {
+        "branch": "main",
+        "rules_path": "pkg/iac/providers/aws/",
+        "file_pattern": "*.go",
+        "max_files": 50
+      }
+    },
+    {
+      "id": "cloudsploit",
+      "name": "CloudSploit",
+      "type": "github",
+      "url": "https://github.com/aquasecurity/cloudsploit",
+      "categories": ["security"],
+      "enabled": false,
+      "fetch_config": {
+        "branch": "master",
+        "rules_path": "plugins/aws/",
+        "file_pattern": "*.js",
+        "max_files": 50
+      }
+    },
+    {
+      "id": "cloudmapper",
+      "name": "CloudMapper",
+      "type": "github",
+      "url": "https://github.com/duo-labs/cloudmapper",
+      "categories": ["security", "operations"],
+      "enabled": false,
+      "fetch_config": {
+        "branch": "main",
+        "rules_path": "commands/",
+        "file_pattern": "*.py",
+        "max_files": 50
+      }
+    },
+    {
+      "id": "steampipe-aws-compliance",
+      "name": "Steampipe AWS Compliance",
+      "type": "github",
+      "url": "https://github.com/turbot/steampipe-mod-aws-compliance",
+      "categories": ["security"],
+      "enabled": false,
+      "fetch_config": {
+        "branch": "main",
+        "rules_path": "controls/",
+        "file_pattern": "*.sp",
+        "max_files": 50
+      }
+    },
+    {
+      "id": "aws-news-com",
+      "name": "aws-news.com",
+      "type": "html",
+      "url": "https://aws-news.com/",
+      "categories": ["security", "cost", "performance", "reliability", "operations"],
+      "enabled": false,
+      "fetch_config": {},
+      "parse_config": {
+        "title_selector": "h2, h3"
+      }
+    },
+    {
+      "id": "last-week-in-aws",
+      "name": "Last Week in AWS",
+      "type": "html",
+      "url": "https://www.lastweekinaws.com/",
+      "categories": ["cost", "operations"],
+      "enabled": false,
+      "fetch_config": {},
+      "parse_config": {
+        "title_selector": "h2, h3"
+      }
+    },
+    {
+      "id": "cloudseclist",
+      "name": "CloudSecList",
+      "type": "html",
+      "url": "https://cloudseclist.com/",
+      "categories": ["security"],
+      "enabled": false,
+      "fetch_config": {},
+      "parse_config": {
+        "title_selector": "h2, h3"
+      }
+    },
+    {
+      "id": "tldrsec",
+      "name": "tl;dr sec",
+      "type": "html",
+      "url": "https://tldrsec.com/",
+      "categories": ["security"],
+      "enabled": false,
+      "fetch_config": {},
+      "parse_config": {
+        "title_selector": "h2, h3"
+      }
+    },
+    {
+      "id": "cloud-security-newsletter",
+      "name": "Cloud Security Newsletter",
+      "type": "html",
+      "url": "https://www.cloudsecuritynewsletter.com/",
+      "categories": ["security"],
+      "enabled": false,
+      "fetch_config": {},
+      "parse_config": {
+        "title_selector": "h2, h3"
+      }
+    },
+    {
+      "id": "sysdig-feed",
+      "name": "Sysdig AWS Feed",
+      "type": "html",
+      "url": "https://sysdig.com/company/sysdig-rss-feeds/",
+      "categories": ["security"],
+      "enabled": false,
+      "fetch_config": {},
+      "parse_config": {
+        "title_selector": "h2, h3"
+      }
+    },
+    {
+      "id": "wa-cost-optimization",
+      "name": "Cost Optimization Pillar",
+      "type": "html",
+      "url": "https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/welcome.html",
+      "categories": ["cost"],
+      "enabled": false,
+      "fetch_config": {
+        "follow_links": true,
+        "link_pattern": "cost-optimization-pillar",
+        "max_pages": 20
+      },
+      "parse_config": {
+        "title_selector": "h2, h3"
+      }
+    },
+    {
+      "id": "wa-security",
+      "name": "Security Pillar",
+      "type": "html",
+      "url": "https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/welcome.html",
+      "categories": ["security"],
+      "enabled": false,
+      "fetch_config": {
+        "follow_links": true,
+        "link_pattern": "security-pillar",
+        "max_pages": 20
+      },
+      "parse_config": {
+        "title_selector": "h2, h3"
+      }
+    },
+    {
+      "id": "wa-reliability",
+      "name": "Reliability Pillar",
+      "type": "html",
+      "url": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html",
+      "categories": ["reliability"],
+      "enabled": false,
+      "fetch_config": {
+        "follow_links": true,
+        "link_pattern": "reliability-pillar",
+        "max_pages": 20
+      },
+      "parse_config": {
+        "title_selector": "h2, h3"
+      }
+    },
+    {
+      "id": "wa-performance",
+      "name": "Performance Efficiency Pillar",
+      "type": "html",
+      "url": "https://docs.aws.amazon.com/wellarchitected/latest/performance-efficiency-pillar/welcome.html",
+      "categories": ["performance"],
+      "enabled": false,
+      "fetch_config": {
+        "follow_links": true,
+        "link_pattern": "performance-efficiency-pillar",
+        "max_pages": 20
+      },
+      "parse_config": {
+        "title_selector": "h2, h3"
+      }
+    },
+    {
+      "id": "wa-operational-excellence",
+      "name": "Operational Excellence Pillar",
+      "type": "html",
+      "url": "https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/welcome.html",
+      "categories": ["operations"],
+      "enabled": false,
+      "fetch_config": {
+        "follow_links": true,
+        "link_pattern": "operational-excellence-pillar",
+        "max_pages": 20
+      },
+      "parse_config": {
+        "title_selector": "h2, h3"
+      }
+    },
+    {
+      "id": "wa-sustainability",
+      "name": "Sustainability Pillar",
+      "type": "html",
+      "url": "https://docs.aws.amazon.com/wellarchitected/latest/sustainability-pillar/welcome.html",
+      "categories": ["operations"],
+      "enabled": false,
+      "fetch_config": {
+        "follow_links": true,
+        "link_pattern": "sustainability-pillar",
+        "max_pages": 20
+      },
+      "parse_config": {
+        "title_selector": "h2, h3"
+      }
+    },
+    {
+      "id": "organizing-aws-environment",
+      "name": "Organizing Your AWS Environment",
+      "type": "html",
+      "url": "https://docs.aws.amazon.com/whitepapers/latest/organizing-your-aws-environment/",
+      "categories": ["security", "operations"],
+      "enabled": false,
+      "fetch_config": {
+        "follow_links": true,
+        "link_pattern": "organizing-your-aws-environment",
+        "max_pages": 20
+      },
+      "parse_config": {
+        "title_selector": "h2, h3"
+      }
+    },
+    {
+      "id": "aws-pricing-cost-optimization",
+      "name": "AWS Pricing / Cost Optimization",
+      "type": "html",
+      "url": "https://docs.aws.amazon.com/whitepapers/latest/how-aws-pricing-works/aws-cost-optimization.html",
+      "categories": ["cost"],
+      "enabled": false,
+      "fetch_config": {},
+      "parse_config": {
+        "title_selector": "h2, h3"
+      }
+    },
+    {
+      "id": "aws-security-bulletins",
+      "name": "AWS Security Bulletins",
+      "type": "html",
+      "url": "https://aws.amazon.com/security/security-bulletins/",
+      "categories": ["security"],
+      "enabled": false,
+      "fetch_config": {},
+      "parse_config": {
+        "title_selector": "h2, h3"
+      }
+    },
+    {
+      "id": "amazon-linux-advisories",
+      "name": "Amazon Linux Security Advisories",
+      "type": "html",
+      "url": "https://alas.aws.amazon.com/",
+      "categories": ["security"],
+      "enabled": false,
+      "fetch_config": {},
+      "parse_config": {
+        "title_selector": "h2, h3"
+      }
+    },
+    {
+      "id": "nvd-nist",
+      "name": "NVD (NIST)",
+      "type": "html",
+      "url": "https://nvd.nist.gov/",
+      "categories": ["security"],
+      "enabled": false,
+      "fetch_config": {},
+      "parse_config": {
+        "title_selector": "h2, h3"
+      }
+    },
+    {
+      "id": "guardduty-finding-types",
+      "name": "GuardDuty Finding Types",
+      "type": "html",
+      "url": "https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_finding-types-active.html",
+      "categories": ["security"],
+      "enabled": false,
+      "fetch_config": {
+        "follow_links": true,
+        "link_pattern": "guardduty_finding-types",
+        "max_pages": 20
+      },
+      "parse_config": {
+        "title_selector": "h2, h3"
+      }
+    },
+    {
+      "id": "awesome-aws-security",
+      "name": "Awesome AWS Security",
+      "type": "github",
+      "url": "https://github.com/coffeewithayman/awesome-aws-security",
+      "categories": ["security"],
+      "enabled": false,
+      "fetch_config": {
+        "branch": "main",
+        "rules_path": "",
+        "file_pattern": "README.md",
+        "max_files": 5
+      }
+    },
+    {
+      "id": "aws-security-tools",
+      "name": "AWS Security Tools",
+      "type": "github",
+      "url": "https://github.com/0xVariable/AWS-Security-Tools",
+      "categories": ["security"],
+      "enabled": false,
+      "fetch_config": {
+        "branch": "main",
+        "rules_path": "",
+        "file_pattern": "README.md",
+        "max_files": 5
+      }
+    },
+    {
+      "id": "asecure-cloud",
+      "name": "ASecure.Cloud",
+      "type": "html",
+      "url": "https://asecure.cloud/tools/",
+      "categories": ["security"],
+      "enabled": false,
+      "fetch_config": {},
+      "parse_config": {
+        "title_selector": "h2, h3"
+      }
+    },
+    {
+      "id": "aws-security-best-practices",
+      "name": "AWS Security Best Practices",
+      "type": "html",
+      "url": "https://aws.github.io/aws-security-services-best-practices/",
+      "categories": ["security"],
+      "enabled": false,
+      "fetch_config": {
+        "follow_links": true,
+        "link_pattern": "aws-security-services-best-practices",
+        "max_pages": 20
+      },
+      "parse_config": {
+        "title_selector": "h2, h3"
+      }
+    }
+  ]
+}

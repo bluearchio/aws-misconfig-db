@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>AWS Security Blog</title>
+    <link>https://aws.amazon.com/blogs/security/</link>
+    <description>AWS Security Blog posts</description>
+    <item>
+      <title>How to enable encryption on your S3 buckets</title>
+      <link>https://aws.amazon.com/blogs/security/s3-encryption/</link>
+      <description>Learn about enabling server-side encryption on S3 buckets to protect your data at rest. This guide covers SSE-S3, SSE-KMS, and SSE-C encryption options and when to use each approach for maximum security.</description>
+      <pubDate>Wed, 15 Jan 2026 10:00:00 GMT</pubDate>
+      <category>Security</category>
+      <category>S3</category>
+    </item>
+    <item>
+      <title>Best practices for IAM policy management</title>
+      <link>https://aws.amazon.com/blogs/security/iam-best-practices/</link>
+      <description>Follow the principle of least privilege when creating IAM policies. This post covers how to audit existing policies, use IAM Access Analyzer, and implement permission boundaries for enhanced security.</description>
+      <pubDate>Mon, 13 Jan 2026 08:00:00 GMT</pubDate>
+      <category>Security</category>
+      <category>IAM</category>
+    </item>
+    <item>
+      <title>Company holiday party announcement</title>
+      <link>https://aws.amazon.com/blogs/security/holiday/</link>
+      <description>Short note.</description>
+      <pubDate>Fri, 20 Dec 2025 09:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>

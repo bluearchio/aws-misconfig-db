@@ -1,0 +1,6 @@
+name: s3_bucket_logging_enabled
+description: Ensure S3 bucket logging is enabled for audit trail
+severity: medium
+service: s3
+check_type: configuration
+remediation: Enable server access logging on the S3 bucket

@@ -350,21 +350,181 @@ Each recommendation contains:
 
 ---
 
+## Ingest Pipeline
+
+The ingest pipeline automatically discovers new AWS misconfigurations from RSS feeds, HTML docs, and GitHub repositories. It deduplicates against the existing database using TF-IDF similarity, converts findings into schema-compliant recommendations, and stages them for human review.
+
+### 1. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+Set `ANTHROPIC_API_KEY` in your environment for LLM-powered conversion (optional — the pipeline works without it in `--skip-llm` or `--dry-run` mode):
+
+```bash
+export ANTHROPIC_API_KEY=sk-ant-...
+```
+
+### 2. Add New Sources
+
+Sources are configured in `data/ingest/sources.json`. Each source has:
+
+```json
+{
+  "id": "my-new-source",
+  "name": "My New Source",
+  "type": "rss",
+  "url": "https://example.com/feed/",
+  "categories": ["security", "cost"],
+  "enabled": true,
+  "fetch_config": {
+    "max_items": 50
+  }
+}
+```
+
+**Source types:**
+
+| Type | Use for | Config options |
+|------|---------|----------------|
+| `rss` | RSS/Atom feeds | `max_items` |
+| `html` | AWS doc pages | `follow_links`, `link_pattern`, `item_selector` |
+| `github` | GitHub repo rule files | `branch`, `rules_path`, `file_pattern`, `max_files` |
+
+To add a source, append it to the `sources` array in `data/ingest/sources.json` and set `"enabled": true`. List all configured sources with:
+
+```bash
+python3 scripts/ingest/cli.py list-sources
+python3 scripts/ingest/cli.py list-sources --enabled-only
+```
+
+### 3. Run the Pipeline
+
+```bash
+# Dry run — fetch and deduplicate, but don't convert or stage
+python3 scripts/ingest/cli.py fetch --dry-run
+
+# Fetch from specific sources
+python3 scripts/ingest/cli.py fetch --sources aws-security-blog aws-database-blog --dry-run
+
+# Fetch only RSS sources
+python3 scripts/ingest/cli.py fetch --source-type rss --dry-run
+
+# Full pipeline — fetch, deduplicate, convert via Claude, validate, and stage
+python3 scripts/ingest/cli.py fetch
+
+# Skip LLM conversion (fetch and dedup only, useful for testing sources)
+python3 scripts/ingest/cli.py fetch --skip-llm
+
+# Limit items per source and adjust dedup sensitivity
+python3 scripts/ingest/cli.py fetch --max-items 10 --similarity-threshold 0.80
+
+# Verbose mode — see every item being processed
+python3 scripts/ingest/cli.py fetch --verbose
+```
+
+The CLI shows real-time progress with labeled progress bars, per-source status, and a summary panel:
+
+```
+╭─ AWS Misconfig DB · Ingest Pipeline v1.0.0 ──╮
+│ Mode:       dry-run                            │
+│ Sources:    7 enabled                          │
+│ Threshold:  0.7                                │
+╰────────────────────────────────────────────────╯
+  Loaded 313 existing recommendations for dedup
+
+  Fetching sources ━━━━━━━━━━━━━━━━━━━━ 100% 7/7
+
+    ✓ AWS Security Blog               RSS   20 items → 20 novel
+    ✓ AWS Architecture Blog           RSS   20 items → 20 novel
+    ✗ AWS Cost Management Blog        RSS   XML parse error
+    ✓ AWS Database Blog               RSS   20 items → 20 novel
+    ✓ Security Hub Controls           HTM  172 items → 172 novel
+    ✗ Prowler                         GIT   HTTP 404
+
+╭─ Summary ─────────────────────────────────────╮
+│ Sources      5 processed · 2 errors            │
+│ Fetched      252 items                         │
+│ Time         12.3s                             │
+╰────────────────────────────────────────────────╯
+```
+
+### 4. Review and Promote Results
+
+After a pipeline run, new recommendations are staged in `data/staging/`. Review them before promoting to the main database:
+
+```bash
+# List all staged recommendations
+python3 scripts/ingest/cli.py show-staged
+
+# Detailed view with dedup scores and closest matches
+python3 scripts/ingest/cli.py show-staged --format detail
+
+# Filter staged items by service
+python3 scripts/ingest/cli.py show-staged --filter-service rds
+
+# Promote a recommendation to data/by-service/<service>.json
+python3 scripts/ingest/cli.py promote <uuid>
+
+# Reject a recommendation (removes from staging)
+python3 scripts/ingest/cli.py reject <uuid> --reason "Duplicate of existing recommendation"
+```
+
+After promoting, rebuild aggregates:
+
+```bash
+python3 scripts/generate.py     # Regenerate SUMMARY.md, by-category/, summary-stats
+python3 scripts/db-init.py      # Rebuild DuckDB database
+python3 scripts/validate.py data/by-service/  # Verify schema compliance
+```
+
+### 5. Monitor Pipeline Health
+
+```bash
+# Run all health checks (stale sources, staging overflow, state corruption, etc.)
+python3 scripts/ingest/cli.py health
+
+# View recent pipeline run history
+python3 scripts/ingest/cli.py history
+python3 scripts/ingest/cli.py history --last 20 --format json
+```
+
+---
+
 ## Repository Structure
 
 ```
 aws-misconfig-db/
-├── data/by-service/        # Source of truth (41 JSON files)
-│   ├── ec2.json            # 49 recommendations
-│   ├── s3.json             # 24 recommendations
-│   ├── lambda.json         # 21 recommendations
-│   └── ...
-├── db/                     # Generated DuckDB database
+├── data/
+│   ├── by-service/            # Source of truth (41+ JSON files)
+│   │   ├── ec2.json           # 49 recommendations
+│   │   ├── s3.json            # 24 recommendations
+│   │   ├── lambda.json        # 21 recommendations
+│   │   └── ...
+│   ├── staging/               # Candidate recommendations awaiting review
+│   └── ingest/
+│       └── sources.json       # Source configuration (51 sources)
 ├── scripts/
-│   ├── db-init.py          # Build the database
-│   ├── db-query.py         # Query helper CLI
-│   ├── validate.py         # Schema validation
-│   └── generate.py         # Generate SUMMARY.md
+│   ├── ingest/                # Ingest pipeline
+│   │   ├── cli.py             # CLI entrypoint
+│   │   ├── orchestrator.py    # Pipeline runner
+│   │   ├── progress.py        # Rich terminal progress display
+│   │   ├── config.py          # Source config loader
+│   │   ├── dedup.py           # TF-IDF deduplication
+│   │   ├── convert.py         # Claude API conversion
+│   │   ├── stage.py           # Staging/promote/reject
+│   │   ├── state.py           # State persistence
+│   │   ├── health.py          # Health checks
+│   │   ├── validate_entry.py  # Schema validation wrapper
+│   │   ├── fetchers/          # RSS, HTML, GitHub fetchers
+│   │   └── parsers/           # RSS, HTML, GitHub parsers
+│   ├── db-init.py             # Build the DuckDB database
+│   ├── db-query.py            # Query helper CLI
+│   ├── validate.py            # Schema validation
+│   └── generate.py            # Generate SUMMARY.md
+├── tests/                     # 106 tests
+├── db/                        # Generated DuckDB database
 └── schema/
     └── misconfig-schema.json
 ```
