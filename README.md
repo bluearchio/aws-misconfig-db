@@ -58,8 +58,8 @@ A structured, queryable database of AWS misconfigurations and best practices. Us
 git clone https://github.com/bluearchio/aws-misconfig-db.git
 cd aws-misconfig-db
 
-# Install DuckDB
-pip install duckdb
+# Install all dependencies (includes DuckDB, ingest pipeline, and test tools)
+pip install -r requirements.txt
 
 # Build the queryable database
 python3 scripts/db-init.py
@@ -109,6 +109,124 @@ conn.execute("""
     GROUP BY service_name
     ORDER BY issues DESC
 """).fetchdf()
+```
+
+---
+
+## Ingest Pipeline
+
+The ingest pipeline automatically discovers new AWS misconfigurations from RSS feeds, HTML docs, and GitHub repositories. It deduplicates against the existing database using TF-IDF similarity, converts findings into schema-compliant recommendations via Claude, and stages them for human review.
+
+### 1. Add New Sources
+
+Sources live in `data/ingest/sources.json`. Each source needs an `id`, `type`, `url`, and `categories`:
+
+```json
+{
+  "id": "my-new-source",
+  "name": "My New Source",
+  "type": "rss",
+  "url": "https://example.com/feed/",
+  "categories": ["security", "cost"],
+  "enabled": true,
+  "fetch_config": { "max_items": 50 }
+}
+```
+
+| Type | Use for | Key config |
+|------|---------|------------|
+| `rss` | RSS/Atom feeds | `max_items` |
+| `html` | AWS doc pages | `follow_links`, `link_pattern`, `item_selector` |
+| `github` | Repo rule files | `branch`, `rules_path`, `file_pattern`, `max_files` |
+
+```bash
+# See all 51 configured sources
+python3 scripts/ingest/cli.py list-sources
+
+# See only enabled sources
+python3 scripts/ingest/cli.py list-sources --enabled-only
+```
+
+### 2. Run the Pipeline
+
+```bash
+# Dry run — fetch and deduplicate without converting or staging
+python3 scripts/ingest/cli.py fetch --dry-run
+
+# Fetch from specific sources only
+python3 scripts/ingest/cli.py fetch --sources aws-security-blog aws-database-blog --dry-run
+
+# Fetch only RSS sources
+python3 scripts/ingest/cli.py fetch --source-type rss --dry-run
+
+# Full pipeline — fetch, dedup, convert via Claude, validate, stage
+# (requires ANTHROPIC_API_KEY in environment)
+export ANTHROPIC_API_KEY=sk-ant-...
+python3 scripts/ingest/cli.py fetch
+
+# Skip LLM — fetch and dedup only, no conversion
+python3 scripts/ingest/cli.py fetch --skip-llm
+
+# Tune dedup sensitivity and limit items per source
+python3 scripts/ingest/cli.py fetch --max-items 10 --similarity-threshold 0.80
+```
+
+The CLI shows real-time progress with labeled progress bars and a summary panel:
+
+```
+╭─ AWS Misconfig DB · Ingest Pipeline v1.0.0 ──╮
+│ Mode:       dry-run                            │
+│ Sources:    7 enabled                          │
+│ Threshold:  0.7                                │
+╰────────────────────────────────────────────────╯
+  Loaded 313 existing recommendations for dedup
+
+    ✓ AWS Security Blog               RSS   20 items → 20 novel
+    ✓ AWS Architecture Blog           RSS   20 items → 20 novel
+    ✗ AWS Cost Management Blog        RSS   XML parse error
+    ✓ AWS Database Blog               RSS   20 items → 20 novel
+    ✓ Security Hub Controls           HTM  172 items → 172 novel
+
+╭─ Summary ─────────────────────────────────────╮
+│ Sources      5 processed · 2 errors            │
+│ Fetched      252 items                         │
+│ Time         12.3s                             │
+╰────────────────────────────────────────────────╯
+```
+
+### 3. Review Output and Promote
+
+New recommendations land in `data/staging/`. Review before promoting to the main database:
+
+```bash
+# List staged recommendations (table, detail, or json)
+python3 scripts/ingest/cli.py show-staged
+python3 scripts/ingest/cli.py show-staged --format detail
+python3 scripts/ingest/cli.py show-staged --filter-service rds
+
+# Promote a recommendation into data/by-service/<service>.json
+python3 scripts/ingest/cli.py promote <uuid>
+
+# Reject a recommendation (removes from staging)
+python3 scripts/ingest/cli.py reject <uuid> --reason "Duplicate"
+```
+
+After promoting, rebuild the database and aggregates:
+
+```bash
+python3 scripts/generate.py                       # Regenerate SUMMARY.md and stats
+python3 scripts/db-init.py                        # Rebuild DuckDB
+python3 scripts/validate.py data/by-service/      # Verify schema compliance
+```
+
+### 4. Monitor Health
+
+```bash
+# Run health checks (stale sources, staging overflow, state corruption)
+python3 scripts/ingest/cli.py health
+
+# View pipeline run history
+python3 scripts/ingest/cli.py history
 ```
 
 ---
@@ -350,148 +468,6 @@ Each recommendation contains:
 
 ---
 
-## Ingest Pipeline
-
-The ingest pipeline automatically discovers new AWS misconfigurations from RSS feeds, HTML docs, and GitHub repositories. It deduplicates against the existing database using TF-IDF similarity, converts findings into schema-compliant recommendations, and stages them for human review.
-
-### 1. Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-Set `ANTHROPIC_API_KEY` in your environment for LLM-powered conversion (optional — the pipeline works without it in `--skip-llm` or `--dry-run` mode):
-
-```bash
-export ANTHROPIC_API_KEY=sk-ant-...
-```
-
-### 2. Add New Sources
-
-Sources are configured in `data/ingest/sources.json`. Each source has:
-
-```json
-{
-  "id": "my-new-source",
-  "name": "My New Source",
-  "type": "rss",
-  "url": "https://example.com/feed/",
-  "categories": ["security", "cost"],
-  "enabled": true,
-  "fetch_config": {
-    "max_items": 50
-  }
-}
-```
-
-**Source types:**
-
-| Type | Use for | Config options |
-|------|---------|----------------|
-| `rss` | RSS/Atom feeds | `max_items` |
-| `html` | AWS doc pages | `follow_links`, `link_pattern`, `item_selector` |
-| `github` | GitHub repo rule files | `branch`, `rules_path`, `file_pattern`, `max_files` |
-
-To add a source, append it to the `sources` array in `data/ingest/sources.json` and set `"enabled": true`. List all configured sources with:
-
-```bash
-python3 scripts/ingest/cli.py list-sources
-python3 scripts/ingest/cli.py list-sources --enabled-only
-```
-
-### 3. Run the Pipeline
-
-```bash
-# Dry run — fetch and deduplicate, but don't convert or stage
-python3 scripts/ingest/cli.py fetch --dry-run
-
-# Fetch from specific sources
-python3 scripts/ingest/cli.py fetch --sources aws-security-blog aws-database-blog --dry-run
-
-# Fetch only RSS sources
-python3 scripts/ingest/cli.py fetch --source-type rss --dry-run
-
-# Full pipeline — fetch, deduplicate, convert via Claude, validate, and stage
-python3 scripts/ingest/cli.py fetch
-
-# Skip LLM conversion (fetch and dedup only, useful for testing sources)
-python3 scripts/ingest/cli.py fetch --skip-llm
-
-# Limit items per source and adjust dedup sensitivity
-python3 scripts/ingest/cli.py fetch --max-items 10 --similarity-threshold 0.80
-
-# Verbose mode — see every item being processed
-python3 scripts/ingest/cli.py fetch --verbose
-```
-
-The CLI shows real-time progress with labeled progress bars, per-source status, and a summary panel:
-
-```
-╭─ AWS Misconfig DB · Ingest Pipeline v1.0.0 ──╮
-│ Mode:       dry-run                            │
-│ Sources:    7 enabled                          │
-│ Threshold:  0.7                                │
-╰────────────────────────────────────────────────╯
-  Loaded 313 existing recommendations for dedup
-
-  Fetching sources ━━━━━━━━━━━━━━━━━━━━ 100% 7/7
-
-    ✓ AWS Security Blog               RSS   20 items → 20 novel
-    ✓ AWS Architecture Blog           RSS   20 items → 20 novel
-    ✗ AWS Cost Management Blog        RSS   XML parse error
-    ✓ AWS Database Blog               RSS   20 items → 20 novel
-    ✓ Security Hub Controls           HTM  172 items → 172 novel
-    ✗ Prowler                         GIT   HTTP 404
-
-╭─ Summary ─────────────────────────────────────╮
-│ Sources      5 processed · 2 errors            │
-│ Fetched      252 items                         │
-│ Time         12.3s                             │
-╰────────────────────────────────────────────────╯
-```
-
-### 4. Review and Promote Results
-
-After a pipeline run, new recommendations are staged in `data/staging/`. Review them before promoting to the main database:
-
-```bash
-# List all staged recommendations
-python3 scripts/ingest/cli.py show-staged
-
-# Detailed view with dedup scores and closest matches
-python3 scripts/ingest/cli.py show-staged --format detail
-
-# Filter staged items by service
-python3 scripts/ingest/cli.py show-staged --filter-service rds
-
-# Promote a recommendation to data/by-service/<service>.json
-python3 scripts/ingest/cli.py promote <uuid>
-
-# Reject a recommendation (removes from staging)
-python3 scripts/ingest/cli.py reject <uuid> --reason "Duplicate of existing recommendation"
-```
-
-After promoting, rebuild aggregates:
-
-```bash
-python3 scripts/generate.py     # Regenerate SUMMARY.md, by-category/, summary-stats
-python3 scripts/db-init.py      # Rebuild DuckDB database
-python3 scripts/validate.py data/by-service/  # Verify schema compliance
-```
-
-### 5. Monitor Pipeline Health
-
-```bash
-# Run all health checks (stale sources, staging overflow, state corruption, etc.)
-python3 scripts/ingest/cli.py health
-
-# View recent pipeline run history
-python3 scripts/ingest/cli.py history
-python3 scripts/ingest/cli.py history --last 20 --format json
-```
-
----
-
 ## Repository Structure
 
 ```
@@ -564,13 +540,17 @@ LIMIT 10;
 ## Contributing
 
 ```bash
+# Run the ingest pipeline to discover new recommendations
+python3 scripts/ingest/cli.py fetch --dry-run
+
+# Run tests
+python3 -m pytest tests/ -v
+
 # Validate your changes
 python3 scripts/validate.py data/by-service/
 
-# Rebuild database
+# Rebuild database and docs
 python3 scripts/db-init.py
-
-# Update documentation
 python3 scripts/generate.py
 ```
 
