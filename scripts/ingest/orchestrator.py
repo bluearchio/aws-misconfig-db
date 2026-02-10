@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import logging
+import threading
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Any
 
 from scripts.ingest import RawItem, INGEST_DIR, __version__
@@ -15,7 +17,7 @@ from scripts.ingest.state import (
 from scripts.ingest.dedup import DedupEngine
 from scripts.ingest.convert import LLMConverter
 from scripts.ingest.validate_entry import validate_recommendation
-from scripts.ingest.stage import stage_recommendation
+from scripts.ingest.stage import stage_recommendation, auto_promote
 
 logger = logging.getLogger(__name__)
 
@@ -34,6 +36,9 @@ class PipelineOrchestrator:
         model: str = "claude-sonnet-4-20250514",
         verbose: bool = False,
         progress: Any = None,
+        auto_promote: bool = False,
+        auto_promote_threshold: float = 0.30,
+        max_workers: int = 5,
     ):
         self.source_ids = source_ids
         self.source_type = source_type
@@ -44,11 +49,17 @@ class PipelineOrchestrator:
         self.model = model
         self.verbose = verbose
         self.progress = progress
+        self.auto_promote = auto_promote
+        self.auto_promote_threshold = auto_promote_threshold
+        self.max_workers = max_workers
 
         # Pipeline components
         self.dedup = DedupEngine(threshold=similarity_threshold)
         self.converter = None if skip_llm else LLMConverter(model=model)
         self.state = load_state()
+
+        # Thread safety lock for metrics and state mutations
+        self._lock = threading.Lock()
 
         # Metrics for this run
         self.metrics = {
@@ -62,6 +73,7 @@ class PipelineOrchestrator:
             "items_validated": 0,
             "items_validation_failed": 0,
             "items_staged": 0,
+            "items_auto_promoted": 0,
             "errors": [],
         }
 
@@ -98,9 +110,21 @@ class PipelineOrchestrator:
         if self.progress:
             self.progress.start_fetch_phase(len(sources))
 
-        # Process each source
-        for source in sources:
-            self._process_source(source)
+        # Process sources concurrently
+        with ThreadPoolExecutor(max_workers=self.max_workers) as executor:
+            futures = {
+                executor.submit(self._process_source, source): source
+                for source in sources
+            }
+            for future in as_completed(futures):
+                source = futures[future]
+                try:
+                    future.result()
+                except Exception as e:
+                    source_id = source.get("id", "unknown")
+                    logger.error("Unexpected error processing source %s: %s", source_id, e)
+                    with self._lock:
+                        self.metrics["errors"].append(f"Unexpected error ({source_id}): {e}")
 
         # End fetch phase
         if self.progress:
@@ -140,7 +164,8 @@ class PipelineOrchestrator:
         try:
             fetcher = get_fetcher(source)
             from scripts.ingest.state import get_source_state
-            source_state = get_source_state(self.state, source_id)
+            with self._lock:
+                source_state = get_source_state(self.state, source_id)
 
             result = fetcher.fetch(
                 etag=source_state.get("etag"),
@@ -149,16 +174,18 @@ class PipelineOrchestrator:
 
             if result["not_modified"]:
                 logger.info("Source %s: not modified, skipping", source_id)
-                update_source_after_fetch(self.state, source_id, result["etag"], result["last_modified"], 0)
-                self.metrics["sources_processed"] += 1
+                with self._lock:
+                    update_source_after_fetch(self.state, source_id, result["etag"], result["last_modified"], 0)
+                    self.metrics["sources_processed"] += 1
                 if self.progress:
                     self.progress.update_source_complete(source_name, source_type, 0, 0, not_modified=True)
                 return
 
         except Exception as e:
             logger.error("Fetch failed for %s: %s", source_id, e)
-            self.metrics["errors"].append(f"Fetch error ({source_id}): {e}")
-            update_source_after_fetch(self.state, source_id, None, None, 0, error=str(e))
+            with self._lock:
+                self.metrics["errors"].append(f"Fetch error ({source_id}): {e}")
+                update_source_after_fetch(self.state, source_id, None, None, 0, error=str(e))
             if self.progress:
                 self.progress.update_source_complete(source_name, source_type, 0, 0, error=str(e))
             return
@@ -169,33 +196,37 @@ class PipelineOrchestrator:
             raw_items = parser.parse(result["content"])
         except Exception as e:
             logger.error("Parse failed for %s: %s", source_id, e)
-            self.metrics["errors"].append(f"Parse error ({source_id}): {e}")
+            with self._lock:
+                self.metrics["errors"].append(f"Parse error ({source_id}): {e}")
             if self.progress:
                 self.progress.update_source_complete(source_name, source_type, 0, 0, error=f"Parse: {e}")
             return
 
-        self.metrics["items_fetched"] += len(raw_items)
+        with self._lock:
+            self.metrics["items_fetched"] += len(raw_items)
 
         # Apply max_items limit
         if self.max_items and len(raw_items) > self.max_items:
             raw_items = raw_items[:self.max_items]
 
         # Track per-source novel count
-        seen_before = self.metrics["items_filtered_seen"]
-        dedup_before = self.metrics["items_filtered_dedup"]
+        with self._lock:
+            seen_before = self.metrics["items_filtered_seen"]
+            dedup_before = self.metrics["items_filtered_dedup"]
 
-        # Filter and process items
+        # Filter and process items (LLM conversion is sequential within each source)
         for item in raw_items:
             self._process_item(item)
 
-        seen_delta = self.metrics["items_filtered_seen"] - seen_before
-        dedup_delta = self.metrics["items_filtered_dedup"] - dedup_before
-        novel_count = len(raw_items) - seen_delta - dedup_delta
+        with self._lock:
+            seen_delta = self.metrics["items_filtered_seen"] - seen_before
+            dedup_delta = self.metrics["items_filtered_dedup"] - dedup_before
+            novel_count = len(raw_items) - seen_delta - dedup_delta
 
-        update_source_after_fetch(
-            self.state, source_id, result["etag"], result["last_modified"], len(raw_items),
-        )
-        self.metrics["sources_processed"] += 1
+            update_source_after_fetch(
+                self.state, source_id, result["etag"], result["last_modified"], len(raw_items),
+            )
+            self.metrics["sources_processed"] += 1
 
         if self.progress:
             self.progress.update_source_complete(
@@ -205,20 +236,22 @@ class PipelineOrchestrator:
     def _process_item(self, item: RawItem) -> None:
         """Process a single raw item through filter -> dedup -> convert -> validate -> stage."""
         # State filter (skip seen items)
-        if is_seen(self.state, item.source_id, item.content_hash):
-            self.metrics["items_filtered_seen"] += 1
-            if self.verbose:
-                logger.debug("Skipping seen item: %s", item.title[:60])
-            return
+        with self._lock:
+            if is_seen(self.state, item.source_id, item.content_hash):
+                self.metrics["items_filtered_seen"] += 1
+                if self.verbose:
+                    logger.debug("Skipping seen item: %s", item.title[:60])
+                return
 
-        # Mark as seen
-        if not self.dry_run:
-            mark_seen(self.state, item.source_id, item.content_hash)
+            # Mark as seen
+            if not self.dry_run:
+                mark_seen(self.state, item.source_id, item.content_hash)
 
-        # Dedup check
+        # Dedup check (DedupEngine is read-only after load_existing, so thread-safe)
         dedup_score, closest = self.dedup.check(item.title, item.body)
         if dedup_score >= self.similarity_threshold:
-            self.metrics["items_filtered_dedup"] += 1
+            with self._lock:
+                self.metrics["items_filtered_dedup"] += 1
             if self.verbose:
                 logger.info("Dedup filtered: %s (score=%.2f, closest=%s)", item.title[:40], dedup_score, closest[:40])
             return
@@ -238,12 +271,14 @@ class PipelineOrchestrator:
 
         recommendation = self.converter.convert(item)
         if recommendation is None:
-            self.metrics["items_convert_skipped"] += 1
+            with self._lock:
+                self.metrics["items_convert_skipped"] += 1
             if self.progress:
                 self.progress.advance_item()
             return
 
-        self.metrics["items_converted"] += 1
+        with self._lock:
+            self.metrics["items_converted"] += 1
 
         # Validate
         if self.progress:
@@ -251,7 +286,8 @@ class PipelineOrchestrator:
 
         is_valid, errors = validate_recommendation(recommendation)
         if not is_valid:
-            self.metrics["items_validation_failed"] += 1
+            with self._lock:
+                self.metrics["items_validation_failed"] += 1
             logger.warning("Validation failed for %s: %s", item.title[:40], errors)
 
             # Retry once with errors in prompt
@@ -281,7 +317,29 @@ class PipelineOrchestrator:
                         self.progress.advance_item()
                     return
 
-        self.metrics["items_validated"] += 1
+        with self._lock:
+            self.metrics["items_validated"] += 1
+
+        # Auto-promote if enabled and score is below threshold
+        if self.auto_promote and dedup_score < self.auto_promote_threshold:
+            if self.progress:
+                self.progress.update_item_progress(item.title, "Auto-promoting")
+
+            was_promoted, msg, service_path = auto_promote(
+                recommendation=recommendation,
+                source_id=item.source_id,
+                source_url=item.url,
+                dedup_score=dedup_score,
+                closest_existing=closest,
+                auto_promote_threshold=self.auto_promote_threshold,
+            )
+            if was_promoted:
+                with self._lock:
+                    self.metrics["items_auto_promoted"] += 1
+                logger.info("Auto-promoted: %s - %s", item.title[:60], msg)
+                if self.progress:
+                    self.progress.advance_item()
+                return
 
         # Stage
         if self.progress:
@@ -294,7 +352,8 @@ class PipelineOrchestrator:
             dedup_score=dedup_score,
             closest_existing=closest,
         )
-        self.metrics["items_staged"] += 1
+        with self._lock:
+            self.metrics["items_staged"] += 1
 
         if self.progress:
             self.progress.advance_item()
@@ -314,6 +373,7 @@ class PipelineOrchestrator:
         print(f"Validated:          {m['items_validated']}")
         print(f"Validation failed:  {m['items_validation_failed']}")
         print(f"Staged:             {m['items_staged']}")
+        print(f"Auto-promoted:      {m['items_auto_promoted']}")
         if m.get("elapsed_seconds"):
             print(f"Elapsed:            {m['elapsed_seconds']}s")
         if m["errors"]:

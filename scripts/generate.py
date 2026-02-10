@@ -4,7 +4,10 @@ Generate documentation summary from AWS Misconfiguration Database.
 Reads from data/by-service/*.json (the single source of truth) and generates docs/SUMMARY.md.
 """
 
+from __future__ import annotations
+
 import json
+import re
 from pathlib import Path
 from typing import Dict, List, Any
 from collections import defaultdict
@@ -140,6 +143,50 @@ def generate_markdown_summary(stats: Dict[str, Any], output_path: Path):
     print(f"✓ Generated {output_path}")
 
 
+def update_readme_counts(total_recs: int, num_services: int, readme_path: Path | None = None) -> bool:
+    """Update hardcoded recommendation and service counts in README.md.
+
+    Finds and replaces counts in two locations:
+    1. The ASCII banner line (e.g. "🔥 323 Recommendations • 46 Services 🔥")
+    2. The footer line (e.g. "🔥 323 recommendations • 46 services")
+
+    Args:
+        total_recs: Total number of recommendations.
+        num_services: Total number of services.
+        readme_path: Path to README.md. Defaults to project root README.md.
+
+    Returns:
+        True if any replacements were made, False otherwise.
+    """
+    if readme_path is None:
+        readme_path = Path(__file__).parent.parent / "README.md"
+
+    if not readme_path.exists():
+        print(f"Warning: README.md not found at {readme_path}")
+        return False
+
+    content = readme_path.read_text(encoding="utf-8")
+    original = content
+
+    # Pattern 1: Banner line (capitalized "Recommendations" and "Services")
+    banner_pattern = r"🔥 \d+ Recommendations • \d+ Services 🔥"
+    banner_replacement = f"🔥 {total_recs} Recommendations • {num_services} Services 🔥"
+    content = re.sub(banner_pattern, banner_replacement, content)
+
+    # Pattern 2: Footer line (lowercase "recommendations" and "services")
+    footer_pattern = r"🔥 \d+ recommendations • \d+ services"
+    footer_replacement = f"🔥 {total_recs} recommendations • {num_services} services"
+    content = re.sub(footer_pattern, footer_replacement, content)
+
+    if content != original:
+        readme_path.write_text(content, encoding="utf-8")
+        print(f"✓ Updated README.md counts: {total_recs} recommendations, {num_services} services")
+        return True
+    else:
+        print("README.md counts already up to date")
+        return False
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Generate documentation summary for AWS misconfiguration database"
@@ -177,6 +224,10 @@ def main():
     generate_markdown_summary(stats, summary_path)
 
     print(f"\nTotal: {stats['total_entries']} recommendations across {len(stats['by_service'])} services")
+
+    # Update README.md hardcoded counts
+    update_readme_counts(stats['total_entries'], len(stats['by_service']))
+
     return 0
 
 
