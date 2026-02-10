@@ -168,7 +168,7 @@
       "type": "html",
       "url": "https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html",
       "categories": ["security", "operations"],
-      "enabled": false,
+      "enabled": true,
       "fetch_config": {
         "follow_links": true,
         "link_pattern": "managed-rules",
@@ -184,7 +184,7 @@
       "type": "html",
       "url": "https://docs.aws.amazon.com/awssupport/latest/user/trusted-advisor-check-reference.html",
       "categories": ["cost", "security", "performance", "reliability", "operations"],
-      "enabled": false,
+      "enabled": true,
       "fetch_config": {
         "follow_links": true,
         "link_pattern": "trusted-advisor",
@@ -200,7 +200,7 @@
       "type": "html",
       "url": "https://docs.aws.amazon.com/controltower/latest/controlreference/controls-reference.html",
       "categories": ["security", "operations"],
-      "enabled": false,
+      "enabled": true,
       "fetch_config": {
         "follow_links": true,
         "link_pattern": "controls-reference",
@@ -216,7 +216,7 @@
       "type": "html",
       "url": "https://www.cisecurity.org/benchmark/amazon_web_services",
       "categories": ["security"],
-      "enabled": false,
+      "enabled": true,
       "fetch_config": {},
       "parse_config": {
         "title_selector": "h2, h3"
@@ -286,10 +286,10 @@
       "type": "github",
       "url": "https://github.com/bridgecrewio/checkov",
       "categories": ["security"],
-      "enabled": false,
+      "enabled": true,
       "fetch_config": {
         "branch": "main",
-        "rules_path": "checkov/arm/checks/",
+        "rules_path": "checkov/terraform/checks/resource/",
         "file_pattern": "*.py",
         "max_files": 50
       }
@@ -370,7 +370,7 @@
       "type": "github",
       "url": "https://github.com/turbot/steampipe-mod-aws-compliance",
       "categories": ["security"],
-      "enabled": false,
+      "enabled": true,
       "fetch_config": {
         "branch": "main",
         "rules_path": "controls/",
@@ -472,7 +472,7 @@
       "type": "html",
       "url": "https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/welcome.html",
       "categories": ["security"],
-      "enabled": false,
+      "enabled": true,
       "fetch_config": {
         "follow_links": true,
         "link_pattern": "security-pillar",
@@ -488,7 +488,7 @@
       "type": "html",
       "url": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html",
       "categories": ["reliability"],
-      "enabled": false,
+      "enabled": true,
       "fetch_config": {
         "follow_links": true,
         "link_pattern": "reliability-pillar",
@@ -676,6 +676,80 @@
       "fetch_config": {
         "follow_links": true,
         "link_pattern": "aws-security-services-best-practices",
+        "max_pages": 20
+      },
+      "parse_config": {
+        "title_selector": "h2, h3"
+      }
+    },
+    {
+      "id": "aws-prescriptive-guidance",
+      "name": "AWS Prescriptive Guidance",
+      "type": "html",
+      "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/",
+      "categories": ["security", "cost", "performance", "reliability", "operations"],
+      "enabled": false,
+      "fetch_config": {
+        "follow_links": true,
+        "link_pattern": "prescriptive-guidance",
+        "max_pages": 20
+      },
+      "parse_config": {
+        "title_selector": "h2, h3"
+      }
+    },
+    {
+      "id": "cfn-guard-rules",
+      "name": "CloudFormation Guard Rules",
+      "type": "github",
+      "url": "https://github.com/aws-cloudformation/cloudformation-guard",
+      "categories": ["security", "operations"],
+      "enabled": false,
+      "fetch_config": {
+        "branch": "main",
+        "rules_path": "guard-examples/",
+        "file_pattern": "*.guard",
+        "max_files": 50
+      }
+    },
+    {
+      "id": "aws-architecture-center",
+      "name": "AWS Architecture Center",
+      "type": "html",
+      "url": "https://aws.amazon.com/architecture/",
+      "categories": ["reliability", "performance", "security", "cost"],
+      "enabled": false,
+      "fetch_config": {
+        "follow_links": true,
+        "link_pattern": "architecture",
+        "max_pages": 20
+      },
+      "parse_config": {
+        "title_selector": "h2, h3"
+      }
+    },
+    {
+      "id": "cisa-kev-catalog",
+      "name": "CISA Known Exploited Vulnerabilities Catalog",
+      "type": "html",
+      "url": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+      "categories": ["security"],
+      "enabled": false,
+      "fetch_config": {},
+      "parse_config": {
+        "title_selector": "h2, h3"
+      }
+    },
+    {
+      "id": "aws-service-best-practices",
+      "name": "AWS Service-Specific Best Practices",
+      "type": "html",
+      "url": "https://docs.aws.amazon.com/",
+      "categories": ["security", "cost", "performance", "reliability", "operations"],
+      "enabled": false,
+      "fetch_config": {
+        "follow_links": true,
+        "link_pattern": "best-practices",
         "max_pages": 20
       },
       "parse_config": {
