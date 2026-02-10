@@ -19,6 +19,7 @@
     "service_name": {
       "type": "string",
       "description": "AWS service affected by this misconfiguration",
+      "pattern": "^[a-z][a-z0-9-]*$",
       "examples": ["ec2", "rds", "s3", "lambda", "iam", "vpc", "cloudfront", "elb", "alb"]
     },
     "scenario": {
@@ -205,6 +206,24 @@
     "pattern_implementation_guidance": {
       "type": "string",
       "description": "Specific guidance on implementing the architectural pattern to resolve this misconfiguration, including AWS services, configuration steps, and best practices"
+    },
+    "estimated_cost_impact": {
+      "type": "string",
+      "description": "Estimated cost impact of this misconfiguration (e.g., '$10-50/month per resource', 'up to $500/month')"
+    },
+    "compliance_frameworks": {
+      "type": "array",
+      "description": "Compliance frameworks this recommendation maps to",
+      "items": {
+        "type": "string",
+        "examples": ["CIS", "SOC2", "HIPAA", "PCI-DSS", "NIST-800-53", "ISO-27001", "GDPR", "FedRAMP"]
+      },
+      "uniqueItems": true
+    },
+    "aws_doc_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Canonical AWS documentation URL for this misconfiguration or best practice"
     }
   }
 }

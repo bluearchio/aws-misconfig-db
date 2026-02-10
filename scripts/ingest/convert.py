@@ -145,6 +145,9 @@ IMPORTANT RULES:
 5. "build_priority" should be 0 (critical), 1 (high), 2 (medium), or 3 (low)
 6. All text fields should be clear, professional, and actionable
 7. If the source material is not about an AWS misconfiguration or best practice, output {{"skip": true, "reason": "Not an AWS misconfiguration recommendation"}}
+8. If relevant, include "estimated_cost_impact" with an approximate cost range (e.g., "$10-50/month per resource")
+9. If relevant, include "compliance_frameworks" as an array of framework identifiers (e.g., ["CIS", "SOC2", "HIPAA", "PCI-DSS"])
+10. If relevant, include "aws_doc_url" with the canonical AWS documentation link
 
 Example output:
 {{
@@ -167,7 +170,10 @@ Example output:
     "contributors": ["ingest-pipeline"],
     "source": "{source_name}"
   }},
-  "tags": ["encryption", "s3", "data-protection"]
+  "tags": ["encryption", "s3", "data-protection"],
+  "estimated_cost_impact": "$0 - minimal cost for enabling encryption",
+  "compliance_frameworks": ["CIS", "SOC2", "HIPAA", "PCI-DSS", "NIST-800-53"],
+  "aws_doc_url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html"
 }}"""
 
 

@@ -83,6 +83,66 @@ def list_staged(service_filter: str | None = None) -> list[dict]:
     return staged
 
 
+def auto_promote(
+    recommendation: dict,
+    source_id: str,
+    source_url: str,
+    dedup_score: float,
+    closest_existing: str,
+    auto_promote_threshold: float = 0.30,
+) -> tuple[bool, str, Path | None]:
+    """
+    Auto-promote a high-confidence recommendation directly to the main database,
+    skipping the staging area.
+
+    Returns:
+        (was_auto_promoted, message, service_file_path_or_None)
+    """
+    if dedup_score >= auto_promote_threshold:
+        return False, "Not eligible", None
+
+    service_name = recommendation.get("service_name", "").lower()
+    if not service_name:
+        return False, "Recommendation has no service_name", None
+
+    # Find or create service file
+    service_dir = DATA_DIR / "by-service"
+    service_file = service_dir / f"{service_name}.json"
+
+    if service_file.exists():
+        with open(service_file, "r", encoding="utf-8") as f:
+            service_data = json.load(f)
+    else:
+        service_data = {
+            "service": service_name,
+            "count": 0,
+            "misconfigurations": [],
+        }
+
+    # Check for duplicate ID
+    existing_ids = {e["id"] for e in service_data["misconfigurations"]}
+    if recommendation["id"] in existing_ids:
+        return False, f"Duplicate ID: {recommendation['id']}", None
+
+    # Add recommendation
+    service_data["misconfigurations"].append(recommendation)
+    service_data["count"] = len(service_data["misconfigurations"])
+
+    # Write service file
+    with open(service_file, "w", encoding="utf-8") as f:
+        json.dump(service_data, f, indent=2, ensure_ascii=False)
+        f.write("\n")
+
+    logger.info(
+        "Auto-promoted %s to %s (dedup=%.4f, source=%s)",
+        recommendation.get("id", "unknown"),
+        service_file,
+        dedup_score,
+        source_id,
+    )
+    return True, f"Auto-promoted to {service_file.name} (dedup={dedup_score:.4f})", service_file
+
+
 def promote(rec_id: str) -> tuple[bool, str]:
     """
     Promote a staged recommendation to the main database.

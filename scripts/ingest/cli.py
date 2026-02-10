@@ -49,8 +49,19 @@ def cmd_fetch(args):
         model=args.model,
         verbose=args.verbose,
         progress=progress,
+        auto_promote=args.auto_promote,
+        auto_promote_threshold=args.auto_promote_threshold,
     )
     metrics = orchestrator.run()
+
+    # Show auto-promoted summary if any
+    auto_promoted = metrics.get("items_auto_promoted", 0)
+    if auto_promoted > 0:
+        console = _console()
+        if console:
+            console.print(f"\n  [bold green]{auto_promoted}[/bold green] item(s) auto-promoted to the main database")
+        else:
+            print(f"\n  {auto_promoted} item(s) auto-promoted to the main database")
 
     # Show staged items table if any were staged
     if metrics.get("items_staged", 0) > 0:
@@ -327,6 +338,8 @@ def main():
     fetch_parser.add_argument("--max-items", type=int, help="Max items per source")
     fetch_parser.add_argument("--similarity-threshold", type=float, default=0.70, help="Dedup threshold (default: 0.70)")
     fetch_parser.add_argument("--model", default="claude-sonnet-4-20250514", help="Claude model for conversion")
+    fetch_parser.add_argument("--auto-promote", action="store_true", help="Auto-promote high-confidence recommendations (dedup < 0.30)")
+    fetch_parser.add_argument("--auto-promote-threshold", type=float, default=0.30, help="Auto-promote threshold (default: 0.30)")
     fetch_parser.add_argument("--verbose", action="store_true", help="Verbose output")
     fetch_parser.set_defaults(func=cmd_fetch)
 
