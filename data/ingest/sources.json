@@ -48,9 +48,9 @@
     },
     {
       "id": "aws-cost-management-blog",
-      "name": "AWS Cost Management Blog",
+      "name": "AWS Cloud Financial Management Blog",
       "type": "rss",
-      "url": "https://aws.amazon.com/blogs/aws-cost-management/feed/",
+      "url": "https://aws.amazon.com/blogs/aws-cloud-financial-management/feed/",
       "categories": ["cost"],
       "enabled": true,
       "fetch_config": {
@@ -274,7 +274,7 @@
       "categories": ["security"],
       "enabled": true,
       "fetch_config": {
-        "branch": "main",
+        "branch": "master",
         "rules_path": "prowler/providers/aws/services/",
         "file_pattern": "*.py",
         "max_files": 50
