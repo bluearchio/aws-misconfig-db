@@ -24,7 +24,7 @@
 ║     ██████╔╝██║  ██║   ██║   ██║  ██║██████╔╝██║  ██║███████║███████╗     ║
 ║     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝     ║
 ║                                                                           ║
-║                 🔥 313 Recommendations • 41 Services 🔥                   ║
+║                 🔥 323 Recommendations • 46 Services 🔥                   ║
 ║                                                                           ║
 ╚═══════════════════════════════════════════════════════════════════════════╝
 ```
@@ -473,7 +473,7 @@ Each recommendation contains:
 ```
 aws-misconfig-db/
 ├── data/
-│   ├── by-service/            # Source of truth (41+ JSON files)
+│   ├── by-service/            # Source of truth (46 JSON files)
 │   │   ├── ec2.json           # 49 recommendations
 │   │   ├── s3.json            # 24 recommendations
 │   │   ├── lambda.json        # 21 recommendations
@@ -566,6 +566,6 @@ MIT License - see [LICENSE](LICENSE)
 
 <div align="center">
 
-**🔥 313 recommendations • 41 services • Query with SQL • Integrate anywhere 🔥**
+**🔥 323 recommendations • 46 services • Query with SQL • Integrate anywhere 🔥**
 
 </div>
