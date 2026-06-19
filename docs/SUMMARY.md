@@ -1,7 +1,7 @@
 # AWS Misconfiguration Database - Summary
 
-**Total Recommendations:** 323
-**Last Updated:** 2026-02-10 21:48:56 UTC
+**Total Recommendations:** 621
+**Last Updated:** 2026-06-19 03:11:20 UTC
 
 ## Overview
 
@@ -16,16 +16,18 @@ performance, reliability, and operational best practices.
 
 | Risk Type | Count |
 | --------- | ----- |
-| operations | 213 |
-| cost | 81 |
-| performance | 34 |
-| security | 29 |
-| reliability | 14 |
+| operations | 281 |
+| cost | 121 |
+| security | 92 |
+| reliability | 80 |
+| performance | 66 |
+| sustainability | 29 |
 
 ### By Service
 
 | Service | Count |
 | ------- | ----- |
+| well-architected | 298 |
 | ec2 | 49 |
 | general | 32 |
 | s3 | 24 |
@@ -77,11 +79,14 @@ performance, reliability, and operational best practices.
 
 | Category | Count |
 | -------- | ----- |
-| cost | 17 |
-| security | 11 |
+| security | 74 |
+| operations | 74 |
+| reliability | 66 |
+| cost | 57 |
+| performance | 32 |
+| sustainability | 29 |
 | database | 10 |
 | networking | 9 |
-| operations | 6 |
 | ai | 5 |
 | storage | 5 |
 | management | 4 |
@@ -94,8 +99,8 @@ performance, reliability, and operational best practices.
 | -------- | ----- |
 | 0 | 63 |
 | 1 | 54 |
-| 2 | 19 |
-| 3 | 4 |
+| 2 | 203 |
+| 3 | 118 |
 
 ## Usage
 

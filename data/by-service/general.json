@@ -621,17 +621,38 @@
       ],
       "metadata": {
         "created_at": "2025-11-06T05:13:46.581727+00:00",
-        "updated_at": "2025-11-06T05:13:46.581727+00:00",
+        "updated_at": "2026-06-18T00:00:00Z",
         "contributors": [
           "aws-well-architected-2025"
         ],
-        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025",
+        "well_architected_metadata_source": "AWS Well-Architected Framework 2026",
+        "detection_status": "planned_resource_metadata",
+        "detector_status": "planned",
+        "support_reason": "Can be evaluated from collected AWS resource, account, configuration, or utilization metadata once a detector is implemented.",
+        "roadmap_phase": "detector-candidate"
       },
       "tags": [
         "tagging",
         "cost-allocation",
         "chargeback",
-        "governance"
+        "governance",
+        "well-architected",
+        "cost03-bp02",
+        "cost_optimization",
+        "planned"
+      ],
+      "pillars": [
+        "cost_optimization"
+      ],
+      "external_refs": {
+        "well_architected": [
+          "COST03-BP02"
+        ]
+      },
+      "compliance_mappings": [
+        "AWS Well-Architected Framework",
+        "COST03-BP02"
       ]
     },
     {
@@ -687,16 +708,37 @@
       ],
       "metadata": {
         "created_at": "2025-11-06T05:13:46.581727+00:00",
-        "updated_at": "2025-11-06T05:13:46.581727+00:00",
+        "updated_at": "2026-06-18T00:00:00Z",
         "contributors": [
           "aws-well-architected-2025"
         ],
-        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025",
+        "well_architected_metadata_source": "AWS Well-Architected Framework 2026",
+        "detection_status": "planned_resource_metadata",
+        "detector_status": "planned",
+        "support_reason": "Can be evaluated from collected AWS resource, account, configuration, or utilization metadata once a detector is implemented.",
+        "roadmap_phase": "detector-candidate"
       },
       "tags": [
         "decommissioning",
         "resource-cleanup",
-        "lifecycle-management"
+        "lifecycle-management",
+        "well-architected",
+        "cost04-bp02",
+        "cost_optimization",
+        "planned"
+      ],
+      "pillars": [
+        "cost_optimization"
+      ],
+      "external_refs": {
+        "well_architected": [
+          "COST04-BP02"
+        ]
+      },
+      "compliance_mappings": [
+        "AWS Well-Architected Framework",
+        "COST04-BP02"
       ]
     },
     {
@@ -720,17 +762,38 @@
       ],
       "metadata": {
         "created_at": "2025-11-06T05:13:46.581727+00:00",
-        "updated_at": "2025-11-06T05:13:46.581727+00:00",
+        "updated_at": "2026-06-18T00:00:00Z",
         "contributors": [
           "aws-well-architected-2025"
         ],
-        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025",
+        "well_architected_metadata_source": "AWS Well-Architected Framework 2026",
+        "detection_status": "planned_resource_metadata",
+        "detector_status": "planned",
+        "support_reason": "Can be evaluated from collected AWS resource, account, configuration, or utilization metadata once a detector is implemented.",
+        "roadmap_phase": "detector-candidate"
       },
       "tags": [
         "aws-budgets",
         "cost-controls",
         "spending-alerts",
-        "governance"
+        "governance",
+        "well-architected",
+        "cost02-bp05",
+        "cost_optimization",
+        "planned"
+      ],
+      "pillars": [
+        "cost_optimization"
+      ],
+      "external_refs": {
+        "well_architected": [
+          "COST02-BP05"
+        ]
+      },
+      "compliance_mappings": [
+        "AWS Well-Architected Framework",
+        "COST02-BP05"
       ]
     },
     {
@@ -754,17 +817,38 @@
       ],
       "metadata": {
         "created_at": "2025-11-06T17:41:02.278720+00:00",
-        "updated_at": "2025-11-06T17:41:02.278720+00:00",
+        "updated_at": "2026-06-18T00:00:00Z",
         "contributors": [
           "aws-well-architected-2025"
         ],
-        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025",
+        "well_architected_metadata_source": "AWS Well-Architected Framework 2026",
+        "detection_status": "unsupported_manual",
+        "detector_status": "manual_review",
+        "support_reason": "Requires workload design, organizational process, business context, or evidence that cannot be proven from collected AWS resource metadata.",
+        "roadmap_phase": "manual-review-only"
       },
       "tags": [
         "finops",
         "cloud-financial-management",
         "cost-optimization-function",
-        "governance"
+        "governance",
+        "well-architected",
+        "cost01-bp01",
+        "cost_optimization",
+        "manual_review"
+      ],
+      "pillars": [
+        "cost_optimization"
+      ],
+      "external_refs": {
+        "well_architected": [
+          "COST01-BP01"
+        ]
+      },
+      "compliance_mappings": [
+        "AWS Well-Architected Framework",
+        "COST01-BP01"
       ]
     },
     {
@@ -789,17 +873,38 @@
       ],
       "metadata": {
         "created_at": "2025-11-06T17:41:02.278720+00:00",
-        "updated_at": "2025-11-06T17:41:02.278720+00:00",
+        "updated_at": "2026-06-18T00:00:00Z",
         "contributors": [
           "aws-well-architected-2025"
         ],
-        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025",
+        "well_architected_metadata_source": "AWS Well-Architected Framework 2026",
+        "detection_status": "planned_resource_metadata",
+        "detector_status": "planned",
+        "support_reason": "Can be evaluated from collected AWS resource, account, configuration, or utilization metadata once a detector is implemented.",
+        "roadmap_phase": "detector-candidate"
       },
       "tags": [
         "managed-services",
         "total-cost-ownership",
         "operational-efficiency",
-        "modernization"
+        "modernization",
+        "well-architected",
+        "cost05-bp05",
+        "cost_optimization",
+        "planned"
+      ],
+      "pillars": [
+        "cost_optimization"
+      ],
+      "external_refs": {
+        "well_architected": [
+          "COST05-BP05"
+        ]
+      },
+      "compliance_mappings": [
+        "AWS Well-Architected Framework",
+        "COST05-BP05"
       ]
     },
     {
@@ -823,17 +928,38 @@
       ],
       "metadata": {
         "created_at": "2025-11-06T17:41:02.278720+00:00",
-        "updated_at": "2025-11-06T17:41:02.278720+00:00",
+        "updated_at": "2026-06-18T00:00:00Z",
         "contributors": [
           "aws-well-architected-2025"
         ],
-        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025",
+        "well_architected_metadata_source": "AWS Well-Architected Framework 2026",
+        "detection_status": "planned_resource_metadata",
+        "detector_status": "planned",
+        "support_reason": "Can be evaluated from collected AWS resource, account, configuration, or utilization metadata once a detector is implemented.",
+        "roadmap_phase": "detector-candidate"
       },
       "tags": [
         "cost-modeling",
         "pricing-calculator",
         "budget-planning",
-        "architecture-decisions"
+        "architecture-decisions",
+        "well-architected",
+        "cost06-bp01",
+        "cost_optimization",
+        "planned"
+      ],
+      "pillars": [
+        "cost_optimization"
+      ],
+      "external_refs": {
+        "well_architected": [
+          "COST06-BP01"
+        ]
+      },
+      "compliance_mappings": [
+        "AWS Well-Architected Framework",
+        "COST06-BP01"
       ]
     },
     {
@@ -857,17 +983,38 @@
       ],
       "metadata": {
         "created_at": "2025-11-06T17:41:02.278720+00:00",
-        "updated_at": "2025-11-06T17:41:02.278720+00:00",
+        "updated_at": "2026-06-18T00:00:00Z",
         "contributors": [
           "aws-well-architected-2025"
         ],
-        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025",
+        "well_architected_metadata_source": "AWS Well-Architected Framework 2026",
+        "detection_status": "unsupported_manual",
+        "detector_status": "manual_review",
+        "support_reason": "Requires workload design, organizational process, business context, or evidence that cannot be proven from collected AWS resource metadata.",
+        "roadmap_phase": "manual-review-only"
       },
       "tags": [
         "cost-culture",
         "engineering-culture",
         "cost-awareness",
-        "organizational-change"
+        "organizational-change",
+        "well-architected",
+        "cost01-bp08",
+        "cost_optimization",
+        "manual_review"
+      ],
+      "pillars": [
+        "cost_optimization"
+      ],
+      "external_refs": {
+        "well_architected": [
+          "COST01-BP08"
+        ]
+      },
+      "compliance_mappings": [
+        "AWS Well-Architected Framework",
+        "COST01-BP08"
       ]
     },
     {
@@ -891,17 +1038,38 @@
       ],
       "metadata": {
         "created_at": "2025-11-06T17:41:02.278720+00:00",
-        "updated_at": "2025-11-06T17:41:02.278720+00:00",
+        "updated_at": "2026-06-18T00:00:00Z",
         "contributors": [
           "aws-well-architected-2025"
         ],
-        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025",
+        "well_architected_metadata_source": "AWS Well-Architected Framework 2026",
+        "detection_status": "planned_resource_metadata",
+        "detector_status": "planned",
+        "support_reason": "Can be evaluated from collected AWS resource, account, configuration, or utilization metadata once a detector is implemented.",
+        "roadmap_phase": "detector-candidate"
       },
       "tags": [
         "shared-resources",
         "resource-sharing",
         "centralization",
-        "infrastructure-consolidation"
+        "infrastructure-consolidation",
+        "well-architected",
+        "cost06-bp04",
+        "cost_optimization",
+        "planned"
+      ],
+      "pillars": [
+        "cost_optimization"
+      ],
+      "external_refs": {
+        "well_architected": [
+          "COST06-BP04"
+        ]
+      },
+      "compliance_mappings": [
+        "AWS Well-Architected Framework",
+        "COST06-BP04"
       ]
     }
   ]
