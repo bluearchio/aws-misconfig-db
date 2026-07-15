@@ -1,7 +1,7 @@
 # AWS Misconfiguration Database - Summary
 
-**Total Recommendations:** 621
-**Last Updated:** 2026-06-19 03:11:20 UTC
+**Total Recommendations:** 631
+**Last Updated:** 2026-07-15 02:35:19 UTC
 
 ## Overview
 
@@ -16,9 +16,9 @@ performance, reliability, and operational best practices.
 
 | Risk Type | Count |
 | --------- | ----- |
-| operations | 281 |
+| operations | 284 |
 | cost | 121 |
-| security | 92 |
+| security | 101 |
 | reliability | 80 |
 | performance | 66 |
 | sustainability | 29 |
@@ -44,6 +44,7 @@ performance, reliability, and operational best practices.
 | kinesis | 7 |
 | ecs | 6 |
 | nat-gateway | 6 |
+| api-gateway | 5 |
 | aws-config | 5 |
 | bedrock | 5 |
 | cloudtrail | 5 |
@@ -52,25 +53,24 @@ performance, reliability, and operational best practices.
 | cloudwatch | 3 |
 | inspector | 3 |
 | redshift | 3 |
+| sns | 3 |
+| sqs | 3 |
 | eks | 2 |
 | elastic beanstalk | 2 |
 | elasticache | 2 |
+| kms | 2 |
+| secrets-manager | 2 |
 | account | 1 |
-| api-gateway | 1 |
 | config | 1 |
 | elasticsearch | 1 |
 | emr | 1 |
 | guardduty | 1 |
-| kms | 1 |
 | network-firewall | 1 |
 | organizations | 1 |
 | s3, rds, redshift, etc. | 1 |
-| secrets-manager | 1 |
 | security-hub | 1 |
 | shield | 1 |
 | snow | 1 |
-| sns | 1 |
-| sqs | 1 |
 | systems-manager | 1 |
 | vpc | 1 |
 | waf | 1 |
@@ -79,8 +79,8 @@ performance, reliability, and operational best practices.
 
 | Category | Count |
 | -------- | ----- |
-| security | 74 |
-| operations | 74 |
+| security | 81 |
+| operations | 77 |
 | reliability | 66 |
 | cost | 57 |
 | performance | 32 |
@@ -97,7 +97,7 @@ performance, reliability, and operational best practices.
 
 | Priority | Count |
 | -------- | ----- |
-| 0 | 63 |
+| 0 | 73 |
 | 1 | 54 |
 | 2 | 203 |
 | 3 | 118 |

@@ -1,6 +1,6 @@
 {
   "service": "kms",
-  "count": 1,
+  "count": 2,
   "misconfigurations": [
     {
       "id": "fbff91c8-6bb2-4ed7-81e6-69463756e497",
@@ -28,6 +28,40 @@
         "source": "Initial CSV Import"
       },
       "tags": []
+    },
+    {
+      "id": "e2a5568c-90b0-4153-877d-246efb62ffad",
+      "service_name": "kms",
+      "scenario": "Customer-managed symmetric KMS key has automatic key-material rotation disabled",
+      "alert_criteria": "A customer-managed symmetric encryption KMS key with AWS_KMS origin is enabled and GetKeyRotationStatus reports KeyRotationEnabled=false",
+      "recommendation_action": "Enable automatic key rotation after confirming application compatibility and the organization's rotation period",
+      "risk_detail": "security",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 3,
+      "recommendation_description_detailed": "Automatic rotation limits the lifetime of cryptographic key material while preserving the KMS key identifier used by applications. Evaluate only eligible customer-managed symmetric encryption keys; AWS-managed, asymmetric, HMAC, imported-material, custom-key-store, and pending-deletion keys require different lifecycle controls.",
+      "category": "security",
+      "output_notes": "Report the key ARN, manager, origin, state, and rotation status only. Never return key policy documents or cryptographic material.",
+      "notes": "AWS-managed keys rotate automatically and are not findings for this rule.",
+      "references": [
+        "https://docs.aws.amazon.com/kms/latest/APIReference/API_GetKeyRotationStatus.html",
+        "https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html"
+      ],
+      "metadata": {
+        "created_at": "2026-07-15T02:15:00Z",
+        "updated_at": "2026-07-15T02:15:00Z",
+        "contributors": [
+          "bluearch-steward-v0.5"
+        ],
+        "source": "BlueArch AWS Steward native detector specification"
+      },
+      "tags": [
+        "kms",
+        "encryption",
+        "rotation",
+        "key-management"
+      ]
     }
   ]
 }
