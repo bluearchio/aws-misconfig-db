@@ -158,17 +158,38 @@
       ],
       "metadata": {
         "created_at": "2025-11-06T05:13:46.581727+00:00",
-        "updated_at": "2025-11-06T05:13:46.581727+00:00",
+        "updated_at": "2026-06-18T00:00:00Z",
         "contributors": [
           "aws-well-architected-2025"
         ],
-        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025"
+        "source": "AWS Well-Architected Framework Cost Optimization Pillar 2025",
+        "well_architected_metadata_source": "AWS Well-Architected Framework 2026",
+        "detection_status": "planned_resource_metadata",
+        "detector_status": "planned",
+        "support_reason": "Can be evaluated from collected AWS resource, account, configuration, or utilization metadata once a detector is implemented.",
+        "roadmap_phase": "detector-candidate"
       },
       "tags": [
         "ebs-snapshots",
         "orphaned-resources",
         "data-lifecycle-manager",
-        "ami-cleanup"
+        "ami-cleanup",
+        "well-architected",
+        "cost04-bp05",
+        "cost_optimization",
+        "planned"
+      ],
+      "pillars": [
+        "cost_optimization"
+      ],
+      "external_refs": {
+        "well_architected": [
+          "COST04-BP05"
+        ]
+      },
+      "compliance_mappings": [
+        "AWS Well-Architected Framework",
+        "COST04-BP05"
       ]
     },
     {

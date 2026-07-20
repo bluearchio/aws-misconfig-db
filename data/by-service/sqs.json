@@ -1,6 +1,6 @@
 {
   "service": "sqs",
-  "count": 1,
+  "count": 3,
   "misconfigurations": [
     {
       "id": "293ff9bc-a6b4-46ac-a524-c967b965101d",
@@ -28,6 +28,74 @@
         "source": "Initial CSV Import"
       },
       "tags": []
+    },
+    {
+      "id": "6c5fa948-aff9-4c05-ac0b-a1e3f532bcc4",
+      "service_name": "sqs",
+      "scenario": "SQS queue does not use server-side encryption",
+      "alert_criteria": "GetQueueAttributes reports neither KmsMasterKeyId nor SqsManagedSseEnabled=true",
+      "recommendation_action": "Enable SSE-SQS or configure a reviewed KMS key, then verify producers, consumers, and dead-letter queues",
+      "risk_detail": "security",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 3,
+      "recommendation_description_detailed": "Server-side encryption protects SQS message bodies at rest. New queues commonly use SSE-SQS by default, but older or explicitly disabled queues can remain unencrypted. Both SQS-owned and KMS-backed encryption satisfy this control.",
+      "category": "security",
+      "output_notes": "Return queue ARN and encryption attribute state only; never inspect message bodies.",
+      "notes": "Do not require a customer-managed KMS key when SSE-SQS is enabled.",
+      "references": [
+        "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_GetQueueAttributes.html",
+        "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html"
+      ],
+      "metadata": {
+        "created_at": "2026-07-15T02:15:00Z",
+        "updated_at": "2026-07-15T02:15:00Z",
+        "contributors": [
+          "bluearch-steward-v0.5"
+        ],
+        "source": "BlueArch AWS Steward native detector specification"
+      },
+      "tags": [
+        "sqs",
+        "encryption",
+        "kms",
+        "messaging"
+      ]
+    },
+    {
+      "id": "4f58c3ff-168e-4b6f-a628-ba279a021fe9",
+      "service_name": "sqs",
+      "scenario": "SQS queue policy grants public access without a restricting condition",
+      "alert_criteria": "An Allow statement grants Principal=* or AWS=* a send, receive, permission-management, or wildcard SQS action without a condition that restricts the caller, source account, source owner, organization, or source ARN",
+      "recommendation_action": "Replace the public statement with explicitly reviewed principals and source conditions",
+      "risk_detail": "security",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 3,
+      "recommendation_description_detailed": "Unconditioned public queue policies can permit unauthorized message injection, consumption, or queue administration. Service integrations may use wildcard principals safely only when source account, organization, or source ARN conditions constrain access.",
+      "category": "security",
+      "output_notes": "Return statement identifiers and matched action classes only. Do not return complete policy documents or messages.",
+      "notes": "Condition-aware policy evaluation is required for AWS service integrations.",
+      "references": [
+        "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_GetQueueAttributes.html",
+        "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-best-practices.html"
+      ],
+      "metadata": {
+        "created_at": "2026-07-15T02:15:00Z",
+        "updated_at": "2026-07-15T02:15:00Z",
+        "contributors": [
+          "bluearch-steward-v0.5"
+        ],
+        "source": "BlueArch AWS Steward native detector specification"
+      },
+      "tags": [
+        "sqs",
+        "public-access",
+        "resource-policy",
+        "messaging"
+      ]
     }
   ]
 }
