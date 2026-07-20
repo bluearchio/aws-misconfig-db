@@ -5,9 +5,9 @@
     {
       "id": "5fc3d4a9-96ef-4bba-82e9-bccabe531b34",
       "service_name": "eks",
-      "scenario": "pods OR nodes within cluster are not appropriately sized (artur to clarify)",
-      "alert_criteria": "workloads (cpu, memory, network IOPs, etc.) for the previous 14, 30, 90 days, multiplied by 1.4 are too large...",
-      "recommendation_action": "recommend the proper size for each pod",
+      "scenario": "EKS pods or worker nodes are overprovisioned for observed workload demand",
+      "alert_criteria": "CPU, memory, and network utilization over reviewed 14-, 30-, and 90-day windows, including a 40% safety margin, remains below requested pod resources or worker-node capacity.",
+      "recommendation_action": "Right-size pod requests, limits, and worker-node capacity after reviewing workload seasonality, autoscaling behavior, disruption budgets, and peak demand.",
       "risk_detail": "cost, performance",
       "build_priority": null,
       "action_value": 3,

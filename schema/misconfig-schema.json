@@ -36,8 +36,8 @@
     },
     "risk_detail": {
       "type": "string",
-      "description": "Type of risk associated with this misconfiguration. Can be a single value or comma-separated list of: cost, security, operations, performance, reliability",
-      "pattern": "^(cost|security|operations|performance|reliability)(,\\s*(cost|security|operations|performance|reliability))*$"
+      "description": "Type of risk associated with this misconfiguration. Can be a single value or comma-separated list of: cost, security, operations, performance, reliability, sustainability",
+      "pattern": "^(cost|security|operations|performance|reliability|sustainability)(,\\s*(cost|security|operations|performance|reliability|sustainability))*$"
     },
     "build_priority": {
       "type": "integer",
@@ -65,6 +65,96 @@
     "recommendation_description_detailed": {
       "type": "string",
       "description": "Detailed explanation of the recommendation and its benefits"
+    },
+    "behavior_title": {
+      "type": "string",
+      "description": "Optional display title for the behavior represented by this catalog row"
+    },
+    "finding_title": {
+      "type": "string",
+      "description": "Optional display title for findings generated from this catalog row"
+    },
+    "countermeasure_title": {
+      "type": "string",
+      "description": "Optional display title for the countermeasure represented by this catalog row"
+    },
+    "pillars": {
+      "type": "array",
+      "description": "AWS Well-Architected pillars this catalog row maps to",
+      "items": {
+        "type": "string",
+        "enum": [
+          "operational_excellence",
+          "security",
+          "reliability",
+          "performance_efficiency",
+          "cost_optimization",
+          "sustainability"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "external_refs": {
+      "type": "object",
+      "description": "External framework references mapped to this catalog row",
+      "properties": {
+        "well_architected": {
+          "description": "AWS Well-Architected best practice IDs",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "attack_technique": {
+          "description": "MITRE ATT&CK technique IDs",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "d3fend": {
+          "description": "MITRE D3FEND technique IDs",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "cis_aws": {
+          "description": "CIS AWS Benchmark control IDs",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "config_rule": {
+          "description": "AWS Config managed or custom rule IDs",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "prowler_check": {
+          "description": "Prowler check IDs",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "trusted_advisor": {
+          "description": "AWS Trusted Advisor check IDs",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "cwe": {
+          "description": "CWE IDs",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        }
+      }
     },
     "category": {
       "type": "string",

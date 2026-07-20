@@ -1,6 +1,6 @@
 {
   "service": "api-gateway",
-  "count": 1,
+  "count": 5,
   "misconfigurations": [
     {
       "id": "c54ea650-2481-4d0d-a61c-9f08443c7cd1",
@@ -28,6 +28,142 @@
         "source": "Initial CSV Import"
       },
       "tags": []
+    },
+    {
+      "id": "dca2e61d-15af-4931-a043-ff3b984a8e08",
+      "service_name": "api-gateway",
+      "scenario": "Deployed API Gateway REST API stage does not publish access logs",
+      "alert_criteria": "A deployed REST API stage omits accessLogSettings, destinationArn, or format",
+      "recommendation_action": "Configure structured access logging to an existing reviewed CloudWatch Logs group and include request identifiers",
+      "risk_detail": "security, operations",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 3,
+      "recommendation_description_detailed": "Access logs provide caller, request, route, response, and latency evidence needed for incident response and operations. Configure a reviewed destination and format without logging authorization headers, secrets, or request bodies.",
+      "category": "operations",
+      "output_notes": "Return API and stage identifiers plus the presence of destination and format. Do not return log contents.",
+      "notes": "Access logging and execution logging are independent controls.",
+      "references": [
+        "https://docs.aws.amazon.com/apigateway/latest/api/API_GetStages.html",
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-logging.html"
+      ],
+      "metadata": {
+        "created_at": "2026-07-15T02:15:00Z",
+        "updated_at": "2026-07-15T02:15:00Z",
+        "contributors": [
+          "bluearch-steward-v0.5"
+        ],
+        "source": "BlueArch AWS Steward native detector specification"
+      },
+      "tags": [
+        "api-gateway",
+        "access-logging",
+        "cloudwatch",
+        "operations"
+      ]
+    },
+    {
+      "id": "bcf46b63-7bdb-4bcc-897a-70dde0abc60b",
+      "service_name": "api-gateway",
+      "scenario": "Deployed API Gateway REST API stage has execution logging disabled",
+      "alert_criteria": "A deployed REST API stage has no method setting with loggingLevel=ERROR or INFO for each deployed method",
+      "recommendation_action": "Enable ERROR or INFO execution logging after configuring the regional API Gateway CloudWatch role",
+      "risk_detail": "security, operations",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 1,
+      "risk_value": 3,
+      "recommendation_description_detailed": "Execution logging records API execution errors and traces that support troubleshooting and incident response. ERROR is the minimum safe level; data tracing remains separate and should stay disabled in production unless explicitly required because it can expose sensitive payloads.",
+      "category": "operations",
+      "output_notes": "Return API, stage, and affected method paths with logging level only. Never recommend dataTraceEnabled by default.",
+      "notes": "Treat wildcard method settings as covering matching deployed methods.",
+      "references": [
+        "https://docs.aws.amazon.com/apigateway/latest/api/API_GetStages.html",
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-logging.html"
+      ],
+      "metadata": {
+        "created_at": "2026-07-15T02:15:00Z",
+        "updated_at": "2026-07-15T02:15:00Z",
+        "contributors": [
+          "bluearch-steward-v0.5"
+        ],
+        "source": "BlueArch AWS Steward native detector specification"
+      },
+      "tags": [
+        "api-gateway",
+        "execution-logging",
+        "cloudwatch",
+        "operations"
+      ]
+    },
+    {
+      "id": "6ee0ddf4-c23a-443d-8e42-c1fa8dfde10a",
+      "service_name": "api-gateway",
+      "scenario": "Deployed API Gateway REST API stage has AWS X-Ray tracing disabled",
+      "alert_criteria": "A deployed REST API stage reports tracingEnabled=false",
+      "recommendation_action": "Enable active X-Ray tracing after reviewing trace sampling, downstream instrumentation, privacy, and cost",
+      "risk_detail": "operations",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 2,
+      "recommendation_description_detailed": "X-Ray traces requests through API Gateway and downstream services, improving root-cause analysis and service-map visibility. Review sampling, data handling, and cost before enabling it in high-volume environments.",
+      "category": "operations",
+      "output_notes": "Return API and stage identifiers plus the tracing flag only.",
+      "notes": "This is an observability recommendation and should remain low severity unless workload policy requires tracing.",
+      "references": [
+        "https://docs.aws.amazon.com/apigateway/latest/api/API_GetStages.html",
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-xray.html"
+      ],
+      "metadata": {
+        "created_at": "2026-07-15T02:15:00Z",
+        "updated_at": "2026-07-15T02:15:00Z",
+        "contributors": [
+          "bluearch-steward-v0.5"
+        ],
+        "source": "BlueArch AWS Steward native detector specification"
+      },
+      "tags": [
+        "api-gateway",
+        "xray",
+        "tracing",
+        "operations"
+      ]
+    },
+    {
+      "id": "90de045c-f234-4b34-ab13-6e660ba2ab5a",
+      "service_name": "api-gateway",
+      "scenario": "API Gateway REST method allows unauthenticated access",
+      "alert_criteria": "A deployed non-OPTIONS REST API method reports authorizationType=NONE and is not explicitly exempted",
+      "recommendation_action": "Confirm whether the method is intentionally public, then configure IAM, Cognito, or a reviewed Lambda authorizer where authentication is required",
+      "risk_detail": "security",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 3,
+      "recommendation_description_detailed": "Methods with authorizationType NONE can be invoked without API Gateway authentication. Public endpoints may be intentional, so the finding must show the exact API, resource path, and method and support explicit resource-tag exemptions before recommending an authorization change.",
+      "category": "security",
+      "output_notes": "Return API, resource path, HTTP method, and authorization type only. Never return integration credentials or request templates.",
+      "notes": "OPTIONS methods are excluded because they commonly support CORS preflight.",
+      "references": [
+        "https://docs.aws.amazon.com/apigateway/latest/api/API_GetMethod.html",
+        "https://docs.aws.amazon.com/apigateway/latest/developerguide/permissions.html"
+      ],
+      "metadata": {
+        "created_at": "2026-07-15T02:15:00Z",
+        "updated_at": "2026-07-15T02:15:00Z",
+        "contributors": [
+          "bluearch-steward-v0.5"
+        ],
+        "source": "BlueArch AWS Steward native detector specification"
+      },
+      "tags": [
+        "api-gateway",
+        "authorization",
+        "public-access",
+        "security"
+      ]
     }
   ]
 }

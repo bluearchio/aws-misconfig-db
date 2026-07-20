@@ -1,6 +1,6 @@
 {
   "service": "sns",
-  "count": 1,
+  "count": 3,
   "misconfigurations": [
     {
       "id": "55db77af-694b-428d-8337-fa10d770e17f",
@@ -28,6 +28,74 @@
         "source": "Initial CSV Import"
       },
       "tags": []
+    },
+    {
+      "id": "e3b3d09c-82b1-48b3-ad01-6205fd754e00",
+      "service_name": "sns",
+      "scenario": "SNS topic does not use server-side encryption",
+      "alert_criteria": "GetTopicAttributes omits KmsMasterKeyId for an active SNS topic",
+      "recommendation_action": "Enable SNS server-side encryption with the AWS-managed SNS key or a reviewed customer-managed KMS key",
+      "risk_detail": "security",
+      "build_priority": 0,
+      "action_value": 2,
+      "effort_level": 1,
+      "risk_value": 3,
+      "recommendation_description_detailed": "SNS server-side encryption protects message bodies at rest. Select an AWS-managed or customer-managed KMS key that allows the required publishers and consumers, then verify delivery integrations after enabling encryption.",
+      "category": "security",
+      "output_notes": "Return topic ARN and encryption-key identifier state only.",
+      "notes": "KMS permissions for AWS services publishing to the topic must be reviewed before remediation.",
+      "references": [
+        "https://docs.aws.amazon.com/sns/latest/api/API_GetTopicAttributes.html",
+        "https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html"
+      ],
+      "metadata": {
+        "created_at": "2026-07-15T02:15:00Z",
+        "updated_at": "2026-07-15T02:15:00Z",
+        "contributors": [
+          "bluearch-steward-v0.5"
+        ],
+        "source": "BlueArch AWS Steward native detector specification"
+      },
+      "tags": [
+        "sns",
+        "encryption",
+        "kms",
+        "messaging"
+      ]
+    },
+    {
+      "id": "f90db437-325b-489b-9f05-6e813cb3524c",
+      "service_name": "sns",
+      "scenario": "SNS topic policy grants public access without a restricting condition",
+      "alert_criteria": "An Allow statement grants Principal=* or AWS=* a publish, subscribe, permission-management, or wildcard SNS action without a condition that restricts the caller, source account, source owner, organization, or source ARN",
+      "recommendation_action": "Replace the public statement with explicitly reviewed principals and source conditions",
+      "risk_detail": "security",
+      "build_priority": 0,
+      "action_value": 3,
+      "effort_level": 2,
+      "risk_value": 3,
+      "recommendation_description_detailed": "Unconditioned public topic policies can permit unauthorized publishing, subscription changes, or topic administration. Default SNS policies commonly use a wildcard principal together with an owner condition; those constrained statements must not be reported as public.",
+      "category": "security",
+      "output_notes": "Return statement identifiers and matched action classes only. Do not return complete policy documents.",
+      "notes": "Condition-aware policy evaluation is required to avoid flagging the SNS default owner-restricted policy.",
+      "references": [
+        "https://docs.aws.amazon.com/sns/latest/api/API_GetTopicAttributes.html",
+        "https://docs.aws.amazon.com/sns/latest/dg/sns-access-policy-use-cases.html"
+      ],
+      "metadata": {
+        "created_at": "2026-07-15T02:15:00Z",
+        "updated_at": "2026-07-15T02:15:00Z",
+        "contributors": [
+          "bluearch-steward-v0.5"
+        ],
+        "source": "BlueArch AWS Steward native detector specification"
+      },
+      "tags": [
+        "sns",
+        "public-access",
+        "resource-policy",
+        "messaging"
+      ]
     }
   ]
 }

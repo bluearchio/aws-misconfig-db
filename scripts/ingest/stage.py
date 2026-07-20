@@ -6,6 +6,7 @@ import json
 import logging
 import os
 import sys
+import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -21,6 +22,32 @@ if str(_project_root) not in sys.path:
 
 def _now_iso() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def _sync_website_governance() -> None:
+    """Best-effort sync for the sibling bluearch-website repo, when present."""
+    script = _project_root / "scripts" / "sync_website_governance.py"
+    output = (
+        _project_root.parent
+        / "bluearch-website"
+        / "frontend"
+        / "app"
+        / "src"
+        / "data"
+        / "governanceCatalog.json"
+    )
+    if not script.exists() or not output.parent.exists():
+        return
+    try:
+        subprocess.run(
+            [sys.executable, str(script), "--output", str(output)],
+            check=True,
+            cwd=str(_project_root),
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+    except Exception as exc:
+        logger.warning("Failed to sync website Governance Hub catalog: %s", exc)
 
 
 def stage_recommendation(
@@ -140,6 +167,7 @@ def auto_promote(
         dedup_score,
         source_id,
     )
+    _sync_website_governance()
     return True, f"Auto-promoted to {service_file.name} (dedup={dedup_score:.4f})", service_file
 
 
@@ -195,6 +223,7 @@ def promote(rec_id: str) -> tuple[bool, str]:
     staged_file.unlink()
 
     logger.info("Promoted %s to %s", rec_id, service_file)
+    _sync_website_governance()
     return True, f"Promoted to {service_file.name}"
 
 

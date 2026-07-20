@@ -8,6 +8,8 @@ from __future__ import annotations
 
 import json
 import re
+import subprocess
+import sys
 from pathlib import Path
 from typing import Dict, List, Any
 from collections import defaultdict
@@ -201,6 +203,11 @@ def main():
         default="docs",
         help="Documentation directory for output (default: docs)"
     )
+    parser.add_argument(
+        "--skip-website-sync",
+        action="store_true",
+        help="Do not update the sibling bluearch-website Governance Hub catalog",
+    )
 
     args = parser.parse_args()
     data_dir = Path(args.data_dir)
@@ -227,6 +234,20 @@ def main():
 
     # Update README.md hardcoded counts
     update_readme_counts(stats['total_entries'], len(stats['by_service']))
+
+    if not args.skip_website_sync:
+        sync_script = Path(__file__).parent / "sync_website_governance.py"
+        website_output = (
+            Path(__file__).parent.parent.parent
+            / "bluearch-website"
+            / "frontend"
+            / "app"
+            / "src"
+            / "data"
+            / "governanceCatalog.json"
+        )
+        if sync_script.exists() and website_output.parent.exists():
+            subprocess.run([sys.executable, str(sync_script), "--output", str(website_output)], check=True)
 
     return 0
 
