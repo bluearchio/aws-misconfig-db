@@ -1,0 +1,123 @@
+{
+  "service": "kubernetes",
+  "count": 9,
+  "misconfigurations": [
+    {
+      "id": "1d2e851b-4f16-40bc-8a1b-89dd07c09a1e",
+      "service_name": "kubernetes",
+      "scenario": "Kubernetes workload containers do not define both CPU and memory requests",
+      "alert_criteria": "A Deployment, StatefulSet, or DaemonSet application container omits a CPU or memory request",
+      "recommendation_action": "Measure representative usage and add reviewed requests without changing the live cluster automatically.",
+      "risk_detail": "performance, reliability, cost",
+      "build_priority": 0, "action_value": 3, "effort_level": 1, "risk_value": 2,
+      "recommendation_description_detailed": "Missing requests weaken scheduling, autoscaling, and capacity planning.",
+      "category": "workload", "references": ["https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"],
+      "metadata": {"created_at": "2026-07-21T00:00:00Z", "updated_at": "2026-07-21T00:00:00Z", "contributors": ["bluearch-steward"], "source": "Kubernetes documentation"},
+      "tags": ["kubernetes", "resources", "scheduling"]
+    },
+    {
+      "id": "82ee867e-d1d8-4f7d-90b6-f24dcd20acef",
+      "service_name": "kubernetes",
+      "scenario": "Kubernetes workload containers do not define memory limits",
+      "alert_criteria": "A Deployment, StatefulSet, or DaemonSet application container omits a memory limit",
+      "recommendation_action": "Measure peak memory, account for runtime behavior, and add a reviewed limit.",
+      "risk_detail": "reliability, performance",
+      "build_priority": 0, "action_value": 3, "effort_level": 1, "risk_value": 2,
+      "recommendation_description_detailed": "Missing memory limits allow a container to consume memory until node pressure or eviction occurs.",
+      "category": "workload", "references": ["https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"],
+      "metadata": {"created_at": "2026-07-21T00:00:00Z", "updated_at": "2026-07-21T00:00:00Z", "contributors": ["bluearch-steward"], "source": "Kubernetes documentation"},
+      "tags": ["kubernetes", "resources", "memory"]
+    },
+    {
+      "id": "5452b6e0-43df-44e0-a34d-362e9c2ac1d9",
+      "service_name": "kubernetes",
+      "scenario": "Kubernetes workload containers do not define readiness and liveness probes",
+      "alert_criteria": "An application container in a Deployment, StatefulSet, or DaemonSet omits readiness or liveness probes",
+      "recommendation_action": "Define application-specific probes and validate thresholds in a staged rollout.",
+      "risk_detail": "operations, reliability",
+      "build_priority": 0, "action_value": 3, "effort_level": 1, "risk_value": 2,
+      "recommendation_description_detailed": "Missing probes prevent Kubernetes from reliably routing around or restarting unhealthy containers.",
+      "category": "workload", "references": ["https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/"],
+      "metadata": {"created_at": "2026-07-21T00:00:00Z", "updated_at": "2026-07-21T00:00:00Z", "contributors": ["bluearch-steward"], "source": "Kubernetes documentation"},
+      "tags": ["kubernetes", "probes", "health"]
+    },
+    {
+      "id": "a9d36d97-5c67-49bd-918f-994419830cab",
+      "service_name": "kubernetes",
+      "scenario": "Replicated and service-exposed Kubernetes workload has no PodDisruptionBudget",
+      "alert_criteria": "A workload has at least two replicas and an associated Service but no selecting PodDisruptionBudget",
+      "recommendation_action": "Add a reviewed PodDisruptionBudget that preserves availability without blocking maintenance.",
+      "risk_detail": "reliability, operations",
+      "build_priority": 0, "action_value": 3, "effort_level": 1, "risk_value": 2,
+      "recommendation_description_detailed": "Without a PDB, voluntary disruptions can remove too many replicas at once.",
+      "category": "workload", "references": ["https://kubernetes.io/docs/tasks/run-application/configure-pdb/"],
+      "metadata": {"created_at": "2026-07-21T00:00:00Z", "updated_at": "2026-07-21T00:00:00Z", "contributors": ["bluearch-steward"], "source": "Kubernetes documentation"},
+      "tags": ["kubernetes", "pdb", "availability"]
+    },
+    {
+      "id": "45189c42-86bf-4a4f-a7fe-947e4c1ef8d0",
+      "service_name": "kubernetes",
+      "scenario": "Kubernetes workload requests dangerous host or container privileges",
+      "alert_criteria": "A workload explicitly enables privileged mode, privilege escalation, host namespaces, hostPath, or dangerous Linux capabilities",
+      "recommendation_action": "Remove unnecessary privileges in source manifests and validate the workload in a staged environment.",
+      "risk_detail": "security",
+      "build_priority": 0, "action_value": 3, "effort_level": 2, "risk_value": 3,
+      "recommendation_description_detailed": "Dangerous privileges can expand a container compromise to the node or cluster.",
+      "category": "security", "references": ["https://kubernetes.io/docs/concepts/security/pod-security-standards/"],
+      "metadata": {"created_at": "2026-07-21T00:00:00Z", "updated_at": "2026-07-21T00:00:00Z", "contributors": ["bluearch-steward"], "source": "Kubernetes Pod Security Standards"},
+      "tags": ["kubernetes", "pod-security", "privileged"]
+    },
+    {
+      "id": "f576861a-fe3d-4ce9-a1ba-2bc088d86d64",
+      "service_name": "kubernetes",
+      "scenario": "Kubernetes pod is repeatedly restarting or waiting in CrashLoopBackOff",
+      "alert_criteria": "A container is waiting with CrashLoopBackOff or has at least five recent restarts",
+      "recommendation_action": "Correlate status, last termination, probes, resource pressure, rollout state, and events before changing the workload.",
+      "risk_detail": "reliability, operations",
+      "build_priority": 0, "action_value": 3, "effort_level": 2, "risk_value": 3,
+      "recommendation_description_detailed": "Restart loops are a symptom; the investigator must distinguish application exit, probe failure, configuration, and resource pressure.",
+      "category": "runtime", "references": ["https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/"],
+      "metadata": {"created_at": "2026-07-21T00:00:00Z", "updated_at": "2026-07-21T00:00:00Z", "contributors": ["bluearch-steward"], "source": "Kubernetes documentation"},
+      "tags": ["kubernetes", "pod", "crashloop"]
+    },
+    {
+      "id": "8e69205c-40e6-4f9f-80ba-3981a20913c4",
+      "service_name": "kubernetes",
+      "scenario": "Kubernetes pod remains unschedulable",
+      "alert_criteria": "PodScheduled is false with an Unschedulable reason for at least five minutes",
+      "recommendation_action": "Explain the exact scheduler constraint and compare requests, selectors, taints, affinity, storage, and node capacity.",
+      "risk_detail": "reliability, operations",
+      "build_priority": 0, "action_value": 3, "effort_level": 2, "risk_value": 3,
+      "recommendation_description_detailed": "Pending pods can block availability and deployments, but the scheduler message must support the claimed cause.",
+      "category": "runtime", "references": ["https://kubernetes.io/docs/concepts/scheduling-eviction/"],
+      "metadata": {"created_at": "2026-07-21T00:00:00Z", "updated_at": "2026-07-21T00:00:00Z", "contributors": ["bluearch-steward"], "source": "Kubernetes documentation"},
+      "tags": ["kubernetes", "scheduling", "pending"]
+    },
+    {
+      "id": "ee15e84f-3bfd-43fe-8751-1c4065b3c7dd",
+      "service_name": "kubernetes",
+      "scenario": "Kubernetes pod CPU use remains close to its configured limit",
+      "alert_criteria": "P95 CPU usage is at least 80 percent of the limit for five of six periods with sufficient datapoints",
+      "recommendation_action": "Review HPA state, application behavior, requests, limits, and throttling-specific evidence before changing CPU.",
+      "risk_detail": "performance, reliability",
+      "build_priority": 0, "action_value": 3, "effort_level": 2, "risk_value": 2,
+      "recommendation_description_detailed": "High utilization against a limit is pressure evidence but does not by itself prove CPU throttling.",
+      "category": "performance", "references": ["https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"],
+      "metadata": {"created_at": "2026-07-21T00:00:00Z", "updated_at": "2026-07-21T00:00:00Z", "contributors": ["bluearch-steward"], "source": "Kubernetes documentation"},
+      "tags": ["kubernetes", "cpu", "performance"]
+    },
+    {
+      "id": "19711ad3-7aae-46e2-8d1d-936474ad1ba2",
+      "service_name": "kubernetes",
+      "scenario": "Kubernetes pod has OOM termination or sustained memory pressure near its limit",
+      "alert_criteria": "A container was OOMKilled or P95 working set is at least 90 percent of its limit for five of six periods",
+      "recommendation_action": "Correlate OOM termination, working set, limits, restarts, node pressure, and application behavior before changing memory.",
+      "risk_detail": "performance, reliability",
+      "build_priority": 0, "action_value": 3, "effort_level": 2, "risk_value": 3,
+      "recommendation_description_detailed": "Memory pressure can cause restarts, eviction, and degraded availability; missing metrics are not interpreted as zero.",
+      "category": "performance", "references": ["https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"],
+      "metadata": {"created_at": "2026-07-21T00:00:00Z", "updated_at": "2026-07-21T00:00:00Z", "contributors": ["bluearch-steward"], "source": "Kubernetes documentation"},
+      "tags": ["kubernetes", "memory", "oom"]
+    }
+  ]
+}
